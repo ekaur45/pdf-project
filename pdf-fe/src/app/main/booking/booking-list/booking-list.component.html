@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="d-flex align-items-center user-member__title mb-30 mt-30">
+            <h4 class="text-capitalize">bookin list</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="userDatatable global-shadow border-light-0 p-30 bg-white radius-xl w-100 mb-30">
+            <div class="table-responsive">
+                <table class="table mb-0 table-borderless">
+                    <thead>
+                        <tr class="userDatatable-header">
+                            <th>
+                                <span class="userDatatable-title">No.</span>
+                            </th>
+                            <th>
+                                <span class="userDatatable-title">First name</span>
+                            </th>
+                            <th>
+                                <span class="userDatatable-title">Last name</span>
+                            </th>
+                            <th>
+                                <span class="userDatatable-title">Username</span>
+                            </th>
+                            <th>
+                                <span class="userDatatable-title">Email</span>
+                            </th>
+                            <th>
+                                <span class="userDatatable-title">User Type</span>
+                            </th>
+                            <th>
+                                <span class="userDatatable-title float-end">action</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let r of list;let ndx = index;">
+                            <td >
+                                {{ ndx+1 }}
+                            </td>
+                            <td>
+                                {{ r.agentName }}
+                            </td>
+                            <td>
+                                {{ r.staffName }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>

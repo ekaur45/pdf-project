@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="d-flex align-items-center user-member__title mb-30 mt-30">
+            <h4 class="text-capitalize">User list</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="userDatatable global-shadow border-light-0 p-30 bg-white radius-xl w-100 mb-30">
+            <div class="table-responsive">
+                <table class="table mb-0 table-borderless">
+                    <thead>
+                        <tr class="userDatatable-header">
+                            <th>
+                                <span class="userDatatable-title">No.</span>
+                            </th>
+                            <th>
+                                <span class="userDatatable-title">First name</span>
+                            </th>
+                            <th>
+                                <span class="userDatatable-title">Last name</span>
+                            </th>
+                            <th>
+                                <span class="userDatatable-title">Username</span>
+                            </th>
+                            <th>
+                                <span class="userDatatable-title">Email</span>
+                            </th>
+                            <th>
+                                <span class="userDatatable-title">User Type</span>
+                            </th>
+                            <th>
+                                <span class="userDatatable-title float-end">action</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="userList&&userList.length>0;">
+                            <tr *ngFor="let r of userList;let ndx = index;">
+                                <td>
+                                    {{ ndx + 1 }}
+                                </td>
+                                <td>
+                                    {{ r.firstName }}
+                                </td>
+                                <td>
+                                    {{ r.lastName }}
+                                </td>
+                                <td>
+                                    {{ r.username }}
+                                </td>
+                                <td>
+                                    {{ r.email }}
+                                </td>
+                                <td>
+                                    <span class="bg-opacity-success  color-success rounded-pill userDatatable-content-status active">
+                                        {{ r.userType==1?"Admin":"User" }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
+                                        <li>
+                                            <a href="#" class="view">
+                                                <i class="uil uil-eye"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="edit">
+                                                <i class="uil uil-edit"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="remove">
+                                                <i class="uil uil-trash-alt"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        <template #noDataFound>
+
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
