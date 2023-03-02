@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="d-flex align-items-center user-member__title mb-30 mt-30">
-            <h4 class="text-capitalize">bookin list</h4>
+            <h4 class="text-capitalize">Booking list</h4>
         </div>
     </div>
 </div>
@@ -74,7 +74,7 @@
                                 {{r.arrival}}
                             </td>
                             <td>
-                                <a (click)="onPrintClick(r.id)" [id]="'loadericon'+r.id">
+                                <a (click)="onPrintClick(r.id)" id="{{ 'loadericon'+r.id }}">
                                     <i class="fa fa-print"></i>
                                 </a>
                             </td>

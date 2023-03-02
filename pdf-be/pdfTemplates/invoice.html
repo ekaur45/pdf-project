@@ -284,10 +284,13 @@
         <tr>
             <td style="width: 50%">
                 <div class="total-box">
-                    <p><span class="filled-bullet"></span> text here </p>
+                    {{#each d.features }}
+                    <p><span class="filled-bullet"></span> {{ this }} </p>
+                    {{/each }}
+                    <!-- <p><span class="filled-bullet"></span> text here </p>
                     <p><span class="filled-bullet"></span> text here </p>
                     <p><span class="filled-bullet"></span></p>
-                    <p><span class="filled-bullet"></span></p>
+                    <p><span class="filled-bullet"></span></p> -->
                 </div>
             </td>
             <td></td>
@@ -299,25 +302,25 @@
                 <table class="block-tbl inner">
                     <tr>
                         <td>price</td>
-                        <td class="dashed-border">text-here</td>
+                        <td class="dashed-border">{{ d.price }}</td>
                     </tr>
                     <tr>
                         <td>discount</td>
-                        <td class="dashed-border">text-here</td>
+                        <td class="dashed-border">{{ d.discount }}</td>
                     </tr>
                     <tr>
                         <td>extra charge</td>
-                        <td class="dashed-border">text-here</td>
+                        <td class="dashed-border">{{ d.extraCharges }}</td>
                     </tr>
                     <tr>
                         <td>price</td>
-                        <td class="dashed-border">text-here</td>
+                        <td class="dashed-border">{{ d.price }}</td>
                     </tr>
                     <tr> 
                         <td colspan="2">
                             <div class="flex-items">
                                 <p>total</p>
-                                <p style="margin-right: auto;">text here</p>
+                                <p style="margin-right: auto;">{{ d.totalPrice }}</p>
                             </div>
                         </td>
                     </tr>
@@ -341,10 +344,10 @@
         <tr>
             <td style="width: 50%">
                 <div class="total-box">
-                    <p><span class="filled-bullet"></span> text here </p>
-                    <p><span class="filled-bullet"></span> text here </p>
-                    <p><span class="filled-bullet"></span></p>
-                    <p><span class="filled-bullet"></span></p>
+                    <p><span class="filled-bullet"></span> First term </p>
+                    <p><span class="filled-bullet"></span> Second term </p>
+                    <p><span class="filled-bullet"></span> Third term </p>
+                    <p><span class="filled-bullet"></span> Fourth term </p>
                 </div>
             </td>
             <td></td>

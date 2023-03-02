@@ -13,6 +13,7 @@ export interface Offer {
     flightDateFrom: Date;
     flightDateTo: Date;
     bookingid: number;
+
 }
 
 export interface Booking {

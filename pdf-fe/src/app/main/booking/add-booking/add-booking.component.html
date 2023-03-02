@@ -99,7 +99,7 @@
                                 <select class="form-control choices-single" type="text" name="destinationId" placeholder="Enter destination"
                                 [(ngModel)]="model.destination.destination"
                                 >
-                                    <option *ngFor="let h of hotels" [value]="h.name">{{ h.name }}</option>
+                                    <option *ngFor="let h of destinationData" [value]="h.display">{{ h.display }}</option>
                                 </select>
                             </div>
                         </div>
@@ -245,6 +245,42 @@
                                     </th>
                                 </tr>
                             </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Price</label>
+                                <input class="form-control " type="text" name="customerName" placeholder="Enter price" 
+                                [(ngModel)]="model.price"
+                                
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Discount</label>
+                                <input class="form-control " type="text" name="customerName" placeholder="Enter discount" 
+                                [(ngModel)]="model.discount"                                
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Extra charges</label>
+                                <input class="form-control " type="text" name="customerName" placeholder="Enter extra charges" 
+                                [(ngModel)]="model.extraCharges"
+                                
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Total</label>
+                                <input class="form-control " type="text" name="customerName" placeholder="Enter total" 
+                                [(ngModel)]="model.totalPrice"                                
+                                />
+                            </div>
                         </div>
                     </div>
                     <div class="row">

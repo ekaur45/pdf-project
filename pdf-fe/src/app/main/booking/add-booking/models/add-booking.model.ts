@@ -1,31 +1,36 @@
 export class AddBooking{
-    agentName:string="asdfdas";
-    staffName:string="sadf";
-    date:string="asdf";
-    orderNo:string="sadf";
-    passengers:number=2;
-    nights:number=3;
-    departure:string="asdf";
-    arrival:string="adsf";
-    customerName:string="sadf";
+    agentName:string="";
+    staffName:string="";
+    date:Date=new Date();
+    orderNo:string="";
+    passengers:number=0;
+    nights:number=0;
+    departure:Date=new Date();
+    arrival:Date=new Date();
+    customerName:string="";
+    price:number=0;
+    discount:number=0;
+    extraCharges:number=0;
+    totalPrice:number=0;
+    features:string[]=[];
     destination:BookingDestination=new BookingDestination();
     flight:BookingFlight=new BookingFlight();
     hotel:BookingHotel = new BookingHotel();
 }
 export class BookingDestination{
-    destination:string="asdf";
-    dateTo:string="dsaf";
-    dateFrom:string="asdf";
+    destination:string="";
+    dateTo:Date=new Date();
+    dateFrom:Date=new Date();
 }
 export class BookingFlight{
-    to:string="asdf";
-    from:string="asdf";
-    dateTo:string="asdf";
-    dateFrom:string="asdf";
+    to:string="";
+    from:string="";
+    dateTo:Date=new Date();
+    dateFrom:Date=new Date();
 }
 export class BookingHotel{
-    bookingNo:string="wersadf";
-    hotel:string="abas";
-    nights:number=3;
-    roomType:string="asdf";
+    bookingNo:string="";
+    hotel:string="";
+    nights:number=0;
+    roomType:string="";
 }

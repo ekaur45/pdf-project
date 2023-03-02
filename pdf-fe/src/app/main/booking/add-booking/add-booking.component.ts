@@ -10,6 +10,7 @@ import { Component, OnInit, NgModule } from '@angular/core';
 export class AddBookingComponent implements OnInit {
   hotels:any=[];
   roomTypes:any = [];
+  destinationData:any = [];
   model:AddBooking = new AddBooking();
   destinationList:AddBooking[] = [];
   constructor(private api:ApiService) {
@@ -20,6 +21,7 @@ export class AddBookingComponent implements OnInit {
   ngOnInit(): void {
     this.getHotels();
     this.getRoomTypes();
+    this.getDestination();
   }
   
   onAddDestination(){
@@ -27,6 +29,11 @@ export class AddBookingComponent implements OnInit {
     this.model.destination = new BookingDestination();
     this.model.flight = new BookingFlight();
     this.model.hotel = new BookingHotel();
+  }
+  getDestination(){
+    this.api.get('booking/destination').subscribe(x=>{
+      if(x.status == 200) this.destinationData = x.data;
+    })
   }
   getHotels(){
     this.api.get('util/hotels').subscribe(x=>{

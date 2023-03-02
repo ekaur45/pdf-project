@@ -26,7 +26,7 @@ export class BookingListComponent implements OnInit {
     const el = document.getElementById('loadericon' + id);
     if (el)
       el.innerHTML = '<i class="fa fa-spinner"></i>';
-    this.api.get('booking/print?id=10').subscribe(x => {
+    this.api.get('booking/print?id='+id).subscribe(x => {
       //this.loadingPdf = false;
       if (el)
         el.innerHTML = '<i class="fa fa-print"></i>';

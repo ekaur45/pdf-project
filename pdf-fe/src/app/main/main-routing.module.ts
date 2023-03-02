@@ -14,6 +14,9 @@ const routes: Routes = [
       },
       {
         path:'exchange',loadChildren:()=>import("./exchange/exchange.module").then(x=>x.ExchangeModule)
+      },
+      {
+        path:'other',loadChildren:()=>import("./other/other.module").then(x=>x.OtherModule)
       }
     ]
   }

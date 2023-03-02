@@ -47,4 +47,76 @@ bookingController.print= async (req,res,next)=>{
     result.success?res.Ok(`${result.data}`):res.BadRequest({},"Something went wrong.");
 }
 
+
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+bookingController.AddHotel= async (req,res,next)=>{
+    var result = await Booking.AddHotel(req.body);
+    result.success?res.Ok({},"Hotel added."):res.BadRequest({},"Error adding hotel.");
+}
+
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+bookingController.GetHotel= async (req,res,next)=>{
+    var result = await Booking.GetHotels();
+    result.success?res.Ok(result.data):res.BadRequest({});
+}
+
+
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+bookingController.AddDestination= async (req,res,next)=>{
+    var result = await Booking.AddDestination(req.body);
+    result.success?res.Ok({},"Destination added."):res.BadRequest({},"Error adding destination.");
+}
+
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+bookingController.GetDestinations= async (req,res,next)=>{
+    var result = await Booking.GetDestination();
+    result.success?res.Ok(result.data):res.BadRequest({});
+}
+
+
+
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+bookingController.AddRoomType= async (req,res,next)=>{
+    var result = await Booking.AddRoomType(req.body);
+    result.success?res.Ok({},"Room type added."):res.BadRequest({},"Error adding room type.");
+}
+
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+bookingController.GetRoomTypes= async (req,res,next)=>{
+    var result = await Booking.GetRoomTypes();
+    result.success?res.Ok(result.data):res.BadRequest({});
+}
+
+
+
 module.exports = bookingController;
