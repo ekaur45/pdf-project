@@ -36,8 +36,12 @@ CREATE TABLE `booking` (
   `customerName` varchar(500) DEFAULT NULL,
   `isDeleted` bit(1) DEFAULT b'0',
   `staffName` varchar(500) DEFAULT NULL,
+  `price` decimal(12,2) DEFAULT NULL,
+  `discount` decimal(12,2) DEFAULT NULL,
+  `extraCharges` decimal(12,2) DEFAULT NULL,
+  `totalPrice` decimal(12,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +50,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (10,'asdfdas','2023-03-01 00:00:00','sadf',2,3,'2023-03-03 00:00:00','2023-03-02 00:00:00','sadf',_binary '\0','sadf');
+INSERT INTO `booking` VALUES (10,'asdfdas','2023-03-01 00:00:00','sadf',2,3,'2023-03-03 00:00:00','2023-03-02 00:00:00','sadf',_binary '\0','sadf',2000.00,50.00,50.00,2000.00),(11,'asdfads','2023-03-03 00:00:00','asdfads',2,2,'2023-03-04 00:00:00','2023-02-28 00:00:00','',_binary '\0','asdf',123.00,64.00,54.00,456.00);
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,7 +77,7 @@ CREATE TABLE `bookingoffers` (
   `flightDateTo` datetime DEFAULT NULL,
   `bookingid` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,8 +86,85 @@ CREATE TABLE `bookingoffers` (
 
 LOCK TABLES `bookingoffers` WRITE;
 /*!40000 ALTER TABLE `bookingoffers` DISABLE KEYS */;
-INSERT INTO `bookingoffers` VALUES (1,'wersadf','Single bed',3,'Honey moon','2023-03-04 00:00:00','2023-03-10 00:00:00','asdf',_binary '\0','asdf','asdf','2023-03-09 00:00:00','2023-03-03 00:00:00',10);
+INSERT INTO `bookingoffers` VALUES (1,'wersadf','Single bed',3,'Honey moon','2023-03-04 00:00:00','2023-03-10 00:00:00','asdf',_binary '\0','asdf','asdf','2023-03-09 00:00:00','2023-03-03 00:00:00',10),(2,'dsafasd','King size',2,'asdfadsfdsa','2023-03-03 00:00:00','2023-03-09 00:00:00','asdfasdfsad',_binary '\0','asdf','sadf','2023-03-15 00:00:00','2023-03-23 00:00:00',11);
 /*!40000 ALTER TABLE `bookingoffers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `currency`
+--
+
+DROP TABLE IF EXISTS `currency`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `currency` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(500) DEFAULT NULL,
+  `code` varchar(45) DEFAULT NULL,
+  `isDefault` bit(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `currency`
+--
+
+LOCK TABLES `currency` WRITE;
+/*!40000 ALTER TABLE `currency` DISABLE KEYS */;
+INSERT INTO `currency` VALUES (2,'US dollar','USD',_binary ''),(3,'Pakistani rupee','PKR',_binary '\0');
+/*!40000 ALTER TABLE `currency` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `currencyexchange`
+--
+
+DROP TABLE IF EXISTS `currencyexchange`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `currencyexchange` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `currencyFrom` int DEFAULT NULL,
+  `currencyTo` int DEFAULT NULL,
+  `currencyFromValue` int DEFAULT NULL,
+  `currencyToValue` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `currencyexchange`
+--
+
+LOCK TABLES `currencyexchange` WRITE;
+/*!40000 ALTER TABLE `currencyexchange` DISABLE KEYS */;
+INSERT INTO `currencyexchange` VALUES (1,2,3,1,286);
+/*!40000 ALTER TABLE `currencyexchange` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `destinations`
+--
+
+DROP TABLE IF EXISTS `destinations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `destinations` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `display` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `destinations`
+--
+
+LOCK TABLES `destinations` WRITE;
+/*!40000 ALTER TABLE `destinations` DISABLE KEYS */;
+INSERT INTO `destinations` VALUES (1,'asdfasdfsad'),(2,'asdfadsfdsa');
+/*!40000 ALTER TABLE `destinations` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -99,7 +180,7 @@ CREATE TABLE `hotel` (
   `location` varchar(500) DEFAULT NULL,
   `isDeleted` bit(1) DEFAULT b'0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,7 +189,7 @@ CREATE TABLE `hotel` (
 
 LOCK TABLES `hotel` WRITE;
 /*!40000 ALTER TABLE `hotel` DISABLE KEYS */;
-INSERT INTO `hotel` VALUES (1,'Honey moon','Swat KPK',_binary '\0');
+INSERT INTO `hotel` VALUES (1,'Honey moon','Swat KPK',_binary '\0'),(2,'asdfadsfdsa',NULL,_binary '\0'),(3,'asdfads',NULL,_binary '\0');
 /*!40000 ALTER TABLE `hotel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -124,7 +205,7 @@ CREATE TABLE `roomtypes` (
   `display` varchar(500) DEFAULT NULL,
   `isDeleted` bit(1) DEFAULT b'0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,7 +214,7 @@ CREATE TABLE `roomtypes` (
 
 LOCK TABLES `roomtypes` WRITE;
 /*!40000 ALTER TABLE `roomtypes` DISABLE KEYS */;
-INSERT INTO `roomtypes` VALUES (1,'King size',_binary '\0'),(2,'Single bed',_binary '\0');
+INSERT INTO `roomtypes` VALUES (1,'King size',_binary '\0'),(2,'Single bed',_binary '\0'),(3,'asdfasdfsad',_binary '\0');
 /*!40000 ALTER TABLE `roomtypes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,10 +271,6 @@ LOCK TABLES `usetypes` WRITE;
 INSERT INTO `usetypes` VALUES (1,'admin'),(2,'user');
 /*!40000 ALTER TABLE `usetypes` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping events for database 'pdfproject'
---
 
 --
 -- Dumping routines for database 'pdfproject'
@@ -310,13 +387,17 @@ in _passengers int,
 in _nights int,
 in _departure varchar(500),
 in _arrival varchar(500),
-in _customerName varchar(500)
+in _customerName varchar(500),
+in _price decimal(12,2),
+in _discount decimal(12,2),
+in _extraCharges decimal(12,2),
+in _totalPrice decimal(12,2)
 )
 BEGIN
 INSERT INTO `booking`
-(`agentName`,`date`,`orderNo`,`passengers`,`nights`,`departure`,`arrival`,`customerName`,`staffName`)
+(`agentName`,`date`,`orderNo`,`passengers`,`nights`,`departure`,`arrival`,`customerName`,`staffName`,`price`, `discount`, `extraCharges`, `totalPrice`)
 VALUES
-(_agentName,_date,_orderNo,_passengers,_nights,_departure,_arrival,_customerName,_staffName);
+(_agentName,_date,_orderNo,_passengers,_nights,_departure,_arrival,_customerName,_staffName,_price,_discount,_extraCharges,_totalPrice);
 select last_insert_id() as id;
 END ;;
 DELIMITER ;
@@ -412,15 +493,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-02  1:03:00
-
-
-
-
-
-
-
--- ALTER USER 'root'@'localhost' IDENTIFIED BY 'test123'; 
--- ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'test123';
-
--- FLUSH PRIVILEGES;
+-- Dump completed on 2023-03-03  1:30:29
