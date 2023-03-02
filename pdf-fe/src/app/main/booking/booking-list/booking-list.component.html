@@ -16,19 +16,28 @@
                                 <span class="userDatatable-title">No.</span>
                             </th>
                             <th>
-                                <span class="userDatatable-title">First name</span>
+                                <span class="userDatatable-title">Agent name</span>
                             </th>
                             <th>
-                                <span class="userDatatable-title">Last name</span>
+                                <span class="userDatatable-title">Staff name</span>
                             </th>
                             <th>
-                                <span class="userDatatable-title">Username</span>
+                                <span class="userDatatable-title">Customer name</span>
                             </th>
                             <th>
-                                <span class="userDatatable-title">Email</span>
+                                <span class="userDatatable-title">Date</span>
                             </th>
                             <th>
-                                <span class="userDatatable-title">User Type</span>
+                                <span class="userDatatable-title">Passengers</span>
+                            </th>
+                            <th>
+                                <span class="userDatatable-title">Nights</span>
+                            </th>
+                            <th>
+                                <span class="userDatatable-title">Departure</span>
+                            </th>
+                            <th>
+                                <span class="userDatatable-title">Arrival</span>
                             </th>
                             <th>
                                 <span class="userDatatable-title float-end">action</span>
@@ -45,6 +54,29 @@
                             </td>
                             <td>
                                 {{ r.staffName }}
+                            </td>
+                            <td>
+                                {{r.customerName}}
+                            </td>
+                            <td>
+                                {{r.date}}
+                            </td>
+                            <td>
+                                {{r.passengers}}
+                            </td>
+                            <td>
+                                {{r.nights}}
+                            </td>
+                            <td>
+                                {{r.departure}}
+                            </td>
+                            <td>
+                                {{r.arrival}}
+                            </td>
+                            <td>
+                                <a (click)="onPrintClick(r.id)" [id]="'loadericon'+r.id">
+                                    <i class="fa fa-print"></i>
+                                </a>
                             </td>
                         </tr>
                     </tbody>

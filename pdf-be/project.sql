@@ -413,3 +413,14 @@ DELIMITER ;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2023-03-02  1:03:00
+
+
+
+
+
+
+
+-- ALTER USER 'root'@'localhost' IDENTIFIED BY 'test123'; 
+-- ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'test123';
+
+-- FLUSH PRIVILEGES;

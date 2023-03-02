@@ -11,6 +11,9 @@ const routes: Routes = [
       },
       {
         path:'booking',loadChildren:()=>import("./booking/booking.module").then(x=>x.BookingModule)
+      },
+      {
+        path:'exchange',loadChildren:()=>import("./exchange/exchange.module").then(x=>x.ExchangeModule)
       }
     ]
   }
