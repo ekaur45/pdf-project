@@ -27,4 +27,16 @@ userController.List = async (req,res,next)=>{
 
 }
 
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+userController.delete = async (req,res,next)=>{    
+    var result = await User.delete(req.query.id);
+    result.success?res.Ok({},"User deleted successfuly."):res.BadRequest({},"Something went wrong.");
+
+}
+
 module.exports = userController;

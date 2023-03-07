@@ -15,4 +15,8 @@ User.Add  = async (model)=>{
 User.List = async ()=>{
     return await mysqlSelect('call sp_get_users();');
 }
+
+User.delete = async id =>{
+    return await mysqlExecute('delete from users where id = ?',[id],false);
+}
 module.exports = User;

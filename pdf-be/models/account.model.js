@@ -16,7 +16,7 @@ const loginAccount = async function (data) {
         if (ispasswordCorrect) {
             let id = result.data[0].id;
             let email = result.data[0].email;
-            let token = GetJwt(id, email, "admin");
+            let token = GetJwt(id, email, result.data[0].userTypeText);
             result.data[0].token = token;
             delete result.data[0].password;
             return functionReturn(result.data[0]);
