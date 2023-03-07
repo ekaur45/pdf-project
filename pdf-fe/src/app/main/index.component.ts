@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 declare const $:any;
 @Component({
@@ -6,8 +7,10 @@ declare const $:any;
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
-
-  constructor() { }
+  user:any = {};
+  constructor(private router:Router) { 
+    this.user = JSON.parse(localStorage.getItem("user")??"{}");
+  }
 
   ngOnInit(): void {
     this.init();
@@ -29,5 +32,9 @@ export class IndexComponent implements OnInit {
     //   debugger
     //   $(e.currentTarget).toggleClass("open");
     // })
+  }
+  onSignout(){
+    localStorage.setItem("user","");
+    this.router.navigate(['/account']);
   }
 }

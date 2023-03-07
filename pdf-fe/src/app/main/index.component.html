@@ -9,9 +9,10 @@
     <nav class="navbar navbar-light">
         <div class="navbar-left">
             <div class="logo-area">
-                <a class="navbar-brand" href="index-2.html">
-                    <img class="dark" src="assets/img/logo-dark.png" alt="logo">
-                    <img class="light" src="assets/img/logo-white.png" alt="logo">
+                <a class="navbar-brand" routerLink="/">
+                    <!-- <img class="dark" src="assets/img/logo-dark.png" alt="logo">
+                    <img class="light" src="assets/img/logo-white.png" alt="logo"> -->
+                    Travel destination
                 </a>
                 <a href="#" class="sidebar-toggle">
                     <img class="svg" src="assets/img/svg/align-center-alt.svg" alt="img"></a>
@@ -25,23 +26,23 @@
 
                 <li class="nav-author">
                     <div class="dropdown-custom">
-                        <a href="javascript:;" class="nav-item-toggle"><img src="assets/img/author-nav.jpg" alt=""
-                                class="rounded-circle">
-                            <span class="nav-item__title">Danial<i class="las la-angle-down nav-item__arrow"></i></span>
+                        <a href="javascript:;" class="nav-item-toggle">
+                            <!-- <img src="assets/img/author-nav.jpg" alt=""
+                                class="rounded-circle"> -->
+                            <span class="nav-item__title">{{ user?.firstName }} {{ user?.lastName }}<i class="las la-angle-down nav-item__arrow"></i></span>
                         </a>
                         <div class="dropdown-parent-wrapper">
                             <div class="dropdown-wrapper">
                                 <div class="nav-author__info">
-                                    <div class="author-img">
+                                    <!-- <div class="author-img">
                                         <img src="assets/img/author-nav.jpg" alt="" class="rounded-circle">
-                                    </div>
+                                    </div> -->
                                     <div>
-                                        <h6>Rabbi Islam Rony</h6>
-                                        <span>UI Designer</span>
+                                        <h6>{{ user?.firstName }} {{ user?.lastName }}</h6>
                                     </div>
                                 </div>
                                 <div class="nav-author__options">
-                                    <ul>
+                                    <!-- <ul>
                                         <li>
                                             <a href="#">
                                                 <i class="uil uil-user"></i> Profile</a>
@@ -63,8 +64,8 @@
                                             <a href="#">
                                                 <i class="uil uil-bell"></i> Help</a>
                                         </li>
-                                    </ul>
-                                    <a href="#" class="nav-author__signout">
+                                    </ul> -->
+                                    <a (click)="onSignout()" class="nav-author__signout" style="cursor: pointer;">
                                         <i class="uil uil-sign-out-alt"></i> Sign Out</a>
                                 </div>
                             </div>
@@ -99,7 +100,7 @@
                     </li>
                     <li class="has-child">
                         <a href="#" class="" routerLinkActive="active">
-                            <span class="nav-icon uil uil-users-alt"></span>
+                            <span class="nav-icon uil uil-ticket"></span>
                             <span class="menu-text">Booking</span>
                             <span class="toggle-icon"></span>
                         </a>
@@ -119,7 +120,7 @@
 
                     <li class="has-child">
                         <a href="#" class="" routerLinkActive="active">
-                            <span class="nav-icon uil uil-users-alt"></span>
+                            <span class="nav-icon uil uil-dollar-sign"></span>
                             <span class="menu-text">Exchange</span>
                             <span class="toggle-icon"></span>
                         </a>
@@ -131,7 +132,7 @@
                     </li>
                     <li class="has-child">
                         <a href="#" class="" routerLinkActive="active">
-                            <span class="nav-icon uil uil-users-alt"></span>
+                            <span class="nav-icon uil uil-okta"></span>
                             <span class="menu-text">Other</span>
                             <span class="toggle-icon"></span>
                         </a>
@@ -182,11 +183,11 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="footer-copyright">
-                            <p><span>© 2023</span><a href="#">Sovware</a>
+                            <p><span>© 2023</span><a href="#">PDF</a>
                             </p>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <div class="footer-menu text-end">
                             <ul>
                                 <li>
@@ -201,7 +202,7 @@
                             </ul>
                         </div>
 
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
