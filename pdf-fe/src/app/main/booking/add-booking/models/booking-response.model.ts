@@ -28,5 +28,9 @@ export interface Booking {
     customerName: string;
     isDeleted: boolean;
     staffName: string;
+    price:number;
+    discount:number;
+    extraCharges:number;
+    totalPrice:number;
     offers: Offer[];
 }
