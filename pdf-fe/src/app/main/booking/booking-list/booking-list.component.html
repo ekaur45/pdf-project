@@ -74,15 +74,57 @@
                                 {{r.arrival}}
                             </td>
                             <td>
-                                <a (click)="onPrintClick(r.id)" id="{{ 'loadericon'+r.id }}">
-                                    <i class="fa fa-print"></i>
-                                </a>
+                                <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
+                                    <li>
+                                            <a [routerLink]="['/booking/edit',r.id]" style="cursor: pointer;"  class="view">
+                                                <i class="uil uil-edit"></i>
+                                            </a>
+                                        </li>
+                                    <li>
+                                        <a class="edit" style="cursor: pointer;"  (click)="onPrintClick(r.id)" id="{{ 'loadericon'+r.id }}">
+                                            <i class="uil uil-print"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="remove" style="cursor: pointer;"  (click)="onUserDelete(r)">
+                                            <i class="uil uil-trash-alt"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal-info-confirmed modal fade" id="modal-info-confirmed" tabindex="-1" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-sm modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-info-body d-flex">
+                    <div class="modal-info-icon warning">
+                        <img src="assets/img/svg/alert-circle.svg" alt="alert-circle" class="svg">
+                    </div>
+                    <div class="modal-info-text">
+                        <h6>Delete booking!</h6>
+                        <p>Are you sure you want to delete? </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light btn-outlined btn-sm" data-bs-dismiss="modal"
+                    (click)="this.deleteobj={};">Cancel</button>
+                <button type="button" class="btn btn-info btn-sm" data-bs-dismiss="modal"
+                (click)="onDeleteConfirm(deleteobj?.id)">Ok</button>
+            </div>
         </div>
     </div>
 </div>

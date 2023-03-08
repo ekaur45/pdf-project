@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/utils/api.service';
 import { environment } from 'src/environments/environment';
-
+declare const $:any;
 @Component({
   selector: 'app-booking-list',
   templateUrl: './booking-list.component.html',
@@ -11,6 +11,7 @@ export class BookingListComponent implements OnInit {
   apiUrl: string = environment.baseUrl;
   list: any[] = [];
   loadingPdf: boolean = false;
+  deleteobj:any = {};
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
@@ -33,4 +34,10 @@ export class BookingListComponent implements OnInit {
       window.open(`${this.apiUrl}${x.data}`)
     })
   }
+
+  onUserEdit(e:any){}
+  onUserDelete(e:any){
+    $("#modal-info-confirmed").modal("show");
+  }
+  onDeleteConfirm(e:any){}
 }

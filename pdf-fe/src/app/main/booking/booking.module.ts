@@ -8,12 +8,14 @@ import { BookingListComponent } from './booking-list/booking-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { EditBookingComponent } from './edit-booking/edit-booking.component';
 
 @NgModule({
   declarations: [
     IndexComponent,
     AddBookingComponent,
-    BookingListComponent
+    BookingListComponent,
+    EditBookingComponent
   ],
   imports: [
     CommonModule,
