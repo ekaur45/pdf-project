@@ -3,7 +3,7 @@ class EditUserModel{
         this.id = obj.id??0;
         this.firstName = obj.firstName??"";
         this.lastName = obj.lastName??"";
-        this.username = obj.username??"";
+        this.username = obj.userName??"";
         this.email = obj.email??"";
         this.userType = obj.userType??2;
         this.password = obj.password??"";
