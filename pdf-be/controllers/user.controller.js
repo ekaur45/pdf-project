@@ -60,7 +60,7 @@ userController.delete = async (req,res,next)=>{
  * @param {import("express").Response} res 
  * @param {import("express").NextFunction} next 
  */
-userController.delete = async (req,res,next)=>{    
+userController.ResetPassword = async (req,res,next)=>{    
     var result = await User.ResetPassword(req.body);
     result.success?res.Ok({},"Password updated successfuly."):res.BadRequest({},"Something went wrong.");
 
