@@ -1,6 +1,6 @@
 import { ApiService } from 'src/app/utils/api.service';
 import { Component, OnInit } from '@angular/core';
-
+declare const $:any;
 @Component({
   selector: 'app-destination-list',
   templateUrl: './destination-list.component.html',
@@ -11,6 +11,7 @@ export class DestinationListComponent implements OnInit {
   data:any;
   isEdit:boolean = false;
   editData:any ={};
+  deleteobj:any ={};
   constructor(private api:ApiService) { 
 
     this.data = [];
@@ -38,10 +39,15 @@ export class DestinationListComponent implements OnInit {
       if(x.status == 200) this.data = x.data;
     })
   }
-  onDelete (id:number){
+  onDeleteConfirm(id:number){
     this.api.get('util/delete-destination?id='+id).subscribe(x=>{
       if(x.status == 200) this.get();
     })
+
+  }
+  onDelete (id:any){
+    this.deleteobj = id;
+    $("#modal-info-confirmed").modal("show")
   }
   onEdit(r:any){
     this.editData = r;

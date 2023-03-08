@@ -1,6 +1,6 @@
 import { ApiService } from 'src/app/utils/api.service';
 import { Component, OnInit } from '@angular/core';
-
+declare const $:any;
 @Component({
   selector: 'app-room-type-list',
   templateUrl: './room-type-list.component.html',
@@ -12,6 +12,7 @@ export class RoomTypeListComponent implements OnInit {
   data:any;
   isEdit:boolean = false;
   editData:any ={};
+  deleteobj:any ={};
   constructor(private api:ApiService) { 
 
     this.data = [];
@@ -39,10 +40,14 @@ export class RoomTypeListComponent implements OnInit {
       if(x.status == 200) this.data = x.data;
     })
   }
-  onDelete (id:number){
+  onDeleteConfirm(id:number){
     this.api.get('util/delete-room-type?id='+id).subscribe(x=>{
       if(x.status == 200) this.get();
     })
+  }
+  onDelete (id:any){
+    this.deleteobj = id;
+    $("#modal-info-confirmed").modal("show")
   }
   onEdit(r:any){
     this.editData = r;

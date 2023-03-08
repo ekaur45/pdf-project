@@ -58,7 +58,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a style="cursor: pointer;" (click)="onDelete(r.id)" class="remove ms-2">
+                                        <a style="cursor: pointer;" (click)="onDelete(r)" class="remove ms-2">
                                             <i class="uil uil-trash-alt"></i>
                                         </a>
                                     </li>
@@ -73,6 +73,32 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal-info-confirmed modal fade" id="modal-info-confirmed" tabindex="-1" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-sm modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-info-body d-flex">
+                    <div class="modal-info-icon warning">
+                        <img src="assets/img/svg/alert-circle.svg" alt="alert-circle" class="svg">
+                    </div>
+                    <div class="modal-info-text">
+                        <h6>Delete room type!</h6>
+                        <p>Are you sure you want to delete? </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light btn-outlined btn-sm" data-bs-dismiss="modal"
+                    (click)="this.deleteobj={};">Cancel</button>
+                <button type="button" class="btn btn-info btn-sm" data-bs-dismiss="modal"
+                (click)="onDeleteConfirm(deleteobj?.id)">Ok</button>
+
             </div>
         </div>
     </div>
