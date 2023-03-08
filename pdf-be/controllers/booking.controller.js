@@ -14,6 +14,18 @@ bookingController.addBooking= async (req,res,next)=>{
     res.Ok(booking);
 }
 
+
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+bookingController.deleteBooking= async (req,res,next)=>{
+    var result = await Booking.delete(req.query.id);
+    result.success?res.Ok(booking):res.BadRequest("Something went wrong");
+}
+
 /**
  * 
  * @param {import("express").Request} req 
