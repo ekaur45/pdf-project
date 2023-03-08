@@ -65,11 +65,11 @@
                                                 <i class="uil uil-eye"></i>
                                             </a>
                                         </li> -->
-                                    <!-- <li>
+                                    <li>
                                         <a class="edit" (click)="onUserEdit(r)">
                                             <i class="uil uil-edit"></i>
                                         </a>
-                                    </li> -->
+                                    </li>
                                     <li>
                                         <a class="remove" style="cursor: pointer;" (click)="onUserDelete(r)">
                                             <i class="uil uil-trash-alt"></i>
@@ -108,7 +108,7 @@
                             <input type="text" class="form-control ih-medium ip-light radius-xs b-light px-15"
                                 placeholder="First name"
                                 name="firstName"
-                                ngModel
+                                [(ngModel)]="editUser.firstName"
                                 >
                         </div>
                     </div>
@@ -119,7 +119,7 @@
                             <input type="text" class="form-control ih-medium ip-light radius-xs b-light px-15"
                                 placeholder="Last name"
                                 name="lastName"
-                                ngModel
+                                [(ngModel)]="editUser.lastName"
                                 >
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                     <input type="text" class="form-control ih-medium ip-light radius-xs b-light px-15"
                         placeholder="Username"
                         name="username"
-                                ngModel
+                        [(ngModel)]="editUser.userName"
                         >
                 </div>
                 <div class="form-group">
@@ -139,7 +139,7 @@
                     <input type="text" class="form-control ih-medium ip-light radius-xs b-light px-15"
                         placeholder="Email"
                         name="email"
-                                ngModel
+                        [(ngModel)]="editUser.email"
                         >
                 </div>
                 <div class="form-group">
@@ -147,7 +147,7 @@
                         UserType</label>
                         <select class="form-control ih-medium ip-light radius-xs b-light px-15"
                         name="userType"
-                                ngModel
+                        [(ngModel)]="editUser.userType"
                         >
                             <option value="1">Admin</option>
                             <option value="2">User</option>
@@ -155,7 +155,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-sm">Save changes</button>
+                <button type="button" class="btn btn-primary btn-sm" (click)="saveEditUser()">Save changes</button>
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>

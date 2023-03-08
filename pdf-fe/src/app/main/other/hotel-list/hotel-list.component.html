@@ -2,14 +2,15 @@
     <div class="card">
         <div class="card-body">
             <div class="col-md-12">
-                <h4 class="mb-3">Add hotel</h4>
+                <h4 class="mb-3"><span *ngIf="isEdit">Update</span> <span *ngIf="!isEdit">Add</span> hotel</h4>
             </div>
             <div class="col-md-12 mb-3">
                 <label>Hotel</label>
                 <input type="text" class="form-control" [(ngModel)]="name">
             </div>
-            <div class="col-md-12">
-                <button class="btn btn-primary" (click)="add()">Add</button>
+            <div class="col-md-12 d-flex">
+                <button class="btn btn-primary" (click)="add()"><span *ngIf="isEdit">Update</span> <span *ngIf="!isEdit">Add</span></button>
+                <button *ngIf="isEdit" class="btn btn-info ms-3" (click)="cancel()">Cancel</button>
             </div>
         </div>
     </div>
@@ -30,6 +31,9 @@
                         <th>
                             Hotel
                         </th>
+                        <th class="text-center">
+                            <span class="userDatatable-title float-end">Action</span>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -40,6 +44,31 @@
                             </td>
                             <td>
                                 {{ r.name }}
+                            </td>
+                            <td class="text-center">
+                                <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
+                                    <!-- <li>
+                                            <a href="#" class="view">
+                                                <i class="uil uil-eye"></i>
+                                            </a>
+                                        </li> -->
+                                    <li>
+                                        <a class="edit" (click)="onEdit(r)">
+                                            <i class="uil uil-edit"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a style="cursor: pointer;" (click)="onDelete(r.id)" class="remove ms-2">
+                                            <i class="uil uil-trash-alt"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!-- <a style="cursor: pointer;" class="text-success" (click)="onEdit(r)">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a style="cursor: pointer;" (click)="onDelete(r.id)" class="text-danger ms-2">
+                                    <i class="fa fa-trash"></i>
+                                </a> -->
                             </td>
                         </tr>
                     </tbody>

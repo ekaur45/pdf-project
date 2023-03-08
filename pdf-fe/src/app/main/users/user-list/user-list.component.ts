@@ -38,4 +38,10 @@ export class UserListComponent implements OnInit {
       }
     })
   }
+  saveEditUser(){
+    this.api.post('user',this.editUser).subscribe(x=>{
+      this.getUsersList();
+      $("#modal-edit-user").modal("hide");
+    })
+  }
 }
