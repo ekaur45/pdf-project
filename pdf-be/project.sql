@@ -494,3 +494,10 @@ DELIMITER ;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2023-03-03  1:30:29
+
+
+
+
+
+ALTER TABLE `pdfproject`.`users` 
+ADD COLUMN `photo` VARCHAR(500) NULL AFTER `userType`;

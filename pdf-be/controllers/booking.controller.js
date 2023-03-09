@@ -23,7 +23,7 @@ bookingController.addBooking= async (req,res,next)=>{
  */
 bookingController.deleteBooking= async (req,res,next)=>{
     var result = await Booking.delete(req.query.id);
-    result.success?res.Ok(booking):res.BadRequest("Something went wrong");
+    result.success?res.Ok({},"Booking deleted successfuly."):res.BadRequest({},"Something went wrong");
 }
 
 /**

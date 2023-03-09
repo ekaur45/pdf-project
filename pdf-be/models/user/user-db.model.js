@@ -1,8 +1,9 @@
 
 const { mysqlExecute, mysqlSelect } = require("../../utils/database.util");
+const { uploadFile } = require("../../utils/file.util");
 const { EditUserModel } = require("./edit-user.model");
 const { UserModel } = require("./user.model");
-
+const bcrypt = require("bcrypt");
 
 const User = {};
 /**
@@ -10,7 +11,8 @@ const User = {};
  * @param {UserModel} model 
  */
 User.Add  = async (model)=>{
-    var result = await mysqlExecute('call sp_add_user(?)',[model.params]);
+    var avatar = await uploadFile(model.files[0]);
+    var result = await mysqlExecute('call sp_add_user(?)',[[...model.params,avatar.fileName]]);
     return result;
 }
 /**
@@ -36,7 +38,7 @@ User.delete = async id =>{
     return await mysqlExecute('delete from users where id = ?',[id],false);
 }
 User.ResetPassword = async (data) =>{
-    let passwod = bcrypt.hasSync(data.password,10);
-    return await mysqlExecute('update users set `password`=? where id = ?',[passwod,id],false);
+    let passwod = bcrypt.hashSync(data.password,10);
+    return await mysqlExecute('update users set `password`=? where id = ?',[passwod,data.id],false);
 }
 module.exports = User;

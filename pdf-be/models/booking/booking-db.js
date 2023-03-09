@@ -123,7 +123,7 @@ Booking.print = async id => {
 }
 
 Booking.delete = async id =>{
-    return await mysqlExecute('delete from bookings where id=?',[id],false);
+    return await mysqlExecute('delete from booking where id=?',[id],false);
 }
 
 Booking.AddDestination = async (obj)=>{

@@ -25,4 +25,14 @@ Misc.getHotels = async ()=>{
 Misc.getRoomTypes = async ()=>{
     return await mysqlSelect('call sp_get_roomtypes();')
 }
+
+
+Misc.getAgents = async ()=>{
+    var query = "select * from users where userType='3'";
+    return await mysqlSelect(query,[],false);
+}
+Misc.getStaff = async ()=>{
+    var query = "select * from users where userType='4'";
+    return await mysqlSelect(query,[],false);
+}
 module.exports = Misc;

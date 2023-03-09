@@ -7,6 +7,7 @@ class UserModel{
         this.email = obj.email??"";
         this.userType = obj.userType??2;
         this.password = obj.password??"";
+        this.files = obj.files;
         this.validate = function(){
             return this.username && this.email && this.userType && this.password;
         }

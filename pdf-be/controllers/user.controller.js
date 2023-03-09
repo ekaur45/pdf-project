@@ -11,6 +11,7 @@ const userController = {};
  */
 userController.Add = async (req,res,next)=>{
     var model = new UserModel(req.body);
+    model.files = req.files;
     if(!model.validate()) return res.BadRequest({},"Fill all required fields.");
     var result = await User.Add(model);
     result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong.");

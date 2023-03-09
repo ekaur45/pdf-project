@@ -11,4 +11,8 @@ router.get('/roomtypes',controller.getRoomTypes);
 
 router.post('/update-destination',controller.updateDestination);
 router.get('/delete-destination',controller.deleteDestination);
+
+
+router.get('/agents',controller.getAgents);
+router.get('/staffs',controller.getStaff);
 module.exports = router;

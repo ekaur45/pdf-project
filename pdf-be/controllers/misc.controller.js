@@ -108,4 +108,16 @@ miscController.getRoomTypes =async (req,res,next)=>{
     result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong");
 }
 
+
+
+miscController.getAgents = async (req,res,next)=>{
+    var result = await Misc.getAgents();
+    result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong");
+}
+
+miscController.getStaff = async (req,res,next)=>{
+    var result = await Misc.getStaff();
+    result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong");
+}
+
 module.exports = miscController;
