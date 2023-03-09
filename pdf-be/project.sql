@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `pdfproject` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `pdfproject`;
 -- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: localhost    Database: pdfproject
@@ -27,12 +25,12 @@ DROP TABLE IF EXISTS `booking`;
 CREATE TABLE `booking` (
   `id` int NOT NULL AUTO_INCREMENT,
   `agentName` varchar(500) DEFAULT NULL,
-  `date` datetime DEFAULT NULL,
+  `date` varchar(500) DEFAULT NULL,
   `orderNo` varchar(45) DEFAULT NULL,
   `passengers` int DEFAULT NULL,
   `nights` int DEFAULT NULL,
-  `departure` datetime DEFAULT NULL,
-  `arrival` datetime DEFAULT NULL,
+  `departure` varchar(500) DEFAULT NULL,
+  `arrival` varchar(500) DEFAULT NULL,
   `customerName` varchar(500) DEFAULT NULL,
   `isDeleted` bit(1) DEFAULT b'0',
   `staffName` varchar(500) DEFAULT NULL,
@@ -41,7 +39,7 @@ CREATE TABLE `booking` (
   `extraCharges` decimal(12,2) DEFAULT NULL,
   `totalPrice` decimal(12,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,7 +48,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (10,'asdfdas','2023-03-01 00:00:00','sadf',2,3,'2023-03-03 00:00:00','2023-03-02 00:00:00','sadf',_binary '\0','sadf',2000.00,50.00,50.00,2000.00),(11,'asdfads','2023-03-03 00:00:00','asdfads',2,2,'2023-03-04 00:00:00','2023-02-28 00:00:00','',_binary '\0','asdf',123.00,64.00,54.00,456.00);
+INSERT INTO `booking` VALUES (13,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00),(14,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00),(15,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00);
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,17 +65,17 @@ CREATE TABLE `bookingoffers` (
   `roomType` varchar(500) DEFAULT NULL,
   `nights` int DEFAULT NULL,
   `hotel` varchar(500) DEFAULT NULL,
-  `destinationTo` datetime DEFAULT NULL,
-  `destinationFrom` datetime DEFAULT NULL,
+  `destinationTo` varchar(500) DEFAULT NULL,
+  `destinationFrom` varchar(500) DEFAULT NULL,
   `destinationName` varchar(500) DEFAULT NULL,
   `isDeleted` bit(1) DEFAULT b'0',
   `flightTo` varchar(500) DEFAULT NULL,
   `flightFrom` varchar(45) DEFAULT NULL,
-  `flightDateFrom` datetime DEFAULT NULL,
-  `flightDateTo` datetime DEFAULT NULL,
+  `flightDateFrom` varchar(500) DEFAULT NULL,
+  `flightDateTo` varchar(500) DEFAULT NULL,
   `bookingid` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -86,7 +84,7 @@ CREATE TABLE `bookingoffers` (
 
 LOCK TABLES `bookingoffers` WRITE;
 /*!40000 ALTER TABLE `bookingoffers` DISABLE KEYS */;
-INSERT INTO `bookingoffers` VALUES (1,'wersadf','Single bed',3,'Honey moon','2023-03-04 00:00:00','2023-03-10 00:00:00','asdf',_binary '\0','asdf','asdf','2023-03-09 00:00:00','2023-03-03 00:00:00',10),(2,'dsafasd','King size',2,'asdfadsfdsa','2023-03-03 00:00:00','2023-03-09 00:00:00','asdfasdfsad',_binary '\0','asdf','sadf','2023-03-15 00:00:00','2023-03-23 00:00:00',11);
+INSERT INTO `bookingoffers` VALUES (1,'wersadf','Single bed',3,'Honey moon','2023-03-04 00:00:00','2023-03-10 00:00:00','asdf',_binary '\0','asdf','asdf','2023-03-09 00:00:00','2023-03-03 00:00:00',10),(2,'dsafasd','King size',2,'asdfadsfdsa','2023-03-03 00:00:00','2023-03-09 00:00:00','asdfasdfsad',_binary '\0','asdf','sadf','2023-03-15 00:00:00','2023-03-23 00:00:00',11),(3,'dfads','Single bed',2,'asdfadsfdsa','2023-03-11 00:00:00','2023-03-15 00:00:00','asdfasdfsad',_binary '\0','fdsa234','23dsa','2023-03-11 00:00:00','2023-03-11 00:00:00',12),(4,'asdfdsa','1',12,'2','03/11/2023','03/11/2023','1',_binary '\0','asdfads','asdfsda','03/11/2023','03/11/2023',15),(5,'sadfsda','2',23,'2','03/18/2023','03/13/2023','2',_binary '\0','dsafasd','aasdf','03/16/2023','03/13/2023',15);
 /*!40000 ALTER TABLE `bookingoffers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,8 +232,9 @@ CREATE TABLE `users` (
   `password` varchar(500) DEFAULT NULL,
   `isDeleted` bit(1) DEFAULT NULL,
   `userType` int DEFAULT NULL,
+  `photo` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -244,7 +243,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Admin','Admin','admin','admin@example.com','$2b$10$io4gq2W1ehE/cEkc7/6Ac.zpGj3WttOen7mDPO01IRf6je4shY36q',NULL,1),(2,'sadfasdf','asdfasd','sadfadsfds','asdaf@sdfasd','$2b$10$zEplhD8OmGWNmpP3Sy1BGu.OkrQtn6G64mD0jKoKtNwnY.C5c.Ch2',_binary '\0',2);
+INSERT INTO `users` VALUES (1,'Admin','Admin','admin','admin@example.com','$2b$10$caBj75lYFipmkCdwWeBMG.fJYICieLyAKiDGAPs67p9IuwClBRvai',NULL,1,'/avatars/E7E02CD73B3BScreenshot_2.png'),(3,'Ali','abrar','ali','ali@example.com','$2b$10$ZjWakxzf1x3VRO.5nP4fTOtDZZq/4VvMEHNvXcW1TOq/LlnMrmFrG',_binary '\0',1,'/avatars/E7E02CD73B3BScreenshot_2.png'),(4,'Ali','haider','alihaider','ali@email.com','$2b$10$y6IykrIDQ31I8E7kKQBN/ulglPwSQNGU7XJNPJVH22.vxHWtQmcbu',_binary '\0',3,'/avatars/F48230D2CE49Screenshot_2.png'),(5,'asdfads','asdfsad','asdfasd','sdaf@sdfdsa','$2b$10$Td0Iwrdh4YiOLNEx8BFnq.ViCosdS.gzELkOVIazTHbFD0m/SlaWG',_binary '\0',4,'/avatars/E7E02CD73B3BScreenshot_2.png');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,7 +258,7 @@ CREATE TABLE `usetypes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,9 +267,13 @@ CREATE TABLE `usetypes` (
 
 LOCK TABLES `usetypes` WRITE;
 /*!40000 ALTER TABLE `usetypes` DISABLE KEYS */;
-INSERT INTO `usetypes` VALUES (1,'admin'),(2,'user');
+INSERT INTO `usetypes` VALUES (1,'admin'),(2,'user'),(3,'agent'),(4,'staff');
 /*!40000 ALTER TABLE `usetypes` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'pdfproject'
+--
 
 --
 -- Dumping routines for database 'pdfproject'
@@ -287,7 +290,9 @@ UNLOCK TABLES;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_booking`()
 BEGIN
-select * from booking where ifnull(isDeleted,0)=0;
+select *,
+(select concat(users.firstName,' ',users.lastName) from users where users.id = booking.agentName) agentFullName, 
+(select concat(users.firstName,' ',users.lastName) from users where users.id = booking.staffName) staffFulName from booking where ifnull(isDeleted,0)=0;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -306,7 +311,13 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_booking_by`( in _id int)
 BEGIN
-select * from booking where ifnull(isDeleted,0)=0 and id = _id;
+-- select *,(select photo from users where users.id = booking.agentName limit 1) photo from booking where ifnull(isDeleted,0)=0 and id = _id;
+
+select id, (select concat(users.firstName,' ',users.lastName) from users where users.id = booking.agentName limit 1) agentName,
+(select concat(users.firstName,' ',users.lastName) from users where users.id = booking.staffName limit 1) staffName, 
+`date`, orderNo, passengers, nights, departure, arrival, customerName, isDeleted,  price, discount, extraCharges, totalPrice, 
+(select photo from users where users.id = booking.agentName limit 1) photo 
+from booking where ifnull(isDeleted,0)=0 and id = _id;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -325,7 +336,16 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_booking_by_id`(in _id int)
 BEGIN
-select * from bookingoffers where ifnull(isDeleted,0)=0 and bookingid = _id;
+-- select * from bookingoffers where ifnull(isDeleted,0)=0 and bookingid = _id;
+select id, bookingNo, 
+(select display from roomTypes where roomTypes.id = bookingoffers.roomType) roomType, 
+nights, 
+(select `name` from hotel where id = bookingoffers.hotel) hotel, 
+destinationTo, destinationFrom, 
+(select display from destinations where destinations.id = bookingoffers.destinationName) destinationName, 
+isDeleted, flightTo, flightFrom, flightDateFrom, flightDateTo, bookingid 
+
+from bookingoffers where ifnull(isDeleted,0)=0 and bookingid = _id;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -348,11 +368,12 @@ in _lastName varchar(500),
 in _username varchar(500),
 in _email varchar(500),
 in _userType int,
-in _password varchar(500)
+in _password varchar(500),
+in _photo varchar(500)
 )
 BEGIN
 INSERT INTO `users`
-(`firstName`,`lastName`,`userName`,`email`,`password`,`isDeleted`,`userType`)
+(`firstName`,`lastName`,`userName`,`email`,`password`,`isDeleted`,`userType`,`photo`)
 VALUES
 (_firstName,
 _lastName,
@@ -360,7 +381,7 @@ _username,
 _email,
 _password,
 0,
-_userType);
+_userType,_photo);
 
 END ;;
 DELIMITER ;
@@ -455,7 +476,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_users`()
 BEGIN
-select * from users where ifnull(isDeleted,0)=0;
+select *,(select `name` from usetypes where usetypes.id = users.userType) userTypeText from users where ifnull(isDeleted,0)=0;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -476,7 +497,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_user_by_email`(
 in _text varchar(500)
 )
 BEGIN
-select * from users where (email = _text or username = _text) and ifnull(isDeleted,0)=0;
+select t1.*,t2.name as userTypeText from users t1 join usetypes t2 on t2.id = t1.userType  where (email = _text or username = _text) and ifnull(isDeleted,0)=0;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -493,11 +514,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-03  1:30:29
-
-
-
-
-
-ALTER TABLE `pdfproject`.`users` 
-ADD COLUMN `photo` VARCHAR(500) NULL AFTER `userType`;
+-- Dump completed on 2023-03-10  4:25:34
