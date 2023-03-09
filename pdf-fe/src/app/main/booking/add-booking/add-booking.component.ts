@@ -90,6 +90,9 @@ export class AddBookingComponent implements OnInit {
     this.model.totalPrice = (price + xCharges) - (discount * price)/100 ;
   }
   onDateChange(e:any){
-    debugger
+    
+  }
+  removeRow(ndx:number){
+    this.destinationList.splice(ndx,1);
   }
 }
