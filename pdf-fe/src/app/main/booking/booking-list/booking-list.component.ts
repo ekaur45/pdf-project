@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/utils/api.service';
 import { environment } from 'src/environments/environment';
+import Swal  from 'sweetalert2';
 declare const $:any;
 @Component({
   selector: 'app-booking-list',
@@ -36,8 +37,28 @@ export class BookingListComponent implements OnInit {
   }
 
   onUserEdit(e:any){}
-  onUserDelete(e:any){
+  onBookingDelete(e:any){
+    this.deleteobj = e;
     $("#modal-info-confirmed").modal("show");
   }
-  onDeleteConfirm(e:any){}
+  onDeleteConfirm(e:any){
+    this.api.get('booking/delete?id='+e).subscribe((x)=>{
+      if(x.status == 200){
+        Swal.fire({
+          icon: 'success',
+          title: x.message,
+          showConfirmButton: false,
+          timer: 1500
+        })
+        this.getBookings();
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: x.message,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+    })
+  }
 }

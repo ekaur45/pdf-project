@@ -16,4 +16,7 @@ export class ApiService {
   post(url:string,data:any):Observable<ApiResponse>{
     return this.http.post<ApiResponse>(this.baseUrl+url,data);
   }
+  multiForm(url:string,data:any):Observable<ApiResponse>{
+    return this.http.post<ApiResponse>(this.baseUrl+url,data);
+  }
 }

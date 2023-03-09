@@ -27,16 +27,16 @@
                 <li class="nav-author">
                     <div class="dropdown-custom">
                         <a href="javascript:;" class="nav-item-toggle">
-                            <!-- <img src="assets/img/author-nav.jpg" alt=""
-                                class="rounded-circle"> -->
+                            <img [src]="url+user?.photo" alt=""
+                                class="rounded-circle">
                             <span class="nav-item__title">{{ user?.firstName }} {{ user?.lastName }}<i class="las la-angle-down nav-item__arrow"></i></span>
                         </a>
                         <div class="dropdown-parent-wrapper">
                             <div class="dropdown-wrapper">
                                 <div class="nav-author__info">
-                                    <!-- <div class="author-img">
-                                        <img src="assets/img/author-nav.jpg" alt="" class="rounded-circle">
-                                    </div> -->
+                                    <div class="author-img">
+                                        <img [src]="url+user?.photo" alt="" class="rounded-circle">
+                                    </div>
                                     <div>
                                         <h6>{{ user?.firstName }} {{ user?.lastName }}</h6>
                                     </div>

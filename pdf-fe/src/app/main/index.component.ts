@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 declare const $:any;
@@ -7,6 +8,7 @@ declare const $:any;
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
+  url:string = environment.baseUrl;
   user:any = {};
   constructor(private router:Router) { 
     this.user = JSON.parse(localStorage.getItem("user")??"{}");
@@ -22,16 +24,6 @@ export class IndexComponent implements OnInit {
     let s1 = document.createElement("script");
     s1.src = "assets/js/script.min.js";
     document.body.appendChild(s1);
-    // $(".sidebar-toggle").on('click',function(){
-    //   $("#sidebar").toggleClass("collapsed")
-    //   // $(".main-content").toggleClass("expanded");
-    //   $(".contents").toggleClass("expanded")
-    //   $(".footer-wrapper").toggleClass("expanded")
-    // });
-    // $(".has-child").on("click",function(e:any){
-    //   debugger
-    //   $(e.currentTarget).toggleClass("open");
-    // })
   }
   onSignout(){
     localStorage.setItem("user","");

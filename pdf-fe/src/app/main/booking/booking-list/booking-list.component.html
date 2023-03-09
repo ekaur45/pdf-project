@@ -50,10 +50,10 @@
                                 {{ ndx+1 }}
                             </td>
                             <td>
-                                {{ r.agentName }}
+                                {{ r.agentFullName }}
                             </td>
                             <td>
-                                {{ r.staffName }}
+                                {{ r.staffFulName }}
                             </td>
                             <td>
                                 {{r.customerName}}
@@ -86,7 +86,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="remove" style="cursor: pointer;"  (click)="onUserDelete(r)">
+                                        <a class="remove" style="cursor: pointer;"  (click)="onBookingDelete(r)">
                                             <i class="uil uil-trash-alt"></i>
                                         </a>
                                     </li>

@@ -1,18 +1,22 @@
 import { AddBooking, BookingDestination, BookingFlight, BookingHotel } from './models/add-booking.model';
 import { ApiService } from './../../../utils/api.service';
 import { Component, OnInit, NgModule } from '@angular/core';
-
+import { FormControl } from '@angular/forms';
+declare const $:any;
 @Component({
   selector: 'app-add-booking',
   templateUrl: './add-booking.component.html',
   styleUrls: ['./add-booking.component.css']
 })
 export class AddBookingComponent implements OnInit {
+  agentControl = new FormControl('');
   hotels:any=[];
   roomTypes:any = [];
   destinationData:any = [];
   model:AddBooking = new AddBooking();
   destinationList:AddBooking[] = [];
+  agents: any = [];
+  staffs: any = [];
   constructor(private api:ApiService) {
     this.model = new AddBooking();
     this.destinationList = [];
@@ -22,6 +26,14 @@ export class AddBookingComponent implements OnInit {
     this.getHotels();
     this.getRoomTypes();
     this.getDestination();
+    this.getAgents();
+    this.getStaffs();
+    //$("select").select2();
+    // $(document).ready(function(){
+    //   setTimeout(() => {
+    //     $(".flatpickr-minimum").datepicker();
+    //   }, 1000);
+    // })
   }
   
   onAddDestination(){
@@ -32,20 +44,34 @@ export class AddBookingComponent implements OnInit {
   }
   getDestination(){
     this.api.get('booking/destination').subscribe(x=>{
-      if(x.status == 200) this.destinationData = x.data;
+      if(x.status == 200) this.destinationData = x.data.map((c:any)=>{ return {id:c.id,text:c.display}});
     })
   }
   getHotels(){
     this.api.get('util/hotels').subscribe(x=>{
       if(x.status ==200){
-        this.hotels = x.data;
+        this.hotels = x.data.map((c:any)=>{ return {id:c.id,text:c.name}});
+      }
+    })
+  }
+  getStaffs(){
+    this.api.get('util/staffs').subscribe(x=>{
+      if(x.status ==200){
+        this.staffs = x.data.map((c:any)=>{ return {id:c.id,text:c.firstName}});
+      }
+    })
+  }
+  getAgents(){
+    this.api.get('util/agents').subscribe(x=>{
+      if(x.status ==200){
+        this.agents = x.data.map((c:any)=>{ return {id:c.id,text:c.firstName}});
       }
     })
   }
   getRoomTypes(){
     this.api.get('util/roomtypes').subscribe(x=>{
       if(x.status ==200){
-        this.roomTypes = x.data;
+        this.roomTypes = x.data.map((c:any)=>{ return {id:c.id,text:c.display}});
       }
     })
   }
@@ -56,5 +82,14 @@ export class AddBookingComponent implements OnInit {
         alert("Added");
       }
     })
+  }
+  onPriceChange(){
+    let price = this.model.price;
+    let discount = this.model.discount;
+    let xCharges =  this.model.extraCharges;
+    this.model.totalPrice = (price + xCharges) - (discount * price)/100 ;
+  }
+  onDateChange(e:any){
+    debugger
   }
 }

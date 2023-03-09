@@ -1,12 +1,12 @@
 export class AddBooking{
     agentName:string="";
     staffName:string="";
-    date:Date=new Date();
+    date:string="";
     orderNo:string="";
     passengers:number=0;
     nights:number=0;
-    departure:Date=new Date();
-    arrival:Date=new Date();
+    departure:string="";
+    arrival:string="";
     customerName:string="";
     price:number=0;
     discount:number=0;
@@ -19,14 +19,14 @@ export class AddBooking{
 }
 export class BookingDestination{
     destination:string="";
-    dateTo:Date=new Date();
-    dateFrom:Date=new Date();
+    dateTo:string="";
+    dateFrom:string="";
 }
 export class BookingFlight{
     to:string="";
     from:string="";
-    dateTo:Date=new Date();
-    dateFrom:Date=new Date();
+    dateTo:string="";
+    dateFrom:string="";
 }
 export class BookingHotel{
     bookingNo:string="";

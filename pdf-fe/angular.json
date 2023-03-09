@@ -26,10 +26,13 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
+            "styles": [              
+              "src/custom-theme.scss",
               "src/styles.css"
             ],
             "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/select2/dist/js/select2.min.js"
             ]
           },
           "configurations": {

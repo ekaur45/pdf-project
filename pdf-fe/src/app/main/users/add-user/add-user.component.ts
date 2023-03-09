@@ -15,8 +15,10 @@ export class AddUserComponent implements OnInit {
   ngOnInit(): void {
     //$(".select2").select2()
   }
-  onAddUserSubmit(f:NgForm){
-    this.api.post('user/add',f.value).subscribe(x=>{
+  onAddUserSubmit(f:any){
+    var formData = new FormData(f.target);
+    debugger
+    this.api.multiForm('user/add',formData).subscribe(x=>{
       if(x.status !=200){
         alert(x.message);
       }else{

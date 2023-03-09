@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/utils/api.service';
-
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,9 +23,20 @@ export class LoginComponent implements OnInit {
     this.api.post('account/login',e.value).subscribe((x:any)=>{
       if(x.status == 200){
         localStorage.setItem("user",JSON.stringify(x.data));
+        Swal.fire({
+          icon: 'success',
+          title: 'Login successful',
+          showConfirmButton: false,
+          timer: 3000
+        })
         this.router.navigate(['']);
       }else{
-        alert(x.message);
+        Swal.fire({
+          icon: 'error',
+          title: x.message,
+          showConfirmButton: false,
+          timer: 3000
+        })
       }
     })
   }

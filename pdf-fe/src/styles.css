@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+/* @import url("../node_modules/bootstrap/dist/css/bootstrap.min.css"); */
 @import url('./assets/css/plugin.min.css');
 @import url('./assets/css/style.css');
 @import url('./assets/css/line.css');
+@import url('../node_modules/sweetalert2/dist/sweetalert2.css');

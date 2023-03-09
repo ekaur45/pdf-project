@@ -1,3 +1,4 @@
+import { environment } from './../../../../environments/environment';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/utils/api.service';
 declare const $:any;
@@ -7,9 +8,12 @@ declare const $:any;
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
+  url:string = environment.baseUrl;
   userList:any = [];
   deleteUser:any={};
   editUser:any={};
+  editPassword: any;
+  editId: any;
   constructor(private api:ApiService) { }
 
   ngOnInit(): void {
@@ -43,5 +47,20 @@ export class UserListComponent implements OnInit {
       this.getUsersList();
       $("#modal-edit-user").modal("hide");
     })
+  }
+  saveEditPassword(){
+    this.api.post('user/reset-password',{id:this.editId,password:this.editPassword}).subscribe(x=>{
+      this.editId=null;
+      this.editPassword = "";
+      this.editUser = {};
+      this.getUsersList();
+      $("#modal-edit-password").modal("hide");
+    })
+  }
+
+  onEditPassword (id:any){
+    this.editUser = id;
+    this.editId=this.editUser.id;
+    $("#modal-edit-password").modal("show");
   }
 }

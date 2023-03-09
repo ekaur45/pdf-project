@@ -8,41 +8,44 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="user-info-tab w-100 bg-white global-shadow radius-xl mb-50">
-            <div class="userDatatable global-shadow border-light-0 p-30 bg-white radius-xl w-100 mb-30"
-            
-            >
+            <div class="userDatatable global-shadow border-light-0 p-30 bg-white radius-xl w-100 mb-30">
                 
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Agent name</label>
-                                <input class="form-control " type="text" name="AgentName" placeholder="Enter agent name" 
-                                [(ngModel)]="model.agentName"
-                                />
+                                <ng-select2 class="form-control ih-medium p-0"
+                                    [(ngModel)]="model.agentName"
+                                    [data]="agents"
+                                    [placeholder]="'Please select an agent'">		
+                                </ng-select2>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Staff name</label>
-                                <input class="form-control " type="text" name="StaffName" placeholder="Enter staff name" 
+                                <ng-select2 class="form-control ih-medium p-0"
                                 [(ngModel)]="model.staffName"
-                                />
+                                [data]="staffs"
+                                [placeholder]="'Please select a staff'">		
+                            </ng-select2>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Date</label>
-                                <input type="date" class="form-control flatpickr-minimum" name="Date" placeholder="Select date.." 
+                                <!-- <input type="text" class="form-control ih-medium flatpickr-minimum" name="Date" placeholder="Select date.." 
                                 
                                 [(ngModel)]="model.date"
-                                />
+                                /> -->
+                                <app-date-picker name="date" [(date)]="model.date"></app-date-picker>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Order no.</label>
-                                <input class="form-control " type="text" name="OrderNo" placeholder="Enter order number" 
+                                <input class="form-control ih-medium " type="text" name="OrderNo" placeholder="Enter order number" 
                                 [(ngModel)]="model.orderNo"
                                 />
                             </div>
@@ -51,7 +54,7 @@
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Passengers</label>
-                                <input class="form-control " type="text" name="Passengers" placeholder="Enter passengers" 
+                                <input class="form-control ih-medium " type="text" name="Passengers" placeholder="Enter passengers" 
                                 [(ngModel)]="model.passengers"
                                 />
                             </div>
@@ -59,7 +62,7 @@
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Nights</label>
-                                <input class="form-control " type="text" name="Nights" placeholder="Enter nights" 
+                                <input class="form-control ih-medium " type="text" name="Nights" placeholder="Enter nights" 
                                 [(ngModel)]="model.nights"
                                 />
                             </div>
@@ -67,59 +70,70 @@
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Departure</label>
-                                <input class="form-control  flatpickr-minimum" type="date" name="Departure" placeholder="Enter departure" 
-                                [(ngModel)]="model.departure"
-                                />
+                                <app-date-picker name="departure" [(date)]="model.departure"></app-date-picker>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Arrival</label>
-                                <input class="form-control  flatpickr-minimum" type="date" name="Arrival" placeholder="Enter arrival" 
+                                <!-- <input class="form-control ih-medium  flatpickr-minimum" type="text" name="Arrival" placeholder="Enter arrival" 
                                 [(ngModel)]="model.arrival"
-                                />
+                                /> -->
+                                <app-date-picker name="Arrival" [(date)]="model.arrival"></app-date-picker>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Customer name</label>
-                                <input class="form-control " type="text" name="CustomerName" placeholder="Enter customer name" 
+                                <input class="form-control ih-medium " type="text" name="CustomerName" placeholder="Enter customer name" 
                                 [(ngModel)]="model.customerName"
                                 />
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3>Destinations</h3>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label class="form-label">Destinations</label>
-                                <select class="form-control choices-single" type="text" name="destinationId" placeholder="Enter destination"
-                                [(ngModel)]="model.destination.destination"
-                                >
-                                    <option *ngFor="let h of destinationData" [value]="h.display">{{ h.display }}</option>
-                                </select>
+                        <fieldset class="row">
+                            <legend>
+                                <h3>Destinations</h3>
+                            </legend>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Destinations</label>
+                                    <!-- <select class="form-control ih-medium choices-single" type="text" name="destinationId" placeholder="Enter destination"
+                                    [(ngModel)]="model.destination.destination"
+                                    >
+                                        <option *ngFor="let h of destinationData" [value]="h.display">{{ h.display }}</option>
+                                    </select> -->
+
+                                    <ng-select2 class="form-control ih-medium p-0"
+                                    [(ngModel)]="model.destination.destination"
+                                    [data]="destinationData"
+                                    [placeholder]="'Please select destination'"
+                                    >
+    
+                                    </ng-select2>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label class="form-label">To</label>
-                                <input class="form-control  flatpickr-minimum" type="date" name="dateTo" placeholder="Enter date to" 
-                                [(ngModel)]="model.destination.dateTo"
-                                />
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">To</label>
+                                    <!-- <input class="form-control ih-medium  flatpickr-minimum" type="text" name="dateTo" placeholder="Enter date to" 
+                                    [(ngModel)]="model.destination.dateTo"
+                                    /> -->
+                                    <app-date-picker name="dateTo" [(date)]="model.destination.dateTo"></app-date-picker>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label class="form-label">From</label>
-                                <input class="form-control  flatpickr-minimum" type="date" name="dateFrom" placeholder="Enter date from" 
-                                [(ngModel)]="model.destination.dateFrom"
-                                />
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">From</label>
+                                    <!-- <input class="form-control ih-medium  flatpickr-minimum" type="text" name="dateFrom" placeholder="Enter date from" 
+                                    [(ngModel)]="model.destination.dateFrom"
+                                    /> -->
+                                    <app-date-picker name="dateFrom" [(date)]="model.destination.dateFrom"></app-date-picker>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </fieldset>
+                        <!-- <div class="col-md-12">
+                        </div> -->
                     <div class="row">
                         <div class="col-md-12">
                             <h3>Internal flight</h3>
@@ -127,16 +141,17 @@
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">From</label>
-                                <input class="form-control " type="text" name="flightFrom" placeholder="Enter flight from" 
+                                <input class="form-control ih-medium " type="text" name="flightFrom" placeholder="Enter flight from" 
                                 [(ngModel)]="model.flight.from"
                                 
                                 />
+                                
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">To</label>
-                                <input class="form-control " type="text" name="flightTo" placeholder="Enter flight to" 
+                                <input class="form-control ih-medium " type="text" name="flightTo" placeholder="Enter flight to" 
                                 [(ngModel)]="model.flight.to"
                                 
                                 />
@@ -145,19 +160,21 @@
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Date to</label>
-                                <input class="form-control  flatpickr-minimum" type="date" name="flightDateFrom" placeholder="Enter flight date to" 
+                                <!-- <input class="form-control ih-medium  flatpickr-minimum" type="text" name="flightDateFrom" placeholder="Enter flight date to" 
                                 [(ngModel)]="model.flight.dateTo"
                                 
-                                />
+                                /> -->
+                                <app-date-picker name="flightDateTo" [(date)]="model.flight.dateTo"></app-date-picker>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Date from</label>
-                                <input class="form-control  flatpickr-minimum" type="date" name="flightDateTo" placeholder="Enter flight date from" 
+                                <!-- <input class="form-control ih-medium  flatpickr-minimum" type="text" name="flightDateTo" placeholder="Enter flight date from" 
                                 [(ngModel)]="model.flight.dateFrom"
                                 
-                                />
+                                /> -->
+                                <app-date-picker name="flightDateFrom" [(date)]="model.flight.dateFrom"></app-date-picker>
                             </div>
                         </div>
                     </div>
@@ -168,7 +185,7 @@
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Booking no</label>
-                                <input class="form-control " type="text" name="customerName" placeholder="Enter booking no" 
+                                <input class="form-control ih-medium " type="text" name="customerName" placeholder="Enter booking no" 
                                 [(ngModel)]="model.hotel.bookingNo"
                                 
                                 />
@@ -177,18 +194,25 @@
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Hotel</label>
-                                <select class="form-control choices-single2"
+                                <ng-select2 class="form-control ih-medium p-0"
+                                [(ngModel)]="model.hotel.hotel"
+                                [data]="hotels"
+                                [placeholder]="'Please select hotel'"
+                                >
+
+                                </ng-select2>
+                                <!-- <select class="form-control ih-medium choices-single2"
                                 
                                 [(ngModel)]="model.hotel.hotel"
                                 >
                                     <option *ngFor="let h of hotels" [value]="h.name">{{ h.name }}</option>
-                                </select>
+                                </select> -->
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Nights</label>
-                                <input class="form-control " type="text" name="customerName" placeholder="Enter nights" 
+                                <input class="form-control ih-medium " type="text" name="customerName" placeholder="Enter nights" 
                                 [(ngModel)]="model.hotel.nights"
                                 
                                 />
@@ -197,11 +221,16 @@
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Room type</label>
-                                <select class="form-control choices-single1"
+                                <ng-select2 class="form-control ih-medium p-0"
+                                [(ngModel)]="model.hotel.roomType"
+                                [data]="roomTypes"
+                                [placeholder]="'Please select room type'"
+                                ></ng-select2>
+                                <!-- <select class="form-control ih-medium choices-single1"
                                 [(ngModel)]="model.hotel.roomType"
                                 >
                                     <option *ngFor="let h of roomTypes" [value]="h.display">{{ h.display }}</option>
-                                </select>
+                                </select> -->
                             </div>
                         </div>
                     </div>
@@ -231,18 +260,18 @@
                                     </th>
                                 </tr>
                                 <tr *ngFor="let r of destinationList;let ndx = index;">
-                                    <th>
+                                    <td>
                                         {{ ndx + 1 }}
-                                    </th>
-                                    <th>
+                                    </td>
+                                    <td>
                                         {{ r.destination.destination }}
-                                    </th>
-                                    <th>
+                                    </td>
+                                    <td>
                                         {{ r.destination.dateTo }}
-                                    </th>
-                                    <th>
+                                    </td>
+                                    <td>
                                         From
-                                    </th>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
@@ -251,34 +280,35 @@
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Price</label>
-                                <input class="form-control " type="text" name="customerName" placeholder="Enter price" 
+                                <input class="form-control ih-medium " type="number" name="customerName" placeholder="Enter price" 
                                 [(ngModel)]="model.price"
-                                
+                                (keyup)="onPriceChange()"
                                 />
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Discount</label>
-                                <input class="form-control " type="text" name="customerName" placeholder="Enter discount" 
-                                [(ngModel)]="model.discount"                                
+                                <input class="form-control ih-medium " type="number" name="customerName" placeholder="Enter discount" 
+                                [(ngModel)]="model.discount"
+                                (keyup)="onPriceChange()"
                                 />
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Extra charges</label>
-                                <input class="form-control " type="text" name="customerName" placeholder="Enter extra charges" 
+                                <input class="form-control ih-medium " type="number" name="customerName" placeholder="Enter extra charges" 
                                 [(ngModel)]="model.extraCharges"
-                                
+                                (keyup)="onPriceChange()"
                                 />
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Total</label>
-                                <input class="form-control " type="text" name="customerName" placeholder="Enter total" 
-                                [(ngModel)]="model.totalPrice"                                
+                                <input class="form-control ih-medium " readonly type="number" name="customerName" placeholder="Enter total" 
+                                [(ngModel)]="model.totalPrice"
                                 />
                             </div>
                         </div>
@@ -290,39 +320,6 @@
                     </div>
                 </div>
             </div>
-            <script>
-                    document.addEventListener("DOMContentLoaded", function() {
-                        // Choices.js
-                        new Choices(document.querySelector(".choices-single"));
-                        new Choices(document.querySelector(".choices-single1"));
-                        new Choices(document.querySelector(".choices-single2"));
-                        // new Choices(document.querySelector(".choices-multiple"));
-                        // Flatpickr
-                        flatpickr(".flatpickr-minimum");
-                        // flatpickr(".flatpickr-datetime", {
-                        // 	enableTime: true,
-                        // 	dateFormat: "Y-m-d H:i",
-                        // });
-                        // flatpickr(".flatpickr-human", {
-                        // 	altInput: true,
-                        // 	altFormat: "F j, Y",
-                        // 	dateFormat: "Y-m-d",
-                        // });
-                        // flatpickr(".flatpickr-multiple", {
-                        // 	mode: "multiple",
-                        // 	dateFormat: "Y-m-d"
-                        // });
-                        // flatpickr(".flatpickr-range", {
-                        // 	mode: "range",
-                        // 	dateFormat: "Y-m-d"
-                        // });
-                        // flatpickr(".flatpickr-time", {
-                        // 	enableTime: true,
-                        // 	noCalendar: true,
-                        // 	dateFormat: "H:i",
-                        // });
-                    });
-                </script>
         </div>
     </div>
 </div>
