@@ -3,7 +3,8 @@ const moment = require("moment");
 const handlerbars = require("handlebars");
 const { mysqlSelect, mysqlExecute } = require("../../utils/database.util");
 const { AddBookingModel } = require("./add-booking.model");
-
+const path = require("path");
+const mime = require("mime");
 const Booking = {};
 /**
  * 
@@ -15,13 +16,14 @@ Booking.add = async (data) => {
     if (result.success === true) {
         var id = result.data[0].id;
 
-        var params = data.listParams.map((e, i) => {
-            let cc = [id];
-            e.forEach(xx => {
-                cc.push(...xx)
-            })
-            return [cc];
-        });
+        // var params = data.listParams.map((e, i) => {
+        //     let cc = [id];
+        //     e.forEach(xx => {
+        //         cc.push(...xx)
+        //     })
+        //     return [cc];
+        // });
+        var params = data.listParams.map((e,i)=>e.map((ee,ii)=>[id,...ee]));
         var result1 = await mysqlExecute('INSERT INTO `bookingoffers`' +
             '(`bookingid`,`bookingNo`,`roomType`,`nights`,`hotel`,`destinationTo`,`destinationFrom`,`destinationName`,`flightTo`,`flightFrom`,`flightDateFrom`,`flightDateTo`) values ? ;', [...params], false);
         return {
@@ -41,17 +43,17 @@ Booking.getById = async (id) => {
     if (result.success == true) {
         for (let i = 0; i < result.data.length; i++) {
             const el = result.data[i];
-            el.date = moment(el.date).format("MM/DD/YYYY");
-            el.arrival = moment(el.arrival).format("MM/DD/YYYY");
-            el.departure = moment(el.departure).format("MM/DD/YYYY");
+            // el.date = moment(el.date).format("MM/DD/YYYY");
+            // el.arrival = moment(el.arrival).format("MM/DD/YYYY");
+            // el.departure = moment(el.departure).format("MM/DD/YYYY");
             var offersResult = await mysqlSelect('call get_booking_by_id(?);', [el.id]);
             el.offers = offersResult.data;
-            el.offers.map((e, ii) => {
-                e.destinationFrom = moment(e.destinationFrom).format("MM/DD/YYYY");
-                e.destinationTo = moment(e.destinationTo).format("MM/DD/YYYY");
-                e.flightDateFrom = moment(e.flightDateFrom).format("MM/DD/YYYY");
-                e.flightDateTo = moment(e.flightDateTo).format("MM/DD/YYYY");
-            })
+            // el.offers.map((e, ii) => {
+            //     e.destinationFrom = moment(e.destinationFrom).format("MM/DD/YYYY");
+            //     e.destinationTo = moment(e.destinationTo).format("MM/DD/YYYY");
+            //     e.flightDateFrom = moment(e.flightDateFrom).format("MM/DD/YYYY");
+            //     e.flightDateTo = moment(e.flightDateTo).format("MM/DD/YYYY");
+            // })
             el.features = [
                 "Feature 1",
                 "Feature 2",
@@ -75,9 +77,9 @@ Booking.get = async () => {
     if (result.success == true) {
         for (let i = 0; i < result.data.length; i++) {
             const el = result.data[i];
-            el.date = moment(el.date).format("MM/DD/YYYY");
-            el.arrival = moment(el.arrival).format("MM/DD/YYYY");
-            el.departure = moment(el.departure).format("MM/DD/YYYY");
+            // el.date = moment(el.date).format("MM/DD/YYYY");
+            // el.arrival = moment(el.arrival).format("MM/DD/YYYY");
+            // el.departure = moment(el.departure).format("MM/DD/YYYY");
             var offersResult = await mysqlSelect('call get_booking_by_id(?);', [el.id]);
             el.offers = offersResult.data;
             el.features = [
@@ -87,6 +89,7 @@ Booking.get = async () => {
                 "Feature 4",
                 "Feature 5",
             ]
+                        
         }
         return {
             success: true,
@@ -113,7 +116,13 @@ Booking.print = async id => {
     var data = await Booking.getById(id);
     if (data.success) {
         const d = data.data[0];
-
+        d.photo = fs.readFileSync(path.join("public", d.photo)).toString("base64");
+        //const stats = fs.statSync(path.join("public", d.photo));
+        //d.photo = `data:image/${d.photo}`;
+        let contentType = mime.getType(path.join("public", d.photo));
+        const imageBas64 = 
+        `data:image/${contentType};base64,${d.photo}`;
+        d.photo = imageBas64;
         const source = fs.readFileSync("pdfTemplates/invoice.html").toString("utf-8");
         const template = handlerbars.compile(source);
         const html = template({ d })
