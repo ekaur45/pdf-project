@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `pdfproject` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `pdfproject`;
 -- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: localhost    Database: pdfproject
@@ -39,7 +41,7 @@ CREATE TABLE `booking` (
   `extraCharges` decimal(12,2) DEFAULT NULL,
   `totalPrice` decimal(12,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +50,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (13,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00),(14,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00),(15,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00);
+INSERT INTO `booking` VALUES (13,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00),(14,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00),(15,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00),(17,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',1000.00,50.00,20.00,520.00);
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,7 +77,7 @@ CREATE TABLE `bookingoffers` (
   `flightDateTo` varchar(500) DEFAULT NULL,
   `bookingid` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,7 +86,7 @@ CREATE TABLE `bookingoffers` (
 
 LOCK TABLES `bookingoffers` WRITE;
 /*!40000 ALTER TABLE `bookingoffers` DISABLE KEYS */;
-INSERT INTO `bookingoffers` VALUES (1,'wersadf','Single bed',3,'Honey moon','2023-03-04 00:00:00','2023-03-10 00:00:00','asdf',_binary '\0','asdf','asdf','2023-03-09 00:00:00','2023-03-03 00:00:00',10),(2,'dsafasd','King size',2,'asdfadsfdsa','2023-03-03 00:00:00','2023-03-09 00:00:00','asdfasdfsad',_binary '\0','asdf','sadf','2023-03-15 00:00:00','2023-03-23 00:00:00',11),(3,'dfads','Single bed',2,'asdfadsfdsa','2023-03-11 00:00:00','2023-03-15 00:00:00','asdfasdfsad',_binary '\0','fdsa234','23dsa','2023-03-11 00:00:00','2023-03-11 00:00:00',12),(4,'asdfdsa','1',12,'2','03/11/2023','03/11/2023','1',_binary '\0','asdfads','asdfsda','03/11/2023','03/11/2023',15),(5,'sadfsda','2',23,'2','03/18/2023','03/13/2023','2',_binary '\0','dsafasd','aasdf','03/16/2023','03/13/2023',15);
+INSERT INTO `bookingoffers` VALUES (1,'wersadf','Single bed',3,'Honey moon','2023-03-04 00:00:00','2023-03-10 00:00:00','asdf',_binary '\0','asdf','asdf','2023-03-09 00:00:00','2023-03-03 00:00:00',10),(2,'dsafasd','King size',2,'asdfadsfdsa','2023-03-03 00:00:00','2023-03-09 00:00:00','asdfasdfsad',_binary '\0','asdf','sadf','2023-03-15 00:00:00','2023-03-23 00:00:00',11),(3,'dfads','Single bed',2,'asdfadsfdsa','2023-03-11 00:00:00','2023-03-15 00:00:00','asdfasdfsad',_binary '\0','fdsa234','23dsa','2023-03-11 00:00:00','2023-03-11 00:00:00',12),(10,'asdfsad','asdfasdfsad',3,'asdfadsfdsa','03/13/2023','03/14/2023','asdfadsfdsa',_binary '\0','asdfsda','asdf','03/15/2023','03/15/2023',17),(11,'asdfdsa','King size',12,'asdfadsfdsa','03/11/2023','03/11/2023','1',_binary '\0','asdfads','asdfsda','03/11/2023','03/11/2023',15),(12,'sadfsda','Single bed',23,'asdfadsfdsa','03/18/2023','03/13/2023','2',_binary '\0','dsafasd','aasdf','03/16/2023','03/13/2023',15),(13,'asdfads','2',34,'2','03/14/2023','03/15/2023','2',_binary '\0','asdfsda','asdfasd','03/15/2023','03/14/2023',15);
 /*!40000 ALTER TABLE `bookingoffers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,7 +163,7 @@ CREATE TABLE `destinations` (
 
 LOCK TABLES `destinations` WRITE;
 /*!40000 ALTER TABLE `destinations` DISABLE KEYS */;
-INSERT INTO `destinations` VALUES (1,'asdfasdfsad'),(2,'asdfadsfdsa');
+INSERT INTO `destinations` VALUES (1,'Destination 1'),(2,'Destination 2');
 /*!40000 ALTER TABLE `destinations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -292,7 +294,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_booking`()
 BEGIN
 select *,
 (select concat(users.firstName,' ',users.lastName) from users where users.id = booking.agentName) agentFullName, 
-(select concat(users.firstName,' ',users.lastName) from users where users.id = booking.staffName) staffFulName from booking where ifnull(isDeleted,0)=0;
+(select concat(users.id) from users where users.id = booking.agentName) agentId, 
+(select concat(users.firstName,' ',users.lastName) from users where users.id = booking.staffName) staffFulName,
+(select concat(users.id) from users where users.id = booking.staffName) staffId from booking where ifnull(isDeleted,0)=0;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -314,7 +318,9 @@ BEGIN
 -- select *,(select photo from users where users.id = booking.agentName limit 1) photo from booking where ifnull(isDeleted,0)=0 and id = _id;
 
 select id, (select concat(users.firstName,' ',users.lastName) from users where users.id = booking.agentName limit 1) agentName,
+(select concat(users.id) from users where users.id = booking.agentName limit 1) agentId,
 (select concat(users.firstName,' ',users.lastName) from users where users.id = booking.staffName limit 1) staffName, 
+(select concat(users.id) from users where users.id = booking.staffName limit 1) staffId, 
 `date`, orderNo, passengers, nights, departure, arrival, customerName, isDeleted,  price, discount, extraCharges, totalPrice, 
 (select photo from users where users.id = booking.agentName limit 1) photo 
 from booking where ifnull(isDeleted,0)=0 and id = _id;
@@ -339,10 +345,13 @@ BEGIN
 -- select * from bookingoffers where ifnull(isDeleted,0)=0 and bookingid = _id;
 select id, bookingNo, 
 (select display from roomTypes where roomTypes.id = bookingoffers.roomType) roomType, 
+(select roomTypes.id from roomTypes where roomTypes.id = bookingoffers.roomType) roomTypeId, 
 nights, 
-(select `name` from hotel where id = bookingoffers.hotel) hotel, 
+(select `name` from hotel where id = bookingoffers.hotel) hotel,
+(select hotel.id from hotel where id = bookingoffers.hotel) hotelId,
 destinationTo, destinationFrom, 
 (select display from destinations where destinations.id = bookingoffers.destinationName) destinationName, 
+(select destinations.id from destinations where destinations.id = bookingoffers.destinationName) destinationId, 
 isDeleted, flightTo, flightFrom, flightDateFrom, flightDateTo, bookingid 
 
 from bookingoffers where ifnull(isDeleted,0)=0 and bookingid = _id;
@@ -504,6 +513,55 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_update_booking` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_update_booking`(
+in _id int,
+in _agentName varchar(500),
+in _staffName varchar(500),
+in _date varchar(500),
+in _orderNo varchar(500),
+in _passengers int,
+in _nights int,
+in _departure varchar(500),
+in _arrival varchar(500),
+in _customerName varchar(500),
+in _price decimal(12,2),
+in _discount decimal(12,2),
+in _extraCharges decimal(12,2),
+in _totalPrice decimal(12,2)
+)
+BEGIN
+UPDATE `booking` SET
+`agentName`=_agentName,
+`date`=_date,
+`orderNo`=_orderNo,
+`passengers`=_passengers,
+`nights`=_nights,
+`departure`=_departure,
+`arrival`=_arrival,
+`customerName`=_customerName,
+`staffName`=_staffName,
+`price`=_price,
+`discount` = _discount,
+`extraCharges`=_extraCharges,
+`totalPrice` =_totalPrice
+
+WHERE id = _id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -514,4 +572,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-10  4:25:34
+-- Dump completed on 2023-03-13  3:13:39
