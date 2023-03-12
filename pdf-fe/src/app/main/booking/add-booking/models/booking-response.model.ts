@@ -4,14 +4,15 @@ export interface Offer {
     roomType: string;
     nights: number;
     hotel: string;
-    destinationTo: Date;
-    destinationFrom: Date;
+    destinationTo: string;
+    destinationFrom: string;
     destinationName: string;
+    destinationId: number;
     isDeleted: boolean;
     flightTo: string;
     flightFrom: string;
-    flightDateFrom: Date;
-    flightDateTo: Date;
+    flightDateFrom: string;
+    flightDateTo: string;
     bookingid: number;
 
 }
@@ -19,12 +20,14 @@ export interface Offer {
 export interface Booking {
     id: number;
     agentName: string;
-    date: Date;
+    agentId:number;
+    staffId:number;
+    date: string;
     orderNo: string;
     passengers: number;
     nights: number;
-    departure: Date;
-    arrival: Date;
+    departure: string;
+    arrival: string;
     customerName: string;
     isDeleted: boolean;
     staffName: string;

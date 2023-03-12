@@ -18,6 +18,7 @@ export class DatePickerComponent implements OnInit {
     let _this = this;
     setTimeout(() => {
       let datepicker = $("#" + n).datepicker({
+        format: 'DD/MM/YYYY',
         onSelect: function (dateText: any) {
           _this.dateChange.emit(dateText);
           console.log("Selected date: " + dateText + "; input's current value: " + this.value);
