@@ -2,6 +2,7 @@ const { CheckAuth } = require("../middlewares/jwr.middleware");
 const controller = require("../controllers/booking.controller");
 const router = require("express").Router();
 router.post('/add',controller.addBooking);
+router.post('/update',controller.editBooking);
 router.get('/all',controller.get);
 router.get('/delete',controller.deleteBooking);
 router.get('/getbyid',controller.getById);

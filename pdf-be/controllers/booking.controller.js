@@ -1,5 +1,6 @@
 const { AddBookingModel } = require("../models/booking/add-booking.model");
 const { Booking } = require("../models/booking/booking-db");
+const { UpdateBookingModel } = require("../models/booking/update-booking.model");
 
 const bookingController = {};
 /**
@@ -12,6 +13,17 @@ bookingController.addBooking= async (req,res,next)=>{
     var booking = new AddBookingModel(req.body);
     await Booking.add(booking);
     res.Ok(booking);
+}
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+bookingController.editBooking= async (req,res,next)=>{
+    var booking = new UpdateBookingModel(req.body);
+    await Booking.edit(booking);
+    res.Ok(booking,"Booking updated successfuly.");
 }
 
 

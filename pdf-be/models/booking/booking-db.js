@@ -5,24 +5,17 @@ const { mysqlSelect, mysqlExecute } = require("../../utils/database.util");
 const { AddBookingModel } = require("./add-booking.model");
 const path = require("path");
 const mime = require("mime");
+const { UpdateBookingModel } = require("./update-booking.model");
 const Booking = {};
 /**
  * 
- * @param {AddBookingModel} data 
+ * @param {AddBookingModel} data    
  */
 Booking.add = async (data) => {
 
     const result = await mysqlSelect('call sp_create_booking(?);', [data.bookingParams]);
     if (result.success === true) {
         var id = result.data[0].id;
-
-        // var params = data.listParams.map((e, i) => {
-        //     let cc = [id];
-        //     e.forEach(xx => {
-        //         cc.push(...xx)
-        //     })
-        //     return [cc];
-        // });
         var params = data.listParams.map((e,i)=>e.map((ee,ii)=>[id,...ee]));
         var result1 = await mysqlExecute('INSERT INTO `bookingoffers`' +
             '(`bookingid`,`bookingNo`,`roomType`,`nights`,`hotel`,`destinationTo`,`destinationFrom`,`destinationName`,`flightTo`,`flightFrom`,`flightDateFrom`,`flightDateTo`) values ? ;', [...params], false);
@@ -33,7 +26,29 @@ Booking.add = async (data) => {
     return {
         success: false
     }
-}/**
+}
+/**
+ * 
+ * @param {UpdateBookingModel} data    
+ */
+Booking.edit = async (data) => {
+
+    const result = await mysqlSelect('call sp_update_booking(?);', [data.bookingParams]);
+    if (result.success === true) {
+        var id = data.booking.id;
+        var params = data.listParams.map((e,i)=>e.map((ee,ii)=>[id,...ee]));
+        await mysqlExecute('DELETE FROM `bookingoffers` WHERE `bookingid`=?',[id]);
+        var result1 = await mysqlExecute('INSERT INTO `bookingoffers`' +
+            '(`bookingid`,`bookingNo`,`roomType`,`nights`,`hotel`,`destinationTo`,`destinationFrom`,`destinationName`,`flightTo`,`flightFrom`,`flightDateFrom`,`flightDateTo`) values ? ;', [...params], false);
+        return {
+            success: result1.success && result.success
+        }
+    }
+    return {
+        success: false
+    }
+}
+/**
  * 
  * @param {*} id 
  * @returns {{success:Boolean,data:object,fields:object}}
