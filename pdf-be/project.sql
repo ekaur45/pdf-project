@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `pdfproject` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `pdfproject`;
--- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
 -- Host: localhost    Database: pdfproject
 -- ------------------------------------------------------
--- Server version	8.0.28
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -52,6 +52,30 @@ LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
 INSERT INTO `booking` VALUES (13,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00),(14,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00),(15,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00),(17,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',1000.00,50.00,20.00,520.00);
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `booking_features`
+--
+
+DROP TABLE IF EXISTS `booking_features`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `booking_features` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `booking_id` int DEFAULT NULL,
+  `feature_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `booking_features`
+--
+
+LOCK TABLES `booking_features` WRITE;
+/*!40000 ALTER TABLE `booking_features` DISABLE KEYS */;
+/*!40000 ALTER TABLE `booking_features` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -154,7 +178,7 @@ CREATE TABLE `destinations` (
   `id` int NOT NULL AUTO_INCREMENT,
   `display` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,8 +187,32 @@ CREATE TABLE `destinations` (
 
 LOCK TABLES `destinations` WRITE;
 /*!40000 ALTER TABLE `destinations` DISABLE KEYS */;
-INSERT INTO `destinations` VALUES (1,'Destination 1'),(2,'Destination 2');
+INSERT INTO `destinations` VALUES (1,'Destination 1'),(2,'Destination 2'),(3,'0'),(4,'new destination name');
 /*!40000 ALTER TABLE `destinations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `features`
+--
+
+DROP TABLE IF EXISTS `features`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `features` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `display` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `features`
+--
+
+LOCK TABLES `features` WRITE;
+/*!40000 ALTER TABLE `features` DISABLE KEYS */;
+INSERT INTO `features` VALUES (2,'Free wifi'),(3,'Kitchen'),(4,'Private hot tub'),(5,'Central air conditioning'),(6,'Backyard'),(7,'Hair dryer'),(8,'Fire pit'),(9,'Indoor fireplace: gas'),(10,'Private patio or balcony'),(11,'TV'),(12,'Free parking on premises');
+/*!40000 ALTER TABLE `features` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -180,7 +228,7 @@ CREATE TABLE `hotel` (
   `location` varchar(500) DEFAULT NULL,
   `isDeleted` bit(1) DEFAULT b'0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -189,7 +237,7 @@ CREATE TABLE `hotel` (
 
 LOCK TABLES `hotel` WRITE;
 /*!40000 ALTER TABLE `hotel` DISABLE KEYS */;
-INSERT INTO `hotel` VALUES (1,'Honey moon','Swat KPK',_binary '\0'),(2,'asdfadsfdsa',NULL,_binary '\0'),(3,'asdfads',NULL,_binary '\0');
+INSERT INTO `hotel` VALUES (1,'Honey moon','1',_binary '\0'),(2,'asdfadsfdsa','1',_binary '\0'),(3,'asdfads','1',_binary '\0'),(4,'fsdgsfd','1',_binary '\0'),(5,'asdfsad','4',_binary '\0');
 /*!40000 ALTER TABLE `hotel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -272,10 +320,6 @@ LOCK TABLES `usetypes` WRITE;
 INSERT INTO `usetypes` VALUES (1,'admin'),(2,'user'),(3,'agent'),(4,'staff');
 /*!40000 ALTER TABLE `usetypes` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping events for database 'pdfproject'
---
 
 --
 -- Dumping routines for database 'pdfproject'
@@ -443,11 +487,13 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_hotels`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_hotels`(
+in _id int
+)
 BEGIN
-select * from hotel where ifnull(isDeleted,0)=0;
+select * from hotel where location = _id and ifnull(isDeleted,0)=0;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -572,4 +618,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-13  3:13:39
+-- Dump completed on 2023-03-14 19:28:23
