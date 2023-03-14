@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { SharedRoutingModule } from './shared-routing.module';
 import { ConfirmPopupComponent } from './confirm-popup/confirm-popup.component';
 import { DatePickerComponent } from './date-picker/date-picker.component';
+import { NgSelect2Module } from 'ng-select2';
 
 
 @NgModule({
@@ -15,10 +16,12 @@ import { DatePickerComponent } from './date-picker/date-picker.component';
   imports: [
     CommonModule,
     SharedRoutingModule,
-    FormsModule
+    FormsModule,
+    NgSelect2Module,
   ],
   exports:[
-    DatePickerComponent
+    DatePickerComponent,
+    NgSelect2Module,
   ]
 })
 export class SharedModule { }

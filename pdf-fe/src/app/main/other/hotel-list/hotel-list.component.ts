@@ -12,23 +12,32 @@ export class HotelListComponent implements OnInit {
   isEdit:boolean = false;
   editData:any ={};
   deleteobj:any ={};
+  destinationData:any[] = [];
+  destination:number = 0;
+  destinationName:string  = "";
   constructor(private api:ApiService) { 
 
     this.data = [];
   }
 
   ngOnInit(): void {
+    this.getDestination();
     this.get();
+  }
+  getDestination(){
+    this.api.get('booking/destination').subscribe(x=>{
+      if(x.status == 200) this.destinationData = x.data.map((c:any)=>{ return {id:c.id,text:c.display}});
+    })
   }
   add(){
     if(this.isEdit) return this.update();
-    this.api.post('booking/hotel',{name:this.name}).subscribe(x=>{
+    this.api.post('booking/hotel',{name:this.name,destination:this.destination}).subscribe(x=>{
       this.name ="";
       if(x.status == 200) this.get();
     })
   }
   update(){
-    this.api.post('util/update-hotel',{id:this.editData.id,name:this.name}).subscribe(x=>{
+    this.api.post('util/update-hotel',{id:this.editData.id,name:this.name,destination:this.destination}).subscribe(x=>{
       this.name ="";
       this.cancel();
       if(x.status == 200) this.get();
@@ -57,5 +66,24 @@ export class HotelListComponent implements OnInit {
     this.editData = {};
     this.name = "";
     this.isEdit =false;
+  }
+  displayDestination(e:string){
+    if(this.destinationData.length>0)
+    return this.destinationData.filter((x:any)=>x.id == e)[0].text;
+    else return "";
+  }
+
+  showAddDestinationModal(){
+    $("#modal-add-destination").modal("show");
+  }
+
+  addDestination(){
+    this.api.post('booking/destination',{name:this.destinationName}).subscribe(x=>{
+      this.name ="";
+      if(x.status == 200) {
+        this.getDestination();
+        this.get();
+      }
+    })
   }
 }

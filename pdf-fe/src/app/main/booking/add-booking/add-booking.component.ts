@@ -17,13 +17,15 @@ export class AddBookingComponent implements OnInit {
   destinationList:AddBooking[] = [];
   agents: any = [];
   staffs: any = [];
+  features: any [] = [];
   constructor(private api:ApiService) {
     this.model = new AddBooking();
     this.destinationList = [];
    }
 
   ngOnInit(): void {
-    this.getHotels();
+    this.getFeatures();
+    //this.getHotels();
     this.getRoomTypes();
     this.getDestination();
     this.getAgents();
@@ -47,8 +49,8 @@ export class AddBookingComponent implements OnInit {
       if(x.status == 200) this.destinationData = x.data.map((c:any)=>{ return {id:c.id,text:c.display}});
     })
   }
-  getHotels(){
-    this.api.get('util/hotels').subscribe(x=>{
+  getHotels(id:any){
+    this.api.get('util/hotels?id='+id).subscribe(x=>{
       if(x.status ==200){
         this.hotels = x.data.map((c:any)=>{ return {id:c.id,text:c.name}});
       }
@@ -75,6 +77,14 @@ export class AddBookingComponent implements OnInit {
       }
     })
   }
+
+  getFeatures(){
+    this.api.get('util/feature').subscribe((x:any)=>{
+      if(x.status == 200){
+        this.features = x.data;
+      }
+    })
+  }
   onFormSubmit(){
     
     this.api.post('booking/add',{booking:this.model,list:this.destinationList}).subscribe(x=>{
@@ -94,5 +104,9 @@ export class AddBookingComponent implements OnInit {
   }
   removeRow(ndx:number){
     this.destinationList.splice(ndx,1);
+  }
+  onDestinationChange(e:any){
+    this.getHotels(e)
+//console.log(e);
   }
 }

@@ -31,7 +31,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     FormsModule,
     SharedModule,
     ReactiveFormsModule,
-    NgSelect2Module,
+    
     NgbDatepickerModule,
     MatSelectModule,
     MatDatepickerModule,

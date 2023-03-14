@@ -2,26 +2,14 @@
     <div class="card">
         <div class="card-body">
             <div class="col-md-12">
-                <h4 class="mb-3"><span *ngIf="isEdit">Update</span> <span *ngIf="!isEdit">Add</span> hotel</h4>
-            </div>
-            <div class="row">
-                <div class="col-md-9 mb-3">
-                    <label>Destination</label>
-                    <ng-select2 class="form-control ih-medium p-0" [(ngModel)]="destination" [data]="destinationData"
-                        [placeholder]="'Please select a destination'">
-                    </ng-select2>
-                </div>
-                <div class="col-md-3 d-flex flex-column justify-content-end mb-3">
-                    <button class="btn btn-primary" (click)="showAddDestinationModal()">Add new destination</button>
-                </div>
+                <h4 class="mb-3"><span *ngIf="isEdit">Update</span> <span *ngIf="!isEdit">Add</span> feature</h4>
             </div>
             <div class="col-md-12 mb-3">
-                <label>Hotel</label>
+                <label>Feature</label>
                 <input type="text" class="form-control" [(ngModel)]="name">
             </div>
             <div class="col-md-12 d-flex">
-                <button class="btn btn-primary" (click)="add()"><span *ngIf="isEdit">Update</span> <span
-                        *ngIf="!isEdit">Add</span></button>
+                <button class="btn btn-primary" (click)="add()"><span *ngIf="isEdit">Update</span> <span *ngIf="!isEdit">Add</span></button>
                 <button *ngIf="isEdit" class="btn btn-info ms-3" (click)="cancel()">Cancel</button>
             </div>
         </div>
@@ -31,7 +19,7 @@
     <div class="card">
         <div class="card-body">
             <div class="col-md-12">
-                <h4 class="mb-3">Room types</h4>
+                <h4 class="mb-3">Features</h4>
             </div>
             <div class="col-md-12 mb-3">
                 <table class="table mb-0 table-borderless">
@@ -41,10 +29,7 @@
                                 No
                             </th>
                             <th>
-                                Hotel
-                            </th>
-                            <th>
-                                Destination
+                                Feature
                             </th>
                             <th class="text-center">
                                 <span class="userDatatable-title float-end">Action</span>
@@ -58,10 +43,7 @@
                                 {{ ndx+1 }}
                             </td>
                             <td>
-                                {{ r.name }}
-                            </td>
-                            <td>
-                                {{displayDestination(r.location)}}
+                                {{ r.display }}
                             </td>
                             <td class="text-center">
                                 <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
@@ -80,41 +62,12 @@
                                             <i class="uil uil-trash-alt"></i>
                                         </a>
                                     </li>
-                                </ul>
-                                <!-- <a style="cursor: pointer;" class="text-success" (click)="onEdit(r)">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <a style="cursor: pointer;" (click)="onDelete(r.id)" class="text-danger ms-2">
-                                    <i class="fa fa-trash"></i>
-                                </a> -->
+                                </ul>                                
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-        </div>
-    </div>
-</div>
-
-
-
-<div class="modal-info-confirmed modal fade" id="modal-add-destination" tabindex="-1" aria-modal="true" role="dialog">
-    <div class="modal-dialog modal-lg modal-info" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="col-md-12">
-                    <h4 class="mb-3"><span>Add</span> destination</h4>
-                </div>
-                <div class="col-md-12 mb-3">
-                    <label>Destination</label>
-                    <input type="text" class="form-control" [(ngModel)]="destinationName">
-                </div>
-                <div class="col-md-12 d-flex">
-                    <button class="btn btn-primary" data-bs-dismiss="modal" (click)="addDestination()"> <span>Add</span></button>
-                    <button class="btn btn-info ms-3" data-bs-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>
@@ -129,7 +82,7 @@
                         <img src="assets/img/svg/alert-circle.svg" alt="alert-circle" class="svg">
                     </div>
                     <div class="modal-info-text">
-                        <h6>Delete hotel!</h6>
+                        <h6>Delete feature!</h6>
                         <p>Are you sure you want to delete? </p>
                     </div>
                 </div>

@@ -7,6 +7,8 @@ import { DestinationListComponent } from './destination-list/destination-list.co
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IndexComponent } from './index.component';
+import { FeaturesComponent } from './features/features.component';
+import { TermsandconditionsComponent } from './termsandconditions/termsandconditions.component';
 
 const routes: Routes = [
   {
@@ -26,6 +28,12 @@ const routes: Routes = [
         path:'room-types',component:RoomTypeListComponent
       },{
         path:'add-room-type',component:AddRoomTypeComponent
+      },
+      {
+        path:'featurs',component:FeaturesComponent
+      },
+      {
+        path:'terms-and-conditions',component:TermsandconditionsComponent
       }
     ]
   }

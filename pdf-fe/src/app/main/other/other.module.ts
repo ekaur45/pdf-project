@@ -10,6 +10,9 @@ import { AddHotelComponent } from './add-hotel/add-hotel.component';
 import { HotelListComponent } from './hotel-list/hotel-list.component';
 import { AddRoomTypeComponent } from './add-room-type/add-room-type.component';
 import { RoomTypeListComponent } from './room-type-list/room-type-list.component';
+import { FeaturesComponent } from './features/features.component';
+import { TermsandconditionsComponent } from './termsandconditions/termsandconditions.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -20,12 +23,15 @@ import { RoomTypeListComponent } from './room-type-list/room-type-list.component
     AddHotelComponent,
     HotelListComponent,
     AddRoomTypeComponent,
-    RoomTypeListComponent
+    RoomTypeListComponent,
+    FeaturesComponent,
+    TermsandconditionsComponent
   ],
   imports: [
     CommonModule,
     OtherRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class OtherModule { }
