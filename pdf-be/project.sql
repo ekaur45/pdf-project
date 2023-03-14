@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `pdfproject` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `pdfproject`;
--- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: localhost    Database: pdfproject
 -- ------------------------------------------------------
--- Server version	8.0.32
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -43,7 +43,7 @@ CREATE TABLE `booking` (
   `currency` varchar(45) DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,7 +52,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (13,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,NULL,NULL),(14,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,NULL,NULL),(15,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,NULL,NULL),(17,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',1000.00,50.00,20.00,520.00,NULL,NULL);
+INSERT INTO `booking` VALUES (13,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,NULL,NULL),(14,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,NULL,NULL),(15,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,NULL,NULL),(17,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',1000.00,50.00,20.00,520.00,NULL,NULL),(18,'4','03/15/2023','Cd7d7ZXi',1,1,'03/15/2023','03/15/2023','Allu',_binary '\0','5',50.00,1.00,2.00,51.50,'usd',NULL),(19,'4','03/15/2023','Cd7d7ZXi',1,1,'03/15/2023','03/15/2023','Allu',_binary '\0','5',50.00,1.00,2.00,51.50,'usd',NULL),(20,'4','03/15/2023','Cd7d7ZXi',1,1,'03/15/2023','03/15/2023','Allu',_binary '\0','5',50.00,1.00,2.00,51.50,'usd',NULL);
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -68,7 +68,7 @@ CREATE TABLE `booking_features` (
   `booking_id` int DEFAULT NULL,
   `feature_id` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -77,7 +77,33 @@ CREATE TABLE `booking_features` (
 
 LOCK TABLES `booking_features` WRITE;
 /*!40000 ALTER TABLE `booking_features` DISABLE KEYS */;
+INSERT INTO `booking_features` VALUES (9,20,2),(10,20,3),(11,20,12);
 /*!40000 ALTER TABLE `booking_features` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `booking_rooms_types`
+--
+
+DROP TABLE IF EXISTS `booking_rooms_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `booking_rooms_types` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `bookingId` int DEFAULT NULL,
+  `roomTypeId` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `booking_rooms_types`
+--
+
+LOCK TABLES `booking_rooms_types` WRITE;
+/*!40000 ALTER TABLE `booking_rooms_types` DISABLE KEYS */;
+INSERT INTO `booking_rooms_types` VALUES (1,6,1),(2,6,2),(3,6,4),(4,5,1),(5,5,2),(7,7,2);
+/*!40000 ALTER TABLE `booking_rooms_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -103,7 +129,7 @@ CREATE TABLE `bookingoffers` (
   `flightDateTo` varchar(500) DEFAULT NULL,
   `bookingid` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +138,7 @@ CREATE TABLE `bookingoffers` (
 
 LOCK TABLES `bookingoffers` WRITE;
 /*!40000 ALTER TABLE `bookingoffers` DISABLE KEYS */;
-INSERT INTO `bookingoffers` VALUES (1,'wersadf','Single bed',3,'Honey moon','2023-03-04 00:00:00','2023-03-10 00:00:00','asdf',_binary '\0','asdf','asdf','2023-03-09 00:00:00','2023-03-03 00:00:00',10),(2,'dsafasd','King size',2,'asdfadsfdsa','2023-03-03 00:00:00','2023-03-09 00:00:00','asdfasdfsad',_binary '\0','asdf','sadf','2023-03-15 00:00:00','2023-03-23 00:00:00',11),(3,'dfads','Single bed',2,'asdfadsfdsa','2023-03-11 00:00:00','2023-03-15 00:00:00','asdfasdfsad',_binary '\0','fdsa234','23dsa','2023-03-11 00:00:00','2023-03-11 00:00:00',12),(10,'asdfsad','asdfasdfsad',3,'asdfadsfdsa','03/13/2023','03/14/2023','asdfadsfdsa',_binary '\0','asdfsda','asdf','03/15/2023','03/15/2023',17),(11,'asdfdsa','King size',12,'asdfadsfdsa','03/11/2023','03/11/2023','1',_binary '\0','asdfads','asdfsda','03/11/2023','03/11/2023',15),(12,'sadfsda','Single bed',23,'asdfadsfdsa','03/18/2023','03/13/2023','2',_binary '\0','dsafasd','aasdf','03/16/2023','03/13/2023',15),(13,'asdfads','2',34,'2','03/14/2023','03/15/2023','2',_binary '\0','asdfsda','asdfasd','03/15/2023','03/14/2023',15);
+INSERT INTO `bookingoffers` VALUES (1,'wersadf','Single bed',3,'Honey moon','2023-03-04 00:00:00','2023-03-10 00:00:00','asdf',_binary '\0','asdf','asdf','2023-03-09 00:00:00','2023-03-03 00:00:00',10),(2,'dsafasd','King size',2,'asdfadsfdsa','2023-03-03 00:00:00','2023-03-09 00:00:00','asdfasdfsad',_binary '\0','asdf','sadf','2023-03-15 00:00:00','2023-03-23 00:00:00',11),(3,'dfads','Single bed',2,'asdfadsfdsa','2023-03-11 00:00:00','2023-03-15 00:00:00','asdfasdfsad',_binary '\0','fdsa234','23dsa','2023-03-11 00:00:00','2023-03-11 00:00:00',12),(10,'asdfsad','asdfasdfsad',3,'asdfadsfdsa','03/13/2023','03/14/2023','asdfadsfdsa',_binary '\0','asdfsda','asdf','03/15/2023','03/15/2023',17),(11,'asdfdsa','King size',12,'asdfadsfdsa','03/11/2023','03/11/2023','1',_binary '\0','asdfads','asdfsda','03/11/2023','03/11/2023',15),(12,'sadfsda','Single bed',23,'asdfadsfdsa','03/18/2023','03/13/2023','2',_binary '\0','dsafasd','aasdf','03/16/2023','03/13/2023',15),(13,'asdfads','2',34,'2','03/14/2023','03/15/2023','2',_binary '\0','asdfsda','asdfasd','03/15/2023','03/14/2023',15),(14,'asdfdsa','2',10,'7','03/15/2023','03/15/2023','5',_binary '\0','ksjdhfjk','sdahfjkads','03/15/2023','03/15/2023',18),(15,'asdfdsa','2',10,'7','03/15/2023','03/15/2023','5',_binary '\0','ksjdhfjk','sdahfjkads','03/15/2023','03/15/2023',19),(19,'asdfdsa','',10,'','03/15/2023','03/15/2023','5',_binary '\0','ksjdhfjk','sdahfjkads','03/15/2023','03/15/2023',20);
 /*!40000 ALTER TABLE `bookingoffers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,7 +206,7 @@ CREATE TABLE `destinations` (
   `id` int NOT NULL AUTO_INCREMENT,
   `display` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -189,7 +215,7 @@ CREATE TABLE `destinations` (
 
 LOCK TABLES `destinations` WRITE;
 /*!40000 ALTER TABLE `destinations` DISABLE KEYS */;
-INSERT INTO `destinations` VALUES (1,'Destination 1'),(2,'Destination 2'),(3,'0'),(4,'new destination name');
+INSERT INTO `destinations` VALUES (1,'Destination 1'),(2,'Destination 2'),(4,'new destination name'),(5,'Naran');
 /*!40000 ALTER TABLE `destinations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,7 +256,7 @@ CREATE TABLE `hotel` (
   `location` varchar(500) DEFAULT NULL,
   `isDeleted` bit(1) DEFAULT b'0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -239,7 +265,7 @@ CREATE TABLE `hotel` (
 
 LOCK TABLES `hotel` WRITE;
 /*!40000 ALTER TABLE `hotel` DISABLE KEYS */;
-INSERT INTO `hotel` VALUES (1,'Honey moon','1',_binary '\0'),(2,'asdfadsfdsa','1',_binary '\0'),(3,'asdfads','1',_binary '\0'),(4,'fsdgsfd','1',_binary '\0'),(5,'asdfsad','4',_binary '\0');
+INSERT INTO `hotel` VALUES (7,'Hotel','5',_binary '\0');
 /*!40000 ALTER TABLE `hotel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,7 +281,7 @@ CREATE TABLE `roomtypes` (
   `display` varchar(500) DEFAULT NULL,
   `isDeleted` bit(1) DEFAULT b'0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -264,7 +290,7 @@ CREATE TABLE `roomtypes` (
 
 LOCK TABLES `roomtypes` WRITE;
 /*!40000 ALTER TABLE `roomtypes` DISABLE KEYS */;
-INSERT INTO `roomtypes` VALUES (1,'King size',_binary '\0'),(2,'Single bed',_binary '\0'),(3,'asdfasdfsad',_binary '\0');
+INSERT INTO `roomtypes` VALUES (1,'King size',_binary '\0'),(2,'Single bed',_binary '\0'),(4,'Bara room',_binary '\0'),(5,'Other room',_binary '\0');
 /*!40000 ALTER TABLE `roomtypes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -517,9 +543,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_roomtypes`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_roomtypes`(
+in _id int
+)
 BEGIN
-select * from roomtypes;
+select * from roomtypes
+ where id in (SELECT roomTypeId FROM pdfproject.booking_rooms_types where bookingid = _id);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -625,4 +654,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-14 20:41:11
+-- Dump completed on 2023-03-15  3:16:25
