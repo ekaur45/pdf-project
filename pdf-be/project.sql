@@ -40,6 +40,8 @@ CREATE TABLE `booking` (
   `discount` decimal(12,2) DEFAULT NULL,
   `extraCharges` decimal(12,2) DEFAULT NULL,
   `totalPrice` decimal(12,2) DEFAULT NULL,
+  `currency` varchar(45) DEFAULT NULL,
+  `status` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -50,7 +52,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (13,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00),(14,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00),(15,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00),(17,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',1000.00,50.00,20.00,520.00);
+INSERT INTO `booking` VALUES (13,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,NULL,NULL),(14,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,NULL,NULL),(15,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,NULL,NULL),(17,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',1000.00,50.00,20.00,520.00,NULL,NULL);
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -322,6 +324,10 @@ INSERT INTO `usetypes` VALUES (1,'admin'),(2,'user'),(3,'agent'),(4,'staff');
 UNLOCK TABLES;
 
 --
+-- Dumping events for database 'pdfproject'
+--
+
+--
 -- Dumping routines for database 'pdfproject'
 --
 /*!50003 DROP PROCEDURE IF EXISTS `get_booking` */;
@@ -450,7 +456,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_create_booking`(
 in _agentName varchar(500),
@@ -465,13 +471,14 @@ in _customerName varchar(500),
 in _price decimal(12,2),
 in _discount decimal(12,2),
 in _extraCharges decimal(12,2),
-in _totalPrice decimal(12,2)
+in _totalPrice decimal(12,2),
+in _currency varchar(45)
 )
 BEGIN
 INSERT INTO `booking`
-(`agentName`,`date`,`orderNo`,`passengers`,`nights`,`departure`,`arrival`,`customerName`,`staffName`,`price`, `discount`, `extraCharges`, `totalPrice`)
+(`agentName`,`date`,`orderNo`,`passengers`,`nights`,`departure`,`arrival`,`customerName`,`staffName`,`price`, `discount`, `extraCharges`, `totalPrice`,`currency`)
 VALUES
-(_agentName,_date,_orderNo,_passengers,_nights,_departure,_arrival,_customerName,_staffName,_price,_discount,_extraCharges,_totalPrice);
+(_agentName,_date,_orderNo,_passengers,_nights,_departure,_arrival,_customerName,_staffName,_price,_discount,_extraCharges,_totalPrice,_currency);
 select last_insert_id() as id;
 END ;;
 DELIMITER ;
@@ -618,4 +625,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-14 19:28:23
+-- Dump completed on 2023-03-14 20:41:11

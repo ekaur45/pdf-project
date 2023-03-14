@@ -15,7 +15,8 @@ class AddBookingModel {
             this.booking.price,
             this.booking.discount,
             this.booking.extraCharges,
-            this.booking.totalPrice
+            this.booking.totalPrice,
+            this.booking.currency
         ]
         this.listParams = [
             this.list.map((e,i)=>[
@@ -50,6 +51,7 @@ class BookingModel {
         this.departure = obj.departure ?? "";
         this.arrival = obj.arrival ?? "";
         this.customerName = obj.customerName ?? "";
+        this.currency = obj.currency ??"";
         this.price=obj.price??0;
         this.discount=obj.discount??0;
         this.extraCharges=obj.extraCharges??0;

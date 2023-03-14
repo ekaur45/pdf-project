@@ -19,8 +19,10 @@ Booking.add = async (data) => {
         var params = data.listParams.map((e,i)=>e.map((ee,ii)=>[id,...ee]));
         var result1 = await mysqlExecute('INSERT INTO `bookingoffers`' +
             '(`bookingid`,`bookingNo`,`roomType`,`nights`,`hotel`,`destinationTo`,`destinationFrom`,`destinationName`,`flightTo`,`flightFrom`,`flightDateFrom`,`flightDateTo`) values ? ;', [...params], false);
+            let featuresParams= data.booking.features.map(x=>[id,x]);
+            var result2 = await mysqlExecute('INSERT INTO `booking_features` (`booking_id`, `feature_id`) VALUES ?',[bookingParams],false);
         return {
-            success: result1.success && result.success
+            success: result1.success && result.success && result2.success
         }
     }
     return {
@@ -169,5 +171,9 @@ Booking.GetRoomTypes = async ()=>{
     return await mysqlSelect('SELECT * FROM `roomtypes`;',{},false);
 }
 
+
+Booking.updateBokkingStatus = async (id,status)=>{
+    return await mysqlExecute('UPDATE `booking` set `status` = ? where id = ?',[status,id],false);
+}
 
 module.exports = { Booking };

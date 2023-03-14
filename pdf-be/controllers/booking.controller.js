@@ -142,5 +142,17 @@ bookingController.GetRoomTypes= async (req,res,next)=>{
 }
 
 
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+bookingController.updateBokkingStatus= async (req,res,next)=>{
+    var result = await Booking.updateBokkingStatus(req.query.id,req.query.status);
+    result.success?res.Ok(result.data,"Status updated successfuly."):res.BadRequest({},"Something went wrong.");
+}
+
+
 
 module.exports = bookingController;
