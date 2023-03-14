@@ -2,6 +2,7 @@ class AddBookingModel {
     constructor(obj = {}) {
         this.booking = new BookingModel(obj.booking) ?? {};
         this.list = new BookingListModel(obj.list).list;
+        this.features = obj.features ?? [];
         this.bookingParams = [
             this.booking.agentName,
             this.booking.staffName,

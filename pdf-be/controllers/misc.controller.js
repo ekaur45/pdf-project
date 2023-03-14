@@ -104,7 +104,7 @@ miscController.deleteRoomType= async (req,res,next)=>{
  * @param {import("express").NextFunction} next 
  */
 miscController.getRoomTypes =async (req,res,next)=>{
-    var result = await Misc.getRoomTypes();
+    var result = await Misc.getRoomTypes(req.query.id);
     result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong");
 }
 

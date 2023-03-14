@@ -6,6 +6,7 @@ const { AddBookingModel } = require("./add-booking.model");
 const path = require("path");
 const mime = require("mime");
 const { UpdateBookingModel } = require("./update-booking.model");
+const Misc = require("../misc/misc-db.model");
 const Booking = {};
 /**
  * 
@@ -19,8 +20,8 @@ Booking.add = async (data) => {
         var params = data.listParams.map((e,i)=>e.map((ee,ii)=>[id,...ee]));
         var result1 = await mysqlExecute('INSERT INTO `bookingoffers`' +
             '(`bookingid`,`bookingNo`,`roomType`,`nights`,`hotel`,`destinationTo`,`destinationFrom`,`destinationName`,`flightTo`,`flightFrom`,`flightDateFrom`,`flightDateTo`) values ? ;', [...params], false);
-            let featuresParams= data.booking.features.map(x=>[id,x]);
-            var result2 = await mysqlExecute('INSERT INTO `booking_features` (`booking_id`, `feature_id`) VALUES ?',[bookingParams],false);
+            let featuresParams= data.features.map(x=>[id,x]);
+            var result2 = await mysqlExecute('INSERT INTO `booking_features` (`booking_id`, `feature_id`) VALUES ?',[featuresParams],false);
         return {
             success: result1.success && result.success && result2.success
         }
@@ -42,6 +43,9 @@ Booking.edit = async (data) => {
         await mysqlExecute('DELETE FROM `bookingoffers` WHERE `bookingid`=?',[id]);
         var result1 = await mysqlExecute('INSERT INTO `bookingoffers`' +
             '(`bookingid`,`bookingNo`,`roomType`,`nights`,`hotel`,`destinationTo`,`destinationFrom`,`destinationName`,`flightTo`,`flightFrom`,`flightDateFrom`,`flightDateTo`) values ? ;', [...params], false);
+            await mysqlExecute('delete from booking_features where booking_id = ?',[data.booking.id]);
+            let featuresParams= data.features.map(x=>[id,x]);
+            var result2 = await mysqlExecute('INSERT INTO `booking_features` (`booking_id`, `feature_id`) VALUES ?',[featuresParams],false);
         return {
             success: result1.success && result.success
         }
@@ -71,13 +75,9 @@ Booking.getById = async (id) => {
             //     e.flightDateFrom = moment(e.flightDateFrom).format("MM/DD/YYYY");
             //     e.flightDateTo = moment(e.flightDateTo).format("MM/DD/YYYY");
             // })
-            el.features = [
-                "Feature 1",
-                "Feature 2",
-                "Feature 3",
-                "Feature 4",
-                "Feature 5",
-            ]
+            var featureResult = await mysqlSelect('select * from features where id in (select feature_id from booking_features where booking_id = ?)',[el.id],false);
+            if(featureResult.success == true)
+                el.features = featureResult.data
         }
         return {
             success: true,
@@ -99,13 +99,9 @@ Booking.get = async () => {
             // el.departure = moment(el.departure).format("MM/DD/YYYY");
             var offersResult = await mysqlSelect('call get_booking_by_id(?);', [el.id]);
             el.offers = offersResult.data;
-            el.features = [
-                "Feature 1",
-                "Feature 2",
-                "Feature 3",
-                "Feature 4",
-                "Feature 5",
-            ]
+            var featureResult = await mysqlSelect('select * from features where id in (select feature_id from booking_features where booking_id = ?)',[el.id],false);
+            if(featureResult.success == true)
+                el.features = featureResult.data;
                         
         }
         return {
@@ -156,19 +152,43 @@ Booking.AddDestination = async (obj)=>{
     return await mysqlExecute(`INSERT INTO destinations (display) VALUES('${obj.name}');`,{},false);
 }
 Booking.AddHotel = async (obj)=>{
-    return await mysqlExecute(`INSERT INTO hotel (name,location) VALUES('${obj.name}','${obj.destination}');`,{},false);
+    var result =  await mysqlExecute(`INSERT INTO hotel (name,location) VALUES('${obj.name}','${obj.destination}');`,{},false);
+    var idResult = await mysqlSelect('SELECT last_insert_id() as id;',[],false);
+    if(idResult.success == true){
+        if(obj.roomTypes&&obj.roomTypes.length>0){
+            let id = idResult.data[0].id;
+        let roomTypesParams = obj.roomTypes.map(x=>[id,x]);
+        let q = 'INSERT INTO `booking_rooms_types`(`bookingId`,`roomTypeId`) VALUES ?';
+        let finalResullt = await mysqlExecute(q,[roomTypesParams],false);
+        return finalResullt;
+        }
+        return result;
+    }
+    return {success:false,data:null};
 }
 Booking.AddRoomType = async (obj)=>{
-    return await mysqlExecute(`INSERT INTO roomtypes (display) VALUES('${obj.name}');`,{},false);
+    return await mysqlExecute(`INSERT INTO roomtypes (display) VALUES('${obj.name}');`,[],false);
 }
 Booking.GetDestination = async ()=>{
-    return await mysqlSelect('SELECT * FROM `destinations`;',{},false);
+    return await mysqlSelect('SELECT * FROM `destinations`;',[],false);
 }
 Booking.GetHotels = async (id)=>{
-    return await mysqlSelect('SELECT * FROM `hotel`;',{},false);
+    var result =  await mysqlSelect('SELECT * FROM `hotel`;',[],false);
+    if(result.success){
+        let data = result.data;
+        let ids = data.map(x=>x.id);
+        for (let i = 0; i < ids.length; i++) {
+            const id = ids[i];
+            const roomTypeResult = await Misc.getRoomTypes(id);
+            if(roomTypeResult.success == true)
+                data[i].roomTypes = roomTypeResult.data;
+            
+        }
+    }
+    return result;
 }
-Booking.GetRoomTypes = async ()=>{
-    return await mysqlSelect('SELECT * FROM `roomtypes`;',{},false);
+Booking.GetRoomTypes = async (id)=>{
+    return await mysqlSelect('SELECT * FROM `roomtypes` ;',[id],false);
 }
 
 
