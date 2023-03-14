@@ -36,4 +36,5 @@ export interface Booking {
     extraCharges:number;
     totalPrice:number;
     offers: Offer[];
+    features:any[];
 }

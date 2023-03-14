@@ -41,7 +41,7 @@
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Order no.</label>
-                                <input class="form-control ih-medium " type="text" name="OrderNo"
+                                <input class="form-control ih-medium " readonly type="text" name="OrderNo"
                                     placeholder="Enter order number" [(ngModel)]="model.orderNo" />
                             </div>
                         </div>
@@ -189,7 +189,9 @@
                                 <div class="mb-3">
                                     <label class="form-label">Hotel</label>
                                     <ng-select2 class="form-control ih-medium p-0" [(ngModel)]="model.hotel.hotel"
-                                        [data]="hotels" [placeholder]="'Please select hotel'">
+                                        [data]="hotels" [placeholder]="'Please select hotel'"
+                                        (valueChanged)="onHotelValueChanged($event)"
+                                        >
 
                                     </ng-select2>
                                     <!-- <select class="form-control ih-medium choices-single2"

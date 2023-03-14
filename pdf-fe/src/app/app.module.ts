@@ -8,6 +8,7 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from'@angular/common/http';
 import { ApiService } from './utils/api.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UtilService } from './utils/util.service';
 @NgModule({
   declarations: [
     AppComponent
@@ -19,7 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgbModule,
     BrowserAnimationsModule
   ],
-  providers: [ApiService,{provide:HTTP_INTERCEPTORS,useClass:ApiInterceptor,multi:true}],
+  providers: [ApiService,UtilService,{provide:HTTP_INTERCEPTORS,useClass:ApiInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

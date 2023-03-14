@@ -7,9 +7,11 @@ import { IndexComponent } from './index.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
   declarations: [
-    IndexComponent
+    IndexComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,

@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
           showConfirmButton: false,
           timer: 3000
         })
-        this.router.navigate(['']);
+        window.location.href = this.router.parseUrl('').toString();//);// .navigate(['']);
       }else{
         Swal.fire({
           icon: 'error',

@@ -14,10 +14,14 @@ export class EditBooking{
     discount:number=0;
     extraCharges:number=0;
     totalPrice:number=0;
-    features:string[]=[];
+    features:Feature[]=[];
     destination:BookingDestination=new BookingDestination();
     flight:BookingFlight=new BookingFlight();
     hotel:BookingHotel = new BookingHotel();
+}
+export class Feature{
+    id:number = 0;
+    display:string = "";
 }
 export class BookingDestination{
     destination:string="";

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/utils/api.service';
 import { AddBooking } from '../add-booking/models/add-booking.model';
 import { BookingDestination, BookingFlight, BookingHotel, EditBooking } from '../add-booking/models/edit-booking.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-booking',
@@ -20,6 +21,7 @@ export class EditBookingComponent implements OnInit {
   data: any = {};
   agents: any = [];
   staffs: any = [];
+  features: any[] = [];
   constructor(private ar: ActivatedRoute, private api: ApiService) {
     ar.params.subscribe(x => {
       if (x["id"] > 0) {
@@ -30,11 +32,7 @@ export class EditBookingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getHotels();
-    this.getRoomTypes();
-    this.getDestination();
-    this.getAgents();
-    this.getStaffs();
+
   }
   getStaffs() {
     this.api.get('util/staffs').subscribe(x => {
@@ -55,15 +53,15 @@ export class EditBookingComponent implements OnInit {
       if (x.status == 200) this.destinationData = x.data.map((c: any) => { return { id: c.id, text: c.display } });
     })
   }
-  getHotels() {
-    this.api.get('util/hotels').subscribe(x => {
+  getHotels(id: any) {
+    this.api.get('util/hotels?id=' + id).subscribe(x => {
       if (x.status == 200) {
         this.hotels = x.data.map((c: any) => { return { id: c.id, text: c.name } });
       }
     })
   }
-  getRoomTypes() {
-    this.api.get('util/roomtypes').subscribe(x => {
+  getRoomTypes(id: any) {
+    this.api.get('util/roomtypes?id=' + id).subscribe(x => {
       if (x.status == 200) {
         this.roomTypes = x.data.map((c: any) => { return { id: c.id, text: c.display } });
       }
@@ -87,6 +85,7 @@ export class EditBookingComponent implements OnInit {
         this.model.discount = result.discount;
         this.model.extraCharges = result.extraCharges;
         this.model.totalPrice = result.totalPrice;
+        this.model.features = result.features;
         for (let i = 0; i < result.offers.length; i++) {
           const el = result.offers[i];
           var _destination = new BookingDestination();
@@ -111,6 +110,10 @@ export class EditBookingComponent implements OnInit {
           _edit.hotel = _hotel;
           this.destinationList.push({ ..._edit });
         }
+        this.getFeatures();
+        this.getDestination();
+        this.getAgents();
+        this.getStaffs();
         //this.destinationList = x.data.offers as any;
       }
     })
@@ -127,11 +130,25 @@ export class EditBookingComponent implements OnInit {
     let xCharges = this.model.extraCharges;
     this.model.totalPrice = (price + xCharges) - (discount * price) / 100;
   }
+  getFeatures() {
+    this.api.get('util/feature').subscribe((x: any) => {
+      if (x.status == 200) {   
+        let ids = this.model.features.map(c=>c.id);
+        debugger
+        this.features = x.data.map((c:any)=>{
+          if(ids.includes(c.id)) c.checked = true;
+          return c;
+        });
+        
+      }
+    })
+  }
   onFormSubmit(){
     this.model.id = this.id;
-    this.api.post('booking/update',{booking:this.model,list:this.destinationList}).subscribe(x=>{
+    let _features = this.features.filter(x => x.checked === true).map(x => x.id);
+    this.api.post('booking/update',{booking:this.model,list:this.destinationList, features: _features}).subscribe(x=>{
       if(x.status == 200){
-        alert("Added");
+        Swal.fire("Success",x.message);
       }
     })
   }
@@ -142,6 +159,12 @@ export class EditBookingComponent implements OnInit {
   }
   removeRow(ndx: number) {
     this.destinationList.splice(ndx, 1);
+  }
+  onDestinationChange(e: any) {
+    this.getHotels(e)
+  }
+  onHotelValueChanged(e: any) {
+    this.getRoomTypes(e);
   }
 }
 

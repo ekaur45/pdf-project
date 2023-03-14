@@ -15,6 +15,8 @@ export class HotelListComponent implements OnInit {
   destinationData:any[] = [];
   destination:number = 0;
   destinationName:string  = "";
+  roomTypeName: string = "";
+  roomTypes: any[]=[];
   constructor(private api:ApiService) { 
 
     this.data = [];
@@ -22,6 +24,7 @@ export class HotelListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDestination();
+    this.getRoomType();
     this.get();
   }
   getDestination(){
@@ -31,13 +34,15 @@ export class HotelListComponent implements OnInit {
   }
   add(){
     if(this.isEdit) return this.update();
-    this.api.post('booking/hotel',{name:this.name,destination:this.destination}).subscribe(x=>{
+    let _roomTypes = this.roomTypes.filter(x=>x.checked == true).map(x=>x.id);
+    this.api.post('booking/hotel',{name:this.name,destination:this.destination,roomTypes:_roomTypes}).subscribe(x=>{
       this.name ="";
       if(x.status == 200) this.get();
     })
   }
   update(){
-    this.api.post('util/update-hotel',{id:this.editData.id,name:this.name,destination:this.destination}).subscribe(x=>{
+    let _roomTypes = this.roomTypes.filter(x=>x.checked == true).map(x=>x.id);
+    this.api.post('util/update-hotel',{id:this.editData.id,name:this.name,destination:this.destination,roomTypes:_roomTypes}).subscribe(x=>{
       this.name ="";
       this.cancel();
       if(x.status == 200) this.get();
@@ -60,11 +65,23 @@ export class HotelListComponent implements OnInit {
   onEdit(r:any){
     this.editData = r;
     this.name = r.name;
+    this.destination = r.location;
+   this.roomTypes = this.roomTypes.map(x=>{
+      let ids = r.roomTypes.map((c:any)=>c.id);
+      if(ids.includes(x.id)) x.checked = true;
+      return x;
+    })
     this.isEdit = true;
   }
   cancel(){
     this.editData = {};
     this.name = "";
+    this.destination = 0;
+
+    this.roomTypes = this.roomTypes.map(x=>{
+      x.checked = false;
+      return x;
+    })
     this.isEdit =false;
   }
   displayDestination(e:string){
@@ -76,14 +93,40 @@ export class HotelListComponent implements OnInit {
   showAddDestinationModal(){
     $("#modal-add-destination").modal("show");
   }
+  showAddRoomTypeModal(){
+    $("#modal-add-roomType").modal("show");
+  }
 
   addDestination(){
     this.api.post('booking/destination',{name:this.destinationName}).subscribe(x=>{
-      this.name ="";
+      this.destinationName ="";
       if(x.status == 200) {
         this.getDestination();
         this.get();
       }
     })
   }
+
+  addRoomType(){
+    if(this.isEdit) return this.update();
+    this.api.post('booking/room-types',{name:this.roomTypeName}).subscribe(x=>{
+      this.roomTypeName ="";
+      if(x.status == 200) {
+        this.getRoomType();
+      }
+    })
+  }
+  getRoomType(){
+    this.api.get('booking/room-types').subscribe(x=>{
+      if(x.status == 200) this.roomTypes = x.data;
+    })
+  }
+
+
+
+
+
+
+
+
 }
