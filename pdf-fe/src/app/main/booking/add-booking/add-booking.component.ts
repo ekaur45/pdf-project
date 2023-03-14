@@ -86,8 +86,8 @@ export class AddBookingComponent implements OnInit {
     })
   }
   onFormSubmit(){
-    
-    this.api.post('booking/add',{booking:this.model,list:this.destinationList}).subscribe(x=>{
+    let _features = this.features.filter(x=>x.checked === true).map(x=>x.id);
+    this.api.post('booking/add',{booking:this.model,list:this.destinationList,features:_features}).subscribe(x=>{
       if(x.status == 200){
         alert("Added");
       }
