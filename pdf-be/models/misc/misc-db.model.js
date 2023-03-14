@@ -19,12 +19,26 @@ Misc.updateDestination = async data=>{
 Misc.deleteDestination = async id=>{
     return await mysqlExecute('delete from destinations where id=?',[id],false);
 }
-Misc.getHotels = async ()=>{
-    return await mysqlSelect('call sp_get_hotels();')
+Misc.getHotels = async (id)=>{
+    return await mysqlSelect('call sp_get_hotels(?);',[id])
 }
 Misc.getRoomTypes = async ()=>{
     return await mysqlSelect('call sp_get_roomtypes();')
 }
+
+Misc.addFeature = async obj=>{
+    return await mysqlExecute('insert into features(display) values(?)',[obj.display]);
+}
+Misc.editFeature = async obj=>{
+    return await mysqlExecute('update features set display =? where id =?',[obj.display,obj.id]);
+}
+Misc.deleteFeature = async obj=>{
+    return await mysqlExecute('delete from features where id = ?',[obj]);
+}
+Misc.getFeature = async obj=>{
+    return await mysqlExecute('select * from  features;',[]);
+}
+
 
 
 Misc.getAgents = async ()=>{

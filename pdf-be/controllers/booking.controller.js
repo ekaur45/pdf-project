@@ -90,7 +90,7 @@ bookingController.AddHotel= async (req,res,next)=>{
  * @param {import("express").NextFunction} next 
  */
 bookingController.GetHotel= async (req,res,next)=>{
-    var result = await Booking.GetHotels();
+    var result = await Booking.GetHotels(req.query?.id);
     result.success?res.Ok(result.data):res.BadRequest({});
 }
 

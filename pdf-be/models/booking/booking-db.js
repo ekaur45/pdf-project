@@ -154,7 +154,7 @@ Booking.AddDestination = async (obj)=>{
     return await mysqlExecute(`INSERT INTO destinations (display) VALUES('${obj.name}');`,{},false);
 }
 Booking.AddHotel = async (obj)=>{
-    return await mysqlExecute(`INSERT INTO hotel (name) VALUES('${obj.name}');`,{},false);
+    return await mysqlExecute(`INSERT INTO hotel (name,location) VALUES('${obj.name}','${obj.destination}');`,{},false);
 }
 Booking.AddRoomType = async (obj)=>{
     return await mysqlExecute(`INSERT INTO roomtypes (display) VALUES('${obj.name}');`,{},false);
@@ -162,7 +162,7 @@ Booking.AddRoomType = async (obj)=>{
 Booking.GetDestination = async ()=>{
     return await mysqlSelect('SELECT * FROM `destinations`;',{},false);
 }
-Booking.GetHotels = async ()=>{
+Booking.GetHotels = async (id)=>{
     return await mysqlSelect('SELECT * FROM `hotel`;',{},false);
 }
 Booking.GetRoomTypes = async ()=>{

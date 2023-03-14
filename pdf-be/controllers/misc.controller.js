@@ -61,7 +61,7 @@ miscController.deleteDestination= async (req,res,next)=>{
  * @param {import("express").NextFunction} next 
  */
 miscController.getHotels =async (req,res,next)=>{
-    var result = await Misc.getHotels();
+    var result = await Misc.getHotels(req.query.id);
     result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong");
 }
 
@@ -105,6 +105,47 @@ miscController.deleteRoomType= async (req,res,next)=>{
  */
 miscController.getRoomTypes =async (req,res,next)=>{
     var result = await Misc.getRoomTypes();
+    result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong");
+}
+
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+miscController.addFeature =async (req,res,next)=>{
+    var result = await Misc.addFeature(req.body);
+    result.success?res.Ok(result.data,"Feature added successfuly."):res.BadRequest({},"Something went wrong");
+}
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+miscController.editFeature =async (req,res,next)=>{
+    var result = await Misc.editFeature(req.body);
+    result.success?res.Ok(result.data,"Feature updated successfuly."):res.BadRequest({},"Something went wrong");
+}
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+miscController.deleteFeature =async (req,res,next)=>{
+    var result = await Misc.deleteFeature(req.query.id);
+    result.success?res.Ok(result.data,"Feature deleted successfuly."):res.BadRequest({},"Something went wrong");
+}
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+miscController.getFeature =async (req,res,next)=>{
+    var result = await Misc.getFeature();
     result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong");
 }
 
