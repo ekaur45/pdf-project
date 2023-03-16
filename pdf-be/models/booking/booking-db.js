@@ -69,6 +69,8 @@ Booking.getById = async (id) => {
             // el.departure = moment(el.departure).format("MM/DD/YYYY");
             var offersResult = await mysqlSelect('call get_booking_by_id(?);', [el.id]);
             el.offers = offersResult.data;
+            //var termsResult = await mysqlSelect('select * from termsAndConditions',[],false);
+            el.terms = [];//termsResult.data;
             // el.offers.map((e, ii) => {
             //     e.destinationFrom = moment(e.destinationFrom).format("MM/DD/YYYY");
             //     e.destinationTo = moment(e.destinationTo).format("MM/DD/YYYY");
@@ -114,11 +116,11 @@ Booking.get = async () => {
         data: []
     }
 }
-Booking.createPdf = async html => {
+Booking.createPdf = async (html,name="") => {
     var pdf = require('html-pdf');
     return new Promise((resolve, reject) => {
         var options = { format: 'Letter' };
-        var fileName = new Date().getMilliseconds() + "invoice.pdf";
+        var fileName = new Date().getMilliseconds() + "_"+name+"_invoice.pdf";
         pdf.create(html, options).toFile('public/' + fileName, function (err, res) {
             if (err) reject(err);
             resolve(fileName); // { filename: '/app/businesscard.pdf' }
@@ -136,10 +138,10 @@ Booking.print = async id => {
         const imageBas64 = 
         `data:image/${contentType};base64,${d.photo}`;
         d.photo = imageBas64;
-        const source = fs.readFileSync("pdfTemplates/invoice.html").toString("utf-8");
+        const source = fs.readFileSync("pdfTemplates/invoice_v2.html").toString("utf-8");
         const template = handlerbars.compile(source);
         const html = template({ d })
-        var file = await Booking.createPdf(html);
+        var file = await Booking.createPdf(html,d.customerName);
         return { success: true, data: file };
     }
 }
@@ -149,10 +151,10 @@ Booking.delete = async id =>{
 }
 
 Booking.AddDestination = async (obj)=>{
-    return await mysqlExecute(`INSERT INTO destinations (display) VALUES('${obj.name}');`,{},false);
+    return await mysqlExecute(`INSERT INTO destinations (display) VALUES('${obj.name}');`,[],false);
 }
 Booking.AddHotel = async (obj)=>{
-    var result =  await mysqlExecute(`INSERT INTO hotel (name,location) VALUES('${obj.name}','${obj.destination}');`,{},false);
+    var result =  await mysqlExecute(`INSERT INTO hotel (name,location) VALUES('${obj.name}','${obj.destination}');`,[],false);
     var idResult = await mysqlSelect('SELECT last_insert_id() as id;',[],false);
     if(idResult.success == true){
         if(obj.roomTypes&&obj.roomTypes.length>0){
