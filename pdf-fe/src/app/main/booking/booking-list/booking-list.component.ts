@@ -35,6 +35,24 @@ export class BookingListComponent implements OnInit {
       window.open(`${this.apiUrl}${x.data}`)
     })
   }
+  onPrintClick2(id: number) {
+    this.loadingPdf = true;
+    const el = document.getElementById('loadericon1' + id);
+    if (el)
+      el.innerHTML = '<i class="fa fa-spinner"></i>';
+    this.api.get('booking/print2?id='+id).subscribe(x => {
+      this.loadingPdf = false;
+      if (el)
+        el.innerHTML = '<i class="fa fa-print"></i>';
+      window.open(`${this.apiUrl}${x.data}`)
+    })
+  }
+
+  onStatusChange(id:any,status:any){
+    this.api.get('booking/update-status?id='+id+'&status='+status).subscribe(x=>{
+      this.getBookings();
+    })
+  }
 
   onUserEdit(e:any){}
   onBookingDelete(e:any){

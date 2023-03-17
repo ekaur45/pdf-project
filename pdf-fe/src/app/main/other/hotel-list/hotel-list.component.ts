@@ -1,5 +1,5 @@
 import { ApiService } from 'src/app/utils/api.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, DebugElement, OnInit } from '@angular/core';
 declare const $:any;
 @Component({
   selector: 'app-hotel-list',
@@ -67,8 +67,8 @@ export class HotelListComponent implements OnInit {
     this.name = r.name;
     this.destination = r.location;
    this.roomTypes = this.roomTypes.map(x=>{
-      let ids = r.roomTypes.map((c:any)=>c.id);
-      if(ids.includes(x.id)) x.checked = true;
+      let ids = r?.roomTypes?.map((c:any)=>c.id);
+      if(ids?.includes(x.id)) x.checked = true;
       return x;
     })
     this.isEdit = true;
@@ -118,6 +118,7 @@ export class HotelListComponent implements OnInit {
   }
   getRoomType(){
     this.api.get('booking/room-types').subscribe(x=>{
+      
       if(x.status == 200) this.roomTypes = x.data;
     })
   }
