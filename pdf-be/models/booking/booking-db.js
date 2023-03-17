@@ -231,4 +231,24 @@ Booking.updateBokkingStatus = async (id, status) => {
     return await mysqlExecute('UPDATE `booking` set `status` = ? where id = ?', [status, id], false);
 }
 
+Booking.printVoucher = async id=>{
+    const source = fs.readFileSync("pdfTemplates/xyz.html").toString("utf-8");
+    const template = handlerbars.compile(source);
+    data = {
+        destination:"Finolhu Baa Atoll Maldives",
+        customerName:"Mr. BIN GHIMLAS SALMAN",
+        confirmationNumber:"106077",
+        checkIn:"18-Feb-23",
+        checkOut:"22-Feb-23",
+        roomType:"Ocean Pool Villa ",
+        roomDescription:"Half board Round Trip Transfers by Seaplane",
+        numberOfRooms:"1",
+        numberOfGuests:"2",
+        guestType:"Adults"
+    }
+    const html = template({ d:data });
+    var file = await Booking.createPdf(html, "test_voucher");
+    return file;
+}
+
 module.exports = { Booking };
