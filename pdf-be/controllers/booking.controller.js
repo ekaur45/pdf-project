@@ -12,8 +12,9 @@ const bookingController = {};
 bookingController.addBooking= async (req,res,next)=>{
     var booking = new AddBookingModel(req.body);
     await Booking.add(booking);
-    res.Ok(booking);
+    res.Ok(booking, "Booking added successfuly.");
 }
+
 /**
  * 
  * @param {import("express").Request} req 
@@ -25,7 +26,6 @@ bookingController.editBooking= async (req,res,next)=>{
     await Booking.edit(booking);
     res.Ok(booking,"Booking updated successfuly.");
 }
-
 
 /**
  * 
@@ -48,6 +48,7 @@ bookingController.getById= async (req,res,next)=>{
     var result = await Booking.getById(req.query.id);
     result.success?res.Ok(result.data[0]):res.BadRequest({},"Something went wrong.");
 }
+
 /**
  * 
  * @param {import("express").Request} req 
@@ -59,7 +60,6 @@ bookingController.get= async (req,res,next)=>{
     result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong.");
 }
 
-
 /**
  * 
  * @param {import("express").Request} req 
@@ -70,6 +70,7 @@ bookingController.print= async (req,res,next)=>{
     var result = await Booking.print(req.query.id);
     result.success?res.Ok(`${result.data}`):res.BadRequest({},"Something went wrong.");
 }
+
 /**
  * 
  * @param {import("express").Request} req 
@@ -80,7 +81,6 @@ bookingController.printWithoutPrice= async (req,res,next)=>{
     var result = await Booking.printWithoutPrice(req.query.id);
     result.success?res.Ok(`${result.data}`):res.BadRequest({},"Something went wrong.");
 }
-
 
 /**
  * 
@@ -104,7 +104,6 @@ bookingController.GetHotel= async (req,res,next)=>{
     result.success?res.Ok(result.data):res.BadRequest({});
 }
 
-
 /**
  * 
  * @param {import("express").Request} req 
@@ -126,8 +125,6 @@ bookingController.GetDestinations= async (req,res,next)=>{
     var result = await Booking.GetDestination();
     result.success?res.Ok(result.data):res.BadRequest({});
 }
-
-
 
 /**
  * 
@@ -151,7 +148,6 @@ bookingController.GetRoomTypes= async (req,res,next)=>{
     result.success?res.Ok(result.data):res.BadRequest({});
 }
 
-
 /**
  * 
  * @param {import("express").Request} req 
@@ -162,7 +158,5 @@ bookingController.updateBokkingStatus= async (req,res,next)=>{
     var result = await Booking.updateBokkingStatus(req.query.id,req.query.status);
     result.success?res.Ok(result.data,"Status updated successfuly."):res.BadRequest({},"Something went wrong.");
 }
-
-
 
 module.exports = bookingController;

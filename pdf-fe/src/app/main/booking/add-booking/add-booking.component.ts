@@ -3,13 +3,16 @@ import { ApiService } from './../../../utils/api.service';
 import { Component, OnInit, NgModule } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UtilService } from 'src/app/utils/util.service';
+import Swal from 'sweetalert2';
 declare const $: any;
+
 @Component({
   selector: 'app-add-booking',
   templateUrl: './add-booking.component.html',
   styleUrls: ['./add-booking.component.css']
 })
 export class AddBookingComponent implements OnInit {
+
   agentControl = new FormControl('');
   hotels: any = [];
   roomTypes: any = [];
@@ -19,6 +22,7 @@ export class AddBookingComponent implements OnInit {
   agents: any = [];
   staffs: any = [];
   features: any[] = [];
+
   constructor(private api: ApiService, private util: UtilService) {
     this.model = new AddBooking();
     this.destinationList = [];
@@ -46,11 +50,13 @@ export class AddBookingComponent implements OnInit {
     this.model.flight = new BookingFlight();
     this.model.hotel = new BookingHotel();
   }
+
   getDestination() {
     this.api.get('booking/destination').subscribe(x => {
       if (x.status == 200) this.destinationData = x.data.map((c: any) => { return { id: c.id, text: c.display } });
     })
   }
+
   getHotels(id: any) {
     this.api.get('util/hotels?id=' + id).subscribe(x => {
       if (x.status == 200) {
@@ -58,6 +64,7 @@ export class AddBookingComponent implements OnInit {
       }
     })
   }
+
   getStaffs() {
     this.api.get('util/staffs').subscribe(x => {
       if (x.status == 200) {
@@ -65,6 +72,7 @@ export class AddBookingComponent implements OnInit {
       }
     })
   }
+
   getAgents() {
     this.api.get('util/agents').subscribe(x => {
       if (x.status == 200) {
@@ -72,6 +80,7 @@ export class AddBookingComponent implements OnInit {
       }
     })
   }
+
   getRoomTypes(id: any) {
     this.api.get('util/roomtypes?id=' + id).subscribe(x => {
       if (x.status == 200) {
@@ -87,14 +96,21 @@ export class AddBookingComponent implements OnInit {
       }
     })
   }
+
   onFormSubmit() {
     let _features = this.features.filter(x => x.checked === true).map(x => x.id);
     this.api.post('booking/add', { booking: this.model, list: this.destinationList, features: _features }).subscribe(x => {
       if (x.status == 200) {
-        alert("Added");
+        Swal.fire({
+          icon: 'success',
+          title: x.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     })
   }
+
   onPriceChange() {
     let price = this.model.price;
     let discount = this.model.discount;
