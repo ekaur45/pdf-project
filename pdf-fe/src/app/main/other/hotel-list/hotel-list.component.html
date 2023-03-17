@@ -6,20 +6,20 @@
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label style="height: 42px;">Hotel name</label>
-                    <input type="text" class="form-control ih-medium" [(ngModel)]="name">
+                    <label>Hotel Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="name">
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label style="height: 42px;">Hotel image</label>
-                    <input type="file" class="form-control ih-medium" (change)="onFileChange($event)">
+                    <label>Hotel Image</label>
+                    <input type="file" class="form-control" (change)="onFileChange($event)">
                 </div>
                 <div class="col-md-6 mb-3">
                     <div class="d-flex align-items-center">
-                        <label>Hotel destination</label>
+                        <label>Hotel Destination</label>
                         <button class="btn btn-icon" (click)="showAddDestinationModal()"><i
                                 class="uil uil-plus"></i></button>
                     </div>
-                    <ng-select2 class="form-control ih-medium p-0" [(ngModel)]="destination" [data]="destinationData"
+                    <ng-select2 class="form-control p-0" [(ngModel)]="destination" [data]="destinationData"
                         [placeholder]="'Please select a destination'">
                     </ng-select2>
                 </div>
@@ -27,7 +27,7 @@
             </div>
             <div class="col-md-12">
                 <div class="align-items-center d-flex">
-                    <label>Available room types</label>
+                    <label>Available Toom Types</label>
                     <button class="btn btn-icon" (click)="showAddRoomTypeModal()">
                         <i class="uil uil-plus"></i>
                     </button>
