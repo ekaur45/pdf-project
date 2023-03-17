@@ -1,6 +1,7 @@
 import { environment } from 'src/environments/environment';
 import { ApiService } from 'src/app/utils/api.service';
 import { Component, DebugElement, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 declare const $:any;
 @Component({
   selector: 'app-hotel-list',
@@ -50,6 +51,7 @@ export class HotelListComponent implements OnInit {
     this.api.multiForm('booking/hotel',form).subscribe(x=>{
       this.name ="";
       this.get();
+      Swal.fire('Success',x.message);
       if(x.status == 200) this.get();
     })
   }
@@ -58,6 +60,7 @@ export class HotelListComponent implements OnInit {
     this.api.post('util/update-hotel',{id:this.editData.id,name:this.name,destination:this.destination,roomTypes:_roomTypes}).subscribe(x=>{
       this.name ="";
       this.cancel();
+      Swal.fire('Success',x.message);
       if(x.status == 200) this.get();
     })
   }
@@ -68,6 +71,7 @@ export class HotelListComponent implements OnInit {
   }
   onDeleteConfirm(id:number){
     this.api.get('util/delete-hotel?id='+id).subscribe(x=>{
+      Swal.fire('Success',x.message);
       if(x.status == 200) this.get();
     })
   }
@@ -98,7 +102,7 @@ export class HotelListComponent implements OnInit {
     this.isEdit =false;
   }
   displayDestination(e:string){
-    if(this.destinationData.length>0)
+    if(this.destinationData.length>0&&this.destinationData.filter((x:any)=>x.id == e).length>0)
     return this.destinationData.filter((x:any)=>x.id == e)[0].text;
     else return "";
   }

@@ -1,6 +1,7 @@
 import { environment } from 'src/environments/environment';
 import { ApiService } from 'src/app/utils/api.service';
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 declare const $:any;
 @Component({
   selector: 'app-destination-list',
@@ -38,6 +39,7 @@ export class DestinationListComponent implements OnInit {
     this.api.post('util/update-destination',{id:this.editData.id,name:this.name}).subscribe(x=>{
       this.name ="";
       this.cancel();
+      Swal.fire('Success',x.message);
       if(x.status == 200) this.get();
     })
   }
@@ -48,6 +50,7 @@ export class DestinationListComponent implements OnInit {
   }
   onDeleteConfirm(id:number){
     this.api.get('util/delete-destination?id='+id).subscribe(x=>{
+      Swal.fire('Success',x.message);
       if(x.status == 200) this.get();
     })
 

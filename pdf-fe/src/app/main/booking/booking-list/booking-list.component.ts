@@ -29,11 +29,11 @@ export class BookingListComponent implements OnInit {
     this.loadingPdf = true;
     const el = document.getElementById('loadericon' + id);
     if (el)
-      el.innerHTML = '<i class="fa fa-spinner"></i>';
+      el.innerHTML = '<i class="uil uil-spinner"></i>';
     this.api.get('booking/print?id=' + id).subscribe(x => {
       //this.loadingPdf = false;
       if (el)
-        el.innerHTML = '<i class="fa fa-print"></i>';
+        el.innerHTML = '<i class="uil uil-print"></i>';
       window.open(`${this.apiUrl}${x.data}`)
     })
   }
@@ -42,11 +42,23 @@ export class BookingListComponent implements OnInit {
     this.loadingPdf = true;
     const el = document.getElementById('loadericon1' + id);
     if (el)
-      el.innerHTML = '<i class="fa fa-spinner"></i>';
+      el.innerHTML = '<i class="uil uil-spinner"></i>';
     this.api.get('booking/print2?id=' + id).subscribe(x => {
       this.loadingPdf = false;
       if (el)
-        el.innerHTML = '<i class="fa fa-bill"></i>';
+        el.innerHTML = '<i class="uil uil-bill"></i>';
+      window.open(`${this.apiUrl}${x.data}`)
+    })
+  }
+  onPrintClick3(id: number) {
+    this.loadingPdf = true;
+    const el = document.getElementById('loadericon3' + id);
+    if (el)
+      el.innerHTML = '<i class="uil uil-spinner"></i>';
+    this.api.get('booking/print-voucher?id=' + id).subscribe(x => {
+      this.loadingPdf = false;
+      if (el)
+        el.innerHTML = '<i class="uil receipt-alt"></i>';
       window.open(`${this.apiUrl}${x.data}`)
     })
   }

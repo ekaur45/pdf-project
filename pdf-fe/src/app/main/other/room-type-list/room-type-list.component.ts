@@ -1,6 +1,7 @@
 import { environment } from 'src/environments/environment';
 import { ApiService } from 'src/app/utils/api.service';
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 declare const $:any;
 @Component({
   selector: 'app-room-type-list',
@@ -30,6 +31,7 @@ export class RoomTypeListComponent implements OnInit {
     form.append("file",this.file);
     this.api.multiForm('booking/room-types',form).subscribe(x=>{
       this.name ="";
+      Swal.fire('Success',x.message);
       if(x.status == 200) this.get();
     })
   }
@@ -37,6 +39,7 @@ export class RoomTypeListComponent implements OnInit {
     this.api.post('util/update-room-type',{id:this.editData.id,name:this.name}).subscribe(x=>{
       this.name ="";
       this.cancel();
+      Swal.fire('Success',x.message);
       if(x.status == 200) this.get();
     })
   }
@@ -47,6 +50,7 @@ export class RoomTypeListComponent implements OnInit {
   }
   onDeleteConfirm(id:number){
     this.api.get('util/delete-room-type?id='+id).subscribe(x=>{
+      Swal.fire('Success',x.message);
       if(x.status == 200) this.get();
     })
   }

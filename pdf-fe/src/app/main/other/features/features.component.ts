@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/utils/api.service';
+import Swal from 'sweetalert2';
 declare const $:any;
 @Component({
   selector: 'app-features',
@@ -24,6 +25,7 @@ export class FeaturesComponent implements OnInit {
     if(this.isEdit) return this.update();
     this.api.post('util/feature',{display:this.name}).subscribe(x=>{
       this.name ="";
+      Swal.fire('Success',x.message);
       if(x.status == 200) this.get();
     })
   }
@@ -31,6 +33,7 @@ export class FeaturesComponent implements OnInit {
     this.api.post('util/edit-feature',{id:this.editData.id,display:this.name}).subscribe(x=>{
       this.name ="";
       this.cancel();
+      Swal.fire('Success',x.message);
       if(x.status == 200) this.get();
     })
   }
@@ -41,6 +44,7 @@ export class FeaturesComponent implements OnInit {
   }
   onDeleteConfirm(id:number){
     this.api.get('util/delete-feature?id='+id).subscribe(x=>{
+      Swal.fire('Success',x.message);
       if(x.status == 200) this.get();
     })
 
