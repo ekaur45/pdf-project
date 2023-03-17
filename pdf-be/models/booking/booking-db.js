@@ -70,8 +70,8 @@ Booking.getById = async (id) => {
             // el.departure = moment(el.departure).format("MM/DD/YYYY");
             var offersResult = await mysqlSelect('call get_booking_by_id(?);', [el.id]);
             el.offers = offersResult.data;
-            //var termsResult = await mysqlSelect('select * from termsAndConditions',[],false);
-            el.terms = [];//termsResult.data;
+            var termsResult = await mysqlSelect('select * from termsandcondition',[],false);
+            el.terms = termsResult.data.map(x=>x.termsAndCondition);
             // el.offers.map((e, ii) => {
             //     e.destinationFrom = moment(e.destinationFrom).format("MM/DD/YYYY");
             //     e.destinationTo = moment(e.destinationTo).format("MM/DD/YYYY");
