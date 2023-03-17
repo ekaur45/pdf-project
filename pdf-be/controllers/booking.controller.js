@@ -89,7 +89,7 @@ bookingController.printWithoutPrice= async (req,res,next)=>{
  * @param {import("express").NextFunction} next 
  */
 bookingController.AddHotel= async (req,res,next)=>{
-    var result = await Booking.AddHotel(req.body);
+    var result = await Booking.AddHotel(req.body,req.files[0]);
     result.success?res.Ok({},"Hotel added."):res.BadRequest({},"Error adding hotel.");
 }
 
@@ -111,7 +111,8 @@ bookingController.GetHotel= async (req,res,next)=>{
  * @param {import("express").NextFunction} next 
  */
 bookingController.AddDestination= async (req,res,next)=>{
-    var result = await Booking.AddDestination(req.body);
+    
+    var result = await Booking.AddDestination(req.body,req.files[0]);
     result.success?res.Ok({},"Destination added."):res.BadRequest({},"Error adding destination.");
 }
 
@@ -133,7 +134,7 @@ bookingController.GetDestinations= async (req,res,next)=>{
  * @param {import("express").NextFunction} next 
  */
 bookingController.AddRoomType= async (req,res,next)=>{
-    var result = await Booking.AddRoomType(req.body);
+    var result = await Booking.AddRoomType(req.body,req.files[0]);
     result.success?res.Ok({},"Room type added."):res.BadRequest({},"Error adding room type.");
 }
 
