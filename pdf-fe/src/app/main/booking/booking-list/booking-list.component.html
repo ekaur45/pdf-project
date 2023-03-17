@@ -75,13 +75,18 @@
                             </td>
                             <td>
                                 <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
-                                    <li>
-                                        <a  style="cursor: pointer;" class="check">
+                                    <li *ngIf="!r.status">
+                                        <a  style="cursor: pointer;" class="check" (click)="onStatusChange(r.id,'Rejected')">
                                             <i class="uil uil-times"></i>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a  style="cursor: pointer;" class="check">
+                                    <li *ngIf="r.status">
+                                        <span class="badge {{r.status =='Accepted'?'bg-success':'bg-danger'}}" style="border-radius: 5px;">
+                                            {{r.status}}
+                                        </span>
+                                    </li>
+                                    <li *ngIf="!r.status">
+                                        <a  style="cursor: pointer;" class="check" (click)="onStatusChange(r.id,'Accepted')">
                                             <i class="uil uil-check"></i>
                                         </a>
                                     </li>
@@ -94,6 +99,12 @@
                                         <a class="edit" style="cursor: pointer;" (click)="onPrintClick(r.id)"
                                             id="{{ 'loadericon'+r.id }}">
                                             <i class="uil uil-print"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="edit" style="cursor: pointer;" (click)="onPrintClick2(r.id)"
+                                        id="{{ 'loadericon1'+r.id }}">
+                                            <i class="uil uil-bill"></i>
                                         </a>
                                     </li>
                                     <li>

@@ -127,6 +127,17 @@ Booking.createPdf = async (html,name="") => {
         });
     });
 }
+Booking.createPdf2 = async (html,name="") => {
+    var pdf = require('html-pdf');
+    return new Promise((resolve, reject) => {
+        var options = { format: 'Letter' };
+        var fileName = new Date().getMilliseconds() + "_"+name+"_invoice2.pdf";
+        pdf.create(html, options).toFile('public/' + fileName, function (err, res) {
+            if (err) reject(err);
+            resolve(fileName); // { filename: '/app/businesscard.pdf' }
+        });
+    });
+}
 Booking.print = async id => {
     var data = await Booking.getById(id);
     if (data.success) {
@@ -145,7 +156,24 @@ Booking.print = async id => {
         return { success: true, data: file };
     }
 }
-
+Booking.printWithoutPrice =async id =>{
+    var data = await Booking.getById(id);
+    if (data.success) {
+        const d = data.data[0];
+        d.photo = fs.readFileSync(path.join("public", d.photo)).toString("base64");
+        //const stats = fs.statSync(path.join("public", d.photo));
+        //d.photo = `data:image/${d.photo}`;
+        let contentType = mime.getType(path.join("public", d.photo));
+        const imageBas64 = 
+        `data:image/${contentType};base64,${d.photo}`;
+        d.photo = imageBas64;
+        const source = fs.readFileSync("pdfTemplates/invoice_v2_withoutprice.html").toString("utf-8");
+        const template = handlerbars.compile(source);
+        const html = template({ d })
+        var file = await Booking.createPdf2(html,d.customerName);
+        return { success: true, data: file };
+    }
+}
 Booking.delete = async id =>{
     return await mysqlExecute('delete from booking where id=?',[id],false);
 }
@@ -181,7 +209,8 @@ Booking.GetHotels = async (id)=>{
         let ids = data.map(x=>x.id);
         for (let i = 0; i < ids.length; i++) {
             const id = ids[i];
-            const roomTypeResult = await Misc.getRoomTypes(id);
+            const roomTypeResult = await mysqlSelect('SELECT * FROM `roomtypes` where id in (SELECT roomTypeId FROM booking_rooms_types where bookingId = ?);',[id],false);
+            //const roomTypeResult = await Misc.getRoomTypes(id);
             if(roomTypeResult.success == true)
                 data[i].roomTypes = roomTypeResult.data;
             

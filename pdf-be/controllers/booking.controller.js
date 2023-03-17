@@ -70,6 +70,16 @@ bookingController.print= async (req,res,next)=>{
     var result = await Booking.print(req.query.id);
     result.success?res.Ok(`${result.data}`):res.BadRequest({},"Something went wrong.");
 }
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+bookingController.printWithoutPrice= async (req,res,next)=>{
+    var result = await Booking.printWithoutPrice(req.query.id);
+    result.success?res.Ok(`${result.data}`):res.BadRequest({},"Something went wrong.");
+}
 
 
 /**

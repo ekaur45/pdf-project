@@ -7,6 +7,7 @@ router.get('/all',controller.get);
 router.get('/delete',controller.deleteBooking);
 router.get('/getbyid',controller.getById);
 router.get('/print',controller.print);
+router.get('/print2',controller.printWithoutPrice);
 router.get('/update-status',controller.updateBokkingStatus);
 
 router.get('/destination',controller.GetDestinations);
