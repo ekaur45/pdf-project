@@ -52,7 +52,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (13,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,NULL,NULL),(14,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,NULL,NULL),(15,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,NULL,NULL),(17,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',1000.00,50.00,20.00,520.00,NULL,NULL),(18,'4','03/15/2023','Cd7d7ZXi',1,1,'03/15/2023','03/15/2023','Allu',_binary '\0','5',50.00,1.00,2.00,51.50,'usd',NULL),(19,'4','03/15/2023','Cd7d7ZXi',1,1,'03/15/2023','03/15/2023','Allu',_binary '\0','5',50.00,1.00,2.00,51.50,'usd',NULL),(20,'4','03/15/2023','Cd7d7ZXi',1,1,'03/15/2023','03/15/2023','Allu',_binary '\0','5',50.00,1.00,2.00,51.50,'usd',NULL);
+INSERT INTO `booking` VALUES (13,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,'usd','Rejected'),(14,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,'usd','Accepted'),(15,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,'usd','Rejected'),(17,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',1000.00,50.00,20.00,520.00,'usd','Accepted'),(18,'4','03/15/2023','Cd7d7ZXi',1,1,'03/15/2023','03/15/2023','Allu',_binary '\0','5',50.00,1.00,2.00,51.50,'usd','Rejected'),(19,'4','03/15/2023','Cd7d7ZXi',1,1,'03/15/2023','03/15/2023','Allu',_binary '\0','5',50.00,1.00,2.00,51.50,'usd','Rejected'),(20,'4','03/15/2023','Cd7d7ZXi',1,1,'03/15/2023','03/15/2023','Allu',_binary '\0','5',50.00,1.00,2.00,51.50,'usd','Accepted');
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +93,7 @@ CREATE TABLE `booking_rooms_types` (
   `bookingId` int DEFAULT NULL,
   `roomTypeId` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `booking_rooms_types` (
 
 LOCK TABLES `booking_rooms_types` WRITE;
 /*!40000 ALTER TABLE `booking_rooms_types` DISABLE KEYS */;
-INSERT INTO `booking_rooms_types` VALUES (1,6,1),(2,6,2),(3,6,4),(4,5,1),(5,5,2),(7,7,2);
+INSERT INTO `booking_rooms_types` VALUES (1,6,1),(2,6,2),(3,6,4),(4,5,1),(5,5,2),(7,7,2),(8,8,1),(9,8,2),(10,9,1),(11,9,4),(12,9,5),(13,10,1),(14,10,2),(15,11,5),(16,11,6),(17,12,5),(18,12,6),(19,13,5),(20,13,6);
 /*!40000 ALTER TABLE `booking_rooms_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,8 +205,9 @@ DROP TABLE IF EXISTS `destinations`;
 CREATE TABLE `destinations` (
   `id` int NOT NULL AUTO_INCREMENT,
   `display` varchar(500) DEFAULT NULL,
+  `file` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,7 +216,7 @@ CREATE TABLE `destinations` (
 
 LOCK TABLES `destinations` WRITE;
 /*!40000 ALTER TABLE `destinations` DISABLE KEYS */;
-INSERT INTO `destinations` VALUES (1,'Destination 1'),(2,'Destination 2'),(4,'new destination name'),(5,'Naran');
+INSERT INTO `destinations` VALUES (6,'dsafasd','/avatars/4547CF3B2364thumnails.jpg');
 /*!40000 ALTER TABLE `destinations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,7 +240,7 @@ CREATE TABLE `features` (
 
 LOCK TABLES `features` WRITE;
 /*!40000 ALTER TABLE `features` DISABLE KEYS */;
-INSERT INTO `features` VALUES (2,'Free wifi'),(3,'Kitchen'),(4,'Private hot tub'),(5,'Central air conditioning'),(6,'Backyard'),(7,'Hair dryer'),(8,'Fire pit'),(9,'Indoor fireplace: gas'),(10,'Private patio or balcony'),(11,'TV'),(12,'Free parking on premises');
+INSERT INTO `features` VALUES (2,'Free wifi'),(3,'Kitchen'),(4,'Private hot tub'),(5,'Central air conditioning'),(6,'Backyard'),(7,'Hair dryer'),(8,'Fire pit'),(9,'Indoor fireplace: gas'),(10,'Private patio or balcony'),(11,'TV'),(12,'Free parking on premises ');
 /*!40000 ALTER TABLE `features` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,8 +256,9 @@ CREATE TABLE `hotel` (
   `name` varchar(500) DEFAULT NULL,
   `location` varchar(500) DEFAULT NULL,
   `isDeleted` bit(1) DEFAULT b'0',
+  `file` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -265,7 +267,7 @@ CREATE TABLE `hotel` (
 
 LOCK TABLES `hotel` WRITE;
 /*!40000 ALTER TABLE `hotel` DISABLE KEYS */;
-INSERT INTO `hotel` VALUES (7,'Hotel','5',_binary '\0');
+INSERT INTO `hotel` VALUES (12,'dasfdasfasd','6',_binary '\0','/avatars/9F4B8E0350ABWhatsApp Image 2023-03-14 at 01.07.19.jpg'),(13,'dfsadsfdsaf','6',_binary '\0','/avatars/57A6027A0E1Fthumnails.jpg');
 /*!40000 ALTER TABLE `hotel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -280,8 +282,9 @@ CREATE TABLE `roomtypes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `display` varchar(500) DEFAULT NULL,
   `isDeleted` bit(1) DEFAULT b'0',
+  `file` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -290,8 +293,32 @@ CREATE TABLE `roomtypes` (
 
 LOCK TABLES `roomtypes` WRITE;
 /*!40000 ALTER TABLE `roomtypes` DISABLE KEYS */;
-INSERT INTO `roomtypes` VALUES (1,'King size',_binary '\0'),(2,'Single bed',_binary '\0'),(4,'Bara room',_binary '\0'),(5,'Other room',_binary '\0');
+INSERT INTO `roomtypes` VALUES (5,'Other room',_binary '\0',NULL),(6,'asdfsda',_binary '\0','/avatars/0293B6F4783Athumnails.jpg');
 /*!40000 ALTER TABLE `roomtypes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `termsandcondition`
+--
+
+DROP TABLE IF EXISTS `termsandcondition`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `termsandcondition` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `termsAndCondition` varchar(5000) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `termsandcondition`
+--
+
+LOCK TABLES `termsandcondition` WRITE;
+/*!40000 ALTER TABLE `termsandcondition` DISABLE KEYS */;
+INSERT INTO `termsandcondition` VALUES (1,'Lorem Ipsum is simply dummy text of the printing and typesetting industry'),(2,'Contrary to popular belief, Lorem Ipsum is not simply random text'),(3,'Lorem Ipsum is simply dummy text of the printing and typesetting industry'),(4,'Contrary to popular belief, Lorem Ipsum is not simply random text');
+/*!40000 ALTER TABLE `termsandcondition` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -397,7 +424,7 @@ select id, (select concat(users.firstName,' ',users.lastName) from users where u
 (select concat(users.id) from users where users.id = booking.agentName limit 1) agentId,
 (select concat(users.firstName,' ',users.lastName) from users where users.id = booking.staffName limit 1) staffName, 
 (select concat(users.id) from users where users.id = booking.staffName limit 1) staffId, 
-`date`, orderNo, passengers, nights, departure, arrival, customerName, isDeleted,  price, discount, extraCharges, totalPrice, 
+`date`, orderNo, passengers, nights, departure, arrival, customerName, isDeleted,  price, discount, extraCharges, totalPrice,currency, 
 (select photo from users where users.id = booking.agentName limit 1) photo 
 from booking where ifnull(isDeleted,0)=0 and id = _id;
 END ;;
@@ -654,33 +681,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-15  3:16:25
-
-
-
-
-USE `pdfproject`;
-DROP procedure IF EXISTS `get_booking_by`;
-
-USE `pdfproject`;
-DROP procedure IF EXISTS `pdfproject`.`get_booking_by`;
-;
-
-DELIMITER $$
-USE `pdfproject`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_booking_by`( in _id int)
-BEGIN
--- select *,(select photo from users where users.id = booking.agentName limit 1) photo from booking where ifnull(isDeleted,0)=0 and id = _id;
-
-select id, (select concat(users.firstName,' ',users.lastName) from users where users.id = booking.agentName limit 1) agentName,
-(select concat(users.id) from users where users.id = booking.agentName limit 1) agentId,
-(select concat(users.firstName,' ',users.lastName) from users where users.id = booking.staffName limit 1) staffName, 
-(select concat(users.id) from users where users.id = booking.staffName limit 1) staffId, 
-`date`, orderNo, passengers, nights, departure, arrival, customerName, isDeleted,  price, discount, extraCharges, totalPrice,currency, 
-(select photo from users where users.id = booking.agentName limit 1) photo 
-from booking where ifnull(isDeleted,0)=0 and id = _id;
-END$$
-
-DELIMITER ;
-;
-
+-- Dump completed on 2023-03-18  2:39:06
