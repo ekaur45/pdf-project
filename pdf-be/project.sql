@@ -655,3 +655,32 @@ DELIMITER ;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2023-03-15  3:16:25
+
+
+
+
+USE `pdfproject`;
+DROP procedure IF EXISTS `get_booking_by`;
+
+USE `pdfproject`;
+DROP procedure IF EXISTS `pdfproject`.`get_booking_by`;
+;
+
+DELIMITER $$
+USE `pdfproject`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_booking_by`( in _id int)
+BEGIN
+-- select *,(select photo from users where users.id = booking.agentName limit 1) photo from booking where ifnull(isDeleted,0)=0 and id = _id;
+
+select id, (select concat(users.firstName,' ',users.lastName) from users where users.id = booking.agentName limit 1) agentName,
+(select concat(users.id) from users where users.id = booking.agentName limit 1) agentId,
+(select concat(users.firstName,' ',users.lastName) from users where users.id = booking.staffName limit 1) staffName, 
+(select concat(users.id) from users where users.id = booking.staffName limit 1) staffId, 
+`date`, orderNo, passengers, nights, departure, arrival, customerName, isDeleted,  price, discount, extraCharges, totalPrice,currency, 
+(select photo from users where users.id = booking.agentName limit 1) photo 
+from booking where ifnull(isDeleted,0)=0 and id = _id;
+END$$
+
+DELIMITER ;
+;
+
