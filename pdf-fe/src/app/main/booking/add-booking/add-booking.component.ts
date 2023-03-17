@@ -129,4 +129,9 @@ export class AddBookingComponent implements OnInit {
   onHotelValueChanged(e: any) {
     this.getRoomTypes(e);
   }
+  displayDestination(e:string){
+    if(this.destinationData.length>0)
+    return this.destinationData.filter((x:any)=>x.id == e)[0].text;
+    else return "";
+  }
 }
