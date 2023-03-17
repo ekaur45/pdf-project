@@ -4,3 +4,8 @@
 @import url('./assets/css/style.css');
 @import url('./assets/css/line.css');
 @import url('../node_modules/sweetalert2/dist/sweetalert2.css');
+
+.w_65x65 {
+    width: 65px;
+    height: 65px;
+}

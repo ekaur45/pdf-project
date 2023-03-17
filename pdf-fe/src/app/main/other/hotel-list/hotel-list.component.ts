@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { ApiService } from 'src/app/utils/api.service';
 import { Component, DebugElement, OnInit } from '@angular/core';
 declare const $:any;
@@ -7,6 +8,7 @@ declare const $:any;
   styleUrls: ['./hotel-list.component.css']
 })
 export class HotelListComponent implements OnInit {
+  url = environment.baseUrl;
   name:string = "";
   data:any;
   isEdit:boolean = false;
@@ -17,6 +19,7 @@ export class HotelListComponent implements OnInit {
   destinationName:string  = "";
   roomTypeName: string = "";
   roomTypes: any[]=[];
+  file:any;
   constructor(private api:ApiService) { 
 
     this.data = [];
@@ -34,9 +37,19 @@ export class HotelListComponent implements OnInit {
   }
   add(){
     if(this.isEdit) return this.update();
+    debugger
+    var form = new FormData();
+    form.append("name",this.name);
+    form.append("destination",this.destination+"");
     let _roomTypes = this.roomTypes.filter(x=>x.checked == true).map(x=>x.id);
-    this.api.post('booking/hotel',{name:this.name,destination:this.destination,roomTypes:_roomTypes}).subscribe(x=>{
+    for (let i = 0; i < _roomTypes.length; i++) {
+      const el = _roomTypes[i];      
+      form.append("roomTypes[]",el);
+    }
+    form.append("file",this.file);
+    this.api.multiForm('booking/hotel',form).subscribe(x=>{
       this.name ="";
+      this.get();
       if(x.status == 200) this.get();
     })
   }
@@ -123,7 +136,9 @@ export class HotelListComponent implements OnInit {
     })
   }
 
-
+onFileChange(e:any){
+  this.file = e.target.files[0];
+}
 
 
 

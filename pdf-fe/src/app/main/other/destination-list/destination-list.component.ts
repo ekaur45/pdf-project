@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { ApiService } from 'src/app/utils/api.service';
 import { Component, OnInit } from '@angular/core';
 declare const $:any;
@@ -7,11 +8,13 @@ declare const $:any;
   styleUrls: ['./destination-list.component.css']
 })
 export class DestinationListComponent implements OnInit {
+  url = environment.baseUrl;
   name:string = "";
   data:any;
   isEdit:boolean = false;
   editData:any ={};
   deleteobj:any ={};
+  file:any;
   constructor(private api:ApiService) { 
 
     this.data = [];
@@ -22,8 +25,12 @@ export class DestinationListComponent implements OnInit {
   }
   add(){
     if(this.isEdit) return this.update();
-    this.api.post('booking/destination',{name:this.name}).subscribe(x=>{
+    var form = new FormData();
+    form.append("name",this.name);
+    form.append("file",this.file);
+    this.api.multiForm('booking/destination',form).subscribe(x=>{
       this.name ="";
+      this.file = null;
       if(x.status == 200) this.get();
     })
   }
@@ -58,5 +65,8 @@ export class DestinationListComponent implements OnInit {
     this.editData = {};
     this.name = "";
     this.isEdit =false;
+  }
+  onFileChange(e:any){
+    this.file = e.target.files[0];
   }
 }

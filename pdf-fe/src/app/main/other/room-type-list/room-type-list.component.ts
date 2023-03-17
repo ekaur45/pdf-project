@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { ApiService } from 'src/app/utils/api.service';
 import { Component, OnInit } from '@angular/core';
 declare const $:any;
@@ -7,12 +8,13 @@ declare const $:any;
   styleUrls: ['./room-type-list.component.css']
 })
 export class RoomTypeListComponent implements OnInit {
-
+  url = environment.baseUrl;
   name:string = "";
   data:any;
   isEdit:boolean = false;
   editData:any ={};
   deleteobj:any ={};
+  file: any;
   constructor(private api:ApiService) { 
 
     this.data = [];
@@ -23,7 +25,10 @@ export class RoomTypeListComponent implements OnInit {
   }
   add(){
     if(this.isEdit) return this.update();
-    this.api.post('booking/room-types',{name:this.name}).subscribe(x=>{
+    var form = new FormData();
+    form.append("name",this.name);
+    form.append("file",this.file);
+    this.api.multiForm('booking/room-types',form).subscribe(x=>{
       this.name ="";
       if(x.status == 200) this.get();
     })
@@ -59,4 +64,8 @@ export class RoomTypeListComponent implements OnInit {
     this.name = "";
     this.isEdit =false;
   }
+  onFileChange(e:any){
+    this.file = e.target.files[0];
+  }
+  
 }
