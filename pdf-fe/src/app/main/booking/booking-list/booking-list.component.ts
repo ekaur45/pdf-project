@@ -46,7 +46,7 @@ export class BookingListComponent implements OnInit {
     this.api.get('booking/print2?id=' + id).subscribe(x => {
       this.loadingPdf = false;
       if (el)
-        el.innerHTML = '<i class="fa fa-print"></i>';
+        el.innerHTML = '<i class="fa fa-bill"></i>';
       window.open(`${this.apiUrl}${x.data}`)
     })
   }
