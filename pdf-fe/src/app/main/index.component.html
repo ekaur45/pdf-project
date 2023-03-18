@@ -27,9 +27,9 @@
                 <li class="nav-author">
                     <div class="dropdown-custom">
                         <a href="javascript:;" class="nav-item-toggle">
-                            <img [src]="url+user?.photo" alt=""
-                                class="rounded-circle">
-                            <span class="nav-item__title">{{ user?.firstName }} {{ user?.lastName }}<i class="las la-angle-down nav-item__arrow"></i></span>
+                            <img [src]="url+user?.photo" alt="" class="rounded-circle">
+                            <span class="nav-item__title">{{ user?.firstName }} {{ user?.lastName }}<i
+                                    class="las la-angle-down nav-item__arrow"></i></span>
                         </a>
                         <div class="dropdown-parent-wrapper">
                             <div class="dropdown-wrapper">
@@ -98,7 +98,7 @@
                             <span class="menu-text">Dashboard</span>
                         </a>
                     </li>
-                    <li class="has-child">
+                    <li class="has-child" *ngIf="checks('booking')">
                         <a href="#" class="" routerLinkActive="active">
                             <span class="nav-icon uil uil-ticket"></span>
                             <span class="menu-text">Booking</span>
@@ -118,7 +118,7 @@
 
 
 
-                    <li class="has-child">
+                    <li class="has-child" *ngIf="false">
                         <a href="#" class="" routerLinkActive="active">
                             <span class="nav-icon uil uil-dollar-sign"></span>
                             <span class="menu-text">Exchange</span>
@@ -130,7 +130,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="has-child">
+                    <li class="has-child" *ngIf="checks('other')">
                         <a href="#" class="" routerLinkActive="active">
                             <span class="nav-icon uil uil-okta"></span>
                             <span class="menu-text">Other</span>
@@ -154,7 +154,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="has-child">
+                    <li class="has-child" *ngIf="checks('users')">
                         <a href="#" class="" routerLinkActive="active">
                             <span class="nav-icon uil uil-users-alt"></span>
                             <span class="menu-text">Users</span>

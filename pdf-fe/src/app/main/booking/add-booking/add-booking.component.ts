@@ -1,9 +1,12 @@
+import { environment } from 'src/environments/environment';
 import { AddBooking, BookingDestination, BookingFlight, BookingHotel } from './models/add-booking.model';
 import { ApiService } from './../../../utils/api.service';
 import { Component, OnInit, NgModule } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UtilService } from 'src/app/utils/util.service';
 import Swal from 'sweetalert2';
+import { Select2OptionData } from 'ng-select2';
+import { Options } from 'select2';
 declare const $: any;
 
 @Component({
@@ -12,7 +15,7 @@ declare const $: any;
   styleUrls: ['./add-booking.component.css']
 })
 export class AddBookingComponent implements OnInit {
-
+  url= environment.baseUrl;
   agentControl = new FormControl('');
   hotels: any = [];
   roomTypes: any = [];
@@ -22,11 +25,16 @@ export class AddBookingComponent implements OnInit {
   agents: any = [];
   staffs: any = [];
   features: any[] = [];
-
+  public options: any;
   constructor(private api: ApiService, private util: UtilService) {
     this.model = new AddBooking();
     this.destinationList = [];
     this.model.orderNo = util.makeString(8);
+    this.options = {
+      width: '300',
+      templateResult: this.templateResult,
+      templateSelection: this.templateSelection
+    };
   }
 
   ngOnInit(): void {
@@ -53,7 +61,7 @@ export class AddBookingComponent implements OnInit {
 
   getDestination() {
     this.api.get('booking/destination').subscribe(x => {
-      if (x.status == 200) this.destinationData = x.data.map((c: any) => { return { id: c.id, text: c.display } });
+      if (x.status == 200) this.destinationData = x.data.map((c: any) => { return { id: c.id, text: c.display , additional: { image: this.url + c.file }} });
     })
   }
 
@@ -133,5 +141,28 @@ export class AddBookingComponent implements OnInit {
     if(this.destinationData.length>0)
     return this.destinationData.filter((x:any)=>x.id == e)[0].text;
     else return "";
+  }
+
+
+  public templateResult = (state: Select2OptionData): JQuery | string => {
+    if (!state.id) {
+      return state.text;
+    }
+
+    let image = '<span class="image"></span>';
+    if (state.additional.image) {
+      image = '<div class="d-flex align-items-center"><img style="height:54px;width:54px" src="' + state.additional.image + '"</div>';
+    }
+
+    return jQuery('<span> ' + image + ' <b class="ms-3">' + state.text + '.</b></span>');
+  }
+
+  // function for selection template
+  public templateSelection = (state: Select2OptionData): JQuery | string => {
+    if (!state.id) {
+      return state.text;
+    }
+
+    return jQuery('<span>' + state.text + '</span>');
   }
 }

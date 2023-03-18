@@ -13,7 +13,11 @@ export class BookingListComponent implements OnInit {
   list: any[] = [];
   loadingPdf: boolean = false;
   deleteobj: any = {};
-  constructor(private api: ApiService) { }
+  user: any = {};
+  constructor(private api: ApiService) { 
+    this.user = JSON.parse(localStorage.getItem("user") ?? "{}");
+
+  }
 
   ngOnInit(): void {
     this.getBookings();

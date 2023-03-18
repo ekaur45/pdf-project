@@ -95,7 +95,9 @@
                                     <ng-select2 class="form-control ih-medium p-0"
                                         [(ngModel)]="model.destination.destination" [data]="destinationData"
                                         [placeholder]="'Please select destination'"
-                                        (valueChanged)="onDestinationChange($event)">
+                                        (valueChanged)="onDestinationChange($event)"
+                                        [options]="options"
+                                        >
 
                                     </ng-select2>
                                 </div>
