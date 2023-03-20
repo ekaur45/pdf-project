@@ -168,8 +168,12 @@ bookingController.updateBokkingStatus= async (req,res,next)=>{
  * @param {import("express").NextFunction} next 
  */
 bookingController.printVoucher= async (req,res,next)=>{
-    const result = await Booking.printVoucher(req.query?.id);
+    try {
+        const result = await Booking.printVoucher(req.query?.id);
     res.Ok(result);
+    } catch (error) {
+        res.BadRequest({},"Something went wrong");
+    }
 }
 
 module.exports = bookingController;

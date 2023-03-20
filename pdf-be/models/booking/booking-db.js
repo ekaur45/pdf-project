@@ -70,8 +70,8 @@ Booking.getById = async (id) => {
             // el.departure = moment(el.departure).format("MM/DD/YYYY");
             var offersResult = await mysqlSelect('call get_booking_by_id(?);', [el.id]);
             el.offers = offersResult.data;
-            var termsResult = await mysqlSelect('select * from termsandcondition',[],false);
-            el.terms = termsResult.data.map(x=>x.termsAndCondition);
+            var termsResult = await mysqlSelect('select * from termsandcondition', [], false);
+            el.terms = termsResult.data.map(x => x.termsAndCondition);
             // el.offers.map((e, ii) => {
             //     e.destinationFrom = moment(e.destinationFrom).format("MM/DD/YYYY");
             //     e.destinationTo = moment(e.destinationTo).format("MM/DD/YYYY");
@@ -231,24 +231,34 @@ Booking.updateBokkingStatus = async (id, status) => {
     return await mysqlExecute('UPDATE `booking` set `status` = ? where id = ?', [status, id], false);
 }
 
-Booking.printVoucher = async id=>{
-    const source = fs.readFileSync("pdfTemplates/xyz.html").toString("utf-8");
+Booking.printVoucher = async id => {
+    const source = fs.readFileSync("pdfTemplates/voucher.html").toString("utf-8");
     const template = handlerbars.compile(source);
-    data = {
-        destination:"Finolhu Baa Atoll Maldives",
-        customerName:"Mr. BIN GHIMLAS SALMAN",
-        confirmationNumber:"106077",
-        checkIn:"18-Feb-23",
-        checkOut:"22-Feb-23",
-        roomType:"Ocean Pool Villa ",
-        roomDescription:"Half board Round Trip Transfers by Seaplane",
-        numberOfRooms:"1",
-        numberOfGuests:"2",
-        guestType:"Adults"
+    var data = await Booking.getById(id);
+    if (data.success) {
+        const d = data.data[0];
+
+        data = {
+            destination: d.offers[0].destinationName,
+            customerName: d.customerName,
+            confirmationNumber: d.orderNo,
+            arrival: d.arrival,
+            departure: d.departure,
+            roomType: d.offers[0].roomType,
+            roomDescription: "",
+            numberOfRooms: d.offers.length,
+            passengers: d.passengers,
+            guestType: "",
+            orderNo: d.orderNo
+        }
+        const html = template({ d: data });
+        var file = await Booking.createPdf(html, data.customerName);
+        return file;
     }
-    const html = template({ d:data });
-    var file = await Booking.createPdf(html, "test_voucher");
-    return file;
+    return {
+        success:false
+
+    }
 }
 
 module.exports = { Booking };
