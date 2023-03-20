@@ -8,6 +8,18 @@ declare const $:any;
   styleUrls: ['./features.component.css']
 })
 export class FeaturesComponent implements OnInit {
+  Toast = Swal.mixin({
+    customClass:"z1050",
+    toast: true,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,    
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }    
+  })
   name:string = "";
   data:any;
   isEdit:boolean = false;
@@ -22,6 +34,13 @@ export class FeaturesComponent implements OnInit {
     this.get();
   }
   add(){
+    if(!this.name){
+      this.Toast.fire({
+        icon:"error",
+        text:"All fields are required."
+      })
+      return 
+    }
     if(this.isEdit) return this.update();
     this.api.post('util/feature',{display:this.name}).subscribe(x=>{
       this.name ="";

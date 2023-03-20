@@ -9,3 +9,6 @@
     width: 65px;
     height: 65px;
 }
+.z1050{
+    z-index: 9989 !important;
+}

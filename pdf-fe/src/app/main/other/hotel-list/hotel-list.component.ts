@@ -11,6 +11,18 @@ declare const $: any;
   styleUrls: ['./hotel-list.component.css']
 })
 export class HotelListComponent implements OnInit {
+  Toast = Swal.mixin({
+    customClass:"z1050",
+    toast: true,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,    
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }    
+  })
   url = environment.baseUrl;
   name: string = "";
   data: any;
@@ -45,6 +57,13 @@ export class HotelListComponent implements OnInit {
     })
   }
   add() {
+    if(!(this.name&&this.destination&&this.file)){
+      this.Toast.fire({
+        icon:"error",
+        text:"All fields are required."
+      })
+      return;
+    }
     if (this.isEdit) return this.update();
     var form = new FormData();
     form.append("name", this.name);

@@ -9,6 +9,18 @@ declare const $:any;
   styleUrls: ['./room-type-list.component.css']
 })
 export class RoomTypeListComponent implements OnInit {
+  Toast = Swal.mixin({
+    customClass:"z1050",
+    toast: true,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,    
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }    
+  })
   url = environment.baseUrl;
   name:string = "";
   data:any;
@@ -26,6 +38,13 @@ export class RoomTypeListComponent implements OnInit {
     this.get();
   }
   add(){
+    if(!(this.name&&this.description&&this.file)){
+      this.Toast.fire({
+        icon:"error",
+        text:"All fields are required."
+      })
+      return;
+    }
     if(this.isEdit) return this.update();
     var form = new FormData();
     form.append("name",this.name);
