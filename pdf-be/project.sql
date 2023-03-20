@@ -42,6 +42,7 @@ CREATE TABLE `booking` (
   `totalPrice` decimal(12,2) DEFAULT NULL,
   `currency` varchar(45) DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
+  `guestType` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -52,7 +53,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (13,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,'usd','Rejected'),(14,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,'usd','Accepted'),(15,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,'usd','Rejected'),(17,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',1000.00,50.00,20.00,520.00,'usd','Accepted'),(18,'4','03/15/2023','Cd7d7ZXi',1,1,'03/15/2023','03/15/2023','Allu',_binary '\0','5',50.00,1.00,2.00,51.50,'usd','Rejected'),(19,'4','03/15/2023','Cd7d7ZXi',1,1,'03/15/2023','03/15/2023','Allu',_binary '\0','5',50.00,1.00,2.00,51.50,'usd','Rejected'),(20,'4','03/15/2023','Cd7d7ZXi',1,1,'03/15/2023','03/15/2023','Allu',_binary '\0','5',50.00,1.00,2.00,51.50,'usd','Accepted');
+INSERT INTO `booking` VALUES (13,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,'usd','',NULL),(14,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,'usd','',NULL),(15,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',500.00,50.00,20.00,270.00,'usd','',NULL),(17,'4','03/10/2023','abc123',1,1,'03/11/2023','03/11/2023','adsfads',_binary '\0','5',1000.00,50.00,20.00,520.00,'usd','',NULL),(18,'4','03/15/2023','Cd7d7ZXi',1,1,'03/15/2023','03/15/2023','Allu',_binary '\0','5',50.00,1.00,2.00,51.50,'usd','',NULL),(19,'4','03/15/2023','Cd7d7ZXi',1,1,'03/15/2023','03/15/2023','Allu',_binary '\0','5',50.00,1.00,2.00,51.50,'usd','',NULL),(20,'4','03/15/2023','Cd7d7ZXi',1,1,'03/15/2023','03/15/2023','Allu',_binary '\0','5',50.00,1.00,2.00,51.50,'usd','','adult');
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +139,7 @@ CREATE TABLE `bookingoffers` (
 
 LOCK TABLES `bookingoffers` WRITE;
 /*!40000 ALTER TABLE `bookingoffers` DISABLE KEYS */;
-INSERT INTO `bookingoffers` VALUES (1,'wersadf','Single bed',3,'Honey moon','2023-03-04 00:00:00','2023-03-10 00:00:00','asdf',_binary '\0','asdf','asdf','2023-03-09 00:00:00','2023-03-03 00:00:00',10),(2,'dsafasd','King size',2,'asdfadsfdsa','2023-03-03 00:00:00','2023-03-09 00:00:00','asdfasdfsad',_binary '\0','asdf','sadf','2023-03-15 00:00:00','2023-03-23 00:00:00',11),(3,'dfads','Single bed',2,'asdfadsfdsa','2023-03-11 00:00:00','2023-03-15 00:00:00','asdfasdfsad',_binary '\0','fdsa234','23dsa','2023-03-11 00:00:00','2023-03-11 00:00:00',12),(10,'asdfsad','asdfasdfsad',3,'asdfadsfdsa','03/13/2023','03/14/2023','asdfadsfdsa',_binary '\0','asdfsda','asdf','03/15/2023','03/15/2023',17),(11,'asdfdsa','King size',12,'asdfadsfdsa','03/11/2023','03/11/2023','1',_binary '\0','asdfads','asdfsda','03/11/2023','03/11/2023',15),(12,'sadfsda','Single bed',23,'asdfadsfdsa','03/18/2023','03/13/2023','2',_binary '\0','dsafasd','aasdf','03/16/2023','03/13/2023',15),(13,'asdfads','2',34,'2','03/14/2023','03/15/2023','2',_binary '\0','asdfsda','asdfasd','03/15/2023','03/14/2023',15),(14,'asdfdsa','2',10,'7','03/15/2023','03/15/2023','5',_binary '\0','ksjdhfjk','sdahfjkads','03/15/2023','03/15/2023',18),(15,'asdfdsa','2',10,'7','03/15/2023','03/15/2023','5',_binary '\0','ksjdhfjk','sdahfjkads','03/15/2023','03/15/2023',19),(19,'asdfdsa','',10,'','03/15/2023','03/15/2023','5',_binary '\0','ksjdhfjk','sdahfjkads','03/15/2023','03/15/2023',20);
+INSERT INTO `bookingoffers` VALUES (1,'wersadf','Single bed',3,'Honey moon','2023-03-04 00:00:00','2023-03-10 00:00:00','asdf',_binary '\0','asdf','asdf','2023-03-09 00:00:00','2023-03-03 00:00:00',10),(2,'dsafasd','King size',2,'asdfadsfdsa','2023-03-03 00:00:00','2023-03-09 00:00:00','asdfasdfsad',_binary '\0','asdf','sadf','2023-03-15 00:00:00','2023-03-23 00:00:00',11),(3,'dfads','Single bed',2,'asdfadsfdsa','2023-03-11 00:00:00','2023-03-15 00:00:00','asdfasdfsad',_binary '\0','fdsa234','23dsa','2023-03-11 00:00:00','2023-03-11 00:00:00',12),(10,'asdfsad','asdfasdfsad',3,'asdfadsfdsa','03/13/2023','03/14/2023','asdfadsfdsa',_binary '\0','asdfsda','asdf','03/15/2023','03/15/2023',17),(11,'asdfdsa','King size',12,'asdfadsfdsa','03/11/2023','03/11/2023','1',_binary '\0','asdfads','asdfsda','03/11/2023','03/11/2023',15),(12,'sadfsda','Single bed',23,'asdfadsfdsa','03/18/2023','03/13/2023','2',_binary '\0','dsafasd','aasdf','03/16/2023','03/13/2023',15),(13,'asdfads','2',34,'2','03/14/2023','03/15/2023','2',_binary '\0','asdfsda','asdfasd','03/15/2023','03/14/2023',15),(14,'asdfdsa','2',10,'7','03/15/2023','03/15/2023','6',_binary '\0','ksjdhfjk','sdahfjkads','03/15/2023','03/15/2023',18),(15,'asdfdsa','6',10,'7','03/15/2023','03/15/2023','6',_binary '\0','ksjdhfjk','sdahfjkads','03/15/2023','03/15/2023',19),(19,'asdfdsa','6',10,'','03/15/2023','03/15/2023','6',_binary '\0','ksjdhfjk','sdahfjkads','03/15/2023','03/15/2023',20);
 /*!40000 ALTER TABLE `bookingoffers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,7 +208,7 @@ CREATE TABLE `destinations` (
   `display` varchar(500) DEFAULT NULL,
   `file` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +217,7 @@ CREATE TABLE `destinations` (
 
 LOCK TABLES `destinations` WRITE;
 /*!40000 ALTER TABLE `destinations` DISABLE KEYS */;
-INSERT INTO `destinations` VALUES (6,'dsafasd','/avatars/4547CF3B2364thumnails.jpg');
+INSERT INTO `destinations` VALUES (6,'dsafasd','/avatars/4547CF3B2364thumnails.jpg'),(7,'adfsadsfdsafadsfsadfsda','/avatars/70260910FBAFWhatsApp Image 2023-03-14 at 01.07.19.jpg');
 /*!40000 ALTER TABLE `destinations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -231,7 +232,7 @@ CREATE TABLE `features` (
   `id` int NOT NULL AUTO_INCREMENT,
   `display` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -283,8 +284,9 @@ CREATE TABLE `roomtypes` (
   `display` varchar(500) DEFAULT NULL,
   `isDeleted` bit(1) DEFAULT b'0',
   `file` varchar(500) DEFAULT NULL,
+  `description` varchar(1500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -293,7 +295,7 @@ CREATE TABLE `roomtypes` (
 
 LOCK TABLES `roomtypes` WRITE;
 /*!40000 ALTER TABLE `roomtypes` DISABLE KEYS */;
-INSERT INTO `roomtypes` VALUES (5,'Other room',_binary '\0',NULL),(6,'asdfsda',_binary '\0','/avatars/0293B6F4783Athumnails.jpg');
+INSERT INTO `roomtypes` VALUES (6,'asdfsda',_binary '\0','/avatars/0293B6F4783Athumnails.jpg',NULL),(7,'asdfdasfdsa',_binary '\0','/avatars/963CA6942BD0BLAL6944njhb.jpg','asdfsadfsda');
 /*!40000 ALTER TABLE `roomtypes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -339,7 +341,7 @@ CREATE TABLE `users` (
   `userType` int DEFAULT NULL,
   `photo` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -348,7 +350,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Admin','Admin','admin','admin@example.com','$2b$10$caBj75lYFipmkCdwWeBMG.fJYICieLyAKiDGAPs67p9IuwClBRvai',NULL,1,'/avatars/E7E02CD73B3BScreenshot_2.png'),(3,'Ali','abrar','ali','ali@example.com','$2b$10$ZjWakxzf1x3VRO.5nP4fTOtDZZq/4VvMEHNvXcW1TOq/LlnMrmFrG',_binary '\0',1,'/avatars/E7E02CD73B3BScreenshot_2.png'),(4,'Ali','haider','alihaider','ali@email.com','$2b$10$y6IykrIDQ31I8E7kKQBN/ulglPwSQNGU7XJNPJVH22.vxHWtQmcbu',_binary '\0',3,'/avatars/F48230D2CE49Screenshot_2.png'),(5,'asdfads','asdfsad','asdfasd','sdaf@sdfdsa','$2b$10$Td0Iwrdh4YiOLNEx8BFnq.ViCosdS.gzELkOVIazTHbFD0m/SlaWG',_binary '\0',4,'/avatars/E7E02CD73B3BScreenshot_2.png');
+INSERT INTO `users` VALUES (1,'Admin','Admin','admin','admin@example.com','$2b$10$caBj75lYFipmkCdwWeBMG.fJYICieLyAKiDGAPs67p9IuwClBRvai',NULL,1,'/avatars/E7E02CD73B3BScreenshot_2.png'),(3,'Ali','abrar','ali','ali@example.com','$2b$10$ZjWakxzf1x3VRO.5nP4fTOtDZZq/4VvMEHNvXcW1TOq/LlnMrmFrG',_binary '\0',1,'/avatars/E7E02CD73B3BScreenshot_2.png'),(4,'Ali','haider','alihaider','ali@email.com','$2b$10$y6IykrIDQ31I8E7kKQBN/ulglPwSQNGU7XJNPJVH22.vxHWtQmcbu',_binary '\0',3,'/avatars/F48230D2CE49Screenshot_2.png'),(5,'asdfads','asdfsad','asdfasd','sdaf@sdfdsa','$2b$10$Td0Iwrdh4YiOLNEx8BFnq.ViCosdS.gzELkOVIazTHbFD0m/SlaWG',_binary '\0',4,'/avatars/E7E02CD73B3BScreenshot_2.png'),(6,'Agent','Agent','agent','agent@example.com','$2b$10$bKRZq6OnJFJ4SWKkM.sYFen6kghCbXySjRUg2cSarkCyRhDsnKw6i',_binary '\0',3,'/avatars/897CE154A8ADWhatsApp Image 2023-03-14 at 01.07.19.jpg'),(7,'user','user','user','user@example.com','$2b$10$4B3ce0XpzVmnRQgauyrpeOlWxEkeGvANkRRQHZZbD/ZBlrfTCfZ6W',_binary '\0',2,'/avatars/22D5CB47FFDBWhatsApp Image 2023-03-14 at 01.07.19.jpg');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -455,7 +457,8 @@ nights,
 destinationTo, destinationFrom, 
 (select display from destinations where destinations.id = bookingoffers.destinationName) destinationName, 
 (select destinations.id from destinations where destinations.id = bookingoffers.destinationName) destinationId, 
-isDeleted, flightTo, flightFrom, flightDateFrom, flightDateTo, bookingid 
+isDeleted, flightTo, flightFrom, flightDateFrom, flightDateTo, bookingid,
+guestType 
 
 from bookingoffers where ifnull(isDeleted,0)=0 and bookingid = _id;
 END ;;
@@ -509,7 +512,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_create_booking`(
 in _agentName varchar(500),
@@ -525,13 +528,14 @@ in _price decimal(12,2),
 in _discount decimal(12,2),
 in _extraCharges decimal(12,2),
 in _totalPrice decimal(12,2),
-in _currency varchar(45)
+in _currency varchar(45),
+in _guestType varchar(50)
 )
 BEGIN
 INSERT INTO `booking`
-(`agentName`,`date`,`orderNo`,`passengers`,`nights`,`departure`,`arrival`,`customerName`,`staffName`,`price`, `discount`, `extraCharges`, `totalPrice`,`currency`)
+(`agentName`,`date`,`orderNo`,`passengers`,`nights`,`departure`,`arrival`,`customerName`,`staffName`,`price`, `discount`, `extraCharges`, `totalPrice`,`currency`,`guestType`)
 VALUES
-(_agentName,_date,_orderNo,_passengers,_nights,_departure,_arrival,_customerName,_staffName,_price,_discount,_extraCharges,_totalPrice,_currency);
+(_agentName,_date,_orderNo,_passengers,_nights,_departure,_arrival,_customerName,_staffName,_price,_discount,_extraCharges,_totalPrice,_currency,_guestType);
 select last_insert_id() as id;
 END ;;
 DELIMITER ;
@@ -681,4 +685,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-18  2:39:06
+-- Dump completed on 2023-03-21  0:41:04
