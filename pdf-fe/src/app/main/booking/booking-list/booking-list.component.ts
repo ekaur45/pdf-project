@@ -38,6 +38,7 @@ export class BookingListComponent implements OnInit {
       //this.loadingPdf = false;
       if (el)
         el.innerHTML = '<i class="uil uil-print"></i>';
+        if(x.status == 200)
       window.open(`${this.apiUrl}${x.data}`)
     })
   }
@@ -47,10 +48,12 @@ export class BookingListComponent implements OnInit {
     const el = document.getElementById('loadericon1' + id);
     if (el)
       el.innerHTML = '<i class="uil uil-spinner"></i>';
-    this.api.get('booking/print2?id=' + id).subscribe(x => {
+    this.api.get('booking/print2?id=' + id).subscribe(x => {      
       this.loadingPdf = false;
       if (el)
         el.innerHTML = '<i class="uil uil-bill"></i>';
+
+        if(x.status == 200)
       window.open(`${this.apiUrl}${x.data}`)
     })
   }
@@ -62,7 +65,8 @@ export class BookingListComponent implements OnInit {
     this.api.get('booking/print-voucher?id=' + id).subscribe(x => {
       this.loadingPdf = false;
       if (el)
-        el.innerHTML = '<i class="uil receipt-alt"></i>';
+        el.innerHTML = '<i class="uil uil-receipt-alt"></i>';
+        if(x.status == 200)
       window.open(`${this.apiUrl}${x.data}`)
     })
   }
