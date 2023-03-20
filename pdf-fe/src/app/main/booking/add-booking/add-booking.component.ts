@@ -15,7 +15,19 @@ declare const $: any;
   styleUrls: ['./add-booking.component.css']
 })
 export class AddBookingComponent implements OnInit {
-  url= environment.baseUrl;
+  Toast = Swal.mixin({
+    customClass: "z1050",
+    toast: true,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+  url = environment.baseUrl;
   agentControl = new FormControl('');
   hotels: any = [];
   roomTypes: any = [];
@@ -53,15 +65,22 @@ export class AddBookingComponent implements OnInit {
   }
 
   onAddDestination() {
+    if(this.validateDest()){
     this.destinationList.push({ ...this.model });
     this.model.destination = new BookingDestination();
     this.model.flight = new BookingFlight();
     this.model.hotel = new BookingHotel();
+    }else{
+      this.Toast.fire({
+        icon:"error",
+        text:"All fields are required."
+      })
+    }
   }
 
   getDestination() {
     this.api.get('booking/destination').subscribe(x => {
-      if (x.status == 200) this.destinationData = x.data.map((c: any) => { return { id: c.id, text: c.display , additional: { image: this.url + c.file }} });
+      if (x.status == 200) this.destinationData = x.data.map((c: any) => { return { id: c.id, text: c.display, additional: { image: this.url + c.file } } });
     })
   }
 
@@ -106,6 +125,7 @@ export class AddBookingComponent implements OnInit {
   }
 
   onFormSubmit() {
+    if (!this.validateModel()) return;
     let _features = this.features.filter(x => x.checked === true).map(x => x.id);
     this.api.post('booking/add', { booking: this.model, list: this.destinationList, features: _features }).subscribe(x => {
       if (x.status == 200) {
@@ -137,9 +157,9 @@ export class AddBookingComponent implements OnInit {
   onHotelValueChanged(e: any) {
     this.getRoomTypes(e);
   }
-  displayDestination(e:string){
-    if(this.destinationData.length>0)
-    return this.destinationData.filter((x:any)=>x.id == e)[0].text;
+  displayDestination(e: string) {
+    if (this.destinationData.length > 0)
+      return this.destinationData.filter((x: any) => x.id == e)[0].text;
     else return "";
   }
 
@@ -164,5 +184,32 @@ export class AddBookingComponent implements OnInit {
     }
 
     return jQuery('<span>' + state.text + '</span>');
+  }
+
+
+  private validateModel() {
+    let m = this.model;
+    let _features = this.features.filter(x => x.checked === true).map(x => x.id);
+    if (!(m.agentName && m.staffName && m.date && m.orderNo && m.passengers && m.nights && m.departure && m.arrival && m.customerName && m.price && m.discount && m.extraCharges && m.totalPrice && m.currency && m.guestType && this.destinationList.length > 0 && _features.length > 0)) {
+      this.Toast.fire({
+        icon: "error",
+        text: "All fields are required and add at least one destination and one feature."
+      });
+      return false;
+    }
+    return true;
+  }
+  validateDest() {
+    return this.model.destination.destination&&
+    this.model.destination.dateTo&&
+    this.model.destination.dateFrom&&
+    this.model.flight.to&&
+    this.model.flight.from&&
+    this.model.flight.dateTo&&
+    this.model.flight.dateFrom&&
+    this.model.hotel.bookingNo&&
+    this.model.hotel.hotel&&
+    this.model.hotel.nights&&
+    this.model.hotel.roomType;
   }
 }

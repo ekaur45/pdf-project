@@ -18,6 +18,7 @@ export class AddBooking{
     destination:BookingDestination=new BookingDestination();
     flight:BookingFlight=new BookingFlight();
     hotel:BookingHotel = new BookingHotel();
+    
 }
 export class BookingDestination{
     destination:string="";
