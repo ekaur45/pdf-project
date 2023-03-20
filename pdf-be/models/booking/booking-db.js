@@ -201,7 +201,7 @@ Booking.AddHotel = async (obj, file) => {
 }
 Booking.AddRoomType = async (obj, file) => {
     var avatar = await uploadFile(file);
-    return await mysqlExecute(`INSERT INTO roomtypes (display,file) VALUES('${obj.name}','${avatar.fileName}');`, [], false);
+    return await mysqlExecute(`INSERT INTO roomtypes (display,file,description) VALUES('${obj.name}','${avatar.fileName}','${obj.description}');`, [], false);
 }
 Booking.GetDestination = async () => {
     return await mysqlSelect('SELECT * FROM `destinations`;', [], false);
@@ -245,10 +245,10 @@ Booking.printVoucher = async id => {
             arrival: d.arrival,
             departure: d.departure,
             roomType: d.offers[0].roomType,
-            roomDescription: "",
+            roomDescription: d.offers[0].roomType,
             numberOfRooms: d.offers.length,
             passengers: d.passengers,
-            guestType: "",
+            guestType: d.guestType,
             orderNo: d.orderNo
         }
         const html = template({ d: data });
