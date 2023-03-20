@@ -16,6 +16,7 @@ export class RoomTypeListComponent implements OnInit {
   editData:any ={};
   deleteobj:any ={};
   file: any;
+  description:string = "";
   constructor(private api:ApiService) { 
 
     this.data = [];
@@ -29,6 +30,7 @@ export class RoomTypeListComponent implements OnInit {
     var form = new FormData();
     form.append("name",this.name);
     form.append("file",this.file);
+    form.append("description",this.description);
     this.api.multiForm('booking/room-types',form).subscribe(x=>{
       this.name ="";
       Swal.fire('Success',x.message);
@@ -36,7 +38,7 @@ export class RoomTypeListComponent implements OnInit {
     })
   }
   update(){
-    this.api.post('util/update-room-type',{id:this.editData.id,name:this.name}).subscribe(x=>{
+    this.api.post('util/update-room-type',{id:this.editData.id,name:this.name,description:this.description}).subscribe(x=>{
       this.name ="";
       this.cancel();
       Swal.fire('Success',x.message);
@@ -66,6 +68,7 @@ export class RoomTypeListComponent implements OnInit {
   cancel(){
     this.editData = {};
     this.name = "";
+    this.description = "";
     this.isEdit =false;
   }
   onFileChange(e:any){

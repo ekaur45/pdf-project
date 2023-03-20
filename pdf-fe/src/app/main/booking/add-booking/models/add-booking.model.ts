@@ -13,6 +13,7 @@ export class AddBooking{
     extraCharges:number=0;
     totalPrice:number=0;
     currency:string="usd";
+    guestType:string="usd";
     features:string[]=[];
     destination:BookingDestination=new BookingDestination();
     flight:BookingFlight=new BookingFlight();
