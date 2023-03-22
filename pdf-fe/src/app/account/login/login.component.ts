@@ -8,6 +8,7 @@ import Swal from 'sweetalert2'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  loading: boolean = false;
 
   constructor(private api:ApiService,private router:Router) { }
 
@@ -20,7 +21,9 @@ export class LoginComponent implements OnInit {
     document.body.appendChild(s1);
   }
   onFormSubmit(e:any){
+    this.loading = true;
     this.api.post('account/login',e.value).subscribe((x:any)=>{
+      this.loading = false;
       if(x.status == 200){
         localStorage.setItem("user",JSON.stringify(x.data));
         Swal.fire({
