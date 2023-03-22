@@ -23,12 +23,14 @@ export class AddUserComponent implements OnInit {
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     }    
   })
+  loading: boolean = false;
   
   constructor(private api: ApiService, private router: Router) { }
 
   ngOnInit(): void { }
 
-  onAddUserSubmit(f: any) {
+  onAddUserSubmit(f: any,e:any) {
+    this.loading = true;
     if(!f.valid) {
      this.Toast.fire({
       icon: 'error',
@@ -36,10 +38,12 @@ export class AddUserComponent implements OnInit {
       text:"All fields are required",
       timer:1500
      })
+     this.loading = false;
       return;
     }
-    var formData = new FormData(f.target);
+    var formData = new FormData(e.target);
     this.api.multiForm('user/add', formData).subscribe(x => {
+      this.loading = false;
       if (x.status != 200) {
         Swal.fire({
           icon: 'error',
