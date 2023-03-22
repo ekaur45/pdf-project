@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path:'',component:IndexComponent,
     children:[
-      {path:'',component:DashboardComponent},
+      {path:'',redirectTo:'booking',pathMatch:'full'},
       {
         path:'user',loadChildren:()=>import("./users/users.module").then(x=>x.UsersModule)
       },
