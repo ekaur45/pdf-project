@@ -250,7 +250,9 @@ Booking.printVoucher = async id => {
             passengers: d.passengers,
             guestType: d.guestType,
             orderNo: d.orderNo,
-            photo: fs.readFileSync(path.join("public", d.photo)).toString("base64")
+            photo: fs.readFileSync(path.join("public", d.photo)).toString("base64"),
+            date:d.date,
+            status:d.status
         }
         const html = template({ d: data });
         var file = await Booking.createPdf(html, data.customerName);
