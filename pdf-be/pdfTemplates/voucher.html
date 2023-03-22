@@ -63,6 +63,7 @@
             width: 75px;
             border-radius: 50%;
             background: white;
+            border: 2px solid #003E79;
             padding: 10px;
             margin-left: 45px;
         }
@@ -81,7 +82,7 @@
         .blue-pill {
             color: white;
             border-radius: 6px;
-            background: #4A64AE;
+            background: #003E79;
             padding: 4px 6px;
             text-align: center;
         }
@@ -190,7 +191,7 @@
 <body>
     <table id="layout" celpadding="0" border="0">
         <tbody>
-            <tr>
+            <tr style="margin-bottom: 40px;">
                 <td id="header" class="p0">
                     <table style="width: 100%;border: 0;border-collapse: collapse;">
                         <tbody>
@@ -205,7 +206,7 @@
                             <tr>
                                 <td class="p0">
                                     <div class="agent-logo">
-
+                                        <div class="logo"> <img src="{{ d.photo }}" alt="logo"> </div>
                                     </div>
                                 </td>
                             </tr>
@@ -214,94 +215,159 @@
                 </td>
             </tr>
             <tr>
-                <td style="padding-left: 20px;padding-right: 20px;">
+                <td style="padding-left: 20px;padding-right: 20px;padding-top: 20px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 16.6%;padding: 5px 5px;background: gray;font-size: 20px;font-weight: 100;">
+                                ORDER NO
+                            </td>
+                            <td style="width: 16.6%;padding: 5px 5px;background: lightgray;font-size: 20px;font-weight: 100;margin-right: 36px;">
+                                123
+                            </td>
+                            <td style="width: 16.6%;padding: 5px 5px;background: gray;font-size: 20px;font-weight: 100;">
+                                ORDER NO
+                            </td>
+                            <td style="width: 16.6%;padding: 5px 5px;background: lightgray;font-size: 20px;font-weight: 100;margin-right: 36px;">
+                                123
+                            </td>
+                            <td style="width: 16.6%;padding: 5px 5px;background: gray;font-size: 20px;font-weight: 100;">
+                                ORDER NO
+                            </td>
+                            <td style="width: 16.6%;padding: 5px 5px;background: lightgray;font-size: 20px;font-weight: 100;margin-right: 36px;">
+                                123
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                
+            </tr>
+            <tr>
+                <td style="width: 100%;padding-top: 40px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="    width: 100%;background-color: #003E79;padding-top: 10px;padding-bottom: 10px;padding-left: 20px;">
+                                <span style="color: #FFFFFF;">
+                                    Hotel Voucher
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <table id="table-info">
                         <tbody>
-                            <tr style="margin-bottom: 5px;">
-                                <td style="text-align: start;">
+                            <tr style="margin-bottom: 5px;border-bottom: 1.5px dashed lightgray;">
+                                <td style="text-align: start;padding: 15px 0;" colspan="2">
+                                    <span class="blue-pill">
+                                        Guest Name
+                                    </span>
+                                </td>
+                                <td colspan="2">{{d.customerName}}</td>
+                            </tr>
+                            <tr style="margin-bottom: 5px;border-bottom: 1.5px dashed lightgray;">
+                                <td style="text-align: start;padding: 15px 0;" colspan="2">
                                     <span class="blue-pill">
                                         Hotel name
                                     </span>
                                 </td>
-                                <td>{{d.destination}}</td>
-                                <td style="text-align: start;">
-                                    <span class="blue-pill">
-                                        Guest name
-                                    </span>
-                                </td>
-                                <td>{{d.customerName}}</td>
+                                <td colspan="2">{{d.customerName}}</td>
                             </tr>
-                            <tr>
-                                <td colspan="2"></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: start;">
+                            <tr style="margin-bottom: 5px;border-bottom: 1.5px dashed lightgray;">
+                                <td style="text-align: start;padding: 15px 0;" colspan="2">
                                     <span class="blue-pill">
                                         Confirmation no.
                                     </span>
                                 </td>
-                                <td>{{d.orderNo}}</td>
+                                <td colspan="2">{{d.confirmationNumber}}</td>
+                            </tr>
+                            <tr style="margin-bottom: 5px;border-bottom: 1.5px dashed lightgray;">
                                 <td style="text-align: start;">
                                     <span class="blue-pill">
-                                        Check in
+                                        Check In
                                     </span>
                                 </td>
                                 <td>{{d.arrival}}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"></td>
-                            </tr>
-                            <tr>
                                 <td style="text-align: start;">
                                     <span class="blue-pill">
-                                        Check out
+                                        Check Out
                                     </span>
                                 </td>
                                 <td>{{d.departure}}</td>
-                                <td style="text-align: start;">
+                            </tr>
+                            <tr style="margin-bottom: 5px;border-bottom: 1.5px dashed lightgray;">
+                                <td style="text-align: start;padding: 15px 0;" colspan="2">
                                     <span class="blue-pill">
-                                        Room type
+                                        No. of Rooms
                                     </span>
                                 </td>
-                                <td>{{d.roomType}}</td>
+                                <td colspan="2">{{d.numberOfRooms}}</td>
+                            </tr>
+                            <tr style="margin-bottom: 5px;border-bottom: 1.5px dashed lightgray;">
+                                <td style="text-align: start;padding: 15px 0;" colspan="2">
+                                    <span class="blue-pill">
+                                        Room Type
+                                    </span>
+                                </td>
+                                <td colspan="2">{{d.roomType}}</td>
+                            </tr>
+                            <tr style="margin-bottom: 5px;border-bottom: 1.5px dashed lightgray;">
+                                <td style="text-align: start;padding: 15px 0;" colspan="2">
+                                    <span class="blue-pill">
+                                        Room Description
+                                    </span>
+                                </td>
+                                <td colspan="2">{{d.roomDescription}}</td>
+                            </tr>
+                            <tr style="margin-bottom: 5px;border-bottom: 1.5px dashed lightgray;">
+                                <td style="text-align: start;padding: 15px 0;" colspan="2">
+                                    <span class="blue-pill">
+                                        No. of Guests
+                                    </span>
+                                </td>
+                                <td colspan="2">{{d.passengers}}</td>
                             </tr>
                             <tr>
-                                <td colspan="3"></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: start;">
+                                <td style="text-align: start;padding: 15px 0;" colspan="2">
                                     <span class="blue-pill">
-                                        Room description
+                                        Guest Type
                                     </span>
                                 </td>
-                                <td>{{d.roomDescription}}</td>
-                                <td style="text-align: start;">
-                                    <span class="blue-pill">
-                                        No. of rooms
-                                    </span>
-                                </td>
-                                <td>{{d.numberOfRooms}}</td>
+                                <td colspan="2">{{d.guestType}}</td>
                             </tr>
-                            <tr>
-                                <td colspan="2"></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: start;">
-                                    <span class="blue-pill">
-                                        No. of guests
-                                    </span>
-                                </td>
-                                <td>{{d.passengers}}</td>
-                                <td style="text-align: start;">
-                                    <span class="blue-pill">
-                                        Guest types
-                                    </span>
-                                </td>
-                                <td>{{d.guestType}}</td>
-                            </tr>
+                          
                         </tbody>
                     </table>
                 </td>
+            </tr>
+            <tr>
+                <td style="width: 100%;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="    width: 100%;background-color: #003E79;padding-top: 10px;padding-bottom: 10px;padding-left: 20px;">
+                                <span style="color: #FFFFFF;">
+                                    LOCATION DETAILS
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-top: 20px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td>
+                                Address:
+                            </td>
+                            <td>
+                                {{ d.destination }}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                
             </tr>
         </tbody>
     </table>
