@@ -82,6 +82,13 @@
                                     placeholder="Enter customer name" [(ngModel)]="model.customerName" />
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Guest type</label>
+                                <input class="form-control ih-medium " type="text" name="CustomerName"
+                                    placeholder="Enter guest type" [(ngModel)]="model.guestType" />
+                            </div>
+                        </div>
                     </div>
                     <fieldset class="border mb-3 mt-4 pb-3 pe-3 ps-3 mb-5">
                         <div class="row">
@@ -95,7 +102,9 @@
                                     <ng-select2 class="form-control ih-medium p-0"
                                         [(ngModel)]="model.destination.destination" [data]="destinationData"
                                         [placeholder]="'Please select destination'"
-                                        (valueChanged)="onDestinationChange($event)">
+                                        (valueChanged)="onDestinationChange($event)"
+                                        [options]="options"
+                                        >
 
                                     </ng-select2>
                                 </div>
@@ -257,7 +266,8 @@
                                         {{ ndx + 1 }}
                                     </td>
                                     <td>
-                                        {{ r.destination.destination }}
+                                        <!-- {{ r.destination.destination }} -->
+                                        {{ displayDestination(r.destination.destination) }}
                                     </td>
                                     <td>
                                         {{ r.destination.dateTo }}

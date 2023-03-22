@@ -7,6 +7,7 @@ const path = require("path");
 const mime = require("mime");
 const { UpdateBookingModel } = require("./update-booking.model");
 const Misc = require("../misc/misc-db.model");
+const { uploadFile } = require("../../utils/file.util");
 const Booking = {};
 /**
  * 
@@ -17,11 +18,11 @@ Booking.add = async (data) => {
     const result = await mysqlSelect('call sp_create_booking(?);', [data.bookingParams]);
     if (result.success === true) {
         var id = result.data[0].id;
-        var params = data.listParams.map((e,i)=>e.map((ee,ii)=>[id,...ee]));
+        var params = data.listParams.map((e, i) => e.map((ee, ii) => [id, ...ee]));
         var result1 = await mysqlExecute('INSERT INTO `bookingoffers`' +
             '(`bookingid`,`bookingNo`,`roomType`,`nights`,`hotel`,`destinationTo`,`destinationFrom`,`destinationName`,`flightTo`,`flightFrom`,`flightDateFrom`,`flightDateTo`) values ? ;', [...params], false);
-            let featuresParams= data.features.map(x=>[id,x]);
-            var result2 = await mysqlExecute('INSERT INTO `booking_features` (`booking_id`, `feature_id`) VALUES ?',[featuresParams],false);
+        let featuresParams = data.features.map(x => [id, x]);
+        var result2 = await mysqlExecute('INSERT INTO `booking_features` (`booking_id`, `feature_id`) VALUES ?', [featuresParams], false);
         return {
             success: result1.success && result.success && result2.success
         }
@@ -39,13 +40,13 @@ Booking.edit = async (data) => {
     const result = await mysqlSelect('call sp_update_booking(?);', [data.bookingParams]);
     if (result.success === true) {
         var id = data.booking.id;
-        var params = data.listParams.map((e,i)=>e.map((ee,ii)=>[id,...ee]));
-        await mysqlExecute('DELETE FROM `bookingoffers` WHERE `bookingid`=?',[id]);
+        var params = data.listParams.map((e, i) => e.map((ee, ii) => [id, ...ee]));
+        await mysqlExecute('DELETE FROM `bookingoffers` WHERE `bookingid`=?', [id]);
         var result1 = await mysqlExecute('INSERT INTO `bookingoffers`' +
             '(`bookingid`,`bookingNo`,`roomType`,`nights`,`hotel`,`destinationTo`,`destinationFrom`,`destinationName`,`flightTo`,`flightFrom`,`flightDateFrom`,`flightDateTo`) values ? ;', [...params], false);
-            await mysqlExecute('delete from booking_features where booking_id = ?',[data.booking.id]);
-            let featuresParams= data.features.map(x=>[id,x]);
-            var result2 = await mysqlExecute('INSERT INTO `booking_features` (`booking_id`, `feature_id`) VALUES ?',[featuresParams],false);
+        await mysqlExecute('delete from booking_features where booking_id = ?', [data.booking.id]);
+        let featuresParams = data.features.map(x => [id, x]);
+        var result2 = await mysqlExecute('INSERT INTO `booking_features` (`booking_id`, `feature_id`) VALUES ?', [featuresParams], false);
         return {
             success: result1.success && result.success
         }
@@ -69,16 +70,16 @@ Booking.getById = async (id) => {
             // el.departure = moment(el.departure).format("MM/DD/YYYY");
             var offersResult = await mysqlSelect('call get_booking_by_id(?);', [el.id]);
             el.offers = offersResult.data;
-            //var termsResult = await mysqlSelect('select * from termsAndConditions',[],false);
-            el.terms = [];//termsResult.data;
+            var termsResult = await mysqlSelect('select * from termsandcondition', [], false);
+            el.terms = termsResult.data.map(x => x.termsAndCondition);
             // el.offers.map((e, ii) => {
             //     e.destinationFrom = moment(e.destinationFrom).format("MM/DD/YYYY");
             //     e.destinationTo = moment(e.destinationTo).format("MM/DD/YYYY");
             //     e.flightDateFrom = moment(e.flightDateFrom).format("MM/DD/YYYY");
             //     e.flightDateTo = moment(e.flightDateTo).format("MM/DD/YYYY");
             // })
-            var featureResult = await mysqlSelect('select * from features where id in (select feature_id from booking_features where booking_id = ?)',[el.id],false);
-            if(featureResult.success == true)
+            var featureResult = await mysqlSelect('select * from features where id in (select feature_id from booking_features where booking_id = ?)', [el.id], false);
+            if (featureResult.success == true)
                 el.features = featureResult.data
         }
         return {
@@ -101,10 +102,10 @@ Booking.get = async () => {
             // el.departure = moment(el.departure).format("MM/DD/YYYY");
             var offersResult = await mysqlSelect('call get_booking_by_id(?);', [el.id]);
             el.offers = offersResult.data;
-            var featureResult = await mysqlSelect('select * from features where id in (select feature_id from booking_features where booking_id = ?)',[el.id],false);
-            if(featureResult.success == true)
+            var featureResult = await mysqlSelect('select * from features where id in (select feature_id from booking_features where booking_id = ?)', [el.id], false);
+            if (featureResult.success == true)
                 el.features = featureResult.data;
-                        
+
         }
         return {
             success: true,
@@ -116,22 +117,22 @@ Booking.get = async () => {
         data: []
     }
 }
-Booking.createPdf = async (html,name="") => {
+Booking.createPdf = async (html, name = "") => {
     var pdf = require('html-pdf');
     return new Promise((resolve, reject) => {
         var options = { format: 'Letter' };
-        var fileName = new Date().getMilliseconds() + "_"+name+"_invoice.pdf";
+        var fileName = new Date().getMilliseconds() + "_" + name + "_invoice.pdf";
         pdf.create(html, options).toFile('public/' + fileName, function (err, res) {
             if (err) reject(err);
             resolve(fileName); // { filename: '/app/businesscard.pdf' }
         });
     });
 }
-Booking.createPdf2 = async (html,name="") => {
+Booking.createPdf2 = async (html, name = "") => {
     var pdf = require('html-pdf');
     return new Promise((resolve, reject) => {
         var options = { format: 'Letter' };
-        var fileName = new Date().getMilliseconds() + "_"+name+"_invoice2.pdf";
+        var fileName = new Date().getMilliseconds() + "_" + name + "_invoice2.pdf";
         pdf.create(html, options).toFile('public/' + fileName, function (err, res) {
             if (err) reject(err);
             resolve(fileName); // { filename: '/app/businesscard.pdf' }
@@ -146,17 +147,17 @@ Booking.print = async id => {
         //const stats = fs.statSync(path.join("public", d.photo));
         //d.photo = `data:image/${d.photo}`;
         let contentType = mime.getType(path.join("public", d.photo));
-        const imageBas64 = 
-        `data:image/${contentType};base64,${d.photo}`;
+        const imageBas64 =
+            `data:image/${contentType};base64,${d.photo}`;
         d.photo = imageBas64;
         const source = fs.readFileSync("pdfTemplates/invoice_v2.html").toString("utf-8");
         const template = handlerbars.compile(source);
         const html = template({ d })
-        var file = await Booking.createPdf(html,d.customerName);
+        var file = await Booking.createPdf(html, d.customerName);
         return { success: true, data: file };
     }
 }
-Booking.printWithoutPrice =async id =>{
+Booking.printWithoutPrice = async id => {
     var data = await Booking.getById(id);
     if (data.success) {
         const d = data.data[0];
@@ -164,67 +165,100 @@ Booking.printWithoutPrice =async id =>{
         //const stats = fs.statSync(path.join("public", d.photo));
         //d.photo = `data:image/${d.photo}`;
         let contentType = mime.getType(path.join("public", d.photo));
-        const imageBas64 = 
-        `data:image/${contentType};base64,${d.photo}`;
+        const imageBas64 =
+            `data:image/${contentType};base64,${d.photo}`;
         d.photo = imageBas64;
         const source = fs.readFileSync("pdfTemplates/invoice_v2_withoutprice.html").toString("utf-8");
         const template = handlerbars.compile(source);
         const html = template({ d })
-        var file = await Booking.createPdf2(html,d.customerName);
+        var file = await Booking.createPdf2(html, d.customerName);
         return { success: true, data: file };
     }
 }
-Booking.delete = async id =>{
-    return await mysqlExecute('delete from booking where id=?',[id],false);
+Booking.delete = async id => {
+    return await mysqlExecute('delete from booking where id=?', [id], false);
 }
 
-Booking.AddDestination = async (obj)=>{
-    return await mysqlExecute(`INSERT INTO destinations (display) VALUES('${obj.name}');`,[],false);
+Booking.AddDestination = async (obj, file) => {
+    var avatar = await uploadFile(file);
+    return await mysqlExecute(`INSERT INTO destinations (display,file) VALUES('${obj.name}','${avatar.fileName}');`, [], false);
 }
-Booking.AddHotel = async (obj)=>{
-    var result =  await mysqlExecute(`INSERT INTO hotel (name,location) VALUES('${obj.name}','${obj.destination}');`,[],false);
-    var idResult = await mysqlSelect('SELECT last_insert_id() as id;',[],false);
-    if(idResult.success == true){
-        if(obj.roomTypes&&obj.roomTypes.length>0){
+Booking.AddHotel = async (obj, file) => {
+    var avatar = await uploadFile(file);
+    var result = await mysqlExecute(`INSERT INTO hotel (name,location,file) VALUES('${obj.name}','${obj.destination}','${avatar.fileName}');`, [], false);
+    var idResult = await mysqlSelect('SELECT last_insert_id() as id;', [], false);
+    if (idResult.success == true) {
+        if (obj.roomTypes && obj.roomTypes.length > 0) {
             let id = idResult.data[0].id;
-        let roomTypesParams = obj.roomTypes.map(x=>[id,x]);
-        let q = 'INSERT INTO `booking_rooms_types`(`bookingId`,`roomTypeId`) VALUES ?';
-        let finalResullt = await mysqlExecute(q,[roomTypesParams],false);
-        return finalResullt;
+            let roomTypesParams = obj.roomTypes.map(x => [id, x]);
+            let q = 'INSERT INTO `booking_rooms_types`(`bookingId`,`roomTypeId`) VALUES ?';
+            let finalResullt = await mysqlExecute(q, [roomTypesParams], false);
+            return finalResullt;
         }
         return result;
     }
-    return {success:false,data:null};
+    return { success: false, data: null };
 }
-Booking.AddRoomType = async (obj)=>{
-    return await mysqlExecute(`INSERT INTO roomtypes (display) VALUES('${obj.name}');`,[],false);
+Booking.AddRoomType = async (obj, file) => {
+    var avatar = await uploadFile(file);
+    return await mysqlExecute(`INSERT INTO roomtypes (display,file,description) VALUES('${obj.name}','${avatar.fileName}','${obj.description}');`, [], false);
 }
-Booking.GetDestination = async ()=>{
-    return await mysqlSelect('SELECT * FROM `destinations`;',[],false);
+Booking.GetDestination = async () => {
+    return await mysqlSelect('SELECT * FROM `destinations`;', [], false);
 }
-Booking.GetHotels = async (id)=>{
-    var result =  await mysqlSelect('SELECT * FROM `hotel`;',[],false);
-    if(result.success){
+Booking.GetHotels = async (id) => {
+    var result = await mysqlSelect('SELECT * FROM `hotel`;', [], false);
+    if (result.success) {
         let data = result.data;
-        let ids = data.map(x=>x.id);
+        let ids = data.map(x => x.id);
         for (let i = 0; i < ids.length; i++) {
             const id = ids[i];
-            const roomTypeResult = await mysqlSelect('SELECT * FROM `roomtypes` where id in (SELECT roomTypeId FROM booking_rooms_types where bookingId = ?);',[id],false);
+            const roomTypeResult = await mysqlSelect('SELECT * FROM `roomtypes` where id in (SELECT roomTypeId FROM booking_rooms_types where bookingId = ?);', [id], false);
             //const roomTypeResult = await Misc.getRoomTypes(id);
-            if(roomTypeResult.success == true)
+            if (roomTypeResult.success == true)
                 data[i].roomTypes = roomTypeResult.data;
-            
+
         }
     }
     return result;
 }
-Booking.GetRoomTypes = async (id)=>{
-    return await mysqlSelect('SELECT * FROM `roomtypes` ;',[id],false);
+Booking.GetRoomTypes = async (id) => {
+    return await mysqlSelect('SELECT * FROM `roomtypes` ;', [id], false);
 }
 
 
-Booking.updateBokkingStatus = async (id,status)=>{
-    return await mysqlExecute('UPDATE `booking` set `status` = ? where id = ?',[status,id],false);
+Booking.updateBokkingStatus = async (id, status) => {
+    return await mysqlExecute('UPDATE `booking` set `status` = ? where id = ?', [status, id], false);
+}
+
+Booking.printVoucher = async id => {
+    const source = fs.readFileSync("pdfTemplates/voucher.html").toString("utf-8");
+    const template = handlerbars.compile(source);
+    var data = await Booking.getById(id);
+    if (data.success) {
+        const d = data.data[0];
+
+        data = {
+            destination: d.offers[0].destinationName,
+            customerName: d.customerName,
+            confirmationNumber: d.orderNo,
+            arrival: d.arrival,
+            departure: d.departure,
+            roomType: d.offers[0].roomType,
+            roomDescription: d.offers[0].roomType,
+            numberOfRooms: d.offers.length,
+            passengers: d.passengers,
+            guestType: d.guestType,
+            orderNo: d.orderNo
+        }
+        const html = template({ d: data });
+        var file = await Booking.createPdf(html, data.customerName);
+        return file;
+    }
+    return {
+        success:false
+
+    }
 }
 
 module.exports = { Booking };

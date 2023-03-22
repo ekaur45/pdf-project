@@ -4,10 +4,20 @@
             <div class="col-md-12">
                 <h4 class="mb-3"><span *ngIf="isEdit">Update</span> <span *ngIf="!isEdit">Add</span> room type</h4>
             </div>
-            <div class="col-md-12 mb-3">
+           <div class="row">
+            <div class="col-md-6 mb-3">
                 <label>Room type</label>
                 <input type="text" class="form-control" [(ngModel)]="name">
             </div>
+            <div class="col-md-6 mb-3">
+                <label>Photo</label>
+                <input type="file" class="form-control" (change)="onFileChange($event)">
+            </div>
+            <div class="col-md-12 mb-3">
+                <label>Room type</label>
+                <textarea class="form-control" [(ngModel)]="description"></textarea>
+            </div>
+           </div>
             <div class="col-md-12 d-flex">
                 <button class="btn btn-primary" (click)="add()"><span *ngIf="isEdit">Update</span> <span *ngIf="!isEdit">Add</span></button>
                 <button *ngIf="isEdit" class="btn btn-info ms-3" (click)="cancel()">Cancel</button>
@@ -29,6 +39,9 @@
                                 No
                             </th>
                             <th>
+                                Image
+                            </th>
+                            <th>
                                 Hotel
                             </th>
                             <th class="text-center">
@@ -41,6 +54,9 @@
                         <tr *ngFor="let r of data;let ndx = index;">
                             <td>
                                 {{ ndx+1 }}
+                            </td>
+                            <td>
+                                <img [src]="url+r.file" alt="" class="w_65x65">
                             </td>
                             <td>
                                 {{ r.display }}

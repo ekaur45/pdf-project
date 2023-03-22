@@ -12,8 +12,9 @@ const bookingController = {};
 bookingController.addBooking= async (req,res,next)=>{
     var booking = new AddBookingModel(req.body);
     await Booking.add(booking);
-    res.Ok(booking);
+    res.Ok(booking, "Booking added successfuly.");
 }
+
 /**
  * 
  * @param {import("express").Request} req 
@@ -25,7 +26,6 @@ bookingController.editBooking= async (req,res,next)=>{
     await Booking.edit(booking);
     res.Ok(booking,"Booking updated successfuly.");
 }
-
 
 /**
  * 
@@ -48,6 +48,7 @@ bookingController.getById= async (req,res,next)=>{
     var result = await Booking.getById(req.query.id);
     result.success?res.Ok(result.data[0]):res.BadRequest({},"Something went wrong.");
 }
+
 /**
  * 
  * @param {import("express").Request} req 
@@ -59,7 +60,6 @@ bookingController.get= async (req,res,next)=>{
     result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong.");
 }
 
-
 /**
  * 
  * @param {import("express").Request} req 
@@ -70,6 +70,7 @@ bookingController.print= async (req,res,next)=>{
     var result = await Booking.print(req.query.id);
     result.success?res.Ok(`${result.data}`):res.BadRequest({},"Something went wrong.");
 }
+
 /**
  * 
  * @param {import("express").Request} req 
@@ -81,7 +82,6 @@ bookingController.printWithoutPrice= async (req,res,next)=>{
     result.success?res.Ok(`${result.data}`):res.BadRequest({},"Something went wrong.");
 }
 
-
 /**
  * 
  * @param {import("express").Request} req 
@@ -89,7 +89,7 @@ bookingController.printWithoutPrice= async (req,res,next)=>{
  * @param {import("express").NextFunction} next 
  */
 bookingController.AddHotel= async (req,res,next)=>{
-    var result = await Booking.AddHotel(req.body);
+    var result = await Booking.AddHotel(req.body,req.files[0]);
     result.success?res.Ok({},"Hotel added."):res.BadRequest({},"Error adding hotel.");
 }
 
@@ -104,7 +104,6 @@ bookingController.GetHotel= async (req,res,next)=>{
     result.success?res.Ok(result.data):res.BadRequest({});
 }
 
-
 /**
  * 
  * @param {import("express").Request} req 
@@ -112,7 +111,8 @@ bookingController.GetHotel= async (req,res,next)=>{
  * @param {import("express").NextFunction} next 
  */
 bookingController.AddDestination= async (req,res,next)=>{
-    var result = await Booking.AddDestination(req.body);
+    
+    var result = await Booking.AddDestination(req.body,req.files[0]);
     result.success?res.Ok({},"Destination added."):res.BadRequest({},"Error adding destination.");
 }
 
@@ -127,8 +127,6 @@ bookingController.GetDestinations= async (req,res,next)=>{
     result.success?res.Ok(result.data):res.BadRequest({});
 }
 
-
-
 /**
  * 
  * @param {import("express").Request} req 
@@ -136,7 +134,7 @@ bookingController.GetDestinations= async (req,res,next)=>{
  * @param {import("express").NextFunction} next 
  */
 bookingController.AddRoomType= async (req,res,next)=>{
-    var result = await Booking.AddRoomType(req.body);
+    var result = await Booking.AddRoomType(req.body,req.files[0]);
     result.success?res.Ok({},"Room type added."):res.BadRequest({},"Error adding room type.");
 }
 
@@ -151,7 +149,6 @@ bookingController.GetRoomTypes= async (req,res,next)=>{
     result.success?res.Ok(result.data):res.BadRequest({});
 }
 
-
 /**
  * 
  * @param {import("express").Request} req 
@@ -164,5 +161,19 @@ bookingController.updateBokkingStatus= async (req,res,next)=>{
 }
 
 
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+bookingController.printVoucher= async (req,res,next)=>{
+    try {
+        const result = await Booking.printVoucher(req.query?.id);
+    res.Ok(result);
+    } catch (error) {
+        res.BadRequest({},"Something went wrong");
+    }
+}
 
 module.exports = bookingController;

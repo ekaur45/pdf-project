@@ -31,6 +31,7 @@ export interface Booking {
     customerName: string;
     isDeleted: boolean;
     staffName: string;
+    guestType: string;
     price:number;
     discount:number;
     extraCharges:number;

@@ -10,6 +10,8 @@ export class EditBooking{
     departure:string="";;
     arrival:string="";;
     customerName:string="";
+    guestType:string="";
+    currency:string = "usd";    
     price:number=0;
     discount:number=0;
     extraCharges:number=0;

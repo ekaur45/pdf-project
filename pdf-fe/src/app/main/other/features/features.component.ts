@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/utils/api.service';
+import Swal from 'sweetalert2';
 declare const $:any;
 @Component({
   selector: 'app-features',
@@ -7,6 +8,18 @@ declare const $:any;
   styleUrls: ['./features.component.css']
 })
 export class FeaturesComponent implements OnInit {
+  Toast = Swal.mixin({
+    customClass:"z1050",
+    toast: true,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,    
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }    
+  })
   name:string = "";
   data:any;
   isEdit:boolean = false;
@@ -21,9 +34,17 @@ export class FeaturesComponent implements OnInit {
     this.get();
   }
   add(){
+    if(!this.name){
+      this.Toast.fire({
+        icon:"error",
+        text:"All fields are required."
+      })
+      return 
+    }
     if(this.isEdit) return this.update();
     this.api.post('util/feature',{display:this.name}).subscribe(x=>{
       this.name ="";
+      Swal.fire('Success',x.message);
       if(x.status == 200) this.get();
     })
   }
@@ -31,6 +52,7 @@ export class FeaturesComponent implements OnInit {
     this.api.post('util/edit-feature',{id:this.editData.id,display:this.name}).subscribe(x=>{
       this.name ="";
       this.cancel();
+      Swal.fire('Success',x.message);
       if(x.status == 200) this.get();
     })
   }
@@ -41,6 +63,7 @@ export class FeaturesComponent implements OnInit {
   }
   onDeleteConfirm(id:number){
     this.api.get('util/delete-feature?id='+id).subscribe(x=>{
+      Swal.fire('Success',x.message);
       if(x.status == 200) this.get();
     })
 

@@ -75,17 +75,17 @@
                             </td>
                             <td>
                                 <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
-                                    <li *ngIf="!r.status">
+                                    <li *ngIf="!r.status &&user?.userType!=3">
                                         <a  style="cursor: pointer;" class="check" (click)="onStatusChange(r.id,'Rejected')">
                                             <i class="uil uil-times"></i>
                                         </a>
                                     </li>
-                                    <li *ngIf="r.status">
+                                    <li *ngIf="r.status && user?.userType!=3">
                                         <span class="badge {{r.status =='Accepted'?'bg-success':'bg-danger'}}" style="border-radius: 5px;">
                                             {{r.status}}
                                         </span>
                                     </li>
-                                    <li *ngIf="!r.status">
+                                    <li *ngIf="!r.status &&user?.userType!=3">
                                         <a  style="cursor: pointer;" class="check" (click)="onStatusChange(r.id,'Accepted')">
                                             <i class="uil uil-check"></i>
                                         </a>
@@ -108,7 +108,13 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="remove" style="cursor: pointer;" (click)="onBookingDelete(r)">
+                                        <a class="edit" style="cursor: pointer;" (click)="onPrintClick3(r.id)"
+                                        id="{{ 'loadericon3'+r.id }}">
+                                            <i class="uil uil-receipt-alt"></i>
+                                        </a>
+                                    </li>
+                                    <li *ngIf="user?.userType!=3">
+                                        <a class="remove" style="cursor: pointer;" (click)="onBookingDelete(r)" >
                                             <i class="uil uil-trash-alt"></i>
                                         </a>
                                     </li>
