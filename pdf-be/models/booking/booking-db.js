@@ -18,19 +18,9 @@ const config = {
             OPENSSL_CONF:"/dev/null"
         }
         },
-    // Export options
-    "directory": "/tmp",       // The directory the file gets written into if not using .toFile(filename, callback). default: '/tmp'  
     
     "format": "Letter",        // allowed units: A3, A4, A5, Legal, Letter, Tabloid
-    "orientation": "portrait", // portrait or landscape
-    border:0,
-  
-    paginationOffset: 1,       // Override the initial pagination number
-    // File options
-    "type": "pdf",           // allowed file types: png, jpeg, pdf
-    "quality": "75",         // only used for types png & jpeg
-  
-    scale:1
+    
   
   }
 
