@@ -30,7 +30,7 @@ const config = {
     "type": "pdf",           // allowed file types: png, jpeg, pdf
     "quality": "75",         // only used for types png & jpeg
   
-
+    scale:1
   
   }
 
