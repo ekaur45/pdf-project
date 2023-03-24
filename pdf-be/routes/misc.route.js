@@ -18,6 +18,18 @@ router.post('/edit-feature',controller.editFeature);
 router.get('/delete-feature',controller.deleteFeature);
 router.get('/feature',controller.getFeature);
 
+
+
+router.post('/toc',controller.addToc);
+router.post('/edit-toc',controller.editToc);
+router.get('/delete-toc',controller.deleteToc);
+router.get('/toc',controller.getToc);
+
+
+
 router.get('/agents',controller.getAgents);
 router.get('/staffs',controller.getStaff);
+
+
+router.get('/dashboard-data',CheckAuth("admin"),controller.getDashboardData)
 module.exports = router;

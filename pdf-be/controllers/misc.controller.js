@@ -151,6 +151,77 @@ miscController.getFeature =async (req,res,next)=>{
 
 
 
+
+
+
+
+
+
+
+
+
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+miscController.addToc =async (req,res,next)=>{
+    var result = await Misc.addToc(req.body);
+    result.success?res.Ok(result.data,"Feature added successfuly."):res.BadRequest({},"Something went wrong");
+}
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+miscController.editToc =async (req,res,next)=>{
+    var result = await Misc.editToc(req.body);
+    result.success?res.Ok(result.data,"Feature updated successfuly."):res.BadRequest({},"Something went wrong");
+}
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+miscController.deleteToc =async (req,res,next)=>{
+    var result = await Misc.deleteToc(req.query.id);
+    result.success?res.Ok(result.data,"Feature deleted successfuly."):res.BadRequest({},"Something went wrong");
+}
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+miscController.getToc =async (req,res,next)=>{
+    var result = await Misc.getToc();
+    result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong");
+}
+
+
+
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+miscController.getDashboardData =async (req,res,next)=>{
+    var result = await Misc.getDashboardData();
+    result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong");
+}
+
+
+
+
+
+
+
+
+
 miscController.getAgents = async (req,res,next)=>{
     var result = await Misc.getAgents();
     result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong");

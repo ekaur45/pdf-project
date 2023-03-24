@@ -363,28 +363,38 @@
                                 <td>{{d.currency}} {{d.totalPrice}}</td>
                                 <td align="right">Price</td>
                             </tr>
-                            <tr>
-                                <th>&nbsp;</th>
-                                <th>
-                                    <div class="blue-pill">
-                                        Terms and Notes
-                                    </div>
-                                </th>
-                            </tr>
-                            <tr>
-                                <td colspan="2" align="right">
-                                    <div class="text-block">
-                                        {{#each d.terms }}
-                                        <div class="bullet">{{this}}</div>
-                                        {{/each }}
-                                    </div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </td>
             </tr>
-
+            <tr>
+                <td colspan="2">
+                    <P style="page-break-after: always"> 
+                </td>
+            </tr>
+            <tr>
+                <tr>
+                    <th style="padding: 5px;">
+                        
+                    </th>
+                </tr>
+                <tr style="padding-top: 40px;">
+                    <th colspan="2" style="margin-top: 25px;">
+                        <div class="blue-pill">
+                            Terms and Notes
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <td colspan="2" align="left">
+                        <ul>
+                            {{#each d.terms }}
+                            <li>{{this}}</li>
+                            {{/each }}
+                        </ul>
+                    </td>
+                </tr>
+            </tr>
         </tbody>
     </table>
 </body>
