@@ -120,7 +120,11 @@ Booking.get = async () => {
 Booking.createPdf = async (html, name = "") => {
     var pdf = require('html-pdf');
     return new Promise((resolve, reject) => {
-        var options = { format: 'Letter' };
+        let options = { format: 'A4',childProcessOptions:{
+            env:{
+                OPENSSL_CONF:"/dev/null"
+            }
+            } };
         var fileName = new Date().getMilliseconds() + "_" + name + "_invoice.pdf";
         pdf.create(html, options).toFile('public/' + fileName, function (err, res) {
             if (err) reject(err);
@@ -131,7 +135,11 @@ Booking.createPdf = async (html, name = "") => {
 Booking.createPdf2 = async (html, name = "") => {
     var pdf = require('html-pdf');
     return new Promise((resolve, reject) => {
-        var options = { format: 'Letter' };
+        let options = { format: 'A4',childProcessOptions:{
+            env:{
+                OPENSSL_CONF:"/dev/null"
+            }
+            } };
         var fileName = new Date().getMilliseconds() + "_" + name + "_invoice2.pdf";
         pdf.create(html, options).toFile('public/' + fileName, function (err, res) {
             if (err) reject(err);
