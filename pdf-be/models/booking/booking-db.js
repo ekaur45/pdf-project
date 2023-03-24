@@ -120,7 +120,7 @@ Booking.get = async () => {
 Booking.createPdf = async (html, name = "") => {
     var pdf = require('html-pdf');
     return new Promise((resolve, reject) => {
-        let options = { format: 'A4',childProcessOptions:{
+        let options = { format: 'Letter',childProcessOptions:{
             env:{
                 OPENSSL_CONF:"/dev/null"
             }
@@ -135,7 +135,7 @@ Booking.createPdf = async (html, name = "") => {
 Booking.createPdf2 = async (html, name = "") => {
     var pdf = require('html-pdf');
     return new Promise((resolve, reject) => {
-        let options = { format: 'A4',childProcessOptions:{
+        let options = { format: 'Letter',childProcessOptions:{
             env:{
                 OPENSSL_CONF:"/dev/null"
             }
