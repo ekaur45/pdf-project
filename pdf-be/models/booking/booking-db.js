@@ -237,7 +237,12 @@ Booking.printVoucher = async id => {
     var data = await Booking.getById(id);
     if (data.success) {
         const d = data.data[0];
-
+        d.photo = fs.readFileSync(path.join("public", d.photo)).toString("base64");
+        //const stats = fs.statSync(path.join("public", d.photo));
+        //d.photo = `data:image/${d.photo}`;
+        let contentType = mime.getType(path.join("public", d.photo));
+        const imageBas64 =
+            `data:image/${contentType};base64,${d.photo}`;
         data = {
             destination: d.offers[0].destinationName,
             customerName: d.customerName,
@@ -250,7 +255,7 @@ Booking.printVoucher = async id => {
             passengers: d.passengers,
             guestType: d.guestType,
             orderNo: d.orderNo,
-            photo: fs.readFileSync(path.join("public", d.photo)).toString("base64"),
+            photo: imageBas64,
             date:d.date,
             status:d.status
         }
