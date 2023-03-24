@@ -1,0 +1,229 @@
+<div class="row ">
+    <div class="col-lg-12">
+        <div class="breadcrumb-main">
+            <h4 class="text-capitalize breadcrumb-title">Dashboard</h4>
+            <div class="breadcrumb-action justify-content-center flex-wrap">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/"><i class="uil uil-estate"></i>Dashboard</a></li>
+                        <!-- <li class="breadcrumb-item active" aria-current="page">Demo 7</li> -->
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-3 col-sm-6  col-ssm-12 mb-25">
+
+        <div class="ap-po-details ap-po-details--2 p-25 radius-xl d-flex justify-content-between">
+            <div class="overview-content w-100">
+                <div class=" ap-po-details-content d-flex flex-wrap justify-content-between">
+                    <div class="ap-po-details__titlebar">
+                        <h1>{{ data?.main?.totalStaff }}</h1>
+                        <p>Total staff</p>
+                    </div>
+                    <div class="ap-po-details__icon-area">
+                        <div class="svg-icon order-bg-opacity-primary color-primary">
+                            <i class="uil uil-arrow-growth"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-xxl-3 col-sm-6  col-ssm-12 mb-25">
+
+        <div class="ap-po-details ap-po-details--2 p-25 radius-xl d-flex justify-content-between">
+            <div class="overview-content w-100">
+                <div class=" ap-po-details-content d-flex flex-wrap justify-content-between">
+                    <div class="ap-po-details__titlebar">
+                        <h1>{{ data?.main?.totalAgents }}</h1>
+                        <p>Total Agents</p>
+                    </div>
+                    <div class="ap-po-details__icon-area">
+                        <div class="svg-icon order-bg-opacity-secondary color-secondary">
+                            <i class="uil uil-users-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-xxl-3 col-sm-6  col-ssm-12 mb-25">
+
+        <div class="ap-po-details ap-po-details--2 p-25 radius-xl d-flex justify-content-between">
+            <div class="overview-content w-100">
+                <div class=" ap-po-details-content d-flex flex-wrap justify-content-between">
+                    <div class="ap-po-details__titlebar">
+                        <h1>${{ data?.main?.totalPrice }}</h1>
+                        <p>Pending bookings</p>
+                    </div>
+                    <div class="ap-po-details__icon-area">
+                        <div class="svg-icon order-bg-opacity-success color-success">
+                            <i class="uil uil-usd-circle"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-xxl-3 col-sm-6  col-ssm-12 mb-25">
+
+        <div class="ap-po-details ap-po-details--2 p-25 radius-xl d-flex justify-content-between">
+            <div class="overview-content w-100">
+                <div class=" ap-po-details-content d-flex flex-wrap justify-content-between">
+                    <div class="ap-po-details__titlebar">
+                        <h1>{{ data?.main?.newUsers }}</h1>
+                        <p>New Customers</p>
+                    </div>
+                    <div class="ap-po-details__icon-area">
+                        <div class="svg-icon order-bg-opacity-infos color-infos">
+                            <i class="uil uil-tachometer-fast"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-xxl-6 mb-25">
+        <div class="card border-0 px-25 h-100">
+            <div class="card-header px-0 border-0">
+                <h6>Users</h6>
+                <div class="card-extra">
+                    <ul class="card-tab-links nav-tabs nav">
+                        <li>
+                            <a class="active" routerLink="/user/list">View All</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- <div class="card-extra">
+                    <ul class="card-tab-links nav-tabs nav" role="tablist">
+                        <li>
+                            <a class="active" href="#t_selling-today-Source22" data-bs-toggle="tab"
+                                id="t_selling-today-Source22-tab" role="tab" aria-selected="true">Today</a>
+                        </li>
+                        <li>
+                            <a href="#t_selling-week-Source22" data-bs-toggle="tab" id="t_selling-week-Source22-tab"
+                                role="tab" aria-selected="true">Week</a>
+                        </li>
+                        <li>
+                            <a href="#t_selling-month-Source33" data-bs-toggle="tab" id="t_selling-month-Source33-tab"
+                                role="tab" aria-selected="true">Month</a>
+                        </li>
+                    </ul>
+                </div> -->
+            </div>
+            <div class="card-body p-0">
+                <div class="tab-content">
+                    <div class="tab-pane fade active show" id="t_selling-today-Source22" role="tabpanel"
+                        aria-labelledby="t_selling-today-Source22-tab">
+                        <div class="selling-table-wrap selling-table-wrap--source">
+                            <div class="table-responsive">
+                                <table class="table table--default table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Email</th>
+                                            <th>User type</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="data">
+                                        <tr *ngFor="let u of data.users">
+                                            <td>
+                                                <div class="selling-product-img d-flex align-items-center">
+                                                    <div class="selling-product-img-wrapper order-bg-opacity-primary">
+                                                        <img class="img-fluid" [src]="url+u.photo" alt="img">
+                                                    </div>
+                                                    <span>{{ u.firstName }} {{ u.lastName }}</span>
+                                                </div>
+                                            </td>
+                                            <td>{{ u.email }}</td>
+                                            <td>{{ u.userTypeText }}</td>
+                                            
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-6 mb-25">
+        <div class="card border-0 px-25">
+            <div class="card-header px-0 border-0">
+                <h6>Booking</h6>
+                <div class="card-extra">
+                    <ul class="card-tab-links nav-tabs nav">
+                        <li>
+                            <a class="active" routerLink="/booking/list">View All</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- <div class="card-extra">
+                    <ul class="card-tab-links nav-tabs nav" role="tablist">
+                        <li>
+                            <a class="active" href="#t_selling-today222" data-bs-toggle="tab"
+                                id="t_selling-today222-tab" role="tab" aria-selected="true">Today</a>
+                        </li>
+                        <li>
+                            <a href="#t_selling-week222" data-bs-toggle="tab" id="t_selling-week222-tab" role="tab"
+                                aria-selected="true">Week</a>
+                        </li>
+                        <li>
+                            <a href="#t_selling-month333" data-bs-toggle="tab" id="t_selling-month333-tab" role="tab"
+                                aria-selected="true">Month</a>
+                        </li>
+                    </ul>
+                </div> -->
+            </div>
+            <div class="card-body p-0">
+                <div class="tab-content">
+                    <div class="tab-pane fade active show" id="t_selling-today222" role="tabpanel"
+                        aria-labelledby="t_selling-today222-tab">
+                        <div class="selling-table-wrap selling-table-wrap--source">
+                            <div class="table-responsive">
+                                <table class="table table--default table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <th>Agent</th>
+                                            <th>Staff</th>
+                                            <th>Customer</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="data">
+                                        <tr *ngFor="let b of data.bookings">
+                                            <td>
+                                                <div class="selling-product-img d-flex align-items-center">
+                                                    <div
+                                                        class="selling-product-img-wrapper order-bg-opacity-primary align-items-end">
+                                                        <img class=" img-fluid" [src]="url+b.agentPhoto" alt="img">
+                                                    </div>
+                                                    <span>{{ b.agentFullName }}</span>
+                                                </div>
+                                            </td>
+                                            <td>{{ b.staffFulName }}</td>
+                                            <td>{{ b.customerName }}</td>
+                                            <td>
+                                                {{ b.date }}
+                                            </td>
+                                            <td>{{ b.status }}</td>
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
