@@ -38,7 +38,7 @@ export class RoomTypeListComponent implements OnInit {
     this.get();
   }
   add(){
-    if(!(this.name&&this.description&&this.file)){
+    if(!(this.name&&this.description)){
       this.Toast.fire({
         icon:"error",
         text:"All fields are required."
@@ -46,6 +46,13 @@ export class RoomTypeListComponent implements OnInit {
       return;
     }
     if(this.isEdit) return this.update();
+    if(!(this.file)){
+      this.Toast.fire({
+        icon:"error",
+        text:"File is required."
+      })
+      return;
+    }
     var form = new FormData();
     form.append("name",this.name);
     form.append("file",this.file);

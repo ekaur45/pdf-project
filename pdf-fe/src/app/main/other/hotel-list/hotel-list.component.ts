@@ -57,7 +57,7 @@ export class HotelListComponent implements OnInit {
     })
   }
   add() {
-    if(!(this.name&&this.destination&&this.file)){
+    if(!(this.name&&this.destination)){
       this.Toast.fire({
         icon:"error",
         text:"All fields are required."
@@ -65,6 +65,13 @@ export class HotelListComponent implements OnInit {
       return;
     }
     if (this.isEdit) return this.update();
+    if(!(this.file)){
+      this.Toast.fire({
+        icon:"error",
+        text:"File is required."
+      })
+      return;
+    }
     var form = new FormData();
     form.append("name", this.name);
     form.append("destination", this.destination + "");
