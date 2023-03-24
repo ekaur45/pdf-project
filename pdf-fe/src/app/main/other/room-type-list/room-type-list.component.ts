@@ -89,6 +89,7 @@ export class RoomTypeListComponent implements OnInit {
   onEdit(r:any){
     this.editData = r;
     this.name = r.display;
+    this.description = r.description;
     this.isEdit = true;
   }
   cancel(){
