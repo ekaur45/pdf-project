@@ -168,7 +168,7 @@ miscController.getFeature =async (req,res,next)=>{
  */
 miscController.addToc =async (req,res,next)=>{
     var result = await Misc.addToc(req.body);
-    result.success?res.Ok(result.data,"Feature added successfuly."):res.BadRequest({},"Something went wrong");
+    result.success?res.Ok(result.data,"Terms and remarks added successfuly."):res.BadRequest({},"Something went wrong");
 }
 /**
  * 
@@ -178,7 +178,7 @@ miscController.addToc =async (req,res,next)=>{
  */
 miscController.editToc =async (req,res,next)=>{
     var result = await Misc.editToc(req.body);
-    result.success?res.Ok(result.data,"Feature updated successfuly."):res.BadRequest({},"Something went wrong");
+    result.success?res.Ok(result.data,"Terms and remarks updated successfuly."):res.BadRequest({},"Something went wrong");
 }
 /**
  * 
@@ -188,7 +188,7 @@ miscController.editToc =async (req,res,next)=>{
  */
 miscController.deleteToc =async (req,res,next)=>{
     var result = await Misc.deleteToc(req.query.id);
-    result.success?res.Ok(result.data,"Feature deleted successfuly."):res.BadRequest({},"Something went wrong");
+    result.success?res.Ok(result.data,"Terms and remarks deleted successfuly."):res.BadRequest({},"Something went wrong");
 }
 /**
  * 
