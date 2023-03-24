@@ -9,6 +9,35 @@ const { UpdateBookingModel } = require("./update-booking.model");
 const Misc = require("../misc/misc-db.model");
 const { uploadFile } = require("../../utils/file.util");
 const Booking = {};
+
+
+
+const config = {
+    childProcessOptions:{
+        env:{
+            OPENSSL_CONF:"/dev/null"
+        }
+        },
+    // Export options
+    "directory": "/tmp",       // The directory the file gets written into if not using .toFile(filename, callback). default: '/tmp'  
+    
+    "format": "Letter",        // allowed units: A3, A4, A5, Legal, Letter, Tabloid
+    "orientation": "portrait", // portrait or landscape
+    border:0,
+  
+    paginationOffset: 1,       // Override the initial pagination number
+    // File options
+    "type": "pdf",           // allowed file types: png, jpeg, pdf
+    "quality": "75",         // only used for types png & jpeg
+  
+
+  
+  }
+
+
+
+
+
 /**
  * 
  * @param {AddBookingModel} data    
@@ -120,11 +149,7 @@ Booking.get = async () => {
 Booking.createPdf = async (html, name = "") => {
     var pdf = require('html-pdf');
     return new Promise((resolve, reject) => {
-        let options = { format: 'Letter',childProcessOptions:{
-            env:{
-                OPENSSL_CONF:"/dev/null"
-            }
-            } };
+        let options = config;
         var fileName = new Date().getMilliseconds() + "_" + name + "_invoice.pdf";
         pdf.create(html, options).toFile('public/' + fileName, function (err, res) {
             if (err) reject(err);
@@ -135,11 +160,7 @@ Booking.createPdf = async (html, name = "") => {
 Booking.createPdf2 = async (html, name = "") => {
     var pdf = require('html-pdf');
     return new Promise((resolve, reject) => {
-        let options = { format: 'Letter',childProcessOptions:{
-            env:{
-                OPENSSL_CONF:"/dev/null"
-            }
-            } };
+        let options = config;
         var fileName = new Date().getMilliseconds() + "_" + name + "_invoice2.pdf";
         pdf.create(html, options).toFile('public/' + fileName, function (err, res) {
             if (err) reject(err);
