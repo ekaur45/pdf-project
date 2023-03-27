@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-          html
-        {
+        html {
             zoom: 0.7;
         }
+
         body {
             margin: 0;
         }
@@ -253,31 +253,26 @@
                     <table id="table-booking">
                         <tbody>
                             <tr>
-                                <td>{{d.passengers}}</td>
                                 <td>
                                     <span class="blue-pill">
                                         Passengers
                                     </span>
                                 </td>
-                                <td>{{d.nights}}</td>
                                 <td>
                                     <span class="blue-pill">
                                         Nights
                                     </span>
                                 </td>
-                                <td>{{d.departure}}</td>
                                 <td>
                                     <span class="blue-pill">
                                         Departure
                                     </span>
                                 </td>
-                                <td>{{d.arrival}}</td>
                                 <td>
                                     <span class="blue-pill">
                                         Arrival
                                     </span>
                                 </td>
-                                <td>{{d.customerName}}</td>
                                 <td>
                                     <span class="blue-pill">
                                         Customer Name
@@ -286,6 +281,11 @@
                             </tr>
                             <tr>
 
+                                <td>{{d.passengers}}</td>
+                                <td>{{d.nights}}</td>
+                                <td>{{d.departure}}</td>
+                                <td>{{d.arrival}}</td>
+                                <td>{{d.customerName}}</td>
 
 
                             </tr>
@@ -373,31 +373,31 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <P style="page-break-after: always"> 
+                    <P style="page-break-after: always">
                 </td>
             </tr>
             <tr>
-                <tr>
-                    <th style="padding: 5px;">
-                        
-                    </th>
-                </tr>
-                <tr style="padding-top: 40px;">
-                    <th colspan="2" style="margin-top: 25px;">
-                        <div class="blue-pill">
-                            Terms and Notes
-                        </div>
-                    </th>
-                </tr>
-                <tr>
-                    <td colspan="2" align="left">
-                        <ul>
-                            {{#each d.terms }}
-                            <li>{{this.termsAndCondition}}</li>
-                            {{/each }}
-                        </ul>
-                    </td>
-                </tr>
+            <tr>
+                <th style="padding: 5px;">
+
+                </th>
+            </tr>
+            <tr style="padding-top: 40px;">
+                <th colspan="2" style="margin-top: 25px;">
+                    <div class="blue-pill">
+                        Terms and Notes
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <td colspan="2" align="left">
+                    <ul>
+                        {{#each d.terms }}
+                        <li>{{this.termsAndCondition}}</li>
+                        {{/each }}
+                    </ul>
+                </td>
+            </tr>
             </tr>
         </tbody>
     </table>
