@@ -90,6 +90,13 @@
 
                         </template>
                     </tbody>
+                    <tbody *ngIf="isLoadingList">
+                        <tr>
+                            <td colspan="8" class="text-center">
+                                <img src="assets/img/pulse_loader.svg" alt="" style="height: 50px;">
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
 
@@ -165,7 +172,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-sm" (click)="saveEditUser()">Save changes</button>
+                <button type="button" class="btn btn-primary btn-sm" *ngIf="!editing" (click)="saveEditUser()">Save changes</button>
+                <button type="button" class="btn btn-primary btn-sm" *ngIf="editing">Saving changes...</button>
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>

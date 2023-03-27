@@ -28,6 +28,8 @@ export class DestinationListComponent implements OnInit {
   editData:any ={};
   deleteobj:any ={};
   file:any;
+  isLoadingList:boolean =false;
+  isAdding :boolean = false;
   constructor(private api:ApiService) { 
 
     this.data = [];
@@ -37,11 +39,13 @@ export class DestinationListComponent implements OnInit {
     this.get();
   }
   add(){
+    this.isAdding = true;
     if(!(this.name)){
       this.Toast.fire({
         icon:"error",
         text:"All fields are required."
       })
+      this.isAdding = false;
       return;
     }
     if(this.isEdit) return this.update();
@@ -50,12 +54,14 @@ export class DestinationListComponent implements OnInit {
         icon:"error",
         text:"File is required."
       })
+      this.isAdding = false;
       return;
     }
     var form = new FormData();
     form.append("name",this.name);
     form.append("file",this.file);
     this.api.multiForm('booking/destination',form).subscribe(x=>{
+      this.isAdding = false;
       this.name ="";
       this.file = null;
       if(x.status == 200) this.get();
@@ -63,6 +69,7 @@ export class DestinationListComponent implements OnInit {
   }
   update(){
     this.api.post('util/update-destination',{id:this.editData.id,name:this.name}).subscribe(x=>{
+      this.isAdding = false;
       this.name ="";
       this.cancel();
       Swal.fire('Success',x.message);
@@ -70,7 +77,9 @@ export class DestinationListComponent implements OnInit {
     })
   }
   get(){
+    this.isLoadingList = true;
     this.api.get('booking/destination').subscribe(x=>{
+      this.isLoadingList = false;
       if(x.status == 200) this.data = x.data;
     })
   }

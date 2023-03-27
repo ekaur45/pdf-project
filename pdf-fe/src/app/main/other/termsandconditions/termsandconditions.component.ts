@@ -25,6 +25,8 @@ export class TermsandconditionsComponent implements OnInit {
   isEdit:boolean = false;
   editData:any ={};
   deleteobj:any ={};
+  isLoadingList:boolean = false;
+  isAdding:boolean = false;
   constructor(private api:ApiService) { 
 
     this.data = [];
@@ -34,6 +36,7 @@ export class TermsandconditionsComponent implements OnInit {
     this.get();
   }
   add(){
+    
     if(!this.name){
       this.Toast.fire({
         icon:"error",
@@ -42,14 +45,18 @@ export class TermsandconditionsComponent implements OnInit {
       return 
     }
     if(this.isEdit) return this.update();
+    this.isAdding = true;
     this.api.post('util/toc',{display:this.name}).subscribe(x=>{
+      this.isAdding = false;
       this.name ="";
       Swal.fire('Success',x.message);
       if(x.status == 200) this.get();
     })
   }
   update(){
+    this.isAdding = true;
     this.api.post('util/edit-toc',{id:this.editData.id,display:this.name}).subscribe(x=>{
+      this.isAdding = false;
       this.name ="";
       this.cancel();
       Swal.fire('Success',x.message);
@@ -57,7 +64,9 @@ export class TermsandconditionsComponent implements OnInit {
     })
   }
   get(){
+    this.isLoadingList = true;
     this.api.get('util/toc').subscribe(x=>{
+      this.isLoadingList = false;
       if(x.status == 200) this.data = x.data;
     })
   }

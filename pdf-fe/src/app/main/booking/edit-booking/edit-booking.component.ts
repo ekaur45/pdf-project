@@ -35,6 +35,7 @@ export class EditBookingComponent implements OnInit {
   staffs: any = [];
   features: any[] = [];
   tocs: any[] = [];
+  isEditing:boolean = false;
   constructor(private ar: ActivatedRoute, private api: ApiService) {
     ar.params.subscribe(x => {
       if (x["id"] > 0) {

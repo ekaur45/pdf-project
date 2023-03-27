@@ -29,6 +29,8 @@ export class RoomTypeListComponent implements OnInit {
   deleteobj:any ={};
   file: any;
   description:string = "";
+  isLoadingList:boolean = false;
+  isAdding:boolean = false;
   constructor(private api:ApiService) { 
 
     this.data = [];
@@ -53,18 +55,22 @@ export class RoomTypeListComponent implements OnInit {
       })
       return;
     }
+    this.isAdding = true;
     var form = new FormData();
     form.append("name",this.name);
     form.append("file",this.file);
     form.append("description",this.description);
     this.api.multiForm('booking/room-types',form).subscribe(x=>{
+      this.isAdding = false;
       this.name ="";
       Swal.fire('Success',x.message);
       if(x.status == 200) this.get();
     })
   }
   update(){
+    this.isAdding = true;
     this.api.post('util/update-room-type',{id:this.editData.id,name:this.name,description:this.description}).subscribe(x=>{
+      this.isAdding = false;
       this.name ="";
       this.cancel();
       Swal.fire('Success',x.message);
@@ -72,7 +78,9 @@ export class RoomTypeListComponent implements OnInit {
     })
   }
   get(){
+    this.isLoadingList = true;
     this.api.get('booking/room-types').subscribe(x=>{
+      this.isLoadingList = false;
       if(x.status == 200) this.data = x.data;
     })
   }

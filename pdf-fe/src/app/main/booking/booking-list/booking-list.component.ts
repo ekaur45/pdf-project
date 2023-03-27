@@ -14,6 +14,7 @@ export class BookingListComponent implements OnInit {
   loadingPdf: boolean = false;
   deleteobj: any = {};
   user: any = {};
+  isListLoading:boolean = false;
   constructor(private api: ApiService) { 
     this.user = JSON.parse(localStorage.getItem("user") ?? "{}");
 
@@ -24,7 +25,9 @@ export class BookingListComponent implements OnInit {
   }
 
   getBookings() {
+    this.isListLoading = true;
     this.api.get('booking/all').subscribe(x => {
+      this.isListLoading = false;
       this.list = x.data as any[];
     })
   }

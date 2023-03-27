@@ -45,8 +45,10 @@
                 </div>
             </div>
             <div class="col-md-12 d-flex">
-                <button class="btn btn-primary" (click)="add()"><span *ngIf="isEdit">Update</span> <span
+                <button class="btn btn-primary" (click)="add()" *ngIf="!isAdding"><span *ngIf="isEdit">Update</span> <span
                         *ngIf="!isEdit">Add</span></button>
+                <button class="btn btn-primary" *ngIf="isAdding"><span *ngIf="isEdit">Updating...</span> <span
+                        *ngIf="!isEdit">Adding...</span></button>
                 <button *ngIf="isEdit" class="btn btn-info ms-3" (click)="cancel()">Cancel</button>
             </div>
         </div>
@@ -79,7 +81,7 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody *ngIf="!isLoadingList">
 
                         <tr *ngFor="let r of data;let ndx = index;">
                             <td>
@@ -118,6 +120,13 @@
                                 <a style="cursor: pointer;" (click)="onDelete(r.id)" class="text-danger ms-2">
                                     <i class="fa fa-trash"></i>
                                 </a> -->
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="isLoadingList">
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                <img src="assets/img/pulse_loader.svg" alt="" style="height: 50px;">
                             </td>
                         </tr>
                     </tbody>

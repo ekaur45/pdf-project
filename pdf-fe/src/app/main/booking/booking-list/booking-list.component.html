@@ -44,7 +44,7 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody *ngIf="!isListLoading">
                         <tr *ngFor="let r of list;let ndx = index;">
                             <td>
                                 {{ ndx+1 }}
@@ -120,6 +120,13 @@
                                     </li>
                                 </ul>
 
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="isListLoading">
+                        <tr>
+                            <td colspan="10" class="text-center">
+                                <img src="assets/img/pulse_loader.svg" alt="" style="height: 50px;">
                             </td>
                         </tr>
                     </tbody>

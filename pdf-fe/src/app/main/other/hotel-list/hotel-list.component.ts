@@ -35,6 +35,8 @@ export class HotelListComponent implements OnInit {
   roomTypeName: string = "";
   roomTypes: any[] = [];
   file: any;
+  isLoadingList:boolean = false;
+  isAdding:boolean = false;
   public options: any;
   constructor(private api: ApiService) {
 
@@ -72,6 +74,7 @@ export class HotelListComponent implements OnInit {
       })
       return;
     }
+    this.isAdding = true;
     var form = new FormData();
     form.append("name", this.name);
     form.append("destination", this.destination + "");
@@ -82,6 +85,7 @@ export class HotelListComponent implements OnInit {
     }
     form.append("file", this.file);
     this.api.multiForm('booking/hotel', form).subscribe(x => {
+      this.isAdding = false;
       this.name = "";
       this.get();
       Swal.fire('Success', x.message);
@@ -89,8 +93,10 @@ export class HotelListComponent implements OnInit {
     })
   }
   update() {
+    this.isAdding = true;
     let _roomTypes = this.roomTypes.filter(x => x.checked == true).map(x => x.id);
     this.api.post('util/update-hotel', { id: this.editData.id, name: this.name, destination: this.destination, roomTypes: _roomTypes }).subscribe(x => {
+      this.isAdding = false;
       this.name = "";
       this.cancel();
       Swal.fire('Success', x.message);
@@ -98,7 +104,9 @@ export class HotelListComponent implements OnInit {
     })
   }
   get() {
+    this.isLoadingList = true;
     this.api.get('booking/hotel').subscribe(x => {
+      this.isLoadingList = false;
       if (x.status == 200) this.data = x.data;
     })
   }

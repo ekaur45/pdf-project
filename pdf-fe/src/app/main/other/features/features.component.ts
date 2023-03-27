@@ -25,6 +25,8 @@ export class FeaturesComponent implements OnInit {
   isEdit:boolean = false;
   editData:any ={};
   deleteobj:any ={};
+  isLoadingList:boolean = false;
+  isAdding:boolean = false;
   constructor(private api:ApiService) { 
 
     this.data = [];
@@ -42,14 +44,18 @@ export class FeaturesComponent implements OnInit {
       return 
     }
     if(this.isEdit) return this.update();
+    this.isAdding = true;
     this.api.post('util/feature',{display:this.name}).subscribe(x=>{
+      this.isAdding = false;
       this.name ="";
       Swal.fire('Success',x.message);
       if(x.status == 200) this.get();
     })
   }
   update(){
+    this.isAdding = true;
     this.api.post('util/edit-feature',{id:this.editData.id,display:this.name}).subscribe(x=>{
+      this.isAdding = false;
       this.name ="";
       this.cancel();
       Swal.fire('Success',x.message);
@@ -57,7 +63,9 @@ export class FeaturesComponent implements OnInit {
     })
   }
   get(){
+    this.isLoadingList = true;
     this.api.get('util/feature').subscribe(x=>{
+      this.isLoadingList = false;
       if(x.status == 200) this.data = x.data;
     })
   }

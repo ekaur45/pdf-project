@@ -353,7 +353,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="btn btn-primary" (click)="onFormSubmit()">Update</button>
+                            <button class="btn btn-primary" *ngIf="!isEditing" (click)="onFormSubmit()">Update</button>
+                            <button class="btn btn-primary" *ngIf="isEditing">Update...</button>
                         </div>
                     </div>
                 </div>

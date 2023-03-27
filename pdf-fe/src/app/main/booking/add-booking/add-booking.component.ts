@@ -39,6 +39,7 @@ export class AddBookingComponent implements OnInit {
   features: any[] = [];
   public options: any;
   tocs: any[] = [];
+  isAdding:boolean = false;
   constructor(private api: ApiService, private util: UtilService) {
     this.model = new AddBooking();
     this.destinationList = [];
@@ -135,9 +136,11 @@ export class AddBookingComponent implements OnInit {
 
   onFormSubmit() {
     if (!this.validateModel()) return;
+    this.isAdding = true;
     let _features = this.features.filter(x => x.checked === true).map(x => x.id);
     let _tocs = this.tocs.filter(x=>x.checked == true).map(x=>x.id);
     this.api.post('booking/add', { booking: this.model, list: this.destinationList, features: _features,tocs:_tocs }).subscribe(x => {
+      this.isAdding = false;
       if (x.status == 200) {
         Swal.fire({
           icon: 'success',
@@ -200,7 +203,7 @@ export class AddBookingComponent implements OnInit {
   private validateModel() {
     let m = this.model;
     let _features = this.features.filter(x => x.checked === true).map(x => x.id);
-    if (!(m.agentName && m.staffName && m.date && m.orderNo && m.passengers && m.nights && m.departure && m.arrival && m.customerName && m.price && m.extraCharges && m.totalPrice && m.currency && m.guestType && this.destinationList.length > 0 && _features.length > 0)) {
+    if (!(m.agentName && m.staffName && m.date && m.orderNo && m.passengers && m.nights && m.departure && m.arrival && m.customerName && m.price && m.totalPrice && m.currency && m.guestType && this.destinationList.length > 0 && _features.length > 0)) {
       this.Toast.fire({
         icon: "error",
         text: "All fields are required and add at least one destination and one feature."

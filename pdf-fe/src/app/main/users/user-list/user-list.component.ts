@@ -17,7 +17,8 @@ export class UserListComponent implements OnInit {
   editUser: any = {};
   editPassword: any;
   editId: any;
-  
+  isLoadingList:boolean = false;
+  editing:boolean = false;
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
@@ -25,7 +26,9 @@ export class UserListComponent implements OnInit {
   }
 
   getUsersList() {
+    this.isLoadingList = true;
     this.api.get('user').subscribe(x => {
+      this.isLoadingList = false;
       if (x.status == 200) {
         this.userList = x.data as any;
       }
@@ -38,7 +41,8 @@ export class UserListComponent implements OnInit {
   }
 
   onUserEdit(id: any) {
-    this.editUser = id;
+    
+    this.editUser = {...id};
     $("#modal-edit-user").modal("show")
   }
 
@@ -51,7 +55,9 @@ export class UserListComponent implements OnInit {
   }
 
   saveEditUser() {
+    this.editing = true;
     this.api.post('user', this.editUser).subscribe(x => {
+      this.editing = false;
       if (x.status == 200) {
         Swal.fire({
           icon: 'success',
