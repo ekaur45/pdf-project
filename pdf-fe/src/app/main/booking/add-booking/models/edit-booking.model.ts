@@ -17,6 +17,7 @@ export class EditBooking{
     extraCharges:number=0;
     totalPrice:number=0;
     features:Feature[]=[];
+    terms:TermmsAndConditions[]=[];
     destination:BookingDestination=new BookingDestination();
     flight:BookingFlight=new BookingFlight();
     hotel:BookingHotel = new BookingHotel();
@@ -41,4 +42,8 @@ export class BookingHotel{
     hotel:string="";
     nights:number=0;
     roomType:string="";
+}
+export class TermmsAndConditions{
+    id:number = 0; 
+    termsAndCondition:string = "";
 }

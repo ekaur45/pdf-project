@@ -38,6 +38,7 @@ export class AddBookingComponent implements OnInit {
   staffs: any = [];
   features: any[] = [];
   public options: any;
+  tocs: any[] = [];
   constructor(private api: ApiService, private util: UtilService) {
     this.model = new AddBooking();
     this.destinationList = [];
@@ -56,6 +57,7 @@ export class AddBookingComponent implements OnInit {
     this.getDestination();
     this.getAgents();
     this.getStaffs();
+    this.getToc();
     //$("select").select2();
     // $(document).ready(function(){
     //   setTimeout(() => {
@@ -115,6 +117,13 @@ export class AddBookingComponent implements OnInit {
       }
     })
   }
+  getToc(){
+    this.api.get('util/toc').subscribe(x=>{
+      if(x.status == 200){
+        this.tocs = x.data;
+      }
+    })
+  }
 
   getFeatures() {
     this.api.get('util/feature').subscribe((x: any) => {
@@ -127,7 +136,8 @@ export class AddBookingComponent implements OnInit {
   onFormSubmit() {
     if (!this.validateModel()) return;
     let _features = this.features.filter(x => x.checked === true).map(x => x.id);
-    this.api.post('booking/add', { booking: this.model, list: this.destinationList, features: _features }).subscribe(x => {
+    let _tocs = this.tocs.filter(x=>x.checked == true).map(x=>x.id);
+    this.api.post('booking/add', { booking: this.model, list: this.destinationList, features: _features,tocs:_tocs }).subscribe(x => {
       if (x.status == 200) {
         Swal.fire({
           icon: 'success',
@@ -190,7 +200,7 @@ export class AddBookingComponent implements OnInit {
   private validateModel() {
     let m = this.model;
     let _features = this.features.filter(x => x.checked === true).map(x => x.id);
-    if (!(m.agentName && m.staffName && m.date && m.orderNo && m.passengers && m.nights && m.departure && m.arrival && m.customerName && m.price && m.discount && m.extraCharges && m.totalPrice && m.currency && m.guestType && this.destinationList.length > 0 && _features.length > 0)) {
+    if (!(m.agentName && m.staffName && m.date && m.orderNo && m.passengers && m.nights && m.departure && m.arrival && m.customerName && m.price && m.extraCharges && m.totalPrice && m.currency && m.guestType && this.destinationList.length > 0 && _features.length > 0)) {
       this.Toast.fire({
         icon: "error",
         text: "All fields are required and add at least one destination and one feature."
@@ -203,10 +213,10 @@ export class AddBookingComponent implements OnInit {
     return this.model.destination.destination&&
     this.model.destination.dateTo&&
     this.model.destination.dateFrom&&
-    this.model.flight.to&&
-    this.model.flight.from&&
-    this.model.flight.dateTo&&
-    this.model.flight.dateFrom&&
+    // this.model.flight.to&&
+    // this.model.flight.from&&
+    // this.model.flight.dateTo&&
+    // this.model.flight.dateFrom&&
     this.model.hotel.bookingNo&&
     this.model.hotel.hotel&&
     this.model.hotel.nights&&

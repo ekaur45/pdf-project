@@ -34,6 +34,7 @@ export class EditBookingComponent implements OnInit {
   agents: any = [];
   staffs: any = [];
   features: any[] = [];
+  tocs: any[] = [];
   constructor(private ar: ActivatedRoute, private api: ApiService) {
     ar.params.subscribe(x => {
       if (x["id"] > 0) {
@@ -79,6 +80,20 @@ export class EditBookingComponent implements OnInit {
       }
     })
   }
+
+  getToc(){
+    this.api.get('util/toc').subscribe(x=>{
+      if(x.status == 200){
+        this.tocs = x.data;
+        this.tocs = x.data.map((c:any)=>{
+          let ids = this.model.terms.map(c=>c.id);
+          if(ids.includes(c.id)) c.checked = true;
+          return c;
+        });
+      }
+    })
+  }
+
   getData() {
     this.api.get('booking/getbyid?id=' + this.id).subscribe(x => {
       if (x.status == 200) {
@@ -99,6 +114,7 @@ export class EditBookingComponent implements OnInit {
         this.model.totalPrice = result.totalPrice;
         this.model.guestType = result.guestType;
         this.model.features = result.features;
+        this.model.terms = result.terms;
         for (let i = 0; i < result.offers.length; i++) {
           const el = result.offers[i];
           var _destination = new BookingDestination();
@@ -127,6 +143,7 @@ export class EditBookingComponent implements OnInit {
         this.getDestination();
         this.getAgents();
         this.getStaffs();
+        this.getToc();
         //this.destinationList = x.data.offers as any;
       }
     })
@@ -166,7 +183,8 @@ export class EditBookingComponent implements OnInit {
     if(!this.validateModel()) return;
     this.model.id = this.id;
     let _features = this.features.filter(x => x.checked === true).map(x => x.id);
-    this.api.post('booking/update',{booking:this.model,list:this.destinationList, features: _features}).subscribe(x=>{
+    let _tocs = this.tocs.filter(x=>x.checked == true).map(x=>x.id);
+    this.api.post('booking/update',{booking:this.model,list:this.destinationList, features: _features,tocs:_tocs}).subscribe(x=>{
       if(x.status == 200){
         Swal.fire("Success",x.message);
       }
