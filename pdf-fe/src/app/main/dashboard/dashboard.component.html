@@ -135,7 +135,7 @@
                                             <td>
                                                 <div class="selling-product-img d-flex align-items-center">
                                                     <div class="selling-product-img-wrapper order-bg-opacity-primary">
-                                                        <img class="img-fluid" [src]="url+u.photo" alt="img">
+                                                        <img class="img-fluid" [src]="url+u.photo" alt="img" style="height: calc(100% - 5px);width: calc(100% - 5px);border-radius: 5px;">
                                                     </div>
                                                     <span>{{ u.firstName }} {{ u.lastName }}</span>
                                                 </div>
@@ -145,6 +145,13 @@
                                             
                                         </tr>
                                         
+                                    </tbody>
+                                    <tbody *ngIf="!data">
+                                        <tr>
+                                            <td colspan="4" class="text-center">
+                                                Loading...
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -204,7 +211,9 @@
                                                 <div class="selling-product-img d-flex align-items-center">
                                                     <div
                                                         class="selling-product-img-wrapper order-bg-opacity-primary align-items-end">
-                                                        <img class=" img-fluid" [src]="url+b.agentPhoto" alt="img">
+                                                        <img class=" img-fluid" [src]="url+b.agentPhoto" alt="img"
+                                                        style="height: calc(100% - 5px);width: calc(100% - 5px);border-radius: 5px;"
+                                                        >
                                                     </div>
                                                     <span>{{ b.agentFullName }}</span>
                                                 </div>
@@ -217,6 +226,13 @@
                                             <td>{{ b.status }}</td>
                                         </tr>
                                        
+                                    </tbody>
+                                    <tbody *ngIf="!data">
+                                        <tr>
+                                            <td colspan="4" class="text-center">
+                                                Loading...
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
