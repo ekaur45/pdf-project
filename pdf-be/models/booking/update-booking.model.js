@@ -3,6 +3,7 @@ class UpdateBookingModel {
         this.booking = new BookingModel(obj.booking) ?? {};
         this.list = new BookingListModel(obj.list).list;
         this.features = obj.features ??[];
+        this.tocs = obj.tocs ??[];
         this.bookingParams = [
             this.booking.id,
             this.booking.agentName,
@@ -17,7 +18,8 @@ class UpdateBookingModel {
             this.booking.price,
             this.booking.discount,
             this.booking.extraCharges,
-            this.booking.totalPrice
+            this.booking.totalPrice,
+            this.booking.guestType
         ]
         this.listParams = [
             this.list.map((e,i)=>[
@@ -57,6 +59,7 @@ class BookingModel {
         this.discount=obj.discount??0;
         this.extraCharges=obj.extraCharges??0;
         this.totalPrice=obj.totalPrice??0;
+        this.guestType=obj.guestType??0;
         this.features=obj.features??[];
     }
 }

@@ -42,8 +42,10 @@ Booking.add = async (data) => {
             '(`bookingid`,`bookingNo`,`roomType`,`nights`,`hotel`,`destinationTo`,`destinationFrom`,`destinationName`,`flightTo`,`flightFrom`,`flightDateFrom`,`flightDateTo`) values ? ;', [...params], false);
         let featuresParams = data.features.map(x => [id, x]);
         var result2 = await mysqlExecute('INSERT INTO `booking_features` (`booking_id`, `feature_id`) VALUES ?', [featuresParams], false);
+        let tocsParams = data.tocs.map(x => [id, x]);
+        var result3 = await mysqlExecute('INSERT INTO `booking_tocs` (`booking_id`, `toc_id`) VALUES ?', [tocsParams], false);
         return {
-            success: result1.success && result.success && result2.success
+            success: result1.success && result.success && result2.success && result3.success
         }
     }
     return {
@@ -66,6 +68,10 @@ Booking.edit = async (data) => {
         await mysqlExecute('delete from booking_features where booking_id = ?', [data.booking.id]);
         let featuresParams = data.features.map(x => [id, x]);
         var result2 = await mysqlExecute('INSERT INTO `booking_features` (`booking_id`, `feature_id`) VALUES ?', [featuresParams], false);
+        
+        await mysqlExecute('delete from booking_tocs where booking_id = ?', [data.booking.id]);
+        let tocsParams = data.tocs.map(x => [id, x]);
+        var result2 = await mysqlExecute('INSERT INTO `booking_tocs` (`booking_id`, `toc_id`) VALUES ?', [tocsParams], false);
         return {
             success: result1.success && result.success
         }
@@ -89,8 +95,8 @@ Booking.getById = async (id) => {
             // el.departure = moment(el.departure).format("MM/DD/YYYY");
             var offersResult = await mysqlSelect('call get_booking_by_id(?);', [el.id]);
             el.offers = offersResult.data;
-            var termsResult = await mysqlSelect('select * from termsandcondition', [], false);
-            el.terms = termsResult.data.map(x => x.termsAndCondition);
+            var termsResult = await mysqlSelect('select * from termsandcondition where id in(select toc_id from booking_tocs where booking_id=?)', [id], false);
+            el.terms = termsResult.data;//.map(x => x.termsAndCondition);
             // el.offers.map((e, ii) => {
             //     e.destinationFrom = moment(e.destinationFrom).format("MM/DD/YYYY");
             //     e.destinationTo = moment(e.destinationTo).format("MM/DD/YYYY");
