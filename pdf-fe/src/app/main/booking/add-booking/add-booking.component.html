@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="user-info-tab w-100 bg-white global-shadow radius-xl mb-50">
-            <div class="userDatatable global-shadow border-light-0 p-30 bg-white radius-xl w-100 mb-30">
+            <div class="userDatatable global-shadow border-light-0 bg-white radius-xl w-100 mb-30">
 
                 <div class="card-body">
                     <div class="row">
@@ -245,6 +245,8 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-12">
+                            <div class="userDatatable global-shadow border-light-0 bg-white radius-xl w-100 mb-30">
+                                <div class="table-responsive">
                             <table class="table mb-0 table-borderless">
                                 <tr class="userDatatable-header">
                                     <th>
@@ -288,6 +290,8 @@
                                     </th>
                                 </tr>
                             </table>
+                        </div>
+                    </div>
                         </div>
                     </div>
                     <div class="row">
@@ -340,7 +344,7 @@
                                 <div class="card-header">
                                     <h4 class="mb-0">Select features</h4>
                                 </div>
-                                <div class="card-body d-flex flex-lg-wrap">
+                                <div class="card-body d-flex flex-wrap">
                                     <div class="p-3 border border-1 mb-2 me-2" *ngFor="let f of features">
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" [id]="'flexSwitchCheckDefault'+f.id" [(ngModel)]="f.checked">
@@ -358,7 +362,7 @@
                                 <div class="card-header">
                                     <h4 class="mb-0">Select terms and remarkss</h4>
                                 </div>
-                                <div class="card-body d-flex flex-lg-wrap">
+                                <div class="card-body d-flex flex-wrap">
                                     <div class="p-3 border border-1 mb-2 me-2 w-100" *ngFor="let f of tocs">
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" [id]="'flexSwitchCheckDefaultToc'+f.id" [(ngModel)]="f.checked">
