@@ -172,6 +172,12 @@
 
                         </ul>
                     </li>
+                    <li *ngIf="checks('statistics')">
+                        <a routerLink="/statistics/stats" routerLinkActive="active" >
+                            <span class="nav-icon uil uil-create-dashboard"></span>
+                            <span class="menu-text">Statistics</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

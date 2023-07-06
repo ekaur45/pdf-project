@@ -19,6 +19,9 @@ const routes: Routes = [
       },
       {
         path:'other',loadChildren:()=>import("./other/other.module").then(x=>x.OtherModule)
+      },
+      {
+        path:'statistics',loadChildren:()=>import("./statistics/statistics.module").then(x=>x.StatisticsModule)
       }
     ]
   }
