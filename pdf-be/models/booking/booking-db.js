@@ -39,7 +39,7 @@ Booking.add = async (data) => {
         var id = result.data[0].id;
         var params = data.listParams.map((e, i) => e.map((ee, ii) => [id, ...ee]));
         var result1 = await mysqlExecute('INSERT INTO `bookingoffers`' +
-            '(`bookingid`,`bookingNo`,`roomType`,`nights`,`hotel`,`destinationTo`,`destinationFrom`,`destinationName`,`flightTo`,`flightFrom`,`flightDateFrom`,`flightDateTo`) values ? ;', [...params], false);
+            '(`bookingid`,`bookingNo`,`roomType`,`nights`,`hotel`,`destinationTo`,`destinationFrom`,`destinationName`,`flightTo`,`flightFrom`,`flightDateFrom`,`flightDateTo`,`flightPrice`) values ? ;', [...params], false);
         let featuresParams = data.features.map(x => [id, x]);
         var result2 = await mysqlExecute('INSERT INTO `booking_features` (`booking_id`, `feature_id`) VALUES ?', [featuresParams], false);
         let tocsParams = data.tocs.map(x => [id, x]);
@@ -210,7 +210,7 @@ Booking.AddDestination = async (obj, file) => {
 }
 Booking.AddHotel = async (obj, file) => {
     var avatar = await uploadFile(file);
-    var result = await mysqlExecute(`INSERT INTO hotel (name,location,file) VALUES('${obj.name}','${obj.destination}','${avatar.fileName}');`, [], false);
+    var result = await mysqlExecute(`INSERT INTO hotel (name,location,file,price) VALUES('${obj.name}','${obj.destination}','${avatar.fileName}','${obj.price}');`, [], false);
     var idResult = await mysqlSelect('SELECT last_insert_id() as id;', [], false);
     if (idResult.success == true) {
         if (obj.roomTypes && obj.roomTypes.length > 0) {
