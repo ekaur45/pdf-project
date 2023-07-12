@@ -12,7 +12,6 @@ export class IndexComponent implements OnInit {
   user: any = {};
   constructor(private router: Router) {
     this.user = JSON.parse(localStorage.getItem("user") ?? "{}");
-    console.log({ user: this.user })
   }
 
   ngOnInit(): void {

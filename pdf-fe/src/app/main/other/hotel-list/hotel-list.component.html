@@ -10,8 +10,8 @@
                     <input type="text" class="form-control" [(ngModel)]="name">
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label>Hotel Image</label>
-                    <input type="file" class="form-control" (change)="onFileChange($event)">
+                    <label>Hotel Price</label>
+                    <input type="text" class="form-control" [(ngModel)]="price">
                 </div>
                 <div class="col-md-6 mb-3">
                     <div class="d-flex align-items-center">
@@ -25,6 +25,12 @@
                         >
                     </ng-select2>
                 </div>
+                <div class="col-md-6 mb-3">
+                    <label>Hotel Image</label>
+                    <input type="file" class="form-control" (change)="onFileChange($event)">
+                </div>
+                
+
 
             </div>
             <div class="col-md-12">
@@ -78,6 +84,9 @@
                             <th>
                                 Destination
                             </th>
+                            <th>
+                                Price
+                            </th>
                             <th class="text-center">
                                 <span class="userDatatable-title float-end">Action</span>
                             </th>
@@ -97,6 +106,9 @@
                             </td>
                             <td>
                                 {{displayDestination(r.location)}}
+                            </td>
+                            <td>
+                                {{r.price}}
                             </td>
                             <td class="text-center">
                                 <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">

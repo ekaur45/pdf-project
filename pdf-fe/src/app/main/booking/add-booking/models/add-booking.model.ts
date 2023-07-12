@@ -12,6 +12,7 @@ export class AddBooking{
     discount:number=0;
     extraCharges:number=0;
     totalPrice:number=0;
+    transportationPrice:number=0;
     currency:string="usd";
     guestType:string="";
     features:string[]=[];
@@ -30,10 +31,12 @@ export class BookingFlight{
     from:string="";
     dateTo:string="";
     dateFrom:string="";
+    price:number=0;
 }
 export class BookingHotel{
     bookingNo:string="";
     hotel:string="";
     nights:number=0;
     roomType:string="";
+    price:number=0;
 }

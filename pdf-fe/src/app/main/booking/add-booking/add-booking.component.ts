@@ -30,6 +30,7 @@ export class AddBookingComponent implements OnInit {
   url = environment.baseUrl;
   agentControl = new FormControl('');
   hotels: any = [];
+  _hotels: any = [];
   roomTypes: any = [];
   destinationData: any = [];
   model: AddBooking = new AddBooking();
@@ -90,7 +91,8 @@ export class AddBookingComponent implements OnInit {
   getHotels(id: any) {
     this.api.get('util/hotels?id=' + id).subscribe(x => {
       if (x.status == 200) {
-        this.hotels = x.data.map((c: any) => { return { id: c.id, text: c.name } });
+        this.hotels = x.data.map((c: any) => { return { id: c.id, text: c.name+" ( "+(c.price??0) +" )" } });
+        this._hotels = x.data;//.map((c: any) => { return { id: c.id, text: c.name+" ( "+(c.price??0) +" )" } });
       }
     })
   }
@@ -156,8 +158,34 @@ export class AddBookingComponent implements OnInit {
     let price = this.model.price;
     let discount = this.model.discount;
     let xCharges = this.model.extraCharges;
-    this.model.totalPrice = (price + xCharges) - (discount * price) / 100;
+    //this.model.totalPrice = (price + xCharges + this.model.transportationPrice ) - (discount * price) / 100;
   }
+  get priceCalculated(){
+    let price = 0;
+    let discount = this.model.discount;
+    let xCharges = this.model.extraCharges;
+    var lst = this.destinationList.map(cc=>{
+      return this.getHotelPrice(Number(cc.hotel.hotel)) + cc.flight.price
+    });
+    let ll = 0;
+    if(lst.length>0) ll = lst.reduce((a,b)=>a+b)
+    //console.log({lst});
+    //this.model.totalPrice = (price + xCharges + this.model.transportationPrice ) - (discount * price) / 100;
+    return (price + ll + this.model.transportationPrice);
+  }  
+  get totalPriceCalculated(){
+    let price = this.priceCalculated;
+    let discount = this.model.discount;
+    let xCharges = this.model.extraCharges;
+    var lst = this.destinationList.map(cc=>{
+      return this.getHotelPrice(Number(cc.hotel.hotel)) + cc.flight.price
+    });
+    let ll = 0;
+    if(lst.length>0) ll = lst.reduce((a,b)=>a+b)
+    //console.log({lst});
+    //this.model.totalPrice = (price + xCharges + this.model.transportationPrice ) - (discount * price) / 100;
+    return (price + xCharges) - (discount * price) / 100;
+  }  
   onDateChange(e: any) {
 
   }
@@ -201,6 +229,8 @@ export class AddBookingComponent implements OnInit {
 
 
   private validateModel() {
+    this.model.price = this.priceCalculated;
+    this.model.totalPrice = this.totalPriceCalculated;
     let m = this.model;
     let _features = this.features.filter(x => x.checked === true).map(x => x.id);
     if (!(m.agentName && m.staffName && m.date && m.orderNo && m.passengers && m.nights && m.departure && m.arrival && m.customerName && m.price && m.totalPrice && m.currency && m.guestType && this.destinationList.length > 0 && _features.length > 0)) {
@@ -224,5 +254,9 @@ export class AddBookingComponent implements OnInit {
     this.model.hotel.hotel&&
     this.model.hotel.nights&&
     this.model.hotel.roomType;
+  }
+  getHotelPrice(id:number){
+    return Number(this._hotels.filter((x:any)=>x.id == id)[0].price);
+    
   }
 }

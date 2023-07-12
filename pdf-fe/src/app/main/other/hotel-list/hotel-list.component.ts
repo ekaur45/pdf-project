@@ -32,6 +32,7 @@ export class HotelListComponent implements OnInit {
   destinationData: any[] = [];
   destination: number = 0;
   destinationName: string = "";
+  price:number = 0.0;
   roomTypeName: string = "";
   roomTypes: any[] = [];
   file: any;
@@ -78,6 +79,7 @@ export class HotelListComponent implements OnInit {
     var form = new FormData();
     form.append("name", this.name);
     form.append("destination", this.destination + "");
+    form.append("price", this.price + "");
     let _roomTypes = this.roomTypes.filter(x => x.checked == true).map(x => x.id);
     for (let i = 0; i < _roomTypes.length; i++) {
       const el = _roomTypes[i];
@@ -87,6 +89,8 @@ export class HotelListComponent implements OnInit {
     this.api.multiForm('booking/hotel', form).subscribe(x => {
       this.isAdding = false;
       this.name = "";
+      this.destination = 0;
+      this.price = 0;
       this.get();
       Swal.fire('Success', x.message);
       if (x.status == 200) this.get();
@@ -95,9 +99,10 @@ export class HotelListComponent implements OnInit {
   update() {
     this.isAdding = true;
     let _roomTypes = this.roomTypes.filter(x => x.checked == true).map(x => x.id);
-    this.api.post('util/update-hotel', { id: this.editData.id, name: this.name, destination: this.destination, roomTypes: _roomTypes }).subscribe(x => {
+    this.api.post('util/update-hotel', { id: this.editData.id, name: this.name, destination: this.destination,price:this.price, roomTypes: _roomTypes }).subscribe(x => {
       this.isAdding = false;
       this.name = "";
+      this.price = 0;
       this.cancel();
       Swal.fire('Success', x.message);
       if (x.status == 200) this.get();
@@ -124,6 +129,7 @@ export class HotelListComponent implements OnInit {
     this.editData = r;
     this.name = r.name;
     this.destination = r.location;
+    this.price = r.price;
     this.roomTypes = this.roomTypes.map(x => {
       let ids = r?.roomTypes?.map((c: any) => c.id);
       if (ids?.includes(x.id)) x.checked = true;
