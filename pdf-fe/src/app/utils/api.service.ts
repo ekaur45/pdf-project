@@ -10,7 +10,7 @@ import { map } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  baseUrl = environment.api;
+  private baseUrl = environment.api;
   constructor(private http:HttpClient,private router:Router) { }
   get(url:string):Observable<ApiResponse>{
     return this.http.get<ApiResponse>(this.baseUrl+url).pipe(map((x:any)=>{

@@ -1,0 +1,182 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="d-flex align-items-center user-member__title mb-30 mt-30">
+            <h4 class="text-capitalize">Stats</h4>
+        </div>
+    </div>
+</div>
+<div class="card mb-3">
+    <div class="card-header">
+        Monthly - Staff
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th>
+                    Staff name
+                </th>
+                <th>
+                    Earning
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+            <tr *ngFor="let d of data.monthly[0]">
+                <td>
+                    {{d.staff}}
+                </td>
+                <td>
+                    {{d.totalPrice}}
+                </td>
+                <td>
+                    {{d.month}}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="card mb-3">
+    <div class="card-header">
+        Monthly - Agent
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th>
+                    Agent name
+                </th>
+                <th>
+                    Earning
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+            <tr *ngFor="let d of data.monthly[1]">
+                <td>
+                    {{d.agent}}
+                </td>
+                <td>
+                    {{d.totalPrice}}
+                </td>
+                <td>
+                    {{d.month}}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="card mb-3">
+    <div class="card-header">
+        Monthly - Total
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th>
+                    Earning
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+            <tr *ngFor="let d of data.monthly[2]">
+                <td>
+                    {{d.totalPrice}}
+                </td>
+                <td>
+                    {{d.month}}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        Yearly - Staff
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th>
+                    Staff name
+                </th>
+                <th>
+                    Earning
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+            <tr *ngFor="let d of data.yearly[0]">
+                <td>
+                    {{d.staff}}
+                </td>
+                <td>
+                    {{d.totalPrice}}
+                </td>
+                <td>
+                    {{d.year}}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="card mb-3">
+    <div class="card-header">
+        Yearly - Agent
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th>
+                    Agent name
+                </th>
+                <th>
+                    Earning
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+            <tr *ngFor="let d of data.yearly[1]">
+                <td>
+                    {{d.agent}}
+                </td>
+                <td>
+                    {{d.totalPrice}}
+                </td>
+                <td>
+                    {{d.year}}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="card mb-3">
+    <div class="card-header">
+        Yearly - Total
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th>
+                    Earning
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+            <tr *ngFor="let d of data.yearly[2]">
+                <td>
+                    {{d.totalPrice}}
+                </td>
+                <td>
+                    {{d.year}}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
