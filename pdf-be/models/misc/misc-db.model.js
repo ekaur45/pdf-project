@@ -91,4 +91,23 @@ Misc.getStaff = async () => {
     var query = "select * from users where userType='4'";
     return await mysqlSelect(query, [], false);
 }
+
+
+Misc.getStats = async () =>{
+    let query = 'call get_stats()';
+    const result = await mysqlExecute(query);
+    let d = [];
+    if(Array.isArray(result.data)){
+        for (let i = 0; i < result.data.length; i++) {
+            const el = result.data[i];
+            if(Array.isArray(el)){
+                d.push(el)
+            }
+        }
+    }
+    result.data = {monthly:d.slice(0,3),yearly:d.slice(3,6)};
+    return result;
+}
+
+
 module.exports = Misc;

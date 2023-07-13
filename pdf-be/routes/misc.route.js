@@ -17,6 +17,7 @@ router.post('/feature',controller.addFeature);
 router.post('/edit-feature',controller.editFeature);
 router.get('/delete-feature',controller.deleteFeature);
 router.get('/feature',controller.getFeature);
+router.get('/get-stats',controller.getStats);
 
 
 

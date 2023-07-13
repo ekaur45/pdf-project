@@ -232,4 +232,10 @@ miscController.getStaff = async (req,res,next)=>{
     result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong");
 }
 
+
+miscController.getStats = async (req,res,next)=>{
+    var result = await Misc.getStats();
+    result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong");
+}
+
 module.exports = miscController;
