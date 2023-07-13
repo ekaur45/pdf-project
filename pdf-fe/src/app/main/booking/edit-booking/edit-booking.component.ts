@@ -25,6 +25,7 @@ export class EditBookingComponent implements OnInit {
     }    
   })
   hotels: any = [];
+  _hotels: any = [];
   roomTypes: any = [];
   destinationData: any = [];
   model: EditBooking = new EditBooking();
@@ -71,6 +72,7 @@ export class EditBookingComponent implements OnInit {
     this.api.get('util/hotels?id=' + id).subscribe(x => {
       if (x.status == 200) {
         this.hotels = x.data.map((c: any) => { return { id: c.id, text: c.name } });
+        this._hotels = x.data;//.map((c: any) => { return { id: c.id, text: c.name+" ( "+(c.price??0) +" )" } });
       }
     })
   }
@@ -116,8 +118,10 @@ export class EditBookingComponent implements OnInit {
         this.model.guestType = result.guestType;
         this.model.features = result.features;
         this.model.terms = result.terms;
+        this.model.transportationPrice = result.transportationPrice;
         for (let i = 0; i < result.offers.length; i++) {
           const el = result.offers[i];
+          this.onDestinationChange(el.destinationId);
           var _destination = new BookingDestination();
           _destination.destination = el.destinationId+"";
           _destination.dateFrom = el.destinationFrom;
@@ -128,16 +132,20 @@ export class EditBookingComponent implements OnInit {
           _flight.dateTo = el.flightDateTo;
           _flight.from = el.flightFrom;
           _flight.to = el.flightTo;
+          _flight.price = el.flightPrice
 
           var _hotel = new BookingHotel();
           _hotel.bookingNo = el.bookingNo;
-          _hotel.hotel = el.hotel;
+          _hotel.hotel = el.hotelId+"";
           _hotel.nights = el.nights;
           _hotel.roomType = el.roomType;
+          _hotel.price = this.getHotelPrice(Number(el.hotelId));
           var _edit = new EditBooking();
           _edit.destination = _destination;
           _edit.flight = _flight;
           _edit.hotel = _hotel;
+        
+          
           this.destinationList.push({ ..._edit });
         }
         this.getFeatures();
@@ -145,6 +153,7 @@ export class EditBookingComponent implements OnInit {
         this.getAgents();
         this.getStaffs();
         this.getToc();
+        
         //this.destinationList = x.data.offers as any;
       }
     })
@@ -196,6 +205,30 @@ export class EditBookingComponent implements OnInit {
     return this.destinationData.filter((x:any)=>x.id == e)[0].text;
     else return "";
   }
+  get priceCalculated(){
+    let price = 0;
+    var lst = this.destinationList.map(cc=>{
+      return this.getHotelPrice(Number(cc.hotel.hotel)) + cc.flight.price
+    });
+    let ll = 0;
+    if(lst.length>0) ll = lst.reduce((a,b)=>a+b)
+    //console.log({lst});
+    //this.model.totalPrice = (price + xCharges + this.model.transportationPrice ) - (discount * price) / 100;    
+    return (price + ll + this.model.transportationPrice);
+  }  
+  get totalPriceCalculated(){
+    let price = this.priceCalculated;
+    let discount = this.model.discount;
+    let xCharges = this.model.extraCharges;
+    var lst = this.destinationList.map(cc=>{
+      return this.getHotelPrice(Number(cc.hotel.hotel)) + cc.flight.price
+    });
+    let ll = 0;
+    if(lst.length>0) ll = lst.reduce((a,b)=>a+b)
+    //console.log({lst});
+    //this.model.totalPrice = (price + xCharges + this.model.transportationPrice ) - (discount * price) / 100;
+    return (price + xCharges) - (discount * price) / 100;
+  }  
   removeRow(ndx: number) {
     this.destinationList.splice(ndx, 1);
   }
@@ -206,6 +239,8 @@ export class EditBookingComponent implements OnInit {
     this.getRoomTypes(e);
   }
   private validateModel() {
+    this.model.price = this.priceCalculated;
+    this.model.totalPrice = this.totalPriceCalculated;
     let m = this.model;
     let _features = this.features.filter(x => x.checked === true).map(x => x.id);
     if(!(m.agentName&&m.staffName&&m.date&&m.orderNo&&m.passengers&&m.nights&&m.departure&&m.arrival&&m.customerName&&m.price&&m.discount&&m.extraCharges&&m.totalPrice&&m.currency&&m.guestType && this.destinationList.length>0 && _features.length>0))
@@ -230,6 +265,10 @@ export class EditBookingComponent implements OnInit {
     this.model.hotel.hotel&&
     this.model.hotel.nights&&
     this.model.hotel.roomType;
+  }
+  getHotelPrice(id:number){
+    if(this._hotels.length<1) return 0;
+    return Number(this._hotels.filter((x:any)=>x.id == id)[0].price);    
   }
 }
 

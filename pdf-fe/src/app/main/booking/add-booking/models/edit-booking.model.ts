@@ -16,6 +16,7 @@ export class EditBooking{
     discount:number=0;
     extraCharges:number=0;
     totalPrice:number=0;
+    transportationPrice:number=0;
     features:Feature[]=[];
     terms:TermmsAndConditions[]=[];
     destination:BookingDestination=new BookingDestination();
@@ -28,20 +29,22 @@ export class Feature{
 }
 export class BookingDestination{
     destination:string="";
-    dateTo:string="";;
-    dateFrom:string="";;
+    dateTo:string="";
+    dateFrom:string="";
 }
 export class BookingFlight{
     to:string="";
     from:string="";
-    dateTo:string="";;
-    dateFrom:string="";;
+    dateTo:string="";
+    dateFrom:string="";
+    price:number=0;
 }
 export class BookingHotel{
     bookingNo:string="";
     hotel:string="";
     nights:number=0;
     roomType:string="";
+    price:number=0;
 }
 export class TermmsAndConditions{
     id:number = 0; 

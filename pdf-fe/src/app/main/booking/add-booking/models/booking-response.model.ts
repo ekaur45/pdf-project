@@ -4,12 +4,15 @@ export interface Offer {
     roomType: string;
     nights: number;
     hotel: string;
+    hotelId: number;
+    hotelPrice: number;
     destinationTo: string;
     destinationFrom: string;
     destinationName: string;
     destinationId: number;
     isDeleted: boolean;
     flightTo: string;
+    flightPrice: number;
     flightFrom: string;
     flightDateFrom: string;
     flightDateTo: string;
@@ -32,6 +35,7 @@ export interface Booking {
     isDeleted: boolean;
     staffName: string;
     guestType: string;
+    transportationPrice: number;
     price:number;
     discount:number;
     extraCharges:number;
