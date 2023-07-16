@@ -371,6 +371,59 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label class="form-label">Day</label>
+                                <input type="text" [(ngModel)]="scheduleModel.day" class="form-control ih-medium">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Schedule</label>
+                                <input type="text" [(ngModel)]="scheduleModel.schedule" class="form-control ih-medium">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label" style="color: transparent;">.</label>
+                            <button class="btn btn-outline-primary btn-sm" (click)="addScheduleItem()">Add</button>
+                        </div>
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Day
+                                        </th>
+                                        <th>
+                                            Schedule
+                                        </th>
+                                        <th>
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let sch of model.schedule;let ndx=index;">
+                                        <td>{{sch.day}}</td>
+                                        <td>{{sch.schedule}}</td>
+                                        <td>
+                                            <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
+                                                <li>
+                                                    <a (click)="removeScheduleItem(ndx)" style="cursor: pointer;" class="view">
+                                                        <i class="uil uil-trash-alt"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- <div class="col-md-12 mb-3">
+                            <button class="btn btn-outline-primary btn-block">Add schedule</button>
+                        </div> -->
+                    </div>
+                    <div class="row">
                         <div class="col-md-12">
                             <button class="btn btn-primary" *ngIf="!isEditing" (click)="onFormSubmit()">Update</button>
                             <button class="btn btn-primary" *ngIf="isEditing">Update...</button>

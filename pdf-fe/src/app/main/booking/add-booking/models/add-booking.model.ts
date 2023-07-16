@@ -16,6 +16,7 @@ export class AddBooking{
     currency:string="usd";
     guestType:string="";
     features:string[]=[];
+    schedule:ScheduleModel[]=[];
     destination:BookingDestination=new BookingDestination();
     flight:BookingFlight=new BookingFlight();
     hotel:BookingHotel = new BookingHotel();
@@ -39,4 +40,9 @@ export class BookingHotel{
     nights:number=0;
     roomType:string="";
     price:number=0;
+}
+
+export class ScheduleModel{
+    day:string="";
+    schedule:string="";
 }

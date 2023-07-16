@@ -2,7 +2,7 @@ import { Booking } from './../add-booking/models/booking-response.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/utils/api.service';
-import { AddBooking } from '../add-booking/models/add-booking.model';
+import { AddBooking, ScheduleModel } from '../add-booking/models/add-booking.model';
 import { BookingDestination, BookingFlight, BookingHotel, EditBooking } from '../add-booking/models/edit-booking.model';
 import Swal from 'sweetalert2';
 
@@ -29,6 +29,7 @@ export class EditBookingComponent implements OnInit {
   roomTypes: any = [];
   destinationData: any = [];
   model: EditBooking = new EditBooking();
+  scheduleModel:ScheduleModel = new ScheduleModel();
   destinationList: EditBooking[] = [];
   id: any;
   data: any = {};
@@ -117,6 +118,7 @@ export class EditBookingComponent implements OnInit {
         this.model.totalPrice = result.totalPrice;
         this.model.guestType = result.guestType;
         this.model.features = result.features;
+        this.model.schedule = result.schedule;
         this.model.terms = result.terms;
         this.model.transportationPrice = result.transportationPrice;
         for (let i = 0; i < result.offers.length; i++) {
@@ -243,7 +245,7 @@ export class EditBookingComponent implements OnInit {
     this.model.totalPrice = this.totalPriceCalculated;
     let m = this.model;
     let _features = this.features.filter(x => x.checked === true).map(x => x.id);
-    if(!(m.agentName&&m.staffName&&m.date&&m.orderNo&&m.passengers&&m.nights&&m.departure&&m.arrival&&m.customerName&&m.price&&m.discount&&m.extraCharges&&m.totalPrice&&m.currency&&m.guestType && this.destinationList.length>0 && _features.length>0))
+    if(!(m.agentName&&m.staffName&&m.date&&m.orderNo&&m.passengers&&m.nights&&m.departure&&m.arrival&&m.customerName&&m.price&&m.totalPrice&&m.currency&&m.guestType && this.destinationList.length>0 && _features.length>0))
     {
       this.Toast.fire({
         icon:"error",
@@ -269,6 +271,13 @@ export class EditBookingComponent implements OnInit {
   getHotelPrice(id:number){
     if(this._hotels.length<1) return 0;
     return Number(this._hotels.filter((x:any)=>x.id == id)[0].price);    
+  }
+  addScheduleItem(){
+    this.model.schedule.push(this.scheduleModel);
+    this.scheduleModel = new ScheduleModel();
+  }
+  removeScheduleItem(ndx:number){
+    this.model.schedule.splice(ndx, 1);
   }
 }
 

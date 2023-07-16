@@ -1,5 +1,5 @@
 import { environment } from 'src/environments/environment';
-import { AddBooking, BookingDestination, BookingFlight, BookingHotel } from './models/add-booking.model';
+import { AddBooking, BookingDestination, BookingFlight, BookingHotel, ScheduleModel } from './models/add-booking.model';
 import { ApiService } from './../../../utils/api.service';
 import { Component, OnInit, NgModule } from '@angular/core';
 import { FormControl } from '@angular/forms';
@@ -35,6 +35,7 @@ export class AddBookingComponent implements OnInit {
   destinationData: any = [];
   model: AddBooking = new AddBooking();
   destinationList: AddBooking[] = [];
+  scheduleModel:ScheduleModel = new ScheduleModel();
   agents: any = [];
   staffs: any = [];
   features: any[] = [];
@@ -258,5 +259,12 @@ export class AddBookingComponent implements OnInit {
   getHotelPrice(id:number){
     return Number(this._hotels.filter((x:any)=>x.id == id)[0].price);
     
+  }
+  addScheduleItem(){
+    this.model.schedule.push(this.scheduleModel);
+    this.scheduleModel = new ScheduleModel();
+  }
+  removeScheduleItem(ndx:number){
+    this.model.schedule.splice(ndx, 1);
   }
 }

@@ -18,12 +18,14 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { AddScheduleComponent } from './add-booking/add-schedule/add-schedule.component';
 @NgModule({
   declarations: [
     IndexComponent,
     AddBookingComponent,
     BookingListComponent,
-    EditBookingComponent
+    EditBookingComponent,
+    AddScheduleComponent
   ],
   imports: [
     CommonModule,

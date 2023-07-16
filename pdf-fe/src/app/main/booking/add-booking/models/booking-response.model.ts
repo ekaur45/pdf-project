@@ -42,5 +42,6 @@ export interface Booking {
     totalPrice:number;
     offers: Offer[];
     features:any[];
+    schedule:any[];
     terms:any[];
 }

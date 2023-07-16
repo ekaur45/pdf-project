@@ -18,6 +18,7 @@ export class EditBooking{
     totalPrice:number=0;
     transportationPrice:number=0;
     features:Feature[]=[];
+    schedule:any[]=[];
     terms:TermmsAndConditions[]=[];
     destination:BookingDestination=new BookingDestination();
     flight:BookingFlight=new BookingFlight();
