@@ -64,6 +64,7 @@ class BookingModel {
         this.guestType=obj.guestType??0;
         this.transportationPrice = obj.transportationPrice ??0.0;
         this.features=obj.features??[];
+        this.schedule = obj.schedule ?? [];
     }
 }
 class BookingListModel {

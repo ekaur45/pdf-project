@@ -44,6 +44,8 @@ Booking.add = async (data) => {
         var result2 = await mysqlExecute('INSERT INTO `booking_features` (`booking_id`, `feature_id`) VALUES ?', [featuresParams], false);
         let tocsParams = data.tocs.map(x => [id, x]);
         var result3 = await mysqlExecute('INSERT INTO `booking_tocs` (`booking_id`, `toc_id`) VALUES ?', [tocsParams], false);
+        let scheduleParams = data.booking.schedule.map(e=>[id,e.day,e.schedule]);
+        var result4 = await mysqlExecute('INSERT INTO `booking_schedule` (`booking_id`,`day`,`schedule`) VALUES ?',[scheduleParams],false);
         return {
             success: result1.success && result.success && result2.success && result3.success
         }
@@ -72,6 +74,9 @@ Booking.edit = async (data) => {
         await mysqlExecute('delete from booking_tocs where booking_id = ?', [data.booking.id]);
         let tocsParams = data.tocs.map(x => [id, x]);
         var result2 = await mysqlExecute('INSERT INTO `booking_tocs` (`booking_id`, `toc_id`) VALUES ?', [tocsParams], false);
+        await mysqlExecute('delete from `booking_schedule` where booking_id = ?', [data.booking.id]);
+        let scheduleParams = data.booking.schedule.map(e=>[id,e.day,e.schedule]);
+        var result4 = await mysqlExecute('INSERT INTO `booking_schedule` (`booking_id`,`day`,`schedule`) VALUES ?',[scheduleParams],false);
         return {
             success: result1.success && result.success
         }
@@ -106,6 +111,9 @@ Booking.getById = async (id) => {
             var featureResult = await mysqlSelect('select * from features where id in (select feature_id from booking_features where booking_id = ?)', [el.id], false);
             if (featureResult.success == true)
                 el.features = featureResult.data
+            var scheduleResult = await mysqlSelect('select * from `booking_schedule` where booking_id =?', [el.id], false);
+            if (scheduleResult.success == true)
+                el.schedule = scheduleResult.data
         }
         return {
             success: true,

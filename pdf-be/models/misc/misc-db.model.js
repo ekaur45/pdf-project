@@ -93,9 +93,9 @@ Misc.getStaff = async () => {
 }
 
 
-Misc.getStats = async () =>{
-    let query = 'call get_stats()';
-    const result = await mysqlExecute(query);
+Misc.getStats = async (startDate,lastDate) =>{
+    let query = 'call get_stats(?)';
+    const result = await mysqlExecute(query,[[new Date(startDate),new Date(lastDate)]]);
     let d = [];
     if(Array.isArray(result.data)){
         for (let i = 0; i < result.data.length; i++) {

@@ -234,7 +234,8 @@ miscController.getStaff = async (req,res,next)=>{
 
 
 miscController.getStats = async (req,res,next)=>{
-    var result = await Misc.getStats();
+    const {startDate,lastDate} = req.body;
+    var result = await Misc.getStats(startDate,lastDate);
     result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong");
 }
 

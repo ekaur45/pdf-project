@@ -4,6 +4,7 @@ class AddBookingModel {
         this.list = new BookingListModel(obj.list).list;
         this.features = obj.features ?? [];
         this.tocs = obj.tocs ?? [];
+        
         this.bookingParams = [
             this.booking.agentName,
             this.booking.staffName,
@@ -64,6 +65,7 @@ class BookingModel {
         this.extraCharges=obj.extraCharges??0;
         this.totalPrice=obj.totalPrice??0;
         this.features=obj.features??[];
+        this.schedule = obj.schedule ?? [];
     }
 }
 class BookingListModel {
@@ -106,6 +108,12 @@ class BookingHotel {
         this.hotel = obj.hotel ?? "";
         this.nights = obj.nights ?? 0;
         this.roomType = obj.roomType ?? "";
+    }
+}
+class ScheduleModel{
+    constructor(obj={}){
+        this.day = obj.day ??"";
+        this.schedule = obj.schedule ??"";
     }
 }
 module.exports = { AddBookingModel };
