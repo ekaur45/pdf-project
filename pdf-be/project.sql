@@ -45,7 +45,7 @@ CREATE TABLE `booking` (
   `guestType` varchar(45) DEFAULT NULL,
   `transportationPrice` decimal(12,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -54,7 +54,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (1,'8','07/13/2023','9a3Thsfv',1,1,'07/13/2023','07/13/2023','1',_binary '\0','10',847.00,0.00,0.00,847.00,'usd',NULL,'1',123.00),(2,'8','07/13/2023','9a3Thsfv',1,1,'07/13/2023','07/13/2023','1',_binary '\0','10',847.00,0.00,0.00,847.00,'usd',NULL,'1',123.00),(3,'11','07/13/2023','5t46UTQ9',1,1,'07/13/2023','07/13/2023','123',_binary '\0','10',847.00,0.00,0.00,847.00,'usd',NULL,'213',123.00),(4,'11','12/02/2022','4r29qx8H',1,1,'07/13/2023','07/13/2023','123',_binary '\0','12',847.00,1.00,10.00,848.53,'usd',NULL,'123',123.00),(5,'11','06/13/2023','4r29qx8H',1,1,'07/13/2023','07/13/2023','123',_binary '\0','12',847.00,1.00,10.00,848.53,'usd',NULL,'123',123.00),(6,'11','06/13/2023','4r29qx8H',1,1,'07/13/2023','07/13/2023','123',_binary '\0','12',1026.00,1.00,10.00,1025.74,'usd',NULL,'123',302.00),(7,'8','07/16/2023','Rd2Xfs7V',1,1,'07/16/2023','07/16/2023','1',_binary '\0','10',847.00,0.00,0.00,847.00,'usd',NULL,'1',123.00),(8,'8','07/16/2023','Rd2Xfs7V',1,1,'07/16/2023','07/16/2023','1',_binary '\0','10',847.00,0.00,0.00,847.00,'usd',NULL,'1',123.00),(9,'8','07/16/2023','Rd2Xfs7V',1,1,'07/16/2023','07/16/2023','1',_binary '\0','10',847.00,0.00,0.00,847.00,'usd',NULL,'1',123.00),(10,'8','07/16/2023','WJ67PPNF',123,123,'07/16/2023','07/16/2023','123',_binary '\0','10',847.00,0.00,1.00,848.00,'usd',NULL,'123',123.00);
+INSERT INTO `booking` VALUES (1,'8','07/13/2023','9a3Thsfv',1,1,'07/13/2023','07/13/2023','1',_binary '\0','10',847.00,0.00,0.00,847.00,'usd',NULL,'1',123.00),(2,'8','07/13/2023','9a3Thsfv',1,1,'07/13/2023','07/13/2023','1',_binary '\0','10',847.00,0.00,0.00,847.00,'usd',NULL,'1',123.00),(3,'11','07/13/2023','5t46UTQ9',1,1,'07/13/2023','07/13/2023','123',_binary '\0','10',847.00,0.00,0.00,847.00,'usd',NULL,'213',123.00),(4,'11','12/02/2022','4r29qx8H',1,1,'07/13/2023','07/13/2023','123',_binary '\0','12',847.00,1.00,10.00,848.53,'usd',NULL,'123',123.00),(5,'11','06/13/2023','4r29qx8H',1,1,'07/13/2023','07/13/2023','123',_binary '\0','12',847.00,1.00,10.00,848.53,'usd',NULL,'123',123.00),(6,'11','06/13/2023','4r29qx8H',1,1,'07/13/2023','07/13/2023','123',_binary '\0','12',1026.00,1.00,10.00,1025.74,'usd',NULL,'123',302.00),(7,'8','07/16/2023','Rd2Xfs7V',1,1,'07/16/2023','07/16/2023','1',_binary '\0','10',847.00,0.00,0.00,847.00,'usd',NULL,'1',123.00),(8,'8','07/16/2023','Rd2Xfs7V',1,1,'07/16/2023','07/16/2023','1',_binary '\0','10',847.00,0.00,0.00,847.00,'usd',NULL,'1',123.00),(9,'8','07/16/2023','Rd2Xfs7V',1,1,'07/16/2023','07/16/2023','1',_binary '\0','10',847.00,0.00,0.00,847.00,'usd',NULL,'1',123.00),(10,'8','07/16/2023','WJ67PPNF',123,123,'07/16/2023','07/16/2023','123',_binary '\0','10',847.00,0.00,1.00,848.00,'usd',NULL,'123',123.00),(11,'8','07/27/2023','nVT8ay0P',1,1,'07/27/2023','07/27/2023','asdf',_binary '\0','10',725.00,0.00,0.00,725.00,'usd',NULL,'asdf',1.00);
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +70,7 @@ CREATE TABLE `booking_features` (
   `booking_id` int DEFAULT NULL,
   `feature_id` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,7 +79,7 @@ CREATE TABLE `booking_features` (
 
 LOCK TABLES `booking_features` WRITE;
 /*!40000 ALTER TABLE `booking_features` DISABLE KEYS */;
-INSERT INTO `booking_features` VALUES (1,1,2),(2,1,3),(3,2,2),(4,2,3),(5,3,2),(6,3,3),(7,3,10),(8,3,12),(9,4,2),(10,4,10),(11,5,2),(12,5,10),(13,6,2),(14,6,10),(15,7,2),(16,7,3),(17,7,10),(18,8,2),(19,8,3),(20,8,10),(21,9,2),(22,9,3),(23,9,10),(24,10,2),(25,10,3),(26,10,4);
+INSERT INTO `booking_features` VALUES (1,1,2),(2,1,3),(3,2,2),(4,2,3),(5,3,2),(6,3,3),(7,3,10),(8,3,12),(9,4,2),(10,4,10),(11,5,2),(12,5,10),(13,6,2),(14,6,10),(15,7,2),(16,7,3),(17,7,10),(18,8,2),(19,8,3),(20,8,10),(21,9,2),(22,9,3),(23,9,10),(24,10,2),(25,10,3),(26,10,4),(29,11,2),(30,11,10);
 /*!40000 ALTER TABLE `booking_features` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,8 +120,10 @@ CREATE TABLE `booking_schedule` (
   `booking_id` int DEFAULT NULL,
   `day` varchar(500) DEFAULT NULL,
   `schedule` varchar(2000) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `time` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,7 +132,7 @@ CREATE TABLE `booking_schedule` (
 
 LOCK TABLES `booking_schedule` WRITE;
 /*!40000 ALTER TABLE `booking_schedule` DISABLE KEYS */;
-INSERT INTO `booking_schedule` VALUES (1,10,'day 1 ',' we go to jakarta and visit the park');
+INSERT INTO `booking_schedule` VALUES (1,10,'day 1 ',' we go to jakarta and visit the park',NULL,NULL),(3,11,'asdf','asdf',NULL,'23:00:00');
 /*!40000 ALTER TABLE `booking_schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,7 +148,7 @@ CREATE TABLE `booking_tocs` (
   `booking_id` int DEFAULT NULL,
   `toc_id` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,8 +157,33 @@ CREATE TABLE `booking_tocs` (
 
 LOCK TABLES `booking_tocs` WRITE;
 /*!40000 ALTER TABLE `booking_tocs` DISABLE KEYS */;
-INSERT INTO `booking_tocs` VALUES (1,1,1),(2,1,2),(3,2,1),(4,2,2),(5,3,1),(6,3,2),(7,4,2),(8,4,3),(9,4,8),(10,5,2),(11,5,3),(12,5,8),(13,6,2),(14,6,3),(15,6,8),(16,7,1),(17,7,2),(18,7,3),(19,8,1),(20,8,2),(21,8,3),(22,9,1),(23,9,2),(24,9,3),(25,10,1),(26,10,2),(27,10,3);
+INSERT INTO `booking_tocs` VALUES (1,1,1),(2,1,2),(3,2,1),(4,2,2),(5,3,1),(6,3,2),(7,4,2),(8,4,3),(9,4,8),(10,5,2),(11,5,3),(12,5,8),(13,6,2),(14,6,3),(15,6,8),(16,7,1),(17,7,2),(18,7,3),(19,8,1),(20,8,2),(21,8,3),(22,9,1),(23,9,2),(24,9,3),(25,10,1),(26,10,2),(27,10,3),(30,11,1),(31,11,2);
 /*!40000 ALTER TABLE `booking_tocs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `booking_transportation`
+--
+
+DROP TABLE IF EXISTS `booking_transportation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `booking_transportation` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `booking_id` int DEFAULT NULL,
+  `transportation_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `booking_transportation`
+--
+
+LOCK TABLES `booking_transportation` WRITE;
+/*!40000 ALTER TABLE `booking_transportation` DISABLE KEYS */;
+INSERT INTO `booking_transportation` VALUES (1,11,4),(2,11,5),(3,11,1),(4,11,2);
+/*!40000 ALTER TABLE `booking_transportation` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -183,7 +210,7 @@ CREATE TABLE `bookingoffers` (
   `bookingid` int DEFAULT NULL,
   `flightPrice` decimal(12,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -209,7 +236,7 @@ CREATE TABLE `currency` (
   `code` varchar(45) DEFAULT NULL,
   `isDefault` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -218,6 +245,7 @@ CREATE TABLE `currency` (
 
 LOCK TABLES `currency` WRITE;
 /*!40000 ALTER TABLE `currency` DISABLE KEYS */;
+INSERT INTO `currency` VALUES (6,'United Arab Emirates Dirham','AED',NULL),(7,'United States Dollar','USD',NULL),(8,'Pakistan Rupee','PKR',NULL);
 /*!40000 ALTER TABLE `currency` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -232,10 +260,10 @@ CREATE TABLE `currencyexchange` (
   `id` int NOT NULL AUTO_INCREMENT,
   `currencyFrom` int DEFAULT NULL,
   `currencyTo` int DEFAULT NULL,
-  `currencyFromValue` int DEFAULT NULL,
-  `currencyToValue` int DEFAULT NULL,
+  `currencyFromValue` decimal(12,2) DEFAULT NULL,
+  `currencyToValue` decimal(12,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -244,7 +272,7 @@ CREATE TABLE `currencyexchange` (
 
 LOCK TABLES `currencyexchange` WRITE;
 /*!40000 ALTER TABLE `currencyexchange` DISABLE KEYS */;
-INSERT INTO `currencyexchange` VALUES (1,2,3,1,286);
+INSERT INTO `currencyexchange` VALUES (1,6,7,1.00,0.27),(2,7,6,1.00,27.00);
 /*!40000 ALTER TABLE `currencyexchange` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -377,6 +405,33 @@ INSERT INTO `termsandcondition` VALUES (1,'Lorem Ipsum is simply dummy text of t
 UNLOCK TABLES;
 
 --
+-- Table structure for table `transportation`
+--
+
+DROP TABLE IF EXISTS `transportation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `transportation` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `description` varchar(1000) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `isDeleted` bit(1) DEFAULT NULL,
+  `currency` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transportation`
+--
+
+LOCK TABLES `transportation` WRITE;
+/*!40000 ALTER TABLE `transportation` DISABLE KEYS */;
+INSERT INTO `transportation` VALUES (1,NULL,NULL,_binary '',NULL),(2,NULL,NULL,_binary '',NULL),(3,'sdfasdfads',100.00,_binary '',NULL),(4,'sdgfsdg',100.00,NULL,NULL),(5,'asdfasd',1.00,NULL,'USD'),(6,'sdfgsfd',1.00,NULL,'PKR'),(7,'fdsgsfd',90.00,NULL,'AED');
+/*!40000 ALTER TABLE `transportation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -434,6 +489,50 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'pdfproject'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `add_transportation` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `add_transportation`(
+in _description varchar(1000),
+in _price decimal(10,8),
+in _currency varchar(45)
+)
+BEGIN
+insert into transportation(`description`,price,currency)values(_description,_price,_currency);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `delete_transportation` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_transportation`(
+in _id int
+)
+BEGIN
+update transportation set `isDeleted`= 1 where id = _id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `get_booking` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -500,8 +599,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_booking_by_id`(in _id int)
 BEGIN
 -- select * from bookingoffers where ifnull(isDeleted,0)=0 and bookingid = _id;
 select id, bookingNo, 
-(select display from roomtypes where roomtypes.id = bookingoffers.roomType) roomType, 
-(select roomtypes.id from roomtypes where roomtypes.id = bookingoffers.roomType) roomTypeId, 
+(select display from roomTypes where roomTypes.id = bookingoffers.roomType) roomType, 
+(select roomTypes.id from roomTypes where roomTypes.id = bookingoffers.roomType) roomTypeId, 
 nights, 
 (select `name` from hotel where id = bookingoffers.hotel) hotel,
 (select hotel.id from hotel where id = bookingoffers.hotel) hotelId,
@@ -511,6 +610,30 @@ destinationTo, destinationFrom,
 isDeleted, flightTo, flightFrom, flightDateFrom, flightDateTo, bookingid, flightPrice 
 
 from bookingoffers where ifnull(isDeleted,0)=0 and bookingid = _id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `get_exchange_rates` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_exchange_rates`()
+BEGIN
+select *,
+(select `name` from currency where id = currencyFrom) currencyFromName,
+(select `code` from currency where id = currencyFrom) currencyFromCode,
+(select `name` from currency where id = currencyTo) currencyToName,
+(select `code` from currency where id = currencyTo) currencyToCode
+ from currencyexchange;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -598,6 +721,48 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `get_transportation` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_transportation`()
+BEGIN
+select * from transportation where ifnull(isDeleted,0) = 0;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `new_procedure` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_procedure`(
+in _id int,
+in _description varchar(1000),
+in _price decimal(10,8)
+)
+BEGIN
+update transportation set `description`=_description,price = _price where id = _id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_add_user` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -629,6 +794,54 @@ _password,
 0,
 _userType,_photo);
 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_CreateCurrency` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_CreateCurrency`(
+    IN p_name VARCHAR(500),
+    IN p_code VARCHAR(45)
+)
+BEGIN
+    INSERT INTO currency (name, code)
+    VALUES (p_name, p_code);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_CreateCurrencyExchange` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_CreateCurrencyExchange`(
+    IN p_currencyFrom INT,
+    IN p_currencyTo INT,
+    IN p_currencyFromValue DECIMAL(12,2),
+    IN p_currencyToValue DECIMAL(12,2)
+)
+BEGIN
+    INSERT INTO currencyexchange (currencyFrom, currencyTo, currencyFromValue, currencyToValue)
+    VALUES (p_currencyFrom, p_currencyTo, p_currencyFromValue, p_currencyToValue);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -669,6 +882,142 @@ INSERT INTO `booking`
 VALUES
 (_agentName,_date,_orderNo,_passengers,_nights,_departure,_arrival,_customerName,_staffName,_price,_discount,_extraCharges,_totalPrice,_currency,_guestType,_transportationPrice);
 select last_insert_id() as id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_DeleteCurrency` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_DeleteCurrency`(
+    IN p_id INT
+)
+BEGIN
+    DELETE FROM currency
+    WHERE id = p_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_DeleteCurrencyExchange` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_DeleteCurrencyExchange`(
+    IN p_id INT
+)
+BEGIN
+    DELETE FROM currencyexchange
+    WHERE id = p_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_GetAllCurrencies` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_GetAllCurrencies`()
+BEGIN
+    SELECT id, name, code, isDefault
+    FROM currency;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_GetAllCurrencyExchanges` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_GetAllCurrencyExchanges`()
+BEGIN
+    -- SELECT id, currencyFrom, currencyTo, currencyFromValue, currencyToValue
+    -- FROM currencyexchange;
+    select *,
+(select `name` from currency where id = currencyFrom) currencyFromName,
+(select `code` from currency where id = currencyFrom) currencyFromCode,
+(select `name` from currency where id = currencyTo) currencyToName,
+(select `code` from currency where id = currencyTo) currencyToCode
+ from currencyexchange;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_GetCurrencyById` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_GetCurrencyById`(
+    IN p_id INT
+)
+BEGIN
+    SELECT id, name, code, isDefault
+    FROM currency
+    WHERE id = p_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_GetCurrencyExchangeById` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_GetCurrencyExchangeById`(
+    IN p_id INT
+)
+BEGIN
+    SELECT id, currencyFrom, currencyTo, currencyFromValue, currencyToValue
+    FROM currencyexchange
+    WHERE id = p_id;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -758,6 +1107,62 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_UpdateCurrency` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_UpdateCurrency`(
+    IN p_id INT,
+    IN p_name VARCHAR(500),
+    IN p_code VARCHAR(45)
+)
+BEGIN
+    UPDATE currency
+    SET name = p_name,
+        code = p_code
+    WHERE id = p_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_UpdateCurrencyExchange` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_UpdateCurrencyExchange`(
+    IN p_id INT,
+    IN p_currencyFrom INT,
+    IN p_currencyTo INT,
+    IN p_currencyFromValue DECIMAL(12,2),
+    IN p_currencyToValue DECIMAL(12,2)
+)
+BEGIN
+    UPDATE currencyexchange
+    SET currencyFrom = p_currencyFrom,
+        currencyTo = p_currencyTo,
+        currencyFromValue = p_currencyFromValue,
+        currencyToValue = p_currencyToValue
+    WHERE id = p_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_update_booking` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -766,7 +1171,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = '' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_update_booking`(
 in _id int,
@@ -782,7 +1187,9 @@ in _customerName varchar(500),
 in _price decimal(12,2),
 in _discount decimal(12,2),
 in _extraCharges decimal(12,2),
-in _totalPrice decimal(12,2)
+in _totalPrice decimal(12,2),
+in _guestType varchar(50),
+in _transportationPrice decimal(12,2)
 )
 BEGIN
 UPDATE `booking` SET
@@ -798,9 +1205,34 @@ UPDATE `booking` SET
 `price`=_price,
 `discount` = _discount,
 `extraCharges`=_extraCharges,
-`totalPrice` =_totalPrice
-
+`totalPrice` =_totalPrice,
+`guestType`=_guestType,
+`transportationPrice`=_transportationPrice
 WHERE id = _id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `update_transportation` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_transportation`(
+in _id int,
+in _description varchar(1000),
+in _price decimal(10,8),
+in _currency varchar(45)
+)
+BEGIN
+update transportation set `description`=_description,price = _price,currency = _currency where id = _id;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -817,4 +1249,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-16 16:37:50
+-- Dump completed on 2023-07-27  2:59:40
