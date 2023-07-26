@@ -44,8 +44,10 @@ Booking.add = async (data) => {
         var result2 = await mysqlExecute('INSERT INTO `booking_features` (`booking_id`, `feature_id`) VALUES ?', [featuresParams], false);
         let tocsParams = data.tocs.map(x => [id, x]);
         var result3 = await mysqlExecute('INSERT INTO `booking_tocs` (`booking_id`, `toc_id`) VALUES ?', [tocsParams], false);
-        let scheduleParams = data.booking.schedule.map(e=>[id,e.day,e.schedule]);
-        var result4 = await mysqlExecute('INSERT INTO `booking_schedule` (`booking_id`,`day`,`schedule`) VALUES ?',[scheduleParams],false);
+        let scheduleParams = data.booking.schedule.map(e=>[id,e.day,e.schedule,e.dateTime,e.time]);
+        var result4 = await mysqlExecute('INSERT INTO `booking_schedule` (`booking_id`,`day`,`schedule`,`date`,`time`) VALUES ?',[scheduleParams],false);
+        let transportation = data.transportation.map(e=>[id,e]);
+        var result5 = await mysqlExecute('INSERT INTO `booking_transportation` (`booking_id`,`transportation_id`) VALUES ?',[transportation],false);
         return {
             success: result1.success && result.success && result2.success && result3.success
         }
@@ -75,8 +77,10 @@ Booking.edit = async (data) => {
         let tocsParams = data.tocs.map(x => [id, x]);
         var result2 = await mysqlExecute('INSERT INTO `booking_tocs` (`booking_id`, `toc_id`) VALUES ?', [tocsParams], false);
         await mysqlExecute('delete from `booking_schedule` where booking_id = ?', [data.booking.id]);
-        let scheduleParams = data.booking.schedule.map(e=>[id,e.day,e.schedule]);
-        var result4 = await mysqlExecute('INSERT INTO `booking_schedule` (`booking_id`,`day`,`schedule`) VALUES ?',[scheduleParams],false);
+        let scheduleParams = data.booking.schedule.map(e=>[id,e.day,e.schedule,e.dateTime,e.time]);
+        var result4 = await mysqlExecute('INSERT INTO `booking_schedule` (`booking_id`,`day`,`schedule`,`date`,`time`) VALUES ?',[scheduleParams],false);
+        let transportation = data.transportation.map(e=>[id,e]);
+        var result5 = await mysqlExecute('INSERT INTO `booking_transportation` (`booking_id`,`transportation_id`) VALUES ?',[transportation],false);
         return {
             success: result1.success && result.success
         }
@@ -114,6 +118,9 @@ Booking.getById = async (id) => {
             var scheduleResult = await mysqlSelect('select * from `booking_schedule` where booking_id =?', [el.id], false);
             if (scheduleResult.success == true)
                 el.schedule = scheduleResult.data
+            var transportationResult = await mysqlSelect('SELECT t1.id as bt_id,t1.booking_id,t2.* FROM booking_transportation t1 join transportation t2 on t2.id = t1.transportation_id where booking_id = ?', [el.id], false);
+            if (transportationResult.success == true)
+                el.transportation = transportationResult.data
         }
         return {
             success: true,

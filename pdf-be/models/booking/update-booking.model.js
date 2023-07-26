@@ -4,6 +4,7 @@ class UpdateBookingModel {
         this.list = new BookingListModel(obj.list).list;
         this.features = obj.features ??[];
         this.tocs = obj.tocs ??[];
+        this.transportation = obj.transportation ?? [];
         this.bookingParams = [
             this.booking.id,
             this.booking.agentName,

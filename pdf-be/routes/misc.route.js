@@ -32,5 +32,23 @@ router.get('/agents',controller.getAgents);
 router.get('/staffs',controller.getStaff);
 
 
-router.get('/dashboard-data',CheckAuth("admin"),controller.getDashboardData)
+router.get('/dashboard-data',CheckAuth("admin"),controller.getDashboardData);
+
+router.post('/transportation',controller.addTransportation);
+router.post('/update-transportation',controller.updateTransportation);
+router.get('/transportation',controller.getTransportation);
+router.get('/delete-transportation',controller.deleteTransportation);
+
+
+router.post('/currency',controller.addCurrency);
+router.post('/update-currency',controller.updateCurrency);
+router.get('/currency',controller.getCurrency);
+router.get('/delete-currency',controller.deleteCurrency);
+
+
+router.post('/exchangeRate',controller.addExchangeRate);
+router.post('/update-exchangeRate',controller.updateExchangeRate);
+router.get('/exchangeRate',controller.getExchangeRate);
+router.get('/delete-exchangeRate',controller.deleteExchangeRate);
+
 module.exports = router;

@@ -4,6 +4,7 @@ class AddBookingModel {
         this.list = new BookingListModel(obj.list).list;
         this.features = obj.features ?? [];
         this.tocs = obj.tocs ?? [];
+        this.transportation = obj.transportation ?? [];
         
         this.bookingParams = [
             this.booking.agentName,
@@ -114,6 +115,8 @@ class ScheduleModel{
     constructor(obj={}){
         this.day = obj.day ??"";
         this.schedule = obj.schedule ??"";
+        this.dateTime = obj.dateTime ??"";
+        this.time = obj.time ??"";
     }
 }
 module.exports = { AddBookingModel };

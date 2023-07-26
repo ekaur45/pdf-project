@@ -239,4 +239,119 @@ miscController.getStats = async (req,res,next)=>{
     result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong");
 }
 
+
+miscController.addTransportation = async (req,res,next)=>{ 
+    const {description,price,currency} = req.body;
+    const result = await Misc.addTransportation(description,price,currency);
+    result.success?res.Ok(result.data,"Transportation added successfully."):res.BadRequest({},"Something went wrong");
+}
+miscController.updateTransportation = async (req,res,next)=>{ 
+    const {id,description,price,currency} = req.body;
+    const result = await Misc.updateTransportation(id,description,price,currency);
+    result.success?res.Ok(result.data,"Transportation updated successfully."):res.BadRequest({},"Something went wrong");
+}
+miscController.getTransportation = async (req,res,next)=>{ 
+    const result = await Misc.getTransportation();
+    result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong");
+}
+miscController.deleteTransportation = async (req,res,next)=>{ 
+    const id = req.query.id;
+    const result = await Misc.deleteTransportation(id);
+    result.success?res.Ok(result.data,"Transportation deleted successfully."):res.BadRequest({},"Something went wrong");
+}
+
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+miscController.addCurrency = async (req,res,next)=>{
+    const {name,code} = req.body;
+    const result = await Misc.addCurrency(name,code);
+    result.success?res.Ok(result.data,"Currency added successfully."):res.BadRequest({},"Something went wrong");
+}
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+miscController.updateCurrency = async (req,res,next)=>{
+    const {id,name,code} = req.body;
+    const result = await Misc.updateCurrency(id,name,code);
+    result.success?res.Ok(result.data,"Currency updated successfully."):res.BadRequest({},"Something went wrong");
+}
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+miscController.getCurrency = async (req,res,next)=>{
+    const result = await Misc.getCurrency();
+    result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong");
+}
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+miscController.deleteCurrency = async (req,res,next)=>{
+    const id = req.query.id;
+    const result = await Misc.deleteCurrency(id);
+    result.success?res.Ok(result.data,"Currency deleted successfully."):res.BadRequest({},"Something went wrong");
+}
+
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+miscController.addExchangeRate = async (req,res,next)=>{
+    const {from,to,fromValue,toValue} = req.body;
+    const result = await Misc.addExchangeRate(from,to,fromValue,toValue);
+    result.success?res.Ok(result.data,"Exchange rate added successfully."):res.BadRequest({},"Something went wrong");
+}
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+miscController.updateExchangeRate = async (req,res,next)=>{
+    const {id,from,to,fromValue,toValue} = req.body;
+    const result = await Misc.updateExchangeRate(id,from,to,fromValue,toValue);
+    result.success?res.Ok(result.data,"Exchange rate updated successfully."):res.BadRequest({},"Something went wrong");
+}
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+miscController.getExchangeRate = async (req,res,next)=>{
+    const result = await Misc.getExchangeRate();
+    result.success?res.Ok(result.data):res.BadRequest({},"Something went wrong");
+}
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
+miscController.deleteExchangeRate = async (req,res,next)=>{
+    const id = req.query.id;
+    const result = await Misc.deleteExchangeRate(id);
+    result.success?res.Ok(result.data,"Exchange rate deleted successfully."):res.BadRequest({},"Something went wrong");
+}
+
+
+
+
+
+
 module.exports = miscController;
+

@@ -15,6 +15,7 @@ const connection = mysql.createConnection({
     database:process.env.MYSQL_NAME,
     user:process.env.MYSQL_USER,
     password:process.env.MYSQL_PASS,
+    debug:true,
     typeCast: function castField( field, useDefaultTypeCasting ) {
 
 		// We only want to cast bit fields that have a single-bit in them. If the field

@@ -109,5 +109,62 @@ Misc.getStats = async (startDate,lastDate) =>{
     return result;
 }
 
+Misc.addTransportation = async (description,price,currency)=>{
+    let query = 'call add_transportation(?)';
+    return await mysqlExecute(query,[[description,price,currency]]);
+}
+Misc.updateTransportation = async (id,description,price,currency)=>{
+    let query = 'call update_transportation(?)';
+    return await mysqlExecute(query,[[id,description,price,currency]]);
+}
+Misc.getTransportation = async ()=>{
+    let query = 'call get_transportation()';
+    return await mysqlSelect(query,[]);
+}
+Misc.deleteTransportation = async (id)=>{
+    let query = 'call delete_transportation(?)';
+    return await mysqlExecute(query,[id]);
+}
+
+
+
+Misc.addCurrency = async (name,code)=>{
+    let query = 'call sp_CreateCurrency(?)';
+    return await mysqlSelect(query,[[name,code]]);
+}
+Misc.updateCurrency = async (id,name,code)=>{
+    let query = 'call sp_UpdateCurrency(?)';
+    return await mysqlSelect(query,[[id,name,code]]);
+}
+Misc.getCurrency = async ()=>{
+    let query = 'call sp_GetAllCurrencies()';
+    return await mysqlSelect(query,[]);
+}
+Misc.deleteCurrency = async (id)=>{
+    let query = 'call sp_DeleteCurrency(?)';
+    return await mysqlSelect(query,[id]);
+}
+
+
+
+
+Misc.addExchangeRate = async (from,to,fromValue,toValue)=>{
+    let query = 'call sp_CreateCurrencyExchange(?)';
+    return await mysqlSelect(query,[[from,to,fromValue,toValue]]);
+}
+Misc.updateExchangeRate = async (id,from,to,fromValue,toValue)=>{
+    let query = 'call sp_UpdateCurrencyExchange(?)';
+    return await mysqlSelect(query,[[id,from,to,fromValue,toValue]]);
+}
+Misc.getExchangeRate = async ()=>{
+    let query = 'call sp_GetAllCurrencyExchanges()';
+    return await mysqlSelect(query,[]);
+}
+Misc.deleteExchangeRate = async (id)=>{
+    let query = 'call sp_DeleteCurrencyExchange(?)';
+    return await mysqlSelect(query,[id]);
+}
+
+
 
 module.exports = Misc;
