@@ -36,6 +36,7 @@ export interface Booking {
     staffName: string;
     guestType: string;
     transportationPrice: number;
+    transportation: any;
     price:number;
     discount:number;
     extraCharges:number;

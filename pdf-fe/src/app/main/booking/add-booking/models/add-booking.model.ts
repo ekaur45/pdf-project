@@ -45,4 +45,6 @@ export class BookingHotel{
 export class ScheduleModel{
     day:string="";
     schedule:string="";
+    dateTime!:Date;
+    time!:string;
 }

@@ -42,6 +42,7 @@ export class AddBookingComponent implements OnInit {
   public options: any;
   tocs: any[] = [];
   isAdding:boolean = false;
+  transportationList: any[] = [];
   constructor(private api: ApiService, private util: UtilService) {
     this.model = new AddBooking();
     this.destinationList = [];
@@ -61,6 +62,7 @@ export class AddBookingComponent implements OnInit {
     this.getAgents();
     this.getStaffs();
     this.getToc();
+    this.getTransportationList();
     //$("select").select2();
     // $(document).ready(function(){
     //   setTimeout(() => {
@@ -142,7 +144,8 @@ export class AddBookingComponent implements OnInit {
     this.isAdding = true;
     let _features = this.features.filter(x => x.checked === true).map(x => x.id);
     let _tocs = this.tocs.filter(x=>x.checked == true).map(x=>x.id);
-    this.api.post('booking/add', { booking: this.model, list: this.destinationList, features: _features,tocs:_tocs }).subscribe(x => {
+    let _transportation = this.tocs.filter(x=>x.checked == true).map(x=>x.id);
+    this.api.post('booking/add', { booking: this.model, list: this.destinationList, features: _features,tocs:_tocs,transportation:_transportation }).subscribe(x => {
       this.isAdding = false;
       if (x.status == 200) {
         Swal.fire({
@@ -244,6 +247,9 @@ export class AddBookingComponent implements OnInit {
     return true;
   }
   validateDest() {
+    // if(this.transportationList.filter(x=>x.checked == true).length>0){
+    //   this.model.transportationPrice = this.transportationList.filter(x=>x.checked == true).map(x=>x.price).reduce((a,b)=>a+b);
+    // }
     return this.model.destination.destination&&
     this.model.destination.dateTo&&
     this.model.destination.dateFrom&&
@@ -266,5 +272,12 @@ export class AddBookingComponent implements OnInit {
   }
   removeScheduleItem(ndx:number){
     this.model.schedule.splice(ndx, 1);
+  }
+  getTransportationList(){
+    this.api.get('util/transportation').subscribe((res)=>{
+      if(res.status == 200){
+        this.transportationList = res.data;
+      }
+    });
   }
 }

@@ -2,24 +2,22 @@
     <div class="card">
         <div class="card-body">
             <div class="col-md-12">
-                <h4 class="mb-3"><span *ngIf="isEdit">Update</span> <span *ngIf="!isEdit">Add</span> exchange rates</h4>
+                <h4 class="mb-3"><span *ngIf="isEdit">Update</span> <span *ngIf="!isEdit">Add</span> transportation</h4>
             </div>
            <div class="row">
             <div class="col-md-4 mb-3">
-                <label>From</label>
-                <select [(ngModel)]="fromCurrency" class="form-control">
-                    <option *ngFor="let c of fromCurrencies" [value]="c.id">{{c.code}}</option>
-                </select>
+                <label>Description</label>
+                <input type="text" class="form-control" [(ngModel)]="description">
             </div>
             <div class="col-md-4 mb-3">
-                <label>To</label>
-                <select [(ngModel)]="toCurrency" class="form-control">
-                    <option *ngFor="let c of toCurrencies" [value]="c.id">{{c.code}}</option>
-                </select>
+                <label>Price</label>
+                <input type="text" class="form-control" [(ngModel)]="price">
             </div>
             <div class="col-md-4 mb-3">
-                <label>Value</label>
-                <input type="number" class="form-control" [(ngModel)]="value">
+                <label>Currency</label>
+                <select class="form-control" [(ngModel)]="currency">
+                    <option *ngFor="let c of currencies" [value]="c.code">{{c.code}}</option>
+                </select>
             </div>
            </div>
             <div class="col-md-12 d-flex">
@@ -34,7 +32,7 @@
     <div class="card">
         <div class="card-body">
             <div class="col-md-12">
-                <h4 class="mb-3">Exchange rates</h4>
+                <h4 class="mb-3">Room types</h4>
             </div>
             <div class="col-md-12 mb-3">
                 <div class="userDatatable global-shadow border-light-0 bg-white radius-xl w-100 mb-30">
@@ -42,9 +40,14 @@
                 <table class="table mb-0 table-borderless">
                     <thead>
                         <tr class="userDatatable-header">
-
                             <th>
-                                Exchange
+                                No
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Price
                             </th>
                             <th class="text-center">
                                 <span class="userDatatable-title float-end">Action</span>
@@ -55,9 +58,13 @@
 
                         <tr *ngFor="let r of data;let ndx = index;">
                             <td>
-                                {{ r.currencyFromValue }}
-                                <b>{{ r.currencyFromCode}}</b>&nbsp; = &nbsp;{{ r.currencyToValue }}
-                                <b>{{ r.currencyToCode}}</b> 
+                                {{ ndx+1 }}
+                            </td>
+                            <td>
+                                {{ r.description}}
+                            </td>
+                            <td>
+                                <b>{{ r.currency }}</b> {{ r.price }}
                             </td>
                             <td class="text-center">
                                 <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
@@ -111,7 +118,7 @@
                         <img src="assets/img/svg/alert-circle.svg" alt="alert-circle" class="svg">
                     </div>
                     <div class="modal-info-text">
-                        <h6>Delete exchange rate!</h6>
+                        <h6>Delete transportation!</h6>
                         <p>Are you sure you want to delete? </p>
                     </div>
                 </div>

@@ -17,6 +17,7 @@ export class EditBooking{
     extraCharges:number=0;
     totalPrice:number=0;
     transportationPrice:number=0;
+    transportation:any[]=[];
     features:Feature[]=[];
     schedule:any[]=[];
     terms:TermmsAndConditions[]=[];

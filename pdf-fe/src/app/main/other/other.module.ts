@@ -13,6 +13,7 @@ import { RoomTypeListComponent } from './room-type-list/room-type-list.component
 import { FeaturesComponent } from './features/features.component';
 import { TermsandconditionsComponent } from './termsandconditions/termsandconditions.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TransportationComponent } from './transportation/transportation.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     AddRoomTypeComponent,
     RoomTypeListComponent,
     FeaturesComponent,
-    TermsandconditionsComponent
+    TermsandconditionsComponent,
+    TransportationComponent
   ],
   imports: [
     CommonModule,

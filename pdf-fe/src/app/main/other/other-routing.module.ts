@@ -9,6 +9,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { IndexComponent } from './index.component';
 import { FeaturesComponent } from './features/features.component';
 import { TermsandconditionsComponent } from './termsandconditions/termsandconditions.component';
+import { TransportationComponent } from './transportation/transportation.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,9 @@ const routes: Routes = [
       },
       {
         path:'terms-and-conditions',component:TermsandconditionsComponent
+      },
+      {
+        path:'transportation',component:TransportationComponent
       }
     ]
   }

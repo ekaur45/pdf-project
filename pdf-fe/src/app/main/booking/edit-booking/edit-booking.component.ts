@@ -38,6 +38,7 @@ export class EditBookingComponent implements OnInit {
   features: any[] = [];
   tocs: any[] = [];
   isEditing:boolean = false;
+  transportationList: any[] = [];
   constructor(private ar: ActivatedRoute, private api: ApiService) {
     ar.params.subscribe(x => {
       if (x["id"] > 0) {
@@ -120,6 +121,7 @@ export class EditBookingComponent implements OnInit {
         this.model.features = result.features;
         this.model.schedule = result.schedule;
         this.model.terms = result.terms;
+        this.model.transportation = result.transportation;
         this.model.transportationPrice = result.transportationPrice;
         for (let i = 0; i < result.offers.length; i++) {
           const el = result.offers[i];
@@ -155,6 +157,7 @@ export class EditBookingComponent implements OnInit {
         this.getAgents();
         this.getStaffs();
         this.getToc();
+        this.getTransportationList();
         
         //this.destinationList = x.data.offers as any;
       }
@@ -196,7 +199,8 @@ export class EditBookingComponent implements OnInit {
     this.model.id = this.id;
     let _features = this.features.filter(x => x.checked === true).map(x => x.id);
     let _tocs = this.tocs.filter(x=>x.checked == true).map(x=>x.id);
-    this.api.post('booking/update',{booking:this.model,list:this.destinationList, features: _features,tocs:_tocs}).subscribe(x=>{
+    let _transportation = this.tocs.filter(x=>x.checked == true).map(x=>x.id);
+    this.api.post('booking/update',{booking:this.model,list:this.destinationList, features: _features,tocs:_tocs,transportation:_transportation }).subscribe(x=>{
       if(x.status == 200){
         Swal.fire("Success",x.message);
       }
@@ -278,6 +282,18 @@ export class EditBookingComponent implements OnInit {
   }
   removeScheduleItem(ndx:number){
     this.model.schedule.splice(ndx, 1);
+  }
+  getTransportationList(){
+    this.api.get('util/transportation').subscribe((res)=>{
+      if(res.status == 200){
+        this.transportationList = res.data;
+        this.transportationList = res.data.map((c:any)=>{
+          let ids = this.model.transportation.map(c=>c.id);
+          if(ids.includes(c.id)) c.checked = true;
+          return c;
+        });
+      }
+    });
   }
 }
 

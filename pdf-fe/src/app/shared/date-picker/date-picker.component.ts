@@ -21,7 +21,6 @@ export class DatePickerComponent implements OnInit {
         format: 'DD/MM/YYYY',
         onSelect: function (dateText: any) {
           _this.dateChange.emit(dateText);
-          console.log("Selected date: " + dateText + "; input's current value: " + this.value);
         }
       });
     }, 1000);
