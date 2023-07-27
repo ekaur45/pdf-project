@@ -9,9 +9,12 @@ import { ApiService } from './utils/api.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UtilService } from './utils/util.service';
+import { CCurrencyPipe } from './pipes/c-currency.pipe';
+import { CONSTANTS } from './utils/constants';
 @NgModule({
   declarations: [
     AppComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -23,4 +26,10 @@ import { UtilService } from './utils/util.service';
   providers: [ApiService,UtilService,{provide:HTTP_INTERCEPTORS,useClass:ApiInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(api:ApiService) {
+    api.get('util/exchangeRate').subscribe((res)=>{
+      CONSTANTS.exchangeRates = res.data;
+    })
+  }
+}

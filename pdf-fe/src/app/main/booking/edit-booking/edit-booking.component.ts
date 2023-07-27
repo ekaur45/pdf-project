@@ -195,11 +195,12 @@ export class EditBookingComponent implements OnInit {
     })
   }
   onFormSubmit(){
+    debugger
     if(!this.validateModel()) return;
     this.model.id = this.id;
     let _features = this.features.filter(x => x.checked === true).map(x => x.id);
     let _tocs = this.tocs.filter(x=>x.checked == true).map(x=>x.id);
-    let _transportation = this.tocs.filter(x=>x.checked == true).map(x=>x.id);
+    let _transportation = this.transportationList.filter(x=>x.checked == true).map(x=>x.id);
     this.api.post('booking/update',{booking:this.model,list:this.destinationList, features: _features,tocs:_tocs,transportation:_transportation }).subscribe(x=>{
       if(x.status == 200){
         Swal.fire("Success",x.message);

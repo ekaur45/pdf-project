@@ -1,6 +1,8 @@
 import { environment } from './../../environments/environment';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../utils/api.service';
+import { CONSTANTS } from '../utils/constants';
 declare const $: any;
 @Component({
   selector: 'app-index',
@@ -8,9 +10,12 @@ declare const $: any;
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
+  selectedCurrency:string = "USD";  
+  currencies:any = [];
   url: string = environment.baseUrl;
   user: any = {};
-  constructor(private router: Router) {
+  a:boolean =false;
+  constructor(private router: Router,private api:ApiService) {
     this.user = JSON.parse(localStorage.getItem("user") ?? "{}");
   }
 
@@ -24,6 +29,17 @@ export class IndexComponent implements OnInit {
     let s1 = document.createElement("script");
     s1.src = "assets/js/script.min.js";
     document.body.appendChild(s1);
+    this.getCurrencies()
+  }
+  getCurrencies() {
+    this.api.get('util/currency').subscribe((res)=>{
+      if(res.status == 200){
+        this.currencies = res.data;
+        CONSTANTS.currencies = res.data;
+        
+        this.a = true;
+      }
+    })
   }
   onSignout() {
     localStorage.setItem("user", "");
@@ -39,5 +55,8 @@ export class IndexComponent implements OnInit {
     } else if (mod == '') {
     }
     return false;
+  }
+  onCurrencyChange(e:any){
+    CONSTANTS.currentCurrency = e;
   }
 }

@@ -23,8 +23,12 @@
 
         <div class="navbar-right">
             <ul class="navbar-right__menu">
-
-
+                <li *ngIf="a">
+                    {{1 | cCurrency:'USD'}}
+                    <select [(ngModel)]="selectedCurrency" (ngModelChange)="onCurrencyChange($event)">
+                        <option *ngFor="let c of currencies" [value]="c.code">{{c.code}}</option>
+                    </select>
+                </li>
                 <li class="nav-author">
                     <div class="dropdown-custom">
                         <a href="javascript:;" class="nav-item-toggle">
