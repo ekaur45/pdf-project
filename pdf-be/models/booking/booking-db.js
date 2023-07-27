@@ -226,7 +226,7 @@ Booking.AddDestination = async (obj, file) => {
 }
 Booking.AddHotel = async (obj, file) => {
     var avatar = await uploadFile(file);
-    var result = await mysqlExecute(`INSERT INTO hotel (name,location,file,price) VALUES('${obj.name}','${obj.destination}','${avatar.fileName}','${obj.price}');`, [], false);
+    var result = await mysqlExecute(`INSERT INTO hotel (name,location,file,price,priceCurrency) VALUES('${obj.name}','${obj.destination}','${avatar.fileName}','${obj.price}','${obj.priceCurrency}');`, [], false);
     var idResult = await mysqlSelect('SELECT last_insert_id() as id;', [], false);
     if (idResult.success == true) {
         if (obj.roomTypes && obj.roomTypes.length > 0) {
