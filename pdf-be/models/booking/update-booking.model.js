@@ -37,7 +37,7 @@ class UpdateBookingModel {
                 e.flight.dateFrom,
                 e.flight.dateTo,
                 e.flight.price,
-                e.flight.currency
+                e.flight.priceCurrency
             ])
         ]
     }

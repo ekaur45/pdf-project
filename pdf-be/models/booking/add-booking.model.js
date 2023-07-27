@@ -38,7 +38,7 @@ class AddBookingModel {
                 e.flight.dateFrom,
                 e.flight.dateTo,
                 e.flight.price,
-                e.flight.currency
+                e.flight.priceCurrency
             ])
         ]
     }
@@ -102,6 +102,7 @@ class BookingFlight {
         this.dateTo = obj.dateTo ?? "";
         this.dateFrom = obj.dateFrom ?? "";
         this.price = obj.price ?? 0.0;
+        this.priceCurrency = obj.priceCurrency ?? 0.0;
     }
 }
 class BookingHotel {
