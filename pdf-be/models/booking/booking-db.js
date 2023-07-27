@@ -39,7 +39,7 @@ Booking.add = async (data) => {
         var id = result.data[0].id;
         var params = data.listParams.map((e, i) => e.map((ee, ii) => [id, ...ee]));
         var result1 = await mysqlExecute('INSERT INTO `bookingoffers`' +
-            '(`bookingid`,`bookingNo`,`roomType`,`nights`,`hotel`,`destinationTo`,`destinationFrom`,`destinationName`,`flightTo`,`flightFrom`,`flightDateFrom`,`flightDateTo`,`flightPrice`) values ? ;', [...params], false);
+            '(`bookingid`,`bookingNo`,`roomType`,`nights`,`hotel`,`destinationTo`,`destinationFrom`,`destinationName`,`flightTo`,`flightFrom`,`flightDateFrom`,`flightDateTo`,`flightPrice`,`priceCurrency`) values ? ;', [...params], false);
         let featuresParams = data.features.map(x => [id, x]);
         var result2 = await mysqlExecute('INSERT INTO `booking_features` (`booking_id`, `feature_id`) VALUES ?', [featuresParams], false);
         let tocsParams = data.tocs.map(x => [id, x]);
@@ -68,7 +68,7 @@ Booking.edit = async (data) => {
         var params = data.listParams.map((e, i) => e.map((ee, ii) => [id, ...ee]));
         await mysqlExecute('DELETE FROM `bookingoffers` WHERE `bookingid`=?', [id]);
         var result1 = await mysqlExecute('INSERT INTO `bookingoffers`' +
-            '(`bookingid`,`bookingNo`,`roomType`,`nights`,`hotel`,`destinationTo`,`destinationFrom`,`destinationName`,`flightTo`,`flightFrom`,`flightDateFrom`,`flightDateTo`) values ? ;', [...params], false);
+            '(`bookingid`,`bookingNo`,`roomType`,`nights`,`hotel`,`destinationTo`,`destinationFrom`,`destinationName`,`flightTo`,`flightFrom`,`flightDateFrom`,`flightDateTo`,`flightPrice`,`priceCurrency`) values ? ;', [...params], false);
         await mysqlExecute('delete from booking_features where booking_id = ?', [data.booking.id]);
         let featuresParams = data.features.map(x => [id, x]);
         var result2 = await mysqlExecute('INSERT INTO `booking_features` (`booking_id`, `feature_id`) VALUES ?', [featuresParams], false);
@@ -79,6 +79,7 @@ Booking.edit = async (data) => {
         await mysqlExecute('delete from `booking_schedule` where booking_id = ?', [data.booking.id]);
         let scheduleParams = data.booking.schedule.map(e=>[id,e.day,e.schedule,e.dateTime,e.time]);
         var result4 = await mysqlExecute('INSERT INTO `booking_schedule` (`booking_id`,`day`,`schedule`,`date`,`time`) VALUES ?',[scheduleParams],false);
+        await mysqlExecute('delete from `booking_transportation` where booking_id = ?', [data.booking.id]);
         let transportation = data.transportation.map(e=>[id,e]);
         var result5 = await mysqlExecute('INSERT INTO `booking_transportation` (`booking_id`,`transportation_id`) VALUES ?',[transportation],false);
         return {
