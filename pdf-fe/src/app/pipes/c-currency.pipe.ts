@@ -6,8 +6,7 @@ import { CONSTANTS } from '../utils/constants';
 })
 export class CCurrencyPipe implements PipeTransform {
   transform(value: number,symbol:string, ...args: unknown[]): number {
-    console.log(CONSTANTS.exchangeRates);
-    debugger
+    console.log(CONSTANTS.exchangeRates);    
     let obj = CONSTANTS.exchangeRates.filter(x=>x.currencyFromCode == symbol && x.currencyToCode==CONSTANTS.currentCurrency)[0];
     if(obj)
     return Number(obj.currencyToValue)*value;
