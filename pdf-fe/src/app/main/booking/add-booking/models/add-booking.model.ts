@@ -33,6 +33,7 @@ export class BookingFlight{
     dateTo:string="";
     dateFrom:string="";
     price:number=0;
+    priceCurrency:string = "";
 }
 export class BookingHotel{
     bookingNo:string="";

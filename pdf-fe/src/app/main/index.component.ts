@@ -10,7 +10,7 @@ declare const $: any;
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
-  selectedCurrency:string = "USD";  
+  selectedCurrency:string = CONSTANTS.currentCurrency;  
   currencies:any = [];
   url: string = environment.baseUrl;
   user: any = {};
