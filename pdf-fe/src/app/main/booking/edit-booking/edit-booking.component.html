@@ -89,13 +89,13 @@
                                     placeholder="Enter guest type" [(ngModel)]="model.guestType" />
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Transportantion cost</label>
                                 <input class="form-control ih-medium " type="number" name="transportationPrice"
                                     placeholder="Enter transportation cost" (ngModelChange)="onPriceChange()" [(ngModel)]="model.transportationPrice" />
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <fieldset class="row">
                         <legend>
@@ -293,17 +293,15 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Currency</label>
                                 <select class="form-control ih-medium" [(ngModel)]="model.currency">
                                     <option value="usd">USD</option>
                                     <option value="aed">AED</option>
                                 </select>
-                                <!-- <input class="form-control ih-medium " type="number"
-                                    placeholder="Enter price" [(ngModel)]="model.price" (keyup)="onPriceChange()" /> -->
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Price</label>
@@ -468,7 +466,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <button class="btn btn-primary" *ngIf="!isEditing" (click)="onFormSubmit()">Update</button>
-                            <button class="btn btn-primary" *ngIf="isEditing">Update...</button>
+                            <button class="btn btn-primary" *ngIf="isEditing">Updating...</button>
                         </div>
                     </div>
                 </div>

@@ -5,6 +5,8 @@ import { ApiService } from 'src/app/utils/api.service';
 import { AddBooking, ScheduleModel } from '../add-booking/models/add-booking.model';
 import { BookingDestination, BookingFlight, BookingHotel, EditBooking } from '../add-booking/models/edit-booking.model';
 import Swal from 'sweetalert2';
+import { CCurrencyPipe } from 'src/app/pipes/c-currency.pipe';
+import { CONSTANTS } from 'src/app/utils/constants';
 
 @Component({
   selector: 'app-edit-booking',
@@ -39,7 +41,9 @@ export class EditBookingComponent implements OnInit {
   tocs: any[] = [];
   isEditing:boolean = false;
   transportationList: any[] = [];
+  cPipe:CCurrencyPipe;
   constructor(private ar: ActivatedRoute, private api: ApiService) {
+    this.cPipe = new CCurrencyPipe();
     ar.params.subscribe(x => {
       if (x["id"] > 0) {
         this.id = x["id"];
@@ -137,6 +141,7 @@ export class EditBookingComponent implements OnInit {
           _flight.from = el.flightFrom;
           _flight.to = el.flightTo;
           _flight.price = el.flightPrice
+          _flight.priceCurrency = el.flightPriceCurrency
 
           var _hotel = new BookingHotel();
           _hotel.bookingNo = el.bookingNo;
@@ -195,13 +200,14 @@ export class EditBookingComponent implements OnInit {
     })
   }
   onFormSubmit(){
-    debugger
+    this.isEditing = true;
     if(!this.validateModel()) return;
     this.model.id = this.id;
     let _features = this.features.filter(x => x.checked === true).map(x => x.id);
     let _tocs = this.tocs.filter(x=>x.checked == true).map(x=>x.id);
     let _transportation = this.transportationList.filter(x=>x.checked == true).map(x=>x.id);
     this.api.post('booking/update',{booking:this.model,list:this.destinationList, features: _features,tocs:_tocs,transportation:_transportation }).subscribe(x=>{
+      this.isEditing = false;
       if(x.status == 200){
         Swal.fire("Success",x.message);
       }
@@ -215,7 +221,7 @@ export class EditBookingComponent implements OnInit {
   get priceCalculated(){
     let price = 0;
     var lst = this.destinationList.map(cc=>{
-      return this.getHotelPrice(Number(cc.hotel.hotel)) + cc.flight.price
+      return this.getHotelPrice(Number(cc.hotel.hotel)) + this.convertCurrency(cc.flight.price,cc.flight.priceCurrency)
     });
     let ll = 0;
     if(lst.length>0) ll = lst.reduce((a,b)=>a+b)
@@ -228,13 +234,14 @@ export class EditBookingComponent implements OnInit {
     let discount = this.model.discount;
     let xCharges = this.model.extraCharges;
     var lst = this.destinationList.map(cc=>{
-      return this.getHotelPrice(Number(cc.hotel.hotel)) + cc.flight.price
+      return this.getHotelPrice(Number(cc.hotel.hotel)) + this.convertCurrency(cc.flight.price,cc.flight.priceCurrency)
     });
     let ll = 0;
     if(lst.length>0) ll = lst.reduce((a,b)=>a+b)
     //console.log({lst});
     //this.model.totalPrice = (price + xCharges + this.model.transportationPrice ) - (discount * price) / 100;
-    return (price + xCharges) - (discount * price) / 100;
+    let _tPrice = this.getTransportationPrice();
+    return (price + xCharges + _tPrice) - (discount * price) / 100;
   }  
   removeRow(ndx: number) {
     this.destinationList.splice(ndx, 1);
@@ -246,7 +253,10 @@ export class EditBookingComponent implements OnInit {
     this.getRoomTypes(e);
   }
   private validateModel() {
+
     this.model.price = this.priceCalculated;
+    this.model.currency = CONSTANTS.currentCurrency;    
+    this.model.flight.priceCurrency = CONSTANTS.currentCurrency;
     this.model.totalPrice = this.totalPriceCalculated;
     let m = this.model;
     let _features = this.features.filter(x => x.checked === true).map(x => x.id);
@@ -275,7 +285,7 @@ export class EditBookingComponent implements OnInit {
   }
   getHotelPrice(id:number){
     if(this._hotels.length<1) return 0;
-    return Number(this._hotels.filter((x:any)=>x.id == id)[0].price);    
+    return this.convertCurrency(Number(this._hotels.filter((x:any)=>x.id == id)[0].price),this._hotels.filter((x:any)=>x.id == id)[0].priceCurrency);    
   }
   addScheduleItem(){
     this.model.schedule.push(this.scheduleModel);
@@ -295,6 +305,16 @@ export class EditBookingComponent implements OnInit {
         });
       }
     });
+  }
+  convertCurrency(val:number,symbol:string):number{
+    return this.cPipe.transform(val,symbol);
+  }
+  getTransportationPrice() {
+    let checkedList = this.transportationList.filter(x=>x.checked == true);
+    if(checkedList.length>0){
+      return checkedList.map(x=>this.convertCurrency(x.price,x.currency)).reduce((a,b)=>a+b);
+    }
+    return 0;
   }
 }
 

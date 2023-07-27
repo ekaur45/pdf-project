@@ -240,7 +240,8 @@ export class AddBookingComponent implements OnInit {
 
   private validateModel() {
     this.model.price = this.priceCalculated;
-    this.model.currency = CONSTANTS.currentCurrency;
+    this.model.currency = CONSTANTS.currentCurrency;    
+    this.model.flight.priceCurrency = CONSTANTS.currentCurrency;    
     this.model.totalPrice = this.totalPriceCalculated;
     let m = this.model;
     
