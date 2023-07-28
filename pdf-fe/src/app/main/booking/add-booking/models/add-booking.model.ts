@@ -15,6 +15,7 @@ export class AddBooking{
     extraCharges:number=0;
     totalPrice:number=0;
     transportationPrice:number=0;
+    address:string="";
     currency:string=CONSTANTS.currentCurrency;
     guestType:string="";
     features:string[]=[];

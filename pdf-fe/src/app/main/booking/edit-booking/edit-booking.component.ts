@@ -122,6 +122,7 @@ export class EditBookingComponent implements OnInit {
         this.model.extraCharges = result.extraCharges;
         this.model.totalPrice = result.totalPrice;
         this.model.guestType = result.guestType;
+        this.model.address = result.address;
         this.model.features = result.features;
         this.model.schedule = result.schedule;
         this.model.terms = result.terms;

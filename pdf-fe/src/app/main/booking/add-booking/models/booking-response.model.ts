@@ -37,6 +37,7 @@ export interface Booking {
     isDeleted: boolean;
     staffName: string;
     guestType: string;
+    address: string;
     transportationPrice: number;
     transportation: any;
     price:number;

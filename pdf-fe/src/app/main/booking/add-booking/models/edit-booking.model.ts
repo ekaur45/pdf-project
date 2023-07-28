@@ -11,6 +11,7 @@ export class EditBooking{
     arrival:string="";;
     customerName:string="";
     guestType:string="";
+    address:string="";
     currency:string = "usd";    
     price:number=0;
     discount:number=0;

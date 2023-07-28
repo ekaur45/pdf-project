@@ -246,7 +246,7 @@ export class AddBookingComponent implements OnInit {
     let m = this.model;
     
     let _features = this.features.filter(x => x.checked === true).map(x => x.id);
-    if (!(m.agentName && m.staffName && m.date && m.orderNo && m.passengers && m.nights && m.departure && m.arrival && m.customerName && m.price && m.totalPrice && m.currency && m.guestType && this.destinationList.length > 0 && _features.length > 0)) {
+    if (!(m.agentName && m.staffName && m.date && m.orderNo && m.passengers && m.nights && m.departure && m.arrival && m.customerName && m.price && m.totalPrice && m.currency && m.guestType&& m.address && this.destinationList.length > 0 && _features.length > 0)) {
       this.Toast.fire({
         icon: "error",
         text: "All fields are required and add at least one destination and one feature."
