@@ -21,7 +21,8 @@ class UpdateBookingModel {
             this.booking.extraCharges,
             this.booking.totalPrice,
             this.booking.guestType,
-            this.booking.transportationPrice
+            this.booking.transportationPrice,
+            this.booking.address
         ]
         this.listParams = [
             this.list.map((e,i)=>[
@@ -63,7 +64,8 @@ class BookingModel {
         this.discount=obj.discount??0;
         this.extraCharges=obj.extraCharges??0;
         this.totalPrice=obj.totalPrice??0;
-        this.guestType=obj.guestType??0;
+        this.guestType=obj.guestType??"";
+        this.address=obj.address??"";
         this.transportationPrice = obj.transportationPrice ??0.0;
         this.features=obj.features??[];
         this.schedule = obj.schedule ?? [];
