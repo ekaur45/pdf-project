@@ -1252,3 +1252,133 @@ DELIMITER ;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2023-07-28  2:09:06
+
+
+
+ALTER TABLE `pdfproject`.`booking` 
+ADD COLUMN `address` VARCHAR(255) NULL AFTER `transportationPrice`;
+
+
+
+
+USE `pdfproject`;
+DROP procedure IF EXISTS `sp_create_booking`;
+
+USE `pdfproject`;
+DROP procedure IF EXISTS `pdfproject`.`sp_create_booking`;
+;
+
+DELIMITER $$
+USE `pdfproject`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_create_booking`(
+in _agentName varchar(500),
+in _staffName varchar(500),
+in _date varchar(500),
+in _orderNo varchar(500),
+in _passengers int,
+in _nights int,
+in _departure varchar(500),
+in _arrival varchar(500),
+in _customerName varchar(500),
+in _price decimal(12,2),
+in _discount decimal(12,2),
+in _extraCharges decimal(12,2),
+in _totalPrice decimal(12,2),
+in _currency varchar(45),
+in _guestType varchar(50),
+in _transportationPrice decimal(12,2),
+in _address varchar(50)
+)
+BEGIN
+INSERT INTO `booking`
+(`agentName`,`date`,`orderNo`,`passengers`,`nights`,`departure`,`arrival`,`customerName`,`staffName`,`price`, `discount`, `extraCharges`, `totalPrice`,`currency`,`guestType`,`transportationPrice`,`address`)
+VALUES
+(_agentName,_date,_orderNo,_passengers,_nights,_departure,_arrival,_customerName,_staffName,_price,_discount,_extraCharges,_totalPrice,_currency,_guestType,_transportationPrice,_address);
+select last_insert_id() as id;
+END$$
+
+DELIMITER ;
+;
+
+
+
+
+USE `pdfproject`;
+DROP procedure IF EXISTS `sp_update_booking`;
+
+USE `pdfproject`;
+DROP procedure IF EXISTS `pdfproject`.`sp_update_booking`;
+;
+
+DELIMITER $$
+USE `pdfproject`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_update_booking`(
+in _id int,
+in _agentName varchar(500),
+in _staffName varchar(500),
+in _date varchar(500),
+in _orderNo varchar(500),
+in _passengers int,
+in _nights int,
+in _departure varchar(500),
+in _arrival varchar(500),
+in _customerName varchar(500),
+in _price decimal(12,2),
+in _discount decimal(12,2),
+in _extraCharges decimal(12,2),
+in _totalPrice decimal(12,2),
+in _guestType varchar(50),
+in _transportationPrice decimal(12,2),
+in _address varchar(50)
+)
+BEGIN
+UPDATE `booking` SET
+`agentName`=_agentName,
+`date`=_date,
+`orderNo`=_orderNo,
+`passengers`=_passengers,
+`nights`=_nights,
+`departure`=_departure,
+`arrival`=_arrival,
+`customerName`=_customerName,
+`staffName`=_staffName,
+`price`=_price,
+`discount` = _discount,
+`extraCharges`=_extraCharges,
+`totalPrice` =_totalPrice,
+`guestType`=_guestType,
+`transportationPrice`=_transportationPrice,
+`address` = _address
+WHERE id = _id;
+END$$
+
+DELIMITER ;
+;
+
+USE `pdfproject`;
+DROP procedure IF EXISTS `get_booking_by`;
+
+USE `pdfproject`;
+DROP procedure IF EXISTS `pdfproject`.`get_booking_by`;
+;
+
+DELIMITER $$
+USE `pdfproject`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_booking_by`( in _id int)
+BEGIN
+-- select *,(select photo from users where users.id = booking.agentName limit 1) photo from booking where ifnull(isDeleted,0)=0 and id = _id;
+
+select id, (select concat(users.firstName,' ',users.lastName) from users where users.id = booking.agentName limit 1) agentName,
+(select concat(users.id) from users where users.id = booking.agentName limit 1) agentId,
+(select concat(users.firstName,' ',users.lastName) from users where users.id = booking.staffName limit 1) staffName, 
+(select concat(users.id) from users where users.id = booking.staffName limit 1) staffId, 
+`date`, orderNo, passengers, nights, departure, arrival, customerName, isDeleted,  price, discount, extraCharges, totalPrice,currency, 
+(select photo from users where users.id = booking.agentName limit 1) photo,
+guestType,
+address,
+transportationPrice
+from booking where ifnull(isDeleted,0)=0 and id = _id;
+END$$
+
+DELIMITER ;
+;
