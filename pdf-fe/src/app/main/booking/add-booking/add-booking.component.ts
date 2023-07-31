@@ -99,7 +99,7 @@ export class AddBookingComponent implements OnInit {
   getHotels(id: any) {
     this.api.get('util/hotels?id=' + id).subscribe(x => {
       if (x.status == 200) {
-        this.hotels = x.data.map((c: any) => { return { id: c.id, text: c.name+" ( "+(c.price??0) +" )" } });
+        this.hotels = x.data.map((c: any) => { return { id: c.id, text: c.name+" ( "+(c.price??0)+" "+c.priceCurrency +" )" } });
         this._hotels = x.data;//.map((c: any) => { return { id: c.id, text: c.name+" ( "+(c.price??0) +" )" } });
       }
     })
