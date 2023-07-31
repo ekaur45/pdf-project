@@ -184,6 +184,14 @@ Booking.print = async id => {
     var data = await Booking.getById(id);
     if (data.success) {
         const d = data.data[0];
+        d.schedule = d.schedule.map(x=>{
+            return{
+                day:x.day,
+                schedule:x.schedule,
+                date: moment(x.date).format('mm/dd/yyyy'),
+                time:x.time
+            }
+        })
         d.photo = fs.readFileSync(path.join("public", d.photo)).toString("base64");
         //const stats = fs.statSync(path.join("public", d.photo));
         //d.photo = `data:image/${d.photo}`;
