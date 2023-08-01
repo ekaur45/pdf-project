@@ -215,7 +215,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">Hotel</label>
                                     <ng-select2 class="form-control ih-medium p-0" [(ngModel)]="model.hotel.hotel"
-                                        [data]="hotels" [placeholder]="'Please select hotel'"
+                                        [data]="hotels" [options]="options" [placeholder]="'Please select hotel'"
                                         (valueChanged)="onHotelValueChanged($event)"
                                         >
 
@@ -239,7 +239,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">Room type</label>
                                     <ng-select2 class="form-control ih-medium p-0" [(ngModel)]="model.hotel.roomType"
-                                        [data]="roomTypes" [placeholder]="'Please select room type'"></ng-select2>
+                                        [data]="roomTypes" [placeholder]="'Please select room type'" [options]="options"></ng-select2>
                                     <!-- <select class="form-control ih-medium choices-single1"
                                 [(ngModel)]="model.hotel.roomType"
                                 >

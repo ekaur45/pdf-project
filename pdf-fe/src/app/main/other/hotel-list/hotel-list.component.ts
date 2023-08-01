@@ -33,6 +33,7 @@ export class HotelListComponent implements OnInit {
   destination: number = 0;
   destinationName: string = "";
   price:number = 0.0;
+  address:string = "";
   roomTypeName: string = "";
   roomTypes: any[] = [];
   file: any;
@@ -60,7 +61,7 @@ export class HotelListComponent implements OnInit {
     })
   }
   add() {
-    if(!(this.name&&this.destination)){
+    if(!(this.name&&this.destination&&this.address)){
       this.Toast.fire({
         icon:"error",
         text:"All fields are required."
@@ -79,6 +80,7 @@ export class HotelListComponent implements OnInit {
     var form = new FormData();
     form.append("name", this.name);
     form.append("destination", this.destination + "");
+    form.append("address", this.address + "");
     form.append("price", this.price + "");
     let _roomTypes = this.roomTypes.filter(x => x.checked == true).map(x => x.id);
     for (let i = 0; i < _roomTypes.length; i++) {
@@ -99,7 +101,7 @@ export class HotelListComponent implements OnInit {
   update() {
     this.isAdding = true;
     let _roomTypes = this.roomTypes.filter(x => x.checked == true).map(x => x.id);
-    this.api.post('util/update-hotel', { id: this.editData.id, name: this.name, destination: this.destination,price:this.price, roomTypes: _roomTypes }).subscribe(x => {
+    this.api.post('util/update-hotel', { id: this.editData.id, name: this.name,address:this.address, destination: this.destination,price:this.price, roomTypes: _roomTypes }).subscribe(x => {
       this.isAdding = false;
       this.name = "";
       this.price = 0;

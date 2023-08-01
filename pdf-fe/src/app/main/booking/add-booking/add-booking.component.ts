@@ -94,7 +94,7 @@ export class AddBookingComponent implements OnInit {
   getHotels(id: any) {
     this.api.get('util/hotels?id=' + id).subscribe(x => {
       if (x.status == 200) {
-        this.hotels = x.data.map((c: any) => { return { id: c.id, text: c.name+" ( "+(c.price??0) +" )" } });
+        this.hotels = x.data.map((c: any) => { return { id: c.id, text: c.name+" ( "+(c.price??0) +" )", additional: { image: this.url + c.file } } });
         this._hotels = x.data;//.map((c: any) => { return { id: c.id, text: c.name+" ( "+(c.price??0) +" )" } });
       }
     })
@@ -119,7 +119,7 @@ export class AddBookingComponent implements OnInit {
   getRoomTypes(id: any) {
     this.api.get('util/roomtypes?id=' + id).subscribe(x => {
       if (x.status == 200) {
-        this.roomTypes = x.data.map((c: any) => { return { id: c.id, text: c.display } });
+        this.roomTypes = x.data.map((c: any) => { return { id: c.id, text: c.display, additional: { image: this.url + c.file } } });
       }
     })
   }

@@ -14,6 +14,15 @@
                     <input type="text" class="form-control" [(ngModel)]="price">
                 </div>
                 <div class="col-md-6 mb-3">
+                    <label>Hotel address</label>
+                    <input type="text" class="form-control" [(ngModel)]="address">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>Hotel Image</label>
+                    <input type="file" class="form-control" (change)="onFileChange($event)">
+                </div>
+                <div class="col-md-6 mb-3">
                     <div class="d-flex align-items-center">
                         <label>Hotel Destination</label>
                         <button class="btn btn-icon" (click)="showAddDestinationModal()"><i
@@ -25,11 +34,6 @@
                         >
                     </ng-select2>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label>Hotel Image</label>
-                    <input type="file" class="form-control" (change)="onFileChange($event)">
-                </div>
-                
 
 
             </div>
@@ -85,6 +89,9 @@
                                 Destination
                             </th>
                             <th>
+                                Address
+                            </th>
+                            <th>
                                 Price
                             </th>
                             <th class="text-center">
@@ -106,6 +113,9 @@
                             </td>
                             <td>
                                 {{displayDestination(r.location)}}
+                            </td>
+                            <td>
+                                {{r.address}}
                             </td>
                             <td>
                                 {{r.price}}
