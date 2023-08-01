@@ -2,7 +2,7 @@ const { mysqlSelect, mysqlExecute } = require("../../utils/database.util");
 
 const Misc = {};
 Misc.updateHotel = async data => {
-    const result =  await mysqlExecute('update hotel set `name`=?,location=?,price=? where id=?', [data.name, data.destination,Number(data.price), data.id], false);
+    const result =  await mysqlExecute('update hotel set `name`=?,location=?,address=?,price=? where id=?', [data.name, data.destination,data.address,Number(data.price), data.id], false);
     if (result.success == true) {
         if (data.roomTypes&&data.roomTypes.length>0) {
             await mysqlExecute('delete from booking_rooms_types where bookingId = ?', [data.id]);
