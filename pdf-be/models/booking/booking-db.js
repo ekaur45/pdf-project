@@ -300,6 +300,7 @@ Booking.printVoucher = async id => {
             departure: d.departure,
             roomType: d.offers[0].roomType,
             roomDescription: d.offers[0].roomType,
+            hotelAddress: d.offers[0].hotelAddress,
             numberOfRooms: d.offers.length,
             passengers: d.passengers,
             guestType: d.guestType,
