@@ -36,7 +36,7 @@ export class IndexComponent implements OnInit {
       if(res.status == 200){
         this.currencies = res.data;
         CONSTANTS.currencies = res.data;
-        
+        this.selectedCurrency = res.data[0].code;
         this.a = true;
       }
     })

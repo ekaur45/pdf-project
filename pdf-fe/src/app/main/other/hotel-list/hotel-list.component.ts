@@ -133,6 +133,7 @@ export class HotelListComponent implements OnInit {
     this.editData = r;
     this.name = r.name;
     this.destination = r.location;
+    this.address = r.address;
     this.price = r.price;
     this.roomTypes = this.roomTypes.map(x => {
       let ids = r?.roomTypes?.map((c: any) => c.id);
@@ -145,6 +146,7 @@ export class HotelListComponent implements OnInit {
     this.editData = {};
     this.name = "";
     this.destination = 0;
+    this.address = '';
 
     this.roomTypes = this.roomTypes.map(x => {
       x.checked = false;
