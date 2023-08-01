@@ -1,3 +1,5 @@
+import { CONSTANTS } from "src/app/utils/constants";
+
 export class AddBooking{
     agentName:string="";
     staffName:string="";
@@ -13,7 +15,8 @@ export class AddBooking{
     extraCharges:number=0;
     totalPrice:number=0;
     transportationPrice:number=0;
-    currency:string="usd";
+    address:string="";
+    currency:string=CONSTANTS.currentCurrency;
     guestType:string="";
     features:string[]=[];
     schedule:ScheduleModel[]=[];
@@ -33,6 +36,7 @@ export class BookingFlight{
     dateTo:string="";
     dateFrom:string="";
     price:number=0;
+    priceCurrency:string = "";
 }
 export class BookingHotel{
     bookingNo:string="";

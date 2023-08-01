@@ -7,6 +7,8 @@ import { UtilService } from 'src/app/utils/util.service';
 import Swal from 'sweetalert2';
 import { Select2OptionData } from 'ng-select2';
 import { Options } from 'select2';
+import { CCurrencyPipe } from 'src/app/pipes/c-currency.pipe';
+import { CONSTANTS } from 'src/app/utils/constants';
 declare const $: any;
 
 @Component({
@@ -15,6 +17,7 @@ declare const $: any;
   styleUrls: ['./add-booking.component.css']
 })
 export class AddBookingComponent implements OnInit {
+  
   Toast = Swal.mixin({
     customClass: "z1050",
     toast: true,
@@ -43,7 +46,9 @@ export class AddBookingComponent implements OnInit {
   tocs: any[] = [];
   isAdding:boolean = false;
   transportationList: any[] = [];
+  cPipe:CCurrencyPipe;
   constructor(private api: ApiService, private util: UtilService) {
+    this.cPipe = new CCurrencyPipe();
     this.model = new AddBooking();
     this.destinationList = [];
     this.model.orderNo = util.makeString(8);
@@ -94,7 +99,7 @@ export class AddBookingComponent implements OnInit {
   getHotels(id: any) {
     this.api.get('util/hotels?id=' + id).subscribe(x => {
       if (x.status == 200) {
-        this.hotels = x.data.map((c: any) => { return { id: c.id, text: c.name+" ( "+(c.price??0) +" )", additional: { image: this.url + c.file } } });
+        this.hotels = x.data.map((c: any) => { return { id: c.id, text: c.name+" ( "+(c.price??0)+" "+c.priceCurrency +" )", additional: { image: this.url + c.file } } });
         this._hotels = x.data;//.map((c: any) => { return { id: c.id, text: c.name+" ( "+(c.price??0) +" )" } });
       }
     })
@@ -169,7 +174,7 @@ export class AddBookingComponent implements OnInit {
     let discount = this.model.discount;
     let xCharges = this.model.extraCharges;
     var lst = this.destinationList.map(cc=>{
-      return this.getHotelPrice(Number(cc.hotel.hotel)) + cc.flight.price
+      return this.getHotelPrice(Number(cc.hotel.hotel)) + this.convertCurrency(cc.flight.price,cc.flight.priceCurrency)
     });
     let ll = 0;
     if(lst.length>0) ll = lst.reduce((a,b)=>a+b)
@@ -182,13 +187,14 @@ export class AddBookingComponent implements OnInit {
     let discount = this.model.discount;
     let xCharges = this.model.extraCharges;
     var lst = this.destinationList.map(cc=>{
-      return this.getHotelPrice(Number(cc.hotel.hotel)) + cc.flight.price
+      return this.getHotelPrice(Number(cc.hotel.hotel)) + this.convertCurrency(cc.flight.price,cc.flight.priceCurrency)
     });
     let ll = 0;
     if(lst.length>0) ll = lst.reduce((a,b)=>a+b)
     //console.log({lst});
     //this.model.totalPrice = (price + xCharges + this.model.transportationPrice ) - (discount * price) / 100;
-    return (price + xCharges) - (discount * price) / 100;
+    let tPrice = this.getTransportationPrice();
+    return (price + xCharges + tPrice) - (discount * price) / 100;
   }  
   onDateChange(e: any) {
 
@@ -234,10 +240,13 @@ export class AddBookingComponent implements OnInit {
 
   private validateModel() {
     this.model.price = this.priceCalculated;
+    this.model.currency = CONSTANTS.currentCurrency;    
+    this.model.flight.priceCurrency = CONSTANTS.currentCurrency;    
     this.model.totalPrice = this.totalPriceCalculated;
     let m = this.model;
+    
     let _features = this.features.filter(x => x.checked === true).map(x => x.id);
-    if (!(m.agentName && m.staffName && m.date && m.orderNo && m.passengers && m.nights && m.departure && m.arrival && m.customerName && m.price && m.totalPrice && m.currency && m.guestType && this.destinationList.length > 0 && _features.length > 0)) {
+    if (!(m.agentName && m.staffName && m.date && m.orderNo && m.passengers && m.nights && m.departure && m.arrival && m.customerName && m.price && m.totalPrice && m.currency && m.guestType&& m.address && this.destinationList.length > 0 && _features.length > 0)) {
       this.Toast.fire({
         icon: "error",
         text: "All fields are required and add at least one destination and one feature."
@@ -263,7 +272,7 @@ export class AddBookingComponent implements OnInit {
     this.model.hotel.roomType;
   }
   getHotelPrice(id:number){
-    return Number(this._hotels.filter((x:any)=>x.id == id)[0].price);
+    return this.convertCurrency(Number(this._hotels.filter((x:any)=>x.id == id)[0].price),this._hotels.filter((x:any)=>x.id == id)[0].priceCurrency);
     
   }
   addScheduleItem(){
@@ -279,5 +288,15 @@ export class AddBookingComponent implements OnInit {
         this.transportationList = res.data;
       }
     });
+  }
+  convertCurrency(val:number,symbol:string):number{
+    return this.cPipe.transform(val,symbol);
+  }
+  getTransportationPrice() {
+    let checkedList = this.transportationList.filter(x=>x.checked == true);
+    if(checkedList.length>0){
+      return checkedList.map(x=>this.convertCurrency(x.price,x.currency)).reduce((a,b)=>a+b);
+    }
+    return 0;
   }
 }

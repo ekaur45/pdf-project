@@ -4,7 +4,7 @@ USE `pdfproject`;
 --
 -- Host: localhost    Database: pdfproject
 -- ------------------------------------------------------
--- Server version	8.0.32
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -45,7 +45,7 @@ CREATE TABLE `booking` (
   `guestType` varchar(45) DEFAULT NULL,
   `transportationPrice` decimal(12,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -54,6 +54,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
+INSERT INTO `booking` VALUES (14,'8','07/27/2023','4maKz1yq',1,1,'07/27/2023','07/27/2023','123',_binary '\0','10',724.00,0.00,0.00,752.00,'AED',NULL,'123',0.00);
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -69,7 +70,7 @@ CREATE TABLE `booking_features` (
   `booking_id` int DEFAULT NULL,
   `feature_id` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +79,7 @@ CREATE TABLE `booking_features` (
 
 LOCK TABLES `booking_features` WRITE;
 /*!40000 ALTER TABLE `booking_features` DISABLE KEYS */;
-INSERT INTO `booking_features` VALUES (1,1,2),(2,1,3),(3,2,2),(4,2,3),(5,3,2),(6,3,3),(7,3,10),(8,3,12),(9,4,2),(10,4,10),(11,5,2),(12,5,10),(13,6,2),(14,6,10),(15,7,2),(16,7,3),(17,7,10),(18,8,2),(19,8,3),(20,8,10),(21,9,2),(22,9,3),(23,9,10),(24,10,2),(25,10,3),(26,10,4),(29,11,2),(30,11,10),(37,12,2),(38,12,3),(39,12,4),(40,12,10),(41,12,11),(42,12,12),(43,13,2),(44,13,3),(45,13,11);
+INSERT INTO `booking_features` VALUES (1,1,2),(2,1,3),(3,2,2),(4,2,3),(5,3,2),(6,3,3),(7,3,10),(8,3,12),(9,4,2),(10,4,10),(11,5,2),(12,5,10),(13,6,2),(14,6,10),(15,7,2),(16,7,3),(17,7,10),(18,8,2),(19,8,3),(20,8,10),(21,9,2),(22,9,3),(23,9,10),(24,10,2),(25,10,3),(26,10,4),(29,11,2),(30,11,10),(37,12,2),(38,12,3),(39,12,4),(40,12,10),(41,12,11),(42,12,12),(43,13,2),(44,13,3),(45,13,11),(61,14,2),(62,14,3),(63,14,10),(64,14,11),(65,14,12);
 /*!40000 ALTER TABLE `booking_features` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +95,7 @@ CREATE TABLE `booking_rooms_types` (
   `bookingId` int DEFAULT NULL,
   `roomTypeId` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +104,7 @@ CREATE TABLE `booking_rooms_types` (
 
 LOCK TABLES `booking_rooms_types` WRITE;
 /*!40000 ALTER TABLE `booking_rooms_types` DISABLE KEYS */;
-INSERT INTO `booking_rooms_types` VALUES (1,15,8),(2,15,9),(3,16,8),(4,16,9);
+INSERT INTO `booking_rooms_types` VALUES (5,15,8),(6,15,9),(9,16,8),(10,16,9);
 /*!40000 ALTER TABLE `booking_rooms_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +123,7 @@ CREATE TABLE `booking_schedule` (
   `date` date DEFAULT NULL,
   `time` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,7 +132,7 @@ CREATE TABLE `booking_schedule` (
 
 LOCK TABLES `booking_schedule` WRITE;
 /*!40000 ALTER TABLE `booking_schedule` DISABLE KEYS */;
-INSERT INTO `booking_schedule` VALUES (1,10,'day 1 ',' we go to jakarta and visit the park',NULL,NULL),(3,11,'asdf','asdf',NULL,'23:00:00');
+INSERT INTO `booking_schedule` VALUES (1,10,'day 1 ',' we go to jakarta and visit the park',NULL,NULL),(3,11,'asdf','asdf',NULL,'23:00:00'),(7,14,'asdfads',' dfsa dsa fasd f','2023-07-27','00:26:00');
 /*!40000 ALTER TABLE `booking_schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,7 +148,7 @@ CREATE TABLE `booking_tocs` (
   `booking_id` int DEFAULT NULL,
   `toc_id` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,7 +157,7 @@ CREATE TABLE `booking_tocs` (
 
 LOCK TABLES `booking_tocs` WRITE;
 /*!40000 ALTER TABLE `booking_tocs` DISABLE KEYS */;
-INSERT INTO `booking_tocs` VALUES (1,1,1),(2,1,2),(3,2,1),(4,2,2),(5,3,1),(6,3,2),(7,4,2),(8,4,3),(9,4,8),(10,5,2),(11,5,3),(12,5,8),(13,6,2),(14,6,3),(15,6,8),(16,7,1),(17,7,2),(18,7,3),(19,8,1),(20,8,2),(21,8,3),(22,9,1),(23,9,2),(24,9,3),(25,10,1),(26,10,2),(27,10,3),(30,11,1),(31,11,2),(35,12,1),(36,12,2),(37,12,3),(38,13,1),(39,13,8);
+INSERT INTO `booking_tocs` VALUES (1,1,1),(2,1,2),(3,2,1),(4,2,2),(5,3,1),(6,3,2),(7,4,2),(8,4,3),(9,4,8),(10,5,2),(11,5,3),(12,5,8),(13,6,2),(14,6,3),(15,6,8),(16,7,1),(17,7,2),(18,7,3),(19,8,1),(20,8,2),(21,8,3),(22,9,1),(23,9,2),(24,9,3),(25,10,1),(26,10,2),(27,10,3),(30,11,1),(31,11,2),(35,12,1),(36,12,2),(37,12,3),(38,13,1),(39,13,8),(52,14,1),(53,14,2),(54,14,3),(55,14,8);
 /*!40000 ALTER TABLE `booking_tocs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +173,7 @@ CREATE TABLE `booking_transportation` (
   `booking_id` int DEFAULT NULL,
   `transportation_id` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,7 +182,7 @@ CREATE TABLE `booking_transportation` (
 
 LOCK TABLES `booking_transportation` WRITE;
 /*!40000 ALTER TABLE `booking_transportation` DISABLE KEYS */;
-INSERT INTO `booking_transportation` VALUES (1,11,4),(2,11,5),(3,11,1),(4,11,2),(5,12,1),(6,12,2),(7,12,3),(8,12,1),(9,12,2),(10,12,3),(11,13,1),(12,13,8);
+INSERT INTO `booking_transportation` VALUES (1,11,4),(2,11,5),(3,11,1),(4,11,2),(5,12,1),(6,12,2),(7,12,3),(8,12,1),(9,12,2),(10,12,3),(11,13,1),(12,13,8),(22,14,6),(21,14,5);
 /*!40000 ALTER TABLE `booking_transportation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,7 +211,7 @@ CREATE TABLE `bookingoffers` (
   `flightPrice` decimal(12,2) DEFAULT NULL,
   `priceCurrency` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -219,7 +220,7 @@ CREATE TABLE `bookingoffers` (
 
 LOCK TABLES `bookingoffers` WRITE;
 /*!40000 ALTER TABLE `bookingoffers` DISABLE KEYS */;
-INSERT INTO `bookingoffers` VALUES (1,'123','8',1,'15','07/13/2023','07/13/2023','8',_binary '\0','123','123','07/13/2023','07/13/2023',1,123.00,NULL),(2,'123','8',1,'15','07/13/2023','07/13/2023','8',_binary '\0','123','123','07/13/2023','07/13/2023',2,123.00,NULL),(3,'123','8',123,'15','07/13/2023','07/13/2023','8',_binary '\0','123','123','07/13/2023','07/13/2023',3,123.00,NULL),(4,'123','8',123,'15','07/13/2023','07/13/2023','8',_binary '\0','123','12','07/13/2023','07/13/2023',4,123.00,NULL),(5,'123','8',123,'15','07/13/2023','07/13/2023','8',_binary '\0','123','12','07/13/2023','07/13/2023',5,123.00,NULL),(6,'123','8',123,'15','07/13/2023','07/13/2023','8',_binary '\0','123','12','07/13/2023','07/13/2023',6,123.00,NULL),(7,'123','8',123,'15','07/16/2023','07/16/2023','8',_binary '\0','123','123','07/16/2023','07/16/2023',7,123.00,NULL),(8,'123','8',123,'15','07/16/2023','07/16/2023','8',_binary '\0','123','123','07/16/2023','07/16/2023',8,123.00,NULL),(9,'123','8',123,'15','07/16/2023','07/16/2023','8',_binary '\0','123','123','07/16/2023','07/16/2023',9,123.00,NULL),(10,'123','8',123,'15','07/16/2023','07/16/2023','8',_binary '\0','123','123','07/16/2023','07/16/2023',10,123.00,NULL);
+INSERT INTO `bookingoffers` VALUES (1,'123','8',1,'15','07/13/2023','07/13/2023','8',_binary '\0','123','123','07/13/2023','07/13/2023',1,123.00,NULL),(2,'123','8',1,'15','07/13/2023','07/13/2023','8',_binary '\0','123','123','07/13/2023','07/13/2023',2,123.00,NULL),(3,'123','8',123,'15','07/13/2023','07/13/2023','8',_binary '\0','123','123','07/13/2023','07/13/2023',3,123.00,NULL),(4,'123','8',123,'15','07/13/2023','07/13/2023','8',_binary '\0','123','12','07/13/2023','07/13/2023',4,123.00,NULL),(5,'123','8',123,'15','07/13/2023','07/13/2023','8',_binary '\0','123','12','07/13/2023','07/13/2023',5,123.00,NULL),(6,'123','8',123,'15','07/13/2023','07/13/2023','8',_binary '\0','123','12','07/13/2023','07/13/2023',6,123.00,NULL),(7,'123','8',123,'15','07/16/2023','07/16/2023','8',_binary '\0','123','123','07/16/2023','07/16/2023',7,123.00,NULL),(8,'123','8',123,'15','07/16/2023','07/16/2023','8',_binary '\0','123','123','07/16/2023','07/16/2023',8,123.00,NULL),(9,'123','8',123,'15','07/16/2023','07/16/2023','8',_binary '\0','123','123','07/16/2023','07/16/2023',9,123.00,NULL),(10,'123','8',123,'15','07/16/2023','07/16/2023','8',_binary '\0','123','123','07/16/2023','07/16/2023',10,123.00,NULL),(17,'12321','',123,'15','07/27/2023','07/27/2023','8',_binary '\0','dsaf12','212adsf','07/27/2023','07/27/2023',14,123.00,NULL);
 /*!40000 ALTER TABLE `bookingoffers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -339,6 +340,7 @@ CREATE TABLE `hotel` (
   `isDeleted` bit(1) DEFAULT b'0',
   `file` varchar(500) DEFAULT NULL,
   `price` decimal(12,2) DEFAULT NULL,
+  `priceCurrency` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -349,7 +351,7 @@ CREATE TABLE `hotel` (
 
 LOCK TABLES `hotel` WRITE;
 /*!40000 ALTER TABLE `hotel` DISABLE KEYS */;
-INSERT INTO `hotel` VALUES (15,'test hotel name test de hotel name test name of hotel','8',_binary '\0','/avatars/6372BFE5803Csohaib.png',601.00),(16,'Test','8',_binary '\0','/avatars/650160074481serena.jpg',10.00);
+INSERT INTO `hotel` VALUES (15,'test hotel name test de hotel name test name of hotel','8',_binary '\0','/avatars/6372BFE5803Csohaib.png',601.00,'AED'),(16,'Test','8',_binary '\0','/avatars/650160074481serena.jpg',10.00,'USD');
 /*!40000 ALTER TABLE `hotel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -427,7 +429,7 @@ CREATE TABLE `transportation` (
 
 LOCK TABLES `transportation` WRITE;
 /*!40000 ALTER TABLE `transportation` DISABLE KEYS */;
-INSERT INTO `transportation` VALUES (1,NULL,NULL,_binary '',NULL),(2,NULL,NULL,_binary '',NULL),(3,'sdfasdfads',100.00,_binary '',NULL),(4,'sdgfsdg',100.00,NULL,NULL),(5,'asdfasd',1.00,NULL,'USD'),(6,'sdfgsfd',1.00,NULL,'PKR'),(7,'fdsgsfd',90.00,NULL,'AED');
+INSERT INTO `transportation` VALUES (1,NULL,NULL,_binary '',NULL),(2,NULL,NULL,_binary '',NULL),(3,'sdfasdfads',100.00,_binary '',NULL),(4,'sdgfsdg',0.00,_binary '',NULL),(5,'asdfasd',1.00,NULL,'USD'),(6,'sdfgsfd',1.00,NULL,'PKR'),(7,'fdsgsfd',90.00,NULL,'AED');
 /*!40000 ALTER TABLE `transportation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -458,7 +460,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Admin','Admin','admin','admin@example.com','$2b$10$GWoK1WDbpanJW0tzwD4bXufAkKIPX7RKbost67620xl9Yx5kJ1Wui',NULL,1,'/avatars/E7E02CD73B3BScreenshot_2.png'),(8,'Agentindo','VIP','agentvip','agentvip@gmail.com','$2b$10$orePTMxqHLQX99jK2Q0zZOeax3ROXpwdmBH1TFkLXvYJicmB9f2mq',_binary '\0',3,'/avatars/372EFED77219sohaib.png'),(9,'User','CO','usertest','usertest@email.com','$2b$10$b26q91j6/tjEfYIuY6a1M.ww4M.BPJgZ9I/cg62EVeLcLJ2H5ICmm',_binary '\0',2,'/avatars/932154A0B5A4maxresdefault (1).jpg'),(10,'test','test','test','test@gmail.com','$2b$10$VwV/Xikn.OgpPM5ar9OFJe7.6Ns1hdE4XtL3DBwLBYcNHjqPF0RyC',_binary '\0',4,'/avatars/27C3E7961607sohaib.png'),(11,'Agent','Test','Agent','agent@ex.com','$2b$10$PmVUdM7.Vu/6vJu.mHoGQe9.jAOwwjPWME6KSE/eq1nCrqwTKC8Wa',_binary '\0',3,'/avatars/D4B02E394B6Echampion.jpg'),(12,'Staff','2','staff2','staff2@example.com','$2b$10$uNCEDiIEBC7ctmkO24UDhu8ZzFkDKGWBvIdSO2ZXvK6VHXbZpHfbS',_binary '\0',4,'/avatars/E3259F7EF3BAdefault.png');
+INSERT INTO `users` VALUES (1,'Admin','Admin','admin','admin@example.com','$2b$10$GWoK1WDbpanJW0tzwD4bXufAkKIPX7RKbost67620xl9Yx5kJ1Wui',NULL,1,'/avatars/E7E02CD73B3BScreenshot_2.png'),(8,'Agentindo','VIP','agentvip','agentvip@gmail.com','$2b$10$orePTMxqHLQX99jK2Q0zZOeax3ROXpwdmBH1TFkLXvYJicmB9f2mq',_binary '\0',3,'/avatars/E7E02CD73B3BScreenshot_2.png'),(9,'User','CO','usertest','usertest@email.com','$2b$10$b26q91j6/tjEfYIuY6a1M.ww4M.BPJgZ9I/cg62EVeLcLJ2H5ICmm',_binary '\0',2,'/avatars/E7E02CD73B3BScreenshot_2.png'),(10,'test','test','test','test@gmail.com','$2b$10$VwV/Xikn.OgpPM5ar9OFJe7.6Ns1hdE4XtL3DBwLBYcNHjqPF0RyC',_binary '\0',4,'/avatars/E7E02CD73B3BScreenshot_2.png'),(11,'Agent','Test','Agent','agent@ex.com','$2b$10$PmVUdM7.Vu/6vJu.mHoGQe9.jAOwwjPWME6KSE/eq1nCrqwTKC8Wa',_binary '\0',3,'/avatars/E7E02CD73B3BScreenshot_2.png'),(12,'Staff','2','staff2','staff2@example.com','$2b$10$uNCEDiIEBC7ctmkO24UDhu8ZzFkDKGWBvIdSO2ZXvK6VHXbZpHfbS',_binary '\0',4,'/avatars/E7E02CD73B3BScreenshot_2.png');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -607,7 +609,7 @@ nights,
 destinationTo, destinationFrom, 
 (select display from destinations where destinations.id = bookingoffers.destinationName) destinationName, 
 (select destinations.id from destinations where destinations.id = bookingoffers.destinationName) destinationId, 
-isDeleted, flightTo, flightFrom, flightDateFrom, flightDateTo, bookingid, flightPrice 
+isDeleted, flightTo, flightFrom, flightDateFrom, flightDateTo, bookingid, flightPrice,priceCurrency as flightPriceCurrency 
 
 from bookingoffers where ifnull(isDeleted,0)=0 and bookingid = _id;
 END ;;
@@ -1249,7 +1251,147 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-27 19:19:11
+-- Dump completed on 2023-07-28  2:09:06
+
+
+
+ALTER TABLE `pdfproject`.`booking` 
+ADD COLUMN `address` VARCHAR(255) NULL AFTER `transportationPrice`;
+
+
+
+
+USE `pdfproject`;
+DROP procedure IF EXISTS `sp_create_booking`;
+
+USE `pdfproject`;
+DROP procedure IF EXISTS `pdfproject`.`sp_create_booking`;
+;
+
+DELIMITER $$
+USE `pdfproject`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_create_booking`(
+in _agentName varchar(500),
+in _staffName varchar(500),
+in _date varchar(500),
+in _orderNo varchar(500),
+in _passengers int,
+in _nights int,
+in _departure varchar(500),
+in _arrival varchar(500),
+in _customerName varchar(500),
+in _price decimal(12,2),
+in _discount decimal(12,2),
+in _extraCharges decimal(12,2),
+in _totalPrice decimal(12,2),
+in _currency varchar(45),
+in _guestType varchar(50),
+in _transportationPrice decimal(12,2),
+in _address varchar(50)
+)
+BEGIN
+INSERT INTO `booking`
+(`agentName`,`date`,`orderNo`,`passengers`,`nights`,`departure`,`arrival`,`customerName`,`staffName`,`price`, `discount`, `extraCharges`, `totalPrice`,`currency`,`guestType`,`transportationPrice`,`address`)
+VALUES
+(_agentName,_date,_orderNo,_passengers,_nights,_departure,_arrival,_customerName,_staffName,_price,_discount,_extraCharges,_totalPrice,_currency,_guestType,_transportationPrice,_address);
+select last_insert_id() as id;
+END$$
+
+DELIMITER ;
+;
+
+
+
+
+USE `pdfproject`;
+DROP procedure IF EXISTS `sp_update_booking`;
+
+USE `pdfproject`;
+DROP procedure IF EXISTS `pdfproject`.`sp_update_booking`;
+;
+
+DELIMITER $$
+USE `pdfproject`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_update_booking`(
+in _id int,
+in _agentName varchar(500),
+in _staffName varchar(500),
+in _date varchar(500),
+in _orderNo varchar(500),
+in _passengers int,
+in _nights int,
+in _departure varchar(500),
+in _arrival varchar(500),
+in _customerName varchar(500),
+in _price decimal(12,2),
+in _discount decimal(12,2),
+in _extraCharges decimal(12,2),
+in _totalPrice decimal(12,2),
+in _guestType varchar(50),
+in _transportationPrice decimal(12,2),
+in _address varchar(50)
+)
+BEGIN
+UPDATE `booking` SET
+`agentName`=_agentName,
+`date`=_date,
+`orderNo`=_orderNo,
+`passengers`=_passengers,
+`nights`=_nights,
+`departure`=_departure,
+`arrival`=_arrival,
+`customerName`=_customerName,
+`staffName`=_staffName,
+`price`=_price,
+`discount` = _discount,
+`extraCharges`=_extraCharges,
+`totalPrice` =_totalPrice,
+`guestType`=_guestType,
+`transportationPrice`=_transportationPrice,
+`address` = _address
+WHERE id = _id;
+END$$
+
+DELIMITER ;
+;
+
+USE `pdfproject`;
+DROP procedure IF EXISTS `get_booking_by`;
+
+USE `pdfproject`;
+DROP procedure IF EXISTS `pdfproject`.`get_booking_by`;
+;
+
+DELIMITER $$
+USE `pdfproject`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_booking_by`( in _id int)
+BEGIN
+-- select *,(select photo from users where users.id = booking.agentName limit 1) photo from booking where ifnull(isDeleted,0)=0 and id = _id;
+
+select id, (select concat(users.firstName,' ',users.lastName) from users where users.id = booking.agentName limit 1) agentName,
+(select concat(users.id) from users where users.id = booking.agentName limit 1) agentId,
+(select concat(users.firstName,' ',users.lastName) from users where users.id = booking.staffName limit 1) staffName, 
+(select concat(users.id) from users where users.id = booking.staffName limit 1) staffId, 
+`date`, orderNo, passengers, nights, departure, arrival, customerName, isDeleted,  price, discount, extraCharges, totalPrice,currency, 
+(select photo from users where users.id = booking.agentName limit 1) photo,
+guestType,
+address,
+transportationPrice
+from booking where ifnull(isDeleted,0)=0 and id = _id;
+END$$
+
+DELIMITER ;
+;
+
+
+
+
+
+
+
+
+
+
 
 
 

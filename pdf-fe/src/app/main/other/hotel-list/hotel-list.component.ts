@@ -4,6 +4,7 @@ import { Component, DebugElement, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Select2OptionData } from 'ng-select2';
 import { Options } from 'select2';
+import { CONSTANTS } from 'src/app/utils/constants';
 declare const $: any;
 @Component({
   selector: 'app-hotel-list',
@@ -82,6 +83,7 @@ export class HotelListComponent implements OnInit {
     form.append("destination", this.destination + "");
     form.append("address", this.address + "");
     form.append("price", this.price + "");
+    form.append("priceCurrency", CONSTANTS.currentCurrency + "");
     let _roomTypes = this.roomTypes.filter(x => x.checked == true).map(x => x.id);
     for (let i = 0; i < _roomTypes.length; i++) {
       const el = _roomTypes[i];
@@ -101,7 +103,7 @@ export class HotelListComponent implements OnInit {
   update() {
     this.isAdding = true;
     let _roomTypes = this.roomTypes.filter(x => x.checked == true).map(x => x.id);
-    this.api.post('util/update-hotel', { id: this.editData.id, name: this.name,address:this.address, destination: this.destination,price:this.price, roomTypes: _roomTypes }).subscribe(x => {
+    this.api.post('util/update-hotel', { id: this.editData.id, name: this.name,address:this.address, destination: this.destination,price:this.price, roomTypes: _roomTypes,priceCurrency:CONSTANTS.currentCurrency }).subscribe(x => {
       this.isAdding = false;
       this.name = "";
       this.price = 0;

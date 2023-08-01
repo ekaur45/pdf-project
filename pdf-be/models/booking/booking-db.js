@@ -44,7 +44,7 @@ Booking.add = async (data) => {
         var result2 = await mysqlExecute('INSERT INTO `booking_features` (`booking_id`, `feature_id`) VALUES ?', [featuresParams], false);
         let tocsParams = data.tocs.map(x => [id, x]);
         var result3 = await mysqlExecute('INSERT INTO `booking_tocs` (`booking_id`, `toc_id`) VALUES ?', [tocsParams], false);
-        let scheduleParams = data.booking.schedule.map(e=>[id,e.day,e.schedule,e.dateTime,e.time]);
+        let scheduleParams = data.booking.schedule.map(e=>[id,e.day,e.schedule,new Date(e.dateTime),e.time]);
         var result4 = await mysqlExecute('INSERT INTO `booking_schedule` (`booking_id`,`day`,`schedule`,`date`,`time`) VALUES ?',[scheduleParams],false);
         let transportation = data.transportation.map(e=>[id,e]);
         var result5 = await mysqlExecute('INSERT INTO `booking_transportation` (`booking_id`,`transportation_id`) VALUES ?',[transportation],false);
@@ -77,7 +77,7 @@ Booking.edit = async (data) => {
         let tocsParams = data.tocs.map(x => [id, x]);
         var result2 = await mysqlExecute('INSERT INTO `booking_tocs` (`booking_id`, `toc_id`) VALUES ?', [tocsParams], false);
         await mysqlExecute('delete from `booking_schedule` where booking_id = ?', [data.booking.id]);
-        let scheduleParams = data.booking.schedule.map(e=>[id,e.day,e.schedule,e.dateTime,e.time]);
+        let scheduleParams = data.booking.schedule.map(e=>[id,e.day,e.schedule,new Date(e.dateTime),e.time]);
         var result4 = await mysqlExecute('INSERT INTO `booking_schedule` (`booking_id`,`day`,`schedule`,`date`,`time`) VALUES ?',[scheduleParams],false);
         await mysqlExecute('delete from `booking_transportation` where booking_id = ?', [data.booking.id]);
         let transportation = data.transportation.map(e=>[id,e]);
@@ -184,6 +184,14 @@ Booking.print = async id => {
     var data = await Booking.getById(id);
     if (data.success) {
         const d = data.data[0];
+        d.schedule = d.schedule.map(x=>{
+            return{
+                day:x.day,
+                schedule:x.schedule,
+                date: moment(x.date).format('mm/dd/yyyy'),
+                time:x.time
+            }
+        })
         d.photo = fs.readFileSync(path.join("public", d.photo)).toString("base64");
         //const stats = fs.statSync(path.join("public", d.photo));
         //d.photo = `data:image/${d.photo}`;
@@ -226,7 +234,7 @@ Booking.AddDestination = async (obj, file) => {
 }
 Booking.AddHotel = async (obj, file) => {
     var avatar = await uploadFile(file);
-    var result = await mysqlExecute(`INSERT INTO hotel (name,location,address,file,price) VALUES('${obj.name}','${obj.destination}','${obj.address}','${avatar.fileName}','${obj.price}');`, [], false);
+    var result = await mysqlExecute(`INSERT INTO hotel (name,location,address,file,price,priceCurrency) VALUES('${obj.name}','${obj.destination}','${obj.address}','${avatar.fileName}','${obj.price}','${obj.priceCurrency}');`, [], false);
     var idResult = await mysqlSelect('SELECT last_insert_id() as id;', [], false);
     if (idResult.success == true) {
         if (obj.roomTypes && obj.roomTypes.length > 0) {

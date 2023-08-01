@@ -11,6 +11,7 @@ export class EditBooking{
     arrival:string="";;
     customerName:string="";
     guestType:string="";
+    address:string="";
     currency:string = "usd";    
     price:number=0;
     discount:number=0;
@@ -39,6 +40,7 @@ export class BookingFlight{
     from:string="";
     dateTo:string="";
     dateFrom:string="";
+    priceCurrency:string="";
     price:number=0;
 }
 export class BookingHotel{
@@ -46,6 +48,7 @@ export class BookingHotel{
     hotel:string="";
     nights:number=0;
     roomType:string="";
+    priceCurrency:string="";
     price:number=0;
 }
 export class TermmsAndConditions{
