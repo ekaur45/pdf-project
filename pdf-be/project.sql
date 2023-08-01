@@ -1250,3 +1250,41 @@ DELIMITER ;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2023-07-27 19:19:11
+
+
+
+ALTER TABLE `pdfproject`.`hotel` 
+ADD COLUMN `address` VARCHAR(500) NULL AFTER `price`;
+
+
+
+USE `pdfproject`;
+DROP procedure IF EXISTS `get_booking_by_id`;
+
+USE `pdfproject`;
+DROP procedure IF EXISTS `pdfproject`.`get_booking_by_id`;
+;
+
+DELIMITER $$
+USE `pdfproject`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_booking_by_id`(in _id int)
+BEGIN
+-- select * from bookingoffers where ifnull(isDeleted,0)=0 and bookingid = _id;
+select id, bookingNo, 
+(select display from roomtypes where roomtypes.id = bookingoffers.roomType) roomType, 
+(select roomtypes.id from roomtypes where roomtypes.id = bookingoffers.roomType) roomTypeId, 
+nights, 
+(select `name` from hotel where id = bookingoffers.hotel) hotel,
+(select `address` from hotel where id = bookingoffers.hotel) hotelAddress,
+(select hotel.id from hotel where id = bookingoffers.hotel) hotelId,
+destinationTo, destinationFrom, 
+(select display from destinations where destinations.id = bookingoffers.destinationName) destinationName, 
+(select destinations.id from destinations where destinations.id = bookingoffers.destinationName) destinationId, 
+isDeleted, flightTo, flightFrom, flightDateFrom, flightDateTo, bookingid, flightPrice 
+
+from bookingoffers where ifnull(isDeleted,0)=0 and bookingid = _id;
+END$$
+
+DELIMITER ;
+;
+
